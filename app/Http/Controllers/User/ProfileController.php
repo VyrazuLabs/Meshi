@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\ProfileInformation;
+use App\Models\Food\FoodItem;
+use App\Models\Category\Category;
+use App\Models\Review\Review;
+
+class ProfileController extends Controller
+{
+    public function profile($user_id = null) {
+    	// $profile_details = [];
+    	$user = User::where('user_id',$user_id)->first();
+        if(!empty($user)) {
+            $profile = ProfileInformation::where('user_id',$user_id)->first();
+            if(!empty($profile->image)) {
+                $user->image = $profile->image;
+            }
+            $user->description = $profile->description;
+            $user->total_dishes = $profile->total_dishes;
+            $user->phone_number = $profile->phone_number;
+            $user->address = $profile->address;
+            $user->user_introduction = $profile->user_introduction;
+            $user->profile_message = $profile->profile_message;
+            if(!empty($profile->video_link)) {
+                $user->video_link = $profile->video_link;
+            }
+        }
+
+        $food_items = FoodItem::where('status',1)->where('offered_by',$user_id)->get();
+        if(!empty($food_items)) {
+            foreach ($food_items as $key => $food) {
+                $category = Category::where('category_id',$food->category_id)->first();
+                $food->category_name = $category->category_name;
+                $food->price = $food->price;
+                $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+
+                $profile = ProfileInformation::where('user_id',$user_id)->first();
+                if(!empty($profile->image)) {
+                    $food->image = $profile->image;
+                }
+
+                if(!empty($food->food_images)) {
+                    //getting the food images
+                    $images = $food->food_images;
+                    $food->foodImages = unserialize($images);
+                }
+            }
+        }
+
+        $reviews = Review::where('user_id',$user_id)->get();
+        foreach ($reviews as $key => $review) {
+            $profile = ProfileInformation::where('user_id',$review->reviewed_by)->first();
+            if(!empty($profile->image)) {
+                $review->reviewed_by_image = $profile->image;
+            }
+            $user_profile = ProfileInformation::where('user_id',$user_id)->first();
+            if(!empty($user_profile)) {
+                $review->age = $user_profile->age;
+                $review->gender = $user_profile->gender;
+            }
+        }
+
+    	return view('user.profile',['user'=>$user,'food_items'=>$food_items,'reviews'=>$reviews]);
+    }
+
+
+
+
+}

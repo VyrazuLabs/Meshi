@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models\Order;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $table = 'order';
+	public $fillable = array(
+    					   'food_item_id',
+				           'order_id',
+				           'order_number',
+				           'quantity',
+				           'ordered_by',
+				           'lat',
+				           'long',
+				           'address',
+				           'date_of_order',
+				           'time',			           
+				           'total_price',
+				           'status'
+    					);
+}
