@@ -10,7 +10,7 @@
 |
 */
 Route::group( [ 'namespace' => 'Auth' ], function() {
-	Route::get('/sign-in', array('uses' => 'SigninController@signIn'))->name('sign_in');
+	Route::get('/sign-in', array('uses' => 'SigninController@signIn', 'middleware' => 'SignInRouteAccess'))->name('sign_in');
 	Route::post('/authentication', array('uses' => 'SigninController@authentication'))->name('authentication');
 	Route::get('sign-out', [ 'uses' => 'SigninController@signOut' ])->name('user_sign_out');
 

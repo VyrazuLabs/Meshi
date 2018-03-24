@@ -122,3 +122,29 @@
   height: 80px; 
   width:80px !important;
 }
+.form-custom-group{
+  text-align: left;
+}
+.t-red{
+  color: red;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder{
+  color: #ccc !important;
+}
+.seller input,
+.buyer input{
+  height: 16px;
+  margin-bottom: 0px;
+}
+.register-checktext{
+  vertical-align: text-bottom;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+} 
+body { 
+  top: 0px !important; 
+}

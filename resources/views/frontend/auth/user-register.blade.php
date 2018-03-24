@@ -36,7 +36,7 @@
 	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
 	                  	@if ($errors->has('image'))
 	                    	<span class="help-block">
-	                      		<strong class="strong">{{ $errors->first('image') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -49,7 +49,7 @@
 						          'placeholder'=>'Enter Full Name')) !!}
 						@if ($errors->has('name'))
 						  	<span class="help-block">
-						      <strong class="strong">{{ $errors->first('name') }}</strong>
+						      <strong class="strong t-red">{{ $errors->first('name') }}</strong>
 						  	</span>
 						@endif
 	                </div>
@@ -61,23 +61,23 @@
 						          'placeholder'=>'Enter Nick Name')) !!}
 						@if ($errors->has('nick_name'))
 						  	<span class="help-block">
-						      <strong class="strong">{{ $errors->first('nick_name') }}</strong>
+						      <strong class="strong t-red">{{ $errors->first('nick_name') }}</strong>
 						  	</span>
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label>Email <span>*</span></label>
 	                	@if($form_type == 'edit')
-	                    	{!! Form::text('email', null, 
+	                    	{!! Form::email('email', null, 
 	                          		array('class'=>'form-control','readonly')) !!}
 	                    @else
-	                    	{!! Form::text('email', null, 
+	                    	{!! Form::email('email', null, 
 	                          		array('class'=>'form-control', 
 	                                'placeholder'=>'Enter Email')) !!}
 	                    @endif
 	                  @if ($errors->has('email'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('email') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('email') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -88,7 +88,7 @@
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('password') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('password') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -99,7 +99,7 @@
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password_confirmation'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('password_confirmation') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('password_confirmation') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -108,7 +108,7 @@
 	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Messiator (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
 	                  @if ($errors->has('type'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('type') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -119,62 +119,62 @@
 			                	<div class="col-md-8 buyer">
 			                		<label>
 			                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
-			                			 Busy with working
+			                			 <span class="register-checktext">Busy with working</span>
 		                           	</label> 
 		                           	<label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
-		                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
+		                           		<span class="register-checktext">I got bored with convenience stores, medium meals, and other lunches because I live alone.</span>
 		                            </label> 
 		                            <label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
-		                            	There are few restaurants around the office
+		                            	<span class="register-checktext">There are few restaurants around the office</span>
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
-		                            	I am busy raising children and have no time to make rice
+		                            	<span class="register-checktext">I am busy raising children and have no time to make rice</span>
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
-		                            	I would like to eat a variety of nationalities and people's cooking.
+		                            	<span class="register-checktext">I would like to eat a variety of nationalities and people's cooking.</span>
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
-		                            	There is no big reason, but it seems interesting, so I would like to use it
+		                            	<span class="register-checktext">There is no big reason, but it seems interesting, so I would like to use it</span>
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
-		                            	Other
+		                            	<span class="register-checktext">Other</span>
 		                            </label>
 		                       	</div>
 		                	@elseif($user->type == 1)
 			                	<div class="col-md-8 seller">
 			                		<label>
 			                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
-			                			 I would like to use someone's help through my cooking
+			                			 <span class="register-checktext">I would like to use someone's help through my cooking</span>
 		                           	</label> 
 		                           	<label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-		                           		 I want to earn rewards using free time  
+		                           		 <span class="register-checktext">I want to earn rewards using free time</span>  
 		                            </label> 
 		                            <label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-		                            	I want to earn more rewards than bytes and parts  
+		                            	<span class="register-checktext">I want to earn more rewards than bytes and parts </span> 
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
-		                            	I would like to use dishes of my hobbies
+		                            	<span class="register-checktext">I would like to use dishes of my hobbies</span>
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
-		                            	I am opening a cooking class and I want to increase my students by increasing my name
+		                            	<span class="register-checktext">I am opening a cooking class and I want to increase my students by increasing my name</span>
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
-		                            	I would like to increase my boss name and increase my cook blog and SNS followers
+		                            	<span class="register-checktext">I would like to increase my boss name and increase my cook blog and SNS followers</span>
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
-		                            	Other
+		                            	<span class="register-checktext">Other</span>
 		                            </label>
 		                       	</div>
 		                    @endif
@@ -186,61 +186,61 @@
 	                	<div class="col-md-8 buyer" style="display: none;">
 	                		<label>
 	                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
-	                			 Busy with working
+	                			 <span class="register-checktext">Busy with working</span>
                            	</label> 
                            	<label>
                            		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
-                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
+                           		<span class="register-checktext">I got bored with convenience stores, medium meals, and other lunches because I live alone.</span>
                             </label> 
                             <label>
                            		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
-                            	There are few restaurants around the office
+                            	<span class="register-checktext">There are few restaurants around the office</span>
                             </label> 
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
-                            	I am busy raising children and have no time to make rice
+                            	<span class="register-checktext">I am busy raising children and have no time to make rice</span>
                             </label> 
                             <label> 
                             	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
-                            	I would like to eat a variety of nationalities and people's cooking.
+                            	<span class="register-checktext">I would like to eat a variety of nationalities and people's cooking.</span>
                             </label> 
                             <label> 
                             	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
-                            	There is no big reason, but it seems interesting, so I would like to use it
+                            	<span class="register-checktext">There is no big reason, but it seems interesting, so I would like to use it</span>
                             </label> 
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
-                            	Other
+                            	<span class="register-checktext">Other</span>
                             </label>
                        	</div>
 	                	<div class="col-md-8 seller" style="display: none;">
 	                		<label>
 	                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
-	                			 I would like to use someone's help through my cooking
+	                			 <span class="register-checktext">I would like to use someone's help through my cooking</span>
                            	</label> 
                            	<label>
                            		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-                           		 I want to earn rewards using free time  
+                           		 <span class="register-checktext">I want to earn rewards using free time</span> 
                             </label> 
                             <label>
                            		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-                            	I want to earn more rewards than bytes and parts  
+                            	<span class="register-checktext">I want to earn more rewards than bytes and parts</span>  
                             </label> 
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
-                            	I would like to use dishes of my hobbies
+                            	<span class="register-checktext">I would like to use dishes of my hobbies</span>
                             </label> 
                             <label> 
                             	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
-                            	I am opening a cooking class and I want to increase my students by increasing my name
+                            	<span class="register-checktext">I am opening a cooking class and I want to increase my students by increasing my name</span>
                             </label> 
                             <label> 
                             	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
-                            	I would like to increase my boss name and increase my cook blog and SNS followers
+                            	<span class="register-checktext">I would like to increase my boss name and increase my cook blog and SNS followers</span>
                             </label> 
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
-                            	Other
+                            	<span class="register-checktext">Other</span>
                             </label>
                        	</div>
 	                </div>
@@ -252,7 +252,7 @@
 	                                'id' => 'phone')) !!}
 	                  @if ($errors->has('phone_number'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('phone_number') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('phone_number') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -263,7 +263,7 @@
 	                                'placeholder'=>'Enter Address','rows'=>'2')) !!}
 						@if ($errors->has('address'))
 							<span class="help-block">
-								<strong class="strong">{{ $errors->first('address') }}</strong>
+								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -280,7 +280,7 @@
 	                                'placeholder'=>'Tell us something about the user','rows'=>'3')) !!}
 	                  	@if ($errors->has('description'))
 	                    	<span class="help-block">
-	                      		<strong class="strong">{{ $errors->first('description') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('description') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -291,7 +291,7 @@
 	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
 	                  	@if ($errors->has('user_introduction'))
 	                    	<span class="help-block">
-	                      		<strong class="strong">{{ $errors->first('user_introduction') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -302,7 +302,7 @@
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
 	                  	@if ($errors->has('profile_message'))
 	                    	<span class="help-block">
-	                      		<strong class="strong">{{ $errors->first('profile_message') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -311,7 +311,7 @@
 	                    {{ Form::select('age', ['10' => "10's", '20' => "20's", '30' => "Thirties", '40' => 'Forties', '50' => 'Fifties', '60' => "60's", '70' => "70's", '80' => "Age 80" ], null, ['placeholder' => '-- Please Select Age --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('age'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('age') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('age') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -322,7 +322,7 @@
 	                                'placeholder'=>'104-0061')) !!}
 						@if ($errors->has('zipcode'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('zipcode') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('zipcode') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -333,7 +333,7 @@
 	                                'placeholder'=>'Enter Prefectures')) !!}
 						@if ($errors->has('prefectures'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('prefectures') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('prefectures') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -344,7 +344,7 @@
 	                                'placeholder'=>'Enter Municipality')) !!}
 						@if ($errors->has('municipality'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('municipality') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('municipality') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -353,7 +353,7 @@
 	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('gender'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('gender') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('gender') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -367,7 +367,7 @@
 	                    	null, ['placeholder' => '-- Please Select Profession --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('profession'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('profession') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('profession') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -377,7 +377,7 @@
 	                          array('class'=>'form-control')) !!}
 						@if ($errors->has('job'))
 							<span class="help-block">
-							  <strong class="strong">{{ $errors->first('job') }}</strong>
+							  <strong class="strong t-red">{{ $errors->first('job') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -387,7 +387,7 @@
 		                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
 		                  	@if ($errors->has('image'))
 		                    	<span class="help-block">
-		                      		<strong class="strong">{{ $errors->first('image') }}</strong>
+		                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
 		                    	</span>
 		                  	@endif
 		                </div>
@@ -398,7 +398,7 @@
 	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 	                  @if ($errors->has('status'))
 	                    <span class="help-block">
-	                      <strong class="strong">{{ $errors->first('status') }}</strong>
+	                      <strong class="strong t-red">{{ $errors->first('status') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -406,7 +406,7 @@
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
-                  <button type="submit" class="btn btn-success btn-booking">Submit</button>
+                  <button type="submit" class="btn btn-booking">Submit</button>
                 </div>
             {!! Form::close() !!}
 					</div>

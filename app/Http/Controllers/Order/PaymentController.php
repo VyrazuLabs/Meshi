@@ -339,7 +339,8 @@ class PaymentController extends Controller
             }
 
             \Session::put('success','Payment success');
-            return redirect('/home');
+            Session::flash('success','Payment success');
+            return redirect('/');
             //return Redirect::route('driver_bidding_list', ['move_id' => $move_id]);
         }
         \Session::put('error','Payment failed');
