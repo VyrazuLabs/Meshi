@@ -37,6 +37,8 @@ Route::group( [ 'namespace' => 'Frontend' ], function() {
 	// Route::group([ 'middleware' => 'UserAuth' ], function() {
 		Route::group( ['prefix' => 'user','namespace' => 'User'], function() {
 			Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
+			Route::get('/register','RegistrationController@register');
+			Route::post('/register','RegistrationController@save')->name('registration');
 		});
 	// });
 // });
@@ -51,10 +53,10 @@ Route::group( [ 'namespace' => 'Frontend' ], function() {
 Route::group( ['prefix' => 'order','namespace' => 'Order'], function() {
 	Route::post('/add-to-cart', 'OrderController@addToCart')->name('add_to_cart');
 	// Route::get('/make-order/{food_item_id}', 'OrderController@makeOrder')->name('make_order');
-	Route::get('/make-order/{food_item_id}', 'OrderController@makeOrderWithPaypal')->name('make_order');
+	// Route::get('/make-order/{food_item_id}', 'OrderController@makeOrderWithPaypal')->name('make_order');
 	Route::group( ['prefix' => 'payment'], function() {
 		// Route::post('/make-payment', 'PaymentController@makePayment')->name('make_payment');
-		Route::post('/make-paypal-payment', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
+		Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
 		Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
 
 

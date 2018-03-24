@@ -10,7 +10,7 @@
 @section('content')
 
 <!-- signin-page -->
-	<section id="main" class="clearfix user-page">
+	<section id="" class="clearfix user-page">
 		<div class="container">
 			<div class="row text-center">
 				<!-- user-login -->			
@@ -55,6 +55,7 @@
 							</div><!-- forgot-password -->
 							<button type="submit" href="#" class="btn">Login</button>
                     	</form>
+                    	Don't have an account? <a href="{{ url('/user/register') }}">Sign Up here</a>
 					</div>
 					<!-- <a href="#" class="btn-primary">Create a New Account</a> -->
 				</div><!-- user-login -->			

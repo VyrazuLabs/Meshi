@@ -102,8 +102,8 @@
 							<div class="contact-with">
 								<div class="col-md-6 p-0">
 									<div class="form-group">
-										<select class="form-control" name="slot">
-											<option value=" ">Select Your Time</option>
+										<select onchange="checkForValue(this)" class="form-control" name="slot">
+											<option value="">Select Your Time</option>
 											@if(!empty($time_of_availability))
 			                  					@foreach($time_of_availability as $key => $slot)
 													<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
@@ -113,11 +113,10 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<!-- <a href="{{route('make_order',['food_item_id' => $food_details->food_item_id,'amount' => $cost])}}"> -->
 									@if(Auth::User())
-										<button class="btn btn-red detail-buy-btn makeOrder" type="button">Buy Now</button>
+										<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">Buy Now</button>
 									@else
-										<a href="{{route('sign_in')}}"><button class="btn btn-red detail-buy-btn" type="button">Buy Now</button></a>
+										<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="#">Buy Now</a>
 									@endif
 									<!-- </a> -->
 
@@ -253,12 +252,26 @@ function order(form_data) {
 	            });
 	        }
 	        else {
-				var url = '{{ url("/order/make-order") }}'+ '/' +result.cart_id;
+				var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
 	      		window.location.href = url;
 	        }
 	    	
 	    }
 	});
+}
+
+function checkForValue(param) {
+	var value = $(param).val();
+	if(value != '') {
+		$('#buy_now_btn').prop('disabled', false);
+		$('#buy_now_btn_bfr_login').attr('disabled', false);
+		$('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
+	}
+	else {
+		$('#buy_now_btn').prop('disabled', true);
+		$('#buy_now_btn_bfr_login').attr('disabled', true);
+		$('#buy_now_btn_bfr_login').attr('href', '#');
+	}
 }
 </script>
 @endsection

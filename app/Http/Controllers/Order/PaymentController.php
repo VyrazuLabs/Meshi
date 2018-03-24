@@ -206,23 +206,23 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postPaymentWithpaypal(Request $request)
+    public function postPaymentWithpaypal($cart_id = null)
     {	
-    	$input = $request->all();
-    	$cart = Cart::where('food_item_id',$input['food_item_id'])->first();
-        if(!empty($cart)) {   
+    	error_reporting(E_ALL);
+    	$card = Cart::where('cart_id',$cart_id)->first();
+        if(!empty($card)) {   
 	        $payer = new Payer();
 	        $payer->setPaymentMethod('paypal');
 	        $item_1 = new Item();
 	        $item_1->setName('Item 1') /** item name **/
-	            ->setCurrency('USD')
+	            ->setCurrency('JPY')
 	            ->setQuantity(1)
-	            ->setPrice($request->get('amount')); /** unit price **/
+	            ->setPrice($card['price']); /** unit price **/
 	        $item_list = new ItemList();
 	        $item_list->setItems(array($item_1));
 	        $amount = new Amount();
-	        $amount->setCurrency('USD')
-	            ->setTotal($request->get('amount'));
+	        $amount->setCurrency('JPY')
+	            ->setTotal($card['price']);
 	        $transaction = new Transaction();
 	        $transaction->setAmount($amount)
 	            ->setItemList($item_list)
@@ -238,14 +238,14 @@ class PaymentController extends Controller
 	            /** dd($payment->create($this->_api_context));exit; **/
 	        try {
 	        	/** add amount to session */
-	        	Session::put('paypal_payment_amount', $cart->price);
+	        	Session::put('paypal_payment_amount', $card['price']);
 
 	            $payment->create($this->_api_context);
 	        } 
 	        catch (\PayPal\Exception\PPConnectionException $ex) {
 	            if (\Config::get('app.debug')) {
 	                \Session::put('error','Connection timeout');
-	                return Redirect::route('make_order',[$input['food_item_id']]);
+	                return Redirect::route('food_details',[$card['food_item_id']]);
 
 
 	                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
@@ -253,7 +253,7 @@ class PaymentController extends Controller
 	                /** exit; **/
 	            } else {
 	                \Session::put('error','Some error occur, sorry for inconvenient');
-	                return Redirect::route('make_order',[$input['food_item_id']]);
+	                return Redirect::route('food_details',[$card['food_item_id']]);
 	                // return Redirect::route('addmoney.paywithpaypal');
 	                /** die('Some error occur, sorry for inconvenient'); **/
 	            }
@@ -265,7 +265,7 @@ class PaymentController extends Controller
 	            }
 	        }
 	        /** add food item ID to session **/
-	        Session::put('food_item_ID', $input['food_item_id']);
+	        Session::put('food_item_ID', $card['food_item_id']);
 
 	        /** add payment ID to session **/
 	        Session::put('paypal_payment_id', $payment->getId());
@@ -274,9 +274,9 @@ class PaymentController extends Controller
 	            return Redirect::away($redirect_url);
 	        }
     	}
-        \Session::put('error','Unknown error occurred');
+        // \Session::put('error','Unknown error occurred');
         // return Redirect::route('addmoney.paywithpaypal');
-	    return Redirect::route('make_order',[$input['food_item_id']]);
+	    return Redirect::route('food_details',[$card['food_item_id']]);
 
     }
 
