@@ -18,14 +18,26 @@
 				<div class="navbar-left">
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="{{ url('/')}}">Home</a></li>
+							<li class="active"><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
+							<!-- @if(Auth::user() && Auth::user()->type == 1)
+								<li class="active"><a href="{{ url('/food/create')}}">Add Food Item </a></li>
+							@endif -->
 							<!-- <li><a href="{{ url('food/categories') }}">Category</a></li> -->
 							<!-- <li><a href="{{ url('food/details') }}">all ads</a></li> -->
 							<!-- <li><a href="#">Help/Support</a></li>  -->
 							<!-- <li><a href="#">Pages</a></li> -->
+						@php
+							$choose_type = trans('app.-- Select Language --');
+							$Japanese = trans('app.Japanese');
+						@endphp
+
 						</ul>
+						
 					</div>
+
 				</div>
+
+				
 				
 				<!-- nav-right -->
 				<div class="nav-right">
@@ -38,21 +50,35 @@
 						</ul>								
 					</div> --><!-- language-dropdown -->
 
-					<!-- sign-in -->					
+					<!-- sign-in -->
+					<!-- <div class="languagedropdown">
+						<div id="google_translate_element" class="headlanguage-select"></div>
+					</div> -->					
 					<ul class="sign-in">
-						<li><i class="fa fa-user"></i></li>
-						@if(Auth::User())
-							{{Auth::User()->name}}
-							<div class="pull-right">
-			                  <a href="{{route('user_sign_out')}}" class="btn btn-default btn-flat">Sign out</a>
-			                </div>
-						@else
-						<li><a href="{{ url('/sign-in') }}"> Sign In </a></li>
-						@endif
-						<!-- <li><a href="#">Register</a></li> -->
-					</ul><!-- sign-in -->					
+						<li>
+                
+						@php 
+							$langName =[];
+							if(Session::has('lang_name')) {
+								$langName = Session::get('lang_name');
+                    			
+							}
 
-					<!-- <a href="#" class="btn">Post Your Food</a> -->
+						@endphp
+							{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
+
+						</li>
+						<li>
+							
+						@if(Auth::User())
+							<i class="fa fa-user"></i>
+							{{Auth::User()->name}}
+						</li>
+			            <li>  <a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
+						@else
+						<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
+						@endif
+					</ul><!-- sign-in -->					
 				</div>
 				<!-- nav-right -->
 			</div><!-- container -->

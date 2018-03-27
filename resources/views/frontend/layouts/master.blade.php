@@ -35,32 +35,60 @@
     <script src="{{ url('frontend/js/jquery.countdown.js') }}"></script>   
     <script src="{{ url('frontend/js/custom.js') }}"></script>
 	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
+    <!-- daterangepicker -->
+    <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- datepicker -->
+    <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- timepicker -->
+    <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
     <!-- sweetalert -->
     <script src="{{ url('/js/sweetalert.min.js') }}"></script>
     <!-- PNOTIFY js -->
     <script type="text/javascript" src="{{ url('js/pnotify.custom.min.js') }}"></script>
+    <!-- <script type="text/javascript">
+
+    For language translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ja,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    
     <script type="text/javascript">
-      //PNOTIFY GLOBAL POPUPS
       @if( session('success') )
-        new PNotify({
-          title: 'Success',
-          text: '{{ session("success") }}',
-          type: 'success',
-          buttons: {
-            sticker: false
-          }
-        });
+          new PNotify({
+              title: 'Success',
+              text: '{{ session("success") }}',
+              type: 'success',
+              buttons: {
+                  sticker: false
+              }
+          });
       @endif
       @if( session('error') )
-        new PNotify({
-          title: 'Error',
-          text: '{{ session("error") }}',
-          type: 'error',
-          buttons: {
-            sticker: false
+          new PNotify({
+              title: 'Error',
+              text: '{{ session("error") }}',
+              type: 'error',
+              buttons: {
+                  sticker: false
+              }
+          });
+      @endif
+
+      $('#languageSwitcher').change(function() {
+        var locale = $(this).val();
+        $.ajax({
+          url: "{{ url('/language') }}",
+          type: 'GET',
+          data: { 'locale': locale },
+          success: function(data) {
+            location.reload();
           }
         });
-      @endif
+      })
+
     </script>
     @yield('add-js')
 

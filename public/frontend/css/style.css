@@ -7,6 +7,9 @@
 .t-black{
 	color: #000;
 }
+.t-orange{
+  color: #f26522;
+}
 .p-0{
 	padding: 0;
 }
@@ -15,6 +18,9 @@
 }
 .float-left{
 	float: left;
+}
+.float-none{
+  float: none;
 }
 .text-left{
 	text-align: left;
@@ -121,4 +127,52 @@
 .feature-over-image{
   height: 80px; 
   width:80px !important;
+}
+.form-custom-group{
+  text-align: left;
+}
+.t-red{
+  color: red;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder{
+  color: #ccc !important;
+}
+.seller input,
+.buyer input{
+  height: 16px;
+  margin-bottom: 0px;
+}
+.register-checktext{
+  vertical-align: text-bottom;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+} 
+body { 
+  top: 0px !important; 
+}
+.boxes-card{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+.profile-descriptions{
+  float: none;
+  display: inline-block;
+}
+.profileplace-name{
+  display: inline-block;
+}
+.head-choose{
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #f26522;
+}
+.new-breadcrumb li a{
+  color: #f26522;
+}
+.new-breadcrumb>li+li:before{
+  color: #f26522;
 }

@@ -24,7 +24,7 @@ class CreateProfileInformation extends Migration
             $table->string('image');
             $table->string('video_link')->nullable();
             $table->integer('age');
-            $table->string('created_by');
+            $table->string('created_by')->nullable();
             $table->integer('total_dishes')->nullable();
             $table->string('zipcode');
             $table->string('prefectures');
@@ -33,8 +33,8 @@ class CreateProfileInformation extends Migration
             $table->string('profession');
             $table->longText('reason_for_registration')->nullable();
             $table->string('job');
-            $table->longText('user_introduction');
-            $table->longText('profile_message');
+            $table->longText('user_introduction')->nullable();
+            $table->longText('profile_message')->nullable();
             $table->timestamps();
         });
     }

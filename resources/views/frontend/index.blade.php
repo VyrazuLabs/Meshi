@@ -10,8 +10,10 @@
 @section('content')
 <!-- world-gmap -->
 	<section id="main" class="clearfix home-two">
-		<!-- gmap -->	
-		<div id="road_map"></div>	
+		<!-- <div class="container"> -->
+			<!-- gmap -->	
+			<div id="road_map"></div>	
+		<!-- </div> -->
 		<div class="container">
 		<div class="row">
 			<!-- banner -->
@@ -62,7 +64,7 @@
 					<!-- featured-top -->
 					<div class="col-sm-12">
 						<div class="featured-top">
-							<h4>Tomorrow</h4>
+							<h4>{{ trans('app.Tomorrow') }}</h4>
 						</div>
 					</div><!-- featured-top -->
 				</div>
@@ -126,7 +128,7 @@
 					<!-- featured-top -->
 					<div class="col-sm-12">
 						<div class="featured-top">
-							<h4>Day After Tomorrow</h4>
+							<h4>{{ trans('app.Day After Tomorrow') }}</h4>
 						</div>
 					</div><!-- featured-top -->
 				</div>
@@ -140,7 +142,7 @@
 									<div class="featured-image">
 										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
 											@if(!empty($food->foodImages))
-												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive">
+												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive images-featured">
 											@else
 												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
 											@endif
@@ -204,7 +206,7 @@
 									<div class="featured-image">
 										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
 											@if(!empty($food->foodImages))
-												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive">
+												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive images-featured">
 											@else
 												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
 											@endif
@@ -258,8 +260,8 @@
 						<div class="cta-icon icon-secure">
 							<img src="{{ url('frontend/images/a1.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>Delicious Foods</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Delicious Foods') }}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -270,8 +272,8 @@
 						<div class="cta-icon icon-support">
 							<img src="{{ url('frontend/images/a2.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>Delivery On Time</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Delivery On Time') }}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -282,8 +284,8 @@
 						<div class="cta-icon icon-trading">
 							<img src="{{ url('frontend/images/a3.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>Reasonable Price</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Reasonable Price') }}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 			</div>

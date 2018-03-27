@@ -21,6 +21,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url('frontend/images/ico/apple-touch-icon-114-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url('frontend/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ url('frontend/images/ico/apple-touch-icon-57-precomposed.png') }}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{{ url('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <!-- bootstrap timepicker -->
+    <link rel="stylesheet" type="text/css" href="{{ url('bower_components/bootstrap-timepicker/css/AdminLTE-bootstrap-timepicker.min.css') }}">
     <!-- icons -->
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="{{ url('frontend/css/style.css') }}">

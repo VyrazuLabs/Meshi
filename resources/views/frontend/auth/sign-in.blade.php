@@ -10,13 +10,13 @@
 @section('content')
 
 <!-- signin-page -->
-	<section id="main" class="clearfix user-page">
+	<section id="" class="clearfix user-page">
 		<div class="container">
 			<div class="row text-center">
 				<!-- user-login -->			
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-					<div class="user-account">
-						<h2>User Login</h2>
+					<div class="user-account boxes-card">
+						<h2>{{ trans('app.User') }} {{ trans('app.Login') }}</h2>
 						<!-- form -->
 						
 						<form method="POST" action="{{ route('authentication') }}">
@@ -42,19 +42,21 @@
 	                            @endif
 							</div>
 
+							
 							<!-- forgot-password -->
 							<div class="user-option">
                                 <div class="checkbox pull-left">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Keep Me Logged In
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ trans('app.Keep Me Logged In') }}
                                     </label>
                                 </div>
 								<div class="pull-right forgot-password">
-									<a href="#">Forgot Your Password?</a>
+									<a href="#">{{ trans('app.Forgot Your Password') }}?</a>
 								</div>
 							</div><!-- forgot-password -->
-							<button type="submit" href="#" class="btn">Login</button>
+							<button type="submit" href="#" class="btn">{{ trans('app.Login') }}</button>
                     	</form>
+                    	{{ trans('app.Do not have an account') }}? <a href="{{ url('/user/register') }}">{{ trans('app.Sign Up here') }}</a>
 					</div>
 					<!-- <a href="#" class="btn-primary">Create a New Account</a> -->
 				</div><!-- user-login -->			

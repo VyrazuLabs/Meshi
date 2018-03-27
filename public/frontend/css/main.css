@@ -321,7 +321,7 @@ textarea {
 	padding-left: 10px;
 }
 
-.sign-in li:last-child:before {
+/*.sign-in li:last-child:before {
 	position: absolute;
 	left: 0;
 	top: 50%;
@@ -332,7 +332,7 @@ textarea {
 	content:"";
 	margin-top: -7px;
 }
-
+*/
 .nav-right .dropdown-menu {
     margin: 18px 0 20px;
 }
@@ -1877,9 +1877,9 @@ transform: scale(1.05) rotate(2deg);
 }
 
 .contact-with .btn-red:hover {
-	color: #f36d2d;
-	background-color: transparent;
-	border: 1px solid #f36d2d;
+	color: #f36d2d !important;
+	background-color: transparent !important;
+	border: 1px solid #f36d2d !important;
 }
 
 .social-links li a {
@@ -4088,3 +4088,4 @@ input, select, a, .transition,
 .style-chooser-inner ul li.preset4 a {
   background: #662d91;
 }
+

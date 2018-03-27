@@ -8,16 +8,16 @@
 @endsection
 
 @section('content')
-<section id="main" class="clearfix details-page">
+<section id="" class="clearfix details-page">
 	<div class="container">
 		<div class="breadcrumb-section">
 			<!-- breadcrumb -->
-			<ol class="breadcrumb">
-				<li><a href="{{ url('/')}}">Home</a></li>
-				<li><a href="{{route('food_details',['food_item_id' => $food_details->food_item_id])}}">Food Details</a></li>
+			<ol class="breadcrumb new-breadcrumb">
+				<li><a href="{{ url('/')}}">{{ trans('app.Home') }}</a></li>
+				<li><a href="{{route('food_details',['food_item_id' => $food_details->food_item_id])}}">{{ trans('app.Food Details') }}</a></li>
 				
 			</ol><!-- breadcrumb -->						
-			<h2 class="title">{{ $food_details->category_name }}</h2>
+			<h2 class="title t-orange">{{ $food_details->category_name }}</h2>
 		</div>
 		
 
@@ -66,7 +66,7 @@
 					<div class="slider-text">
 						<h2>¥{{$food_details->price}}</h2>
 						<h3 class="title">{{$food_details->item_name}}</h3>
-						<p><span>Offered by: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}</a></span>
+						<p><span>{{ trans('app.Offered by') }}:<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}</a></span>
 						<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
 						<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
 						<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
@@ -74,7 +74,7 @@
 						
 						<!-- short-info -->
 						<div class="short-info">
-							<h4>Short Info</h4>
+							<h4>{{ trans('app.Short Info') }}</h4>
 							<!-- <p><strong>Ingredients: </strong><a href="#">flour,baking powder,salt and sugar,eggs etc.</a> </p>
 							<p><strong>Contains: </strong><a href="#">5 Pcs of Pancakes</a> </p> -->
 							<p>{{$food_details->short_info}}</p>
@@ -86,24 +86,28 @@
 
 							<!-- price -->
 							<div class="short-info">
-								<h4>Price</h4>
-								<p class="detail-price-list"><strong>Price: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
-								<p class="detail-price-list"><strong>Tax: </strong>
+								<h4>{{ trans('app.Price') }}</h4>
+								<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
+								<p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
 									@foreach($foodCosting as $key => $costing)
 									<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
 									@endforeach
 								</p>
-								<p class="detail-price-list"><strong>Shipping Fee: </strong><span class="float-right">¥ {{$food_details->shipping_fee}}</span></p>
+								<p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
+									@if(!empty($food_details->shipping_fee))
+										¥ {{$food_details->shipping_fee}}
+									@endif
+								</span></p>
 								<div class="price-line"></div>
-								<p class="detail-price-list"><strong>Total: </strong><span class="float-right">¥ {{$cost}}</span></p>
+								<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>
 							</div>
 							<!-- price -->
 							<!-- contact-with -->
 							<div class="contact-with">
 								<div class="col-md-6 p-0">
 									<div class="form-group">
-										<select class="form-control" name="slot">
-											<option value=" ">Select Your Time</option>
+										<select onchange="checkForValue(this)" class="form-control" name="slot">
+											<option value="">{{ trans('app.Select Your Time') }}</option>
 											@if(!empty($time_of_availability))
 			                  					@foreach($time_of_availability as $key => $slot)
 													<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
@@ -113,11 +117,10 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<!-- <a href="{{route('make_order',['food_item_id' => $food_details->food_item_id,'amount' => $cost])}}"> -->
 									@if(Auth::User())
-										<button class="btn btn-red detail-buy-btn makeOrder" type="button">Buy Now</button>
+										<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
 									@else
-										<a href="{{route('sign_in')}}"><button class="btn btn-red detail-buy-btn" type="button">Buy Now</button></a>
+										<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
 									@endif
 									<!-- </a> -->
 
@@ -133,7 +136,7 @@
 			<div class="row">
 				<!-- description -->
 				<div class="col-md-8">
-					<div class="col-lg-12 col-12 description description-main-div float-left">
+					<div class="col-lg-12 col-12 description description-main-div">
 						<div class="col-md-3">
 							<div class="">
 								<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">
@@ -147,7 +150,7 @@
 						</div>
 						<div class="col-md-9">
 							<div class="">
-								<h4>Description</h4>
+								<h4>{{ trans('app.Description') }}</h4>
 								<p>{{$food_details->food_description}}</p>
 							</div>
 						</div>
@@ -158,19 +161,19 @@
 				<!-- description-short-info -->
 				<div class="col-md-4">					
 					<div class="short-info detail-short-info">
-						<h4>Some Information</h4>
+						<h4>{{ trans('app.Some Information') }}</h4>
 						<!-- social-icon -->
 						<ul>
-							<li><i class="fa fa-shopping-cart"></i><a href="#">Delivery: On schedule time</a></li>
+							<li><i class="fa fa-shopping-cart"></i><a href="#">{{ trans('app.Delivery') }}: {{ trans('app.On schedule time') }}</a></li>
 							<li>
 								<i class="fa fa-user-plus"></i>
-								<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">More foods by 
+								<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{ trans('app.More foods by') }} 
 									<span>{{$food_details->made_by}}</span>
 								</a>
 							</li>
 							<!-- <li><i class="fa fa-share-square-o" aria-hidden="true"></i><a href="#">Refer to a friend</a></li> -->
 							<!-- <li><i class="fa fa-heart-o"></i><a href="#">Like</a></li> -->
-							<li><i class="fa fa-leaf"></i><a href="#">100% Fresh</a></li>
+							<li><i class="fa fa-leaf"></i><a href="#">{{ trans('app.100% Fresh') }}</a></li>
 						</ul><!-- social-icon -->
 					</div>
 				</div>
@@ -187,8 +190,8 @@
 							<img src="{{ url('frontend/images/a1.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>Delicious Foods</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Delicious Foods') }}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -200,8 +203,8 @@
 							<img src="{{ url('frontend/images/a2.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>Delivery On Time</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Delivery On Time')}}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -213,8 +216,8 @@
 							<img src="{{ url('frontend/images/a3.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>Reasonable Price</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						<h4>{{ trans('app.Reasonable Price') }}</h4>
+						<p>{{ trans('app.Lorem ipsum') }}</p>
 					</div>
 				</div><!-- single-cta -->
 			</div><!-- row -->
@@ -253,12 +256,26 @@ function order(form_data) {
 	            });
 	        }
 	        else {
-				var url = '{{ url("/order/make-order") }}'+ '/' +result.cart_id;
+				var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
 	      		window.location.href = url;
 	        }
 	    	
 	    }
 	});
 }
+function checkForValue(param) {
+	var value = $(param).val();
+	if(value != '') {
+		$('#buy_now_btn').prop('disabled', false);
+		$('#buy_now_btn_bfr_login').attr('disabled', false);
+		$('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
+	}
+	else {
+		$('#buy_now_btn').prop('disabled', true);
+		$('#buy_now_btn_bfr_login').attr('disabled', true);
+		$('#buy_now_btn_bfr_login').attr('href', '#');
+	}
+}
+
 </script>
 @endsection

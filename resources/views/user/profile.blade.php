@@ -9,42 +9,46 @@
 
 @section('content')
 
-<section id="main" class="clearfix category-page">
+<section id="" class="clearfix category-page">
 	<div class="container">
 		<div class="breadcrumb-section">
 			<!-- breadcrumb -->
-			<ol class="breadcrumb">
-				<li><a href="{{ url('/')}}">Home</a></li>
+			<ol class="breadcrumb new-breadcrumb">
+				<li><a href="{{ url('/')}}">{{ trans('app.Home')}}</a></li>
 				<li>{{$user->name}}</li>
 			</ol><!-- breadcrumb -->						
-			<h2 class="title">Profile</h2>
+			<h2 class="title t-orange">{{ trans('app.Profile')}}</h2>
 		</div>
 		<div class="category-info">	
 			<div class="col-sm-12 col-md-12 text-center profile-box p-0">				
 				<div class="recommended-ads">
 					<div class="col-lg-12 col-12  profile-section">
 						<div class="profile-image-div text-center">
-							@if(!empty($user->image))
-								<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
-							@else
-								<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
-							@endif
+							<div>
+								@if(!empty($user->image))
+									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
+								@else
+									<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
+								@endif
+							</div>
+							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
-							<p class="profile-title">{{$user->name}}</p>
-							<p>{{$user->description}}</p>
+								<p class="profile-title">{{$user->name}}</p>
+								<p>{{$user->description}}</p>
+							</div>
 						</div>
-						<div class="col-md-5 profile-timeline">
-							<div class="col-md-4">
+						<div class="col-md-4 profile-timeline">
+							<div class="col-md-6">
 								<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>
-								<p class="t-black">Dishes</p>
+								<p class="t-black">{{ trans('app.Dishes')}}</p>
 							</div>
 							<!-- <div class="col-md-4">
 								<p class="timeline-numbers mb-0">105</p>
 								<p class="t-black">Favourites</p>
 							</div> -->
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<p class="timeline-numbers mb-0">{{count($reviews)}}</p>
-								<p class="t-black">Reviews</p>
+								<p class="t-black">{{ trans('app.Reviews') }}</p>
 								<!-- <div class="rating">
 									<span class="t-black">
 										<i class="fa fa-star" aria-hidden="true"></i>
@@ -66,31 +70,32 @@
 						</div>
 					</div>
 					<div class="col-lg-12 col-12 p-0 profile-description">
-						<div class="col-md-3">
-							<p><strong>Nickname :</strong><span> {{ $user->nick_name }}</span></p>
-						</div>
-						<div class="col-md-3">
-							<p><strong>EmailId :</strong><span> {{$user->email}}</span></p>
-						</div>
-						<div class="col-md-3">
-							<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
-						</div>
-						<div class="col-md-3">
-							<p><strong>City :</strong><span> {{$user->address}}</span></p>
+						<div class="col-md-6 float-none profileplace-name">
+							<div class="col-md-6">
+								<p><strong>{{ trans('app.Nickname') }} :</strong><span> {{ $user->nick_name }}</span></p>
+							</div>
+							<!-- <div class="col-md-3">
+								<p><strong>EmailId :</strong><span> {{$user->email}}</span></p>
+							</div>
+							<div class="col-md-3">
+								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
+							</div> -->
+							<div class="col-md-6">
+								<p><strong>{{ trans('app.City') }} :</strong><span> {{$user->address}}</span></p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			@if(!empty($user->video_link))
 				<div class="col-sm-12 col-md-12 text-center profile-box section">
-					<h4 class="text-left t-black mt-0">Share Video</h4>
-
+					<h4 class="text-left t-black mt-0">{{ trans('app.Share Video') }}</h4>
 					<?php echo $user->video_link ?>
 					<!-- <iframe width="100%" height="480" src="https://www.youtube.com/embed/KGBxpefNqvw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 				</div>
 			@endif
 			<div class="col-sm-12 col-md-12 text-center profile-box section">
-				<h4 class="text-left t-black mt-0">Schedule</h4>
+				<h4 class="text-left t-black mt-0">{{ trans('app.Schedule') }}</h4>
 				<div class="row">
 					@if(!empty($food_items))
 						@foreach($food_items as $food)
@@ -137,7 +142,7 @@
 			</div>
 			@if(count($reviews)>0)
 				<div class="col-lg-12 col-xs-12 text-center profile-box section">
-					<h4 class="text-left t-black mt-0">Review</h4>
+					<h4 class="text-left t-black mt-0">{{ trans('app.Review') }}</h4>
 					@foreach($reviews as $review)
 						<div class="col-lg-12 col-xs-12 p-0 review-main-div">
 						<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 p-0">
@@ -160,13 +165,13 @@
 				</div>
 			@endif
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
-				<h4 class="text-left t-black mt-0">Introduction</h4>
+				<h4 class="text-left t-black mt-0">{{ trans('app.Introduction') }}</h4>
 				<p class="text-left">
 					{{$user->user_introduction}}
 				</p>
 			</div>
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
-				<h4 class="text-left t-black mt-0">Message From ShareMeshi</h4>
+				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }}&nbsp;{{ trans('app.Share') }}&nbsp;{{ trans('app.Meshi') }}</h4>
 				<div class="col-lg-12 col-xs-12 p-0">
 					<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 message-logo-div">
 						<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive">

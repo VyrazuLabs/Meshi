@@ -7,14 +7,14 @@
                     <!-- footer-widget -->
                     <div class="col-sm-3">
                         <div class="footer-widget">
-                            <h3>Quik Links</h3>
+                            <h3>{{ trans('app.Quik Links') }}</h3>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Food Festival</a></li>
-                                <li><a href="#">All Cities</a></li>
-                                <li><a href="#">Help & Support</a></li>
-                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">{{ trans('app.About Us') }}</a></li>
+                                <li><a href="#">{{ trans('app.Contact Us') }}</a></li>
+                                <li><a href="#">{{ trans('app.Food Festival') }}</a></li>
+                                <li><a href="#">{{ trans('app.All Cities') }}</a></li>
+                                <li><a href="#">{{ trans('app.Help & Support') }}</a></li>
+                                <li><a href="#">{{ trans('app.Blog') }}</a></li>
                             </ul>
                         </div>
                     </div><!-- footer-widget -->
@@ -22,14 +22,14 @@
                     <!-- footer-widget -->
                     <div class="col-sm-3">
                         <div class="footer-widget">
-                            <h3>Foods</h3>
+                            <h3>{{ trans('app.Foods') }}</h3>
                             <ul>
-                                <li><a href="#">Delicious Foods</a></li>
-                                <li><a href="#">Snacks</a></li>
-                                <li><a href="#">Lunch</a></li>
-                                <li><a href="#">Dinner</a></li>
-                                <li><a href="#">Breakfast</a></li>
-                                <li><a href="#">Desert</a></li>
+                                <li><a href="#">{{ trans('app.Delicious Foods') }}</a></li>
+                                <li><a href="#">{{ trans('app.Snacks') }}</a></li>
+                                <li><a href="#">{{ trans('app.Lunch') }}</a></li>
+                                <li><a href="#">{{ trans('app.Dinner') }}</a></li>
+                                <li><a href="#">{{ trans('app.Breakfast') }}</a></li>
+                                <li><a href="#">{{ trans('app.Desert') }}</a></li>
                             </ul>
                         </div>
                     </div><!-- footer-widget -->
@@ -37,9 +37,9 @@
                     <!-- footer-widget -->
                     <div class="col-sm-3">
                         <div class="footer-widget social-widget">
-                            <h3>Follow us on</h3>
+                            <h3>{{ trans('app.Follow us on') }}</h3>
                             <ul>
-                                <li><a href="#"><i class="fa fa-facebook-official"></i>Facebook</a></li>
+                                <li><a href="#"><i class="fa fa-facebook-official"></i>{{ trans('app.Facebook') }}</a></li>
                                 <li><a href="#"><i class="fa fa-twitter-square"></i>Twitter</a></li>
                                 <li><a href="#"><i class="fa fa-google-plus-square"></i>Google+</a></li>
                                 <li><a href="#"><i class="fa fa-youtube-play"></i>youtube</a></li>
@@ -50,12 +50,12 @@
                     <!-- footer-widget -->
                     <div class="col-sm-3">
                         <div class="footer-widget news-letter">
-                            <h3>Newsletter</h3>
-                            <p>Trade is Worldest leading classifieds platform that brings!</p>
+                            <h3>{{ trans('app.Newsletter') }}</h3>
+                            <p>{{ trans('app.Trade is Worldest leading classifieds platform that brings!') }}</p>
                             <!-- form -->
                             <form action="#">
-                                <input type="email" class="form-control" placeholder="Your email id">
-                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                                <input type="email" class="form-control" placeholder="{{ trans('app.Your email id') }}">
+                                <button type="submit" class="btn btn-primary">{{ trans('app.Sign Up') }}</button>
                             </form><!-- form -->            
                         </div>
                     </div><!-- footer-widget -->
@@ -66,7 +66,7 @@
         
         <div class="footer-bottom clearfix text-center">
             <div class="container">
-                <p>Copyright &copy; 2016. Developed by <a href="http://themeregion.com/">Vyrazu Labs</a></p>
+                <p>{{ trans('app.Copyright') }} &copy; 2016. {{ trans('app.Developed by') }} <a href="http://themeregion.com/">{{ trans('app.Vyrazu') }} {{ trans('app.Labs') }}</a></p>
             </div>
         </div><!-- footer-bottom -->
     </footer><!-- footer -->

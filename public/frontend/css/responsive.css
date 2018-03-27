@@ -857,6 +857,9 @@
 	.profile-logo {
 		margin-right: 20px;
 	}
+	#road_map{
+		height: 350px;
+	}
 }
 
 /* XS Portrait */
@@ -1089,6 +1092,5 @@
 		margin-bottom: 20px;
 		float: none;
 	}
-
 }
 
