@@ -4,7 +4,7 @@ namespace App\Models\Payment;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payments extends Model
+class Payment extends Model
 {
     protected $table = 'payment';
 	public $fillable = array(

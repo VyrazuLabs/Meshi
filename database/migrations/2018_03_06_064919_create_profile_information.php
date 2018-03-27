@@ -24,7 +24,7 @@ class CreateProfileInformation extends Migration
             $table->string('image');
             $table->string('video_link')->nullable();
             $table->integer('age');
-            $table->string('created_by')->nullable();
+            $table->string('created_by');
             $table->integer('total_dishes')->nullable();
             $table->string('zipcode');
             $table->string('prefectures');

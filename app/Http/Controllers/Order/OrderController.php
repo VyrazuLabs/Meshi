@@ -53,11 +53,10 @@ class OrderController extends Controller
     // 	return view('order.make-order',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
     // }
 
-    // public function makeOrderWithPaypal($cart_id = null) {
-    // 	echo "hello";die;
-    // 	$cart = Cart::where('cart_id',$cart_id)->first();
-    // 	return view('order.make-order-with-paypal',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
-    // }
+    public function makeOrderWithPaypal($cart_id = null) {
+    	$cart = Cart::where('cart_id',$cart_id)->first();
+    	return view('order.make-order-with-paypal',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
+    }
 
 
 

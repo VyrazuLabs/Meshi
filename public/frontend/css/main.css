@@ -1877,9 +1877,9 @@ transform: scale(1.05) rotate(2deg);
 }
 
 .contact-with .btn-red:hover {
-	color: #f36d2d !important;
-	background-color: transparent !important;
-	border: 1px solid #f36d2d !important;
+	color: #f36d2d;
+	background-color: transparent;
+	border: 1px solid #f36d2d;
 }
 
 .social-links li a {
@@ -4088,4 +4088,3 @@ input, select, a, .transition,
 .style-chooser-inner ul li.preset4 a {
   background: #662d91;
 }
-

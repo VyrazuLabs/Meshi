@@ -28,7 +28,7 @@
 	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
 	                  	@if ($errors->has('image'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+	                      		<strong class="strong">{{ $errors->first('image') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -41,7 +41,7 @@
 						          'placeholder'=>'Enter Full Name')) !!}
 						@if ($errors->has('name'))
 						  	<span class="help-block">
-						      <strong class="strong t-red">{{ $errors->first('name') }}</strong>
+						      <strong class="strong">{{ $errors->first('name') }}</strong>
 						  	</span>
 						@endif
 	                </div>
@@ -53,7 +53,7 @@
 						          'placeholder'=>'Enter Nick Name')) !!}
 						@if ($errors->has('nick_name'))
 						  	<span class="help-block">
-						      <strong class="strong t-red">{{ $errors->first('nick_name') }}</strong>
+						      <strong class="strong">{{ $errors->first('nick_name') }}</strong>
 						  	</span>
 						@endif
 	                </div>
@@ -69,7 +69,7 @@
 	                    @endif
 	                  @if ($errors->has('email'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('email') }}</strong>
+	                      <strong class="strong">{{ $errors->first('email') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -80,7 +80,7 @@
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('password') }}</strong>
+	                      <strong class="strong">{{ $errors->first('password') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -91,7 +91,7 @@
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password_confirmation'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('password_confirmation') }}</strong>
+	                      <strong class="strong">{{ $errors->first('password_confirmation') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -100,7 +100,7 @@
 	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Messiator (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
 	                  @if ($errors->has('type'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
+	                      <strong class="strong">{{ $errors->first('type') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -244,7 +244,7 @@
 	                                'id' => 'phone')) !!}
 	                  @if ($errors->has('phone_number'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('phone_number') }}</strong>
+	                      <strong class="strong">{{ $errors->first('phone_number') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
@@ -255,14 +255,14 @@
 	                                'placeholder'=>'Enter Address','rows'=>'2')) !!}
 						@if ($errors->has('address'))
 							<span class="help-block">
-								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
+								<strong class="strong">{{ $errors->first('address') }}</strong>
 							</span>
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link', null, 
-	                          array('class'=>'form-control','rows'=>'3')) !!}
+	                  	{!! Form::text('video_link', null, 
+	                          array('class'=>'form-control')) !!}
 	                 
 	                </div>
 	                <div class="form-group form-custom-group">
@@ -272,7 +272,7 @@
 	                                'placeholder'=>'Tell us something about the user','rows'=>'3')) !!}
 	                  	@if ($errors->has('description'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('description') }}</strong>
+	                      		<strong class="strong">{{ $errors->first('description') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -283,7 +283,7 @@
 	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
 	                  	@if ($errors->has('user_introduction'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
+	                      		<strong class="strong">{{ $errors->first('user_introduction') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -294,7 +294,7 @@
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
 	                  	@if ($errors->has('profile_message'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
+	                      		<strong class="strong">{{ $errors->first('profile_message') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -303,7 +303,7 @@
 	                    {{ Form::select('age', ['10' => "10's", '20' => "20's", '30' => "Thirties", '40' => 'Forties', '50' => 'Fifties', '60' => "60's", '70' => "70's", '80' => "Age 80" ], null, ['placeholder' => '-- Please Select Age --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('age'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('age') }}</strong>
+							  <strong class="strong">{{ $errors->first('age') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -314,7 +314,7 @@
 	                                'placeholder'=>'104-0061')) !!}
 						@if ($errors->has('zipcode'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('zipcode') }}</strong>
+							  <strong class="strong">{{ $errors->first('zipcode') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -325,7 +325,7 @@
 	                                'placeholder'=>'Enter Prefectures')) !!}
 						@if ($errors->has('prefectures'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('prefectures') }}</strong>
+							  <strong class="strong">{{ $errors->first('prefectures') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -336,7 +336,7 @@
 	                                'placeholder'=>'Enter Municipality')) !!}
 						@if ($errors->has('municipality'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('municipality') }}</strong>
+							  <strong class="strong">{{ $errors->first('municipality') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -345,7 +345,7 @@
 	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('gender'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('gender') }}</strong>
+							  <strong class="strong">{{ $errors->first('gender') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -359,7 +359,7 @@
 	                    	null, ['placeholder' => '-- Please Select Profession --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('profession'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('profession') }}</strong>
+							  <strong class="strong">{{ $errors->first('profession') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -369,7 +369,7 @@
 	                          array('class'=>'form-control')) !!}
 						@if ($errors->has('job'))
 							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('job') }}</strong>
+							  <strong class="strong">{{ $errors->first('job') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -379,7 +379,7 @@
 		                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
 		                  	@if ($errors->has('image'))
 		                    	<span class="help-block">
-		                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+		                      		<strong class="strong">{{ $errors->first('image') }}</strong>
 		                    	</span>
 		                  	@endif
 		                </div>
@@ -390,7 +390,7 @@
 	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 	                  @if ($errors->has('status'))
 	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('status') }}</strong>
+	                      <strong class="strong">{{ $errors->first('status') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>

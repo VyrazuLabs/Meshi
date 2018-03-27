@@ -66,16 +66,16 @@
 						</div>
 					</div>
 					<div class="col-lg-12 col-12 p-0 profile-description">
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<p><strong>Nickname :</strong><span> {{ $user->nick_name }}</span></p>
 						</div>
-						<!-- <div class="col-md-3">
+						<div class="col-md-3">
 							<p><strong>EmailId :</strong><span> {{$user->email}}</span></p>
 						</div>
 						<div class="col-md-3">
 							<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
-						</div> -->
-						<div class="col-md-6">
+						</div>
+						<div class="col-md-3">
 							<p><strong>City :</strong><span> {{$user->address}}</span></p>
 						</div>
 					</div>

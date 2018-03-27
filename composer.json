@@ -10,8 +10,8 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
-        "cartalyst/stripe-laravel": "2.0.*",
-        "guzzlehttp/guzzle": "~5.2",
+	"cartalyst/stripe-laravel": "2.0.*",
+"guzzlehttp/guzzle": "~5.2",
         "paypal/rest-api-sdk-php": "*"
     },
     "require-dev": {
@@ -57,8 +57,5 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    },
-    "repositories": {
-        "packagist": { "url": "https://packagist.org", "type": "composer" }
     }
 }

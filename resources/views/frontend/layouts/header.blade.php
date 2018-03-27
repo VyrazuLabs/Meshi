@@ -38,10 +38,7 @@
 						</ul>								
 					</div> --><!-- language-dropdown -->
 
-					<!-- sign-in -->
-					<div class="languagedropdown">
-						<div id="google_translate_element" class="headlanguage-select"></div>
-					</div>					
+					<!-- sign-in -->					
 					<ul class="sign-in">
 						<li><i class="fa fa-user"></i></li>
 						@if(Auth::User())
