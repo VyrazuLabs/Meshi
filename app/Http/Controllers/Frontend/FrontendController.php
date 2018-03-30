@@ -100,6 +100,16 @@ class FrontendController extends Controller
     	return view('frontend.index',['tomorrow_food_items'=>$tomorrow_food_items,'day_after_tomorrow_food_items'=>$day_after_tomorrow_food_items,'next_day_of_tomorrow_food_items'=>$next_day_of_tomorrow_food_items,'next_day_of_tomorrow'=>$next_day_of_tomorrow]);
     }
 
+    public function privacy() {
+        return view('frontend.privacy-policy');
+    }
+    public function terms() {
+        return view('frontend.Terms & conditions');
+    }
+    public function cart() {
+        return view('frontend.shopping-cart');
+    }
+
 
 
 }

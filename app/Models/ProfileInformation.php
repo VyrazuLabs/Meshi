@@ -15,6 +15,7 @@ class ProfileInformation extends Model
 				            'long',
 				            'description',
 				            'image',
+				            // 'cover_image',
 				            'video_link',
 				            'age',
 				            'total_dishes',

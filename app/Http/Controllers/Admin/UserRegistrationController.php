@@ -113,8 +113,6 @@ class UserRegistrationController extends Controller
 						            'user_introduction' => $input['user_introduction'],
 						            'profile_message' => $input['profile_message'],
 						            'video_link' => $input['video_link'],
-
-
 					          	]);
 
  
@@ -317,7 +315,6 @@ class UserRegistrationController extends Controller
 	        $user->municipality = $profile->municipality;
 	        $user->gender = $profile->gender;
 	        $user->profession = $profile->profession;
-	        $user->reason_for_registration = $profile->reason_for_registration;
 	        $user->job = $profile->job;
 	        $user->image = $profile->image;
 	        $user->user_introduction = $profile->user_introduction;

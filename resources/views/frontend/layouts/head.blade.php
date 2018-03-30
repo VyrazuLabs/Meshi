@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ url('frontend/css/main.css') }}">  
 	<link id="preset" rel="stylesheet" href="{{ url('frontend/css/presets/preset2.css') }}">	
     <link rel="stylesheet" href="{{ url('frontend/css/responsive.css') }}">
+    <!-- <link id="preset" rel="stylesheet" href="{{ url('/presets/preset1.css') }}">   -->
+
 	
 	<!-- font -->
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,300' rel='stylesheet' type='text/css'>

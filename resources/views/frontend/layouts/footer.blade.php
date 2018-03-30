@@ -14,6 +14,9 @@
                                 <li><a href="#">{{ trans('app.Food Festival') }}</a></li>
                                 <li><a href="#">{{ trans('app.All Cities') }}</a></li>
                                 <li><a href="#">{{ trans('app.Help & Support') }}</a></li>
+                                <li><a href="{{url('/privacy-policy')}}">{{ trans('app.Privacy Policy') }}</a></li>
+                                <li><a href="{{route('terms')}}">{{ trans('app.Terms & conditions') }}</a></li>
+                                <li><a href="{{route('shoppingCart')}}">{{ trans('app.Shopping cart feature') }}</a></li>
                                 <li><a href="#">{{ trans('app.Blog') }}</a></li>
                             </ul>
                         </div>

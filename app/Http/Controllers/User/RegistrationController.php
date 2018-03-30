@@ -19,6 +19,8 @@ class RegistrationController extends Controller
     public function save(Request $request) {
     	$input = $request->input();
 
+    	// echo"<pre>";print_r($input);die;
+
     	$file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
@@ -26,12 +28,16 @@ class RegistrationController extends Controller
         
         /* update user */
 	    if(isset($input['user_id'])) {
+
 	    	/* check validation for user updation */
 	    	if($userUpdateValidator->fails()) {
 	        	Session::flash('error', "Please Fill The Form Properly.");
-	        	return redirect()->back()->withErrors($userUpdateValidator)->withInput();
+        		return redirect()->back()->withInput()->withErrors($userUpdateValidator);
+
 	        }
 	        else {
+
+	        	
 	        	/* get user and their profile details */
 	        	$user = User::where('user_id',$input['user_id'])->first();
 				$profile = ProfileInformation::where('user_id',$input['user_id'])->first();
@@ -60,12 +66,15 @@ class RegistrationController extends Controller
 		        $reason = substr($reason, 0, -1);
 
 
+
+
+
 				/******** CODES FOR PASSWORD UPDATION STARTS HERE *********/
 		        if(!empty($input['password']) ) {
 		          	$passwordValidator = $this->passwordValidator($input);
 		          	if($passwordValidator->fails()) {
 		            	Session::flash('error', "Please enter a valid password.");
-		            	return redirect()->back()->withErrors($passwordValidator);
+		            	return redirect()->back()->withErrors($passwordValidator)->withInput();
 		          	}
 		          	else {
 		            	$user->update([ 'password' => bcrypt($input['password'])]);
@@ -74,10 +83,10 @@ class RegistrationController extends Controller
 
 		        /***** CODES FOR PHONE NUMBER UPDATION STARTS HERE *****/
 		        if($profile->phone_number != $input['phone_number']) {
-		          	$phone_number_validator = $this->updatePhoneNumberValidator($input);
+		          	$phone_number_validator = $this->phone_number_validator($input);
 		          	if($phone_number_validator->fails()) {
 		            	Session::flash('error', "Please enter a valid phone number.");
-		            	return redirect()->back()->withErrors($phone_number_validator);
+		            	return redirect()->back()->withErrors($phone_number_validator)->withInput();
 		          	}
 		          	else {
 		            	$profile->update([ 'phone_number' => $input['phone_number']]);
@@ -85,6 +94,13 @@ class RegistrationController extends Controller
 		        }
 		        else {
 		          $profile->update([ 'phone_number' => $input['phone_number']]);
+		        }
+
+		        if(isset($input['video_link'])) {
+		        	$videoLink = $input['video_link'];
+		        }
+		        else {
+		        	$videoLink = '';
 		        }
 
 
@@ -108,9 +124,24 @@ class RegistrationController extends Controller
 						            'profession' => $input['profession'],
 						            'reason_for_registration' => $reason,
 						            'job' => $input['job'],
-
-
+						            'video_link' => $videoLink
 					          	]);
+
+		     //    if ($request->hasFile('cover_image')) {
+		     //        	// echo"bb";die;
+
+	    		// 	$coverImageFile = $request->file('cover_image');
+		     //    	$coverImageValidator = $this->coverImageValidator($coverImageFile);
+		     //    	if( $coverImageValidator->fails()) {
+		     //          return redirect()->back()->withErrors($coverImageValidator)->withInput();
+		     //        }
+		     //        else {
+		     //        	$coverImage = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+		     //        	$file['cover_image']->move(public_path().'/uploads/profile/cover-image/', $coverImage);
+		     //        	$profile->update(
+       //                      array('cover_image' => $coverImage));
+		     //        }
+	    		// }
 
  
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
@@ -140,6 +171,10 @@ class RegistrationController extends Controller
 		        }
 		        $profile->update(
                             array('image' => $profile_image));
+
+
+		        
+
 
 
 		    	Session::flash('success', "User updated successfully");
@@ -207,6 +242,7 @@ class RegistrationController extends Controller
 									            'reason_for_registration' => $reason,
 									            'job' => $input['job'],
 									            'total_dishes' => 0,
+									            'video_link' => $input['video_link'],
 
 								          	]);
 	        	Session::flash('success', "User registered successfully");
@@ -249,8 +285,8 @@ class RegistrationController extends Controller
                                       'type' => 'required',
                                       'address' => 'required|max:255',
                                       'nick_name' => 'required',
-                                      'phone_number' => 'required',
                                       'description' => 'required',
+                                      'phone_number' => 'required',
                                       'age' => 'required',
                                       'zipcode' => 'required|max:7',
                                       'prefectures' => 'required',
@@ -276,9 +312,20 @@ class RegistrationController extends Controller
                                     ]);
   	}
 
+  	//VALIDATOR FOR COVER IMAGE
+  	protected function coverImageValidator($request){
+    	return Validator::make($request,[
+                                      'cover_image' => 'required|mimes:jpeg,png,jpg',
+                                    ]);
+  	}
+
   	protected function phone_number_validator($request) {
     	return Validator::make($request,[
                                       'phone_number' => 'required|unique:profile_information'
                                     ]);
   	}
+
+
+
+
 }

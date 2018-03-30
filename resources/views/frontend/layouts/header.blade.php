@@ -19,15 +19,19 @@
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
-							<!-- @if(Auth::user() && Auth::user()->type == 1)
-								<li class="active"><a href="{{ url('/food/create')}}">Add Food Item </a></li>
-							@endif -->
-							<!-- <li><a href="{{ url('food/categories') }}">Category</a></li> -->
+							@if(Auth::user() && Auth::user()->type == 1)
+								<li><a href="{{route('profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.PROFILE') }}</a></li>
+								<li><a href="{{ url('/food/create')}}">{{ trans('app.ADD FOOD ITEM') }} </a></li>
+							@elseif(Auth::user() && Auth::user()->type == 2)
+								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
+								<li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li>
+							@endif
+							
 							<!-- <li><a href="{{ url('food/details') }}">all ads</a></li> -->
 							<!-- <li><a href="#">Help/Support</a></li>  -->
 							<!-- <li><a href="#">Pages</a></li> -->
 						@php
-							$choose_type = trans('app.-- Select Language --');
+							$choose_type = trans('app.Select Language');
 							$Japanese = trans('app.Japanese');
 						@endphp
 
@@ -53,10 +57,9 @@
 					<!-- sign-in -->
 					<!-- <div class="languagedropdown">
 						<div id="google_translate_element" class="headlanguage-select"></div>
-					</div> -->					
-					<ul class="sign-in">
-						<li>
-                
+					</div> -->	
+					<div class="language-box ">	
+						<i class="fa fa-language t-orange"></i>
 						@php 
 							$langName =[];
 							if(Session::has('lang_name')) {
@@ -65,9 +68,9 @@
 							}
 
 						@endphp
-							{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
-
-						</li>
+							{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose language-select','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
+					</div>			
+					<ul class="sign-in">
 						<li>
 							
 						@if(Auth::User())

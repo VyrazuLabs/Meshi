@@ -13,11 +13,14 @@
 		<div class="breadcrumb-section">
 			<!-- breadcrumb -->
 			<ol class="breadcrumb new-breadcrumb">
-				<li><a href="{{ url('/')}}">{{ trans('app.Home') }}</a></li>
-				<li><a href="{{route('food_details',['food_item_id' => $food_details->food_item_id])}}">{{ trans('app.Food Details') }}</a></li>
-				
+				<li><a href="{{ url('/')}}">{{ trans('app.HOME') }}</a></li>
+				@if(!empty($food_details))
+					<li><a href="{{route('food_details',['food_item_id' => $food_details->food_item_id])}}">{{ trans('app.Food Details') }}</a></li>
+
 			</ol><!-- breadcrumb -->						
 			<h2 class="title t-orange">{{ $food_details->category_name }}</h2>
+				@endif
+
 		</div>
 		
 
@@ -60,125 +63,128 @@
 						</a><!-- Controls -->
 					</div>
 				</div><!-- Controls -->	
-
-				<!-- slider-text -->
-				<div class="col-md-5">
-					<div class="slider-text">
-						<h2>¥{{$food_details->price}}</h2>
-						<h3 class="title">{{$food_details->item_name}}</h3>
-						<p><span>{{ trans('app.Offered by') }}:<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}</a></span>
-						<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
-						<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
-						<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
-						<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
-						
-						<!-- short-info -->
-						<div class="short-info">
-							<h4>{{ trans('app.Short Info') }}</h4>
-							<!-- <p><strong>Ingredients: </strong><a href="#">flour,baking powder,salt and sugar,eggs etc.</a> </p>
-							<p><strong>Contains: </strong><a href="#">5 Pcs of Pancakes</a> </p> -->
-							<p>{{$food_details->short_info}}</p>
-						</div>
-						<!-- short-info -->
-						{!! Form::open(array('id'=>"buy_now_form")) !!}
-                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
-                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
-
-							<!-- price -->
+				@if(!empty($food_details))
+					<!-- slider-text -->
+					<div class="col-md-5">
+						<div class="slider-text">
+							<h2>¥{{$food_details->price}}</h2>
+							<h3 class="title">{{$food_details->item_name}}</h3>
+							<p><span>{{ trans('app.Offered by') }}:<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}</a></span>
+							<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
+							<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
+							<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
+							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
+							
+							<!-- short-info -->
 							<div class="short-info">
-								<h4>{{ trans('app.Price') }}</h4>
-								<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
-								<p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
-									@foreach($foodCosting as $key => $costing)
-									<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
-									@endforeach
-								</p>
-								<p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
-									@if(!empty($food_details->shipping_fee))
-										¥ {{$food_details->shipping_fee}}
-									@endif
-								</span></p>
-								<div class="price-line"></div>
-								<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>
+								<h4>{{ trans('app.Short Info') }}</h4>
+								<!-- <p><strong>Ingredients: </strong><a href="#">flour,baking powder,salt and sugar,eggs etc.</a> </p>
+								<p><strong>Contains: </strong><a href="#">5 Pcs of Pancakes</a> </p> -->
+								<p>{{$food_details->short_info}}</p>
 							</div>
-							<!-- price -->
-							<!-- contact-with -->
-							<div class="contact-with">
-								<div class="col-md-6 p-0">
-									<div class="form-group">
-										<select onchange="checkForValue(this)" class="form-control" name="slot">
-											<option value="">{{ trans('app.Select Your Time') }}</option>
-											@if(!empty($time_of_availability))
-			                  					@foreach($time_of_availability as $key => $slot)
-													<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
-												@endforeach
-											@endif
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									@if(Auth::User())
-										<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
-									@else
-										<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
-									@endif
-									<!-- </a> -->
+							<!-- short-info -->
+							{!! Form::open(array('id'=>"buy_now_form")) !!}
+	                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
+	                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
 
+								<!-- price -->
+								<div class="short-info">
+									<h4>{{ trans('app.Price') }}</h4>
+									<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
+									<p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
+										@foreach($foodCosting as $key => $costing)
+										<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
+										@endforeach
+									</p>
+									<p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
+										@if(!empty($food_details->shipping_fee))
+											¥ {{$food_details->shipping_fee}}
+										@endif
+									</span></p>
+									<div class="price-line"></div>
+									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>
 								</div>
-							</div><!-- contact-with -->
-	            		{!! Form::close() !!}
-					</div>
-				</div><!-- slider-text -->				
+								<!-- price -->
+								<!-- contact-with -->
+								<div class="contact-with">
+									<div class="col-md-6 p-0">
+										<div class="form-group">
+											<select onchange="checkForValue(this)" class="form-control" name="slot">
+												<option value="">{{ trans('app.Select Your Time') }}</option>
+												@if(!empty($time_of_availability))
+				                  					@foreach($time_of_availability as $key => $slot)
+														<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
+													@endforeach
+												@endif
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										@if(Auth::User())
+											<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+										@else
+											<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
+										@endif
+										<!-- </a> -->
+
+									</div>
+								</div><!-- contact-with -->
+		            		{!! Form::close() !!}
+						</div>
+					</div><!-- slider-text -->	
+				@endif			
 			</div>				
 		</div><!-- slider -->
 
-		<div class="description-info">
-			<div class="row">
-				<!-- description -->
-				<div class="col-md-8">
-					<div class="col-lg-12 col-12 description description-main-div">
-						<div class="col-md-3">
-							<div class="">
-								<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">
-									@if(!empty($food_details->image))
-										<img src="{{url('/uploads/profile/picture/'.$food_details->image)}}" class="img-circle">
-									@else
-										<img src="{{ url('frontend/images/description.png') }}" class="img-circle">
-									@endif
-								</a>
+		@if(!empty($food_details))
+			<div class="description-info">
+				<div class="row">
+					<!-- description -->
+					<div class="col-md-8">
+						<div class="col-lg-12 col-12 description description-main-div">
+							<div class="col-md-3">
+								<div class="">
+									<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">
+										@if(!empty($food_details->image))
+											<img src="{{url('/uploads/profile/picture/'.$food_details->image)}}" class="img-circle">
+										@else
+											<img src="{{ url('frontend/images/description.png') }}" class="img-circle">
+										@endif
+									</a>
+								</div>
 							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="">
-								<h4>{{ trans('app.Description') }}</h4>
-								<p>{{$food_details->food_description}}</p>
+							<div class="col-md-9">
+								<div class="">
+									<h4>{{ trans('app.Description') }}</h4>
+									<p>{{$food_details->food_description}}</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- description -->
+					<!-- description -->
 
-				<!-- description-short-info -->
-				<div class="col-md-4">					
-					<div class="short-info detail-short-info">
-						<h4>{{ trans('app.Some Information') }}</h4>
-						<!-- social-icon -->
-						<ul>
-							<li><i class="fa fa-shopping-cart"></i><a href="#">{{ trans('app.Delivery') }}: {{ trans('app.On schedule time') }}</a></li>
-							<li>
-								<i class="fa fa-user-plus"></i>
-								<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{ trans('app.More foods by') }} 
-									<span>{{$food_details->made_by}}</span>
-								</a>
-							</li>
-							<!-- <li><i class="fa fa-share-square-o" aria-hidden="true"></i><a href="#">Refer to a friend</a></li> -->
-							<!-- <li><i class="fa fa-heart-o"></i><a href="#">Like</a></li> -->
-							<li><i class="fa fa-leaf"></i><a href="#">{{ trans('app.100% Fresh') }}</a></li>
-						</ul><!-- social-icon -->
+					<!-- description-short-info -->
+					<div class="col-md-4">					
+						<div class="short-info detail-short-info">
+							<h4>{{ trans('app.Some Information') }}</h4>
+							<!-- social-icon -->
+							<ul>
+								<li><i class="fa fa-shopping-cart"></i><a href="#">{{ trans('app.Delivery') }}: {{ trans('app.On schedule time') }}</a></li>
+								<li>
+									<i class="fa fa-user-plus"></i>
+									<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{ trans('app.More foods by') }} 
+										<span>{{$food_details->made_by}}</span>
+									</a>
+								</li>
+								<!-- <li><i class="fa fa-share-square-o" aria-hidden="true"></i><a href="#">Refer to a friend</a></li> -->
+								<!-- <li><i class="fa fa-heart-o"></i><a href="#">Like</a></li> -->
+								<li><i class="fa fa-leaf"></i><a href="#">{{ trans('app.100% Fresh') }}</a></li>
+							</ul><!-- social-icon -->
+						</div>
 					</div>
-				</div>
-			</div><!-- row -->
-		</div><!-- description-info -->	
+				</div><!-- row -->
+			</div><!-- description-info -->	
+		@endif
 		
 		<div class="section cta text-center">
 			<div class="row">

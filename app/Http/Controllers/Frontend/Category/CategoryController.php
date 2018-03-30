@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
 use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryController extends Controller
 {
@@ -19,8 +21,35 @@ class CategoryController extends Controller
 							  ->where('parent_id','!=',0)
 							  ->pluck('category_name','category_id');
 
-      	// echo"<pre>";print_r($categories);die;
-    	return view('frontend.category.category',['categories'=>$categories,'sub_categories'=>$sub_categories]);
+      $today = date("Y-m-d");
+
+      /* food items available */
+      $food_items = FoodItem::where('status',1)
+                            ->where('date_of_availability','>',$today)
+                            ->get();
+
+      if(!empty($food_items)) {
+        foreach ($food_items as $key => $food) {
+          $category = Category::where('category_id',$food->category_id)->first();
+          $food->category_name = $category->category_name;
+          $food->price = $food->price;
+          $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+          $food->time = date('h:i a', strtotime($food->time_of_availability));
+
+          $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
+          if(!empty($profile->image)) {
+            $food->image = $profile->image;
+          }
+
+          if(!empty($food->food_images)) {
+            //getting the food images
+            $images = $food->food_images;
+            $food->foodImages = unserialize($images);
+          }
+        }
+      }
+
+    	return view('frontend.category.category',['categories'=>$categories,'sub_categories'=>$sub_categories,'food_items'=>$food_items]);
     }
 
     public function allCategory() {
@@ -34,6 +63,34 @@ class CategoryController extends Controller
 
 	  	$all_categories = Category::where('status',1)->pluck('category_name','category_id');
       $food_items = FoodItem::where('status',1)->get();
+      if(!empty($food_items)) {
+        foreach ($food_items as $key => $food) {
+          $category = Category::where('category_id',$food->category_id)->first();
+          $food->category_name = $category->category_name;
+          $food->price = $food->price;
+          $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+          $food->time = date('h:i a', strtotime($food->time_of_availability));
+
+          $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
+          if(!empty($profile->image)) {
+            $food->image = $profile->image;
+          }
+
+          if(!empty($food->food_images)) {
+            //getting the food images
+            $images = $food->food_images;
+            $food->foodImages = unserialize($images);
+          }
+        }
+      }
+
+      $today = date("Y-m-d");
+
+      /* food items available */
+      $food_items = FoodItem::where('status',1)
+                            ->where('date_of_availability','>',$today)
+                            ->get();
+
       if(!empty($food_items)) {
         foreach ($food_items as $key => $food) {
           $category = Category::where('category_id',$food->category_id)->first();

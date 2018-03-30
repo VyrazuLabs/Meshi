@@ -24,7 +24,8 @@
                 	{{ Form::model($user) }}
               	@endif
                 {{Form::hidden('user_id',null)}}
-                <?php 
+
+                @php 
                 	$selectPlaceholder = trans('app.Please Select'); 
                 	$prefecturesPlaceholder = trans('app.prefectures placeholder'); 
                 	$municipalityPlaceholder = trans('app.municipality placeholder');
@@ -44,9 +45,26 @@
                 	$profession_currently = trans('app.profession_currently'); 
                 	$profession_employee = trans('app.profession_employee'); 
                 	$profession_other = trans('app.profession_other'); 
+                	$type_messiator = trans('app.type_messiator');
+                	$type_mesh_creator = trans('app.type_mesh_creator');
 
-                ?>
+                @endphp
               	<div class="box-body">
+              	@if ( $form_type == 'edit' )
+
+              		<div class="form-group form-custom-group">
+	                  	<label> Image<span>*</span></label>
+	                  	@if( !empty($user->image) )
+		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
+		                @endif
+	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
+	                  	@if ($errors->has('image'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	              	@endif
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Name') }} <span>*</span></label>
 						{!! Form::text('name', null, 
@@ -104,51 +122,166 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                <?php $type = trans('app.Messiator');  ?>
+	        
 	                <div class="form-group form-custom-group">
 	                  <label>{{ trans('app.User Type') }}<span>*</span></label>
-	                  {{ Form::select('type', ['2' => $type], null, ['class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
+	                 
+	                  {{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
+
 	                  @if ($errors->has('type'))
 	                    <span class="help-block">
 	                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
-	                
-	                <div class="form-group form-custom-group create-reason">
-	                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('app.Reason why you want to use share map (multiple selections possible)') }}</font></font></label>
-	                	<div class="col-md-8 buyer">
+	                @if($form_type == 'edit')
+		                <div class="form-group form-custom-group reason edit-reason">
+		                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
+		                	@if($user->type == 2)
+			                	<div class="col-md-8 buyer">
 			                		<label>
 			                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
-			                			 <span class="register-checktext">{{ trans('app.Busy with working') }}</span>
+			                			 Busy with working
 		                           	</label> 
 		                           	<label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
-		                           		<span class="register-checktext">{{ trans('app.I got bored with convenience stores, medium meals, and other lunches because I live alone') }}</span>
+		                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
 		                            </label> 
 		                            <label>
 		                           		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
-		                            	<span class="register-checktext">{{ trans('app.There are few restaurants around the office')}}</span>
+		                            	There are few restaurants around the office
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
-		                            	<span class="register-checktext">{{ trans('app.I am busy raising children and have no time to make rice') }}</span>
+		                            	I am busy raising children and have no time to make rice
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
-		                            	<span class="register-checktext">{{ trans('app.I would like to eat a variety of nationalities and peoples cooking') }}</span>
+		                            	I would like to eat a variety of nationalities and people's cooking.
 		                            </label> 
 		                            <label> 
 		                            	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
-		                            	<span class="register-checktext">{{ trans('app.There is no big reason, but it seems interesting, so I would like to use it') }}</span>
+		                            	There is no big reason, but it seems interesting, so I would like to use it
 		                            </label> 
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
-		                            	<span class="register-checktext">{{ trans('app.Other') }}</span>
+		                            	Other
 		                            </label>
 		                       	</div>
-	                	
+		                	@elseif($user->type == 1)
+			                	<div class="col-md-8 seller">
+			                		<label>
+			                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
+			                			 I would like to use someone's help through my cooking
+		                           	</label> 
+		                           	<label>
+		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
+		                           		 I want to earn rewards using free time  
+		                            </label> 
+		                            <label>
+		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
+		                            	I want to earn more rewards than bytes and parts  
+		                            </label> 
+		                            <label>
+		                            	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
+		                            	I would like to use dishes of my hobbies
+		                            </label> 
+		                            <label> 
+		                            	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
+		                            	I am opening a cooking class and I want to increase my students by increasing my name
+		                            </label> 
+		                            <label> 
+		                            	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
+		                            	I would like to increase my boss name and increase my cook blog and SNS followers
+		                            </label> 
+		                            <label>
+		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+		                            	Other
+		                            </label>
+		                       	</div>
+		                    @endif
+		                </div>
+	                @endif
+	                
+	                <div class="form-group form-custom-group create-reason" style="display: none;">
+	                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('app.Reason why you want to use share map (multiple selections possible)') }}</font></font></label>
+	                	<div class="col-md-8 buyer" style="display: none;">
+	                		<label>
+	                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
+	                			 <span class="register-checktext">{{ trans('app.Busy with working') }}</span>
+                           	</label> 
+                           	<label>
+                           		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
+                           		<span class="register-checktext">{{ trans('app.I got bored with convenience stores, medium meals, and other lunches because I live alone') }}</span>
+                            </label> 
+                            <label>
+                           		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
+                            	<span class="register-checktext">{{ trans('app.There are few restaurants around the office')}}</span>
+                            </label> 
+                            <label>
+                            	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
+                            	<span class="register-checktext">{{ trans('app.I am busy raising children and have no time to make rice') }}</span>
+                            </label> 
+                            <label> 
+                            	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
+                            	<span class="register-checktext">{{ trans('app.I would like to eat a variety of nationalities and peoples cooking') }}</span>
+                            </label> 
+                            <label> 
+                            	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
+                            	<span class="register-checktext">{{ trans('app.There is no big reason, but it seems interesting, so I would like to use it') }}</span>
+                            </label> 
+                            <label>
+                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+                            	<span class="register-checktext">{{ trans('app.Other') }}</span>
+                            </label>
+                       	</div>
+                       	<div class="col-md-8 seller" style="display: none;">
+	                		<label>
+	                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
+	                			 {{ trans("app.I would like to use someone's help through my cooking") }}
+                           	</label> 
+                           	<label>
+                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
+                           		 {{ trans('app.I want to earn rewards using free time') }}  
+                            </label> 
+                            <label>
+                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
+                            	{{ trans('app.I want to earn more rewards than bytes and parts') }}  
+                            </label> 
+                            <label>
+                            	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
+                            	{{ trans('app.I would like to use dishes of my hobbies') }}
+                            </label> 
+                            <label> 
+                            	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
+                            	{{ trans('app.I am opening a cooking class and I want to increase my students by increasing my name') }}
+                            </label> 
+                            <label> 
+                            	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
+                            	{{ trans('app.I would like to increase my boss name and increase my cook blog and SNS followers') }}
+                            </label> 
+                            <label>
+                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+                            	{{ trans('app.Other') }}
+                            </label>
+                       	</div>
 	                </div>
+
+	                @if($form_type == 'create')
+	                <div class="form-group form-custom-group food-video-link" style="display: none;">
+	                  <label>Video Link(Embed Code)</label>
+	                  	{!! Form::textarea('video_link', null, 
+	                          array('class'=>'form-control','rows'=>'5')) !!}
+	                </div>
+	                @endif
+	                @if(!empty($user->video_link) && $form_type == 'edit')
+	                <div class="form-group form-custom-group food-video-link">
+	                  <label>Video Link(Embed Code)</label>
+	                  	{!! Form::textarea('video_link', null, 
+	                          array('class'=>'form-control','rows'=>'5')) !!}
+	                </div>
+	                @endif
+	                
 	                <div class="form-group form-custom-group">
 	                  <label>{{ trans('app.Cellphone number') }}<span>*</span></label>
 	                  	{!! Form::text('phone_number', null, 
@@ -268,6 +401,15 @@
 		                  	@endif
 		                </div>
 		            @endif
+		            <!-- <div class="form-group form-custom-group">
+		                  	<label> {{ trans('app.Upload Cover Image') }}</label>
+		                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
+		                  	@if ($errors->has('cover_image'))
+		                    	<span class="help-block">
+		                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
+		                    	</span>
+		                  	@endif
+		                </div> -->
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
@@ -298,20 +440,48 @@
 	});
 
 	//calling a function onchange of user type option
+	// function types() {
+	//   	var userType = $('#select-type').val();
+	//   	$('.create-reason').show();
+	//   	$('.edit-reason').hide();
+
+	//   	//when citizen is selected then hide department select box
+	//   	// if(userType == 1) {
+	//   	// 	$('.seller').show();
+	//    //  	$('.buyer').hide();
+	//   	// }
+	//   	// if(userType == 2) {
+	//    //  	$('.buyer').show();
+	//   	// 	$('.seller').hide();
+	//   	// }
+	// }
+
+	//calling a function onchange of user type option
 	function types() {
 	  	var userType = $('#select-type').val();
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
 
 	  	//when citizen is selected then hide department select box
-	  	// if(userType == 1) {
-	  	// 	$('.seller').show();
-	   //  	$('.buyer').hide();
-	  	// }
-	  	// if(userType == 2) {
-	   //  	$('.buyer').show();
-	  	// 	$('.seller').hide();
-	  	// }
+	  	if(userType == 1) {
+	  		$('.seller').show();
+	    	$('.buyer').hide();
+	    	$('.food-video-link').show();
+	  	}
+	  	if(userType == 2) {
+	    	$('.buyer').show();
+	  		$('.seller').hide();
+	    	$('.food-video-link').hide();
+
+	  	}
+	}
+	$(document).ready(function(){		
+		initAutocomplete('addressbox');	
+	})
+	function initAutocomplete(selector) {	  
+		var indexMoveFrom = new google.maps.places.Autocomplete(	      
+			(document.getElementById(selector)),	      
+			{types: ['geocode']});	
 	}
 </script>
 @endsection

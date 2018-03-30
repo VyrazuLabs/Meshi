@@ -14,15 +14,20 @@
 		<div class="breadcrumb-section">
 			<!-- breadcrumb -->
 			<ol class="breadcrumb new-breadcrumb">
-				<li><a href="{{ url('/')}}">{{ trans('app.Home')}}</a></li>
-				<li>{{$user->name}}</li>
+				<li><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
+				<li><a href="#">{{$user->name}}</a></li>
 			</ol><!-- breadcrumb -->						
-			<h2 class="title t-orange">{{ trans('app.Profile')}}</h2>
+			<h2 class="title t-orange d-inline-block">{{ trans('app.Profile')}}</h2>
+			@if(Auth::user())
+				@if($user->user_id == Auth::User()->user_id)
+					<a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}"><button class="btn back-orange t-white edit-profile-btn float-right"><i class="fa fa-edit"></i> {{ trans('app.EDIT PROFILE') }}</button></a>
+				@endif
+			@endif
 		</div>
 		<div class="category-info">	
 			<div class="col-sm-12 col-md-12 text-center profile-box p-0">				
 				<div class="recommended-ads">
-					<div class="col-lg-12 col-12  profile-section">
+					<div class="col-lg-12 col-12  profile-section profile-back">
 						<div class="profile-image-div text-center">
 							<div>
 								@if(!empty($user->image))
@@ -34,7 +39,7 @@
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
 								<p class="profile-title">{{$user->name}}</p>
-								<p>{{$user->description}}</p>
+								<p class="profile-title-description">{{$user->description}}</p>
 							</div>
 						</div>
 						<div class="col-md-4 profile-timeline">
@@ -90,10 +95,13 @@
 			@if(!empty($user->video_link))
 				<div class="col-sm-12 col-md-12 text-center profile-box section">
 					<h4 class="text-left t-black mt-0">{{ trans('app.Share Video') }}</h4>
-					<?php echo $user->video_link ?>
-					<!-- <iframe width="100%" height="480" src="https://www.youtube.com/embed/KGBxpefNqvw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+					<div class="embed-responsive embed-responsive-16by9">
+						<?php echo $user->video_link ?>
+					</div>
+					<!-- < ! width="100%" height="480" src="https://www.youtube.com/embed/KGBxpefNqvw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 				</div>
 			@endif
+			@if(count($food_items)>0)
 			<div class="col-sm-12 col-md-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Schedule') }}</h4>
 				<div class="row">
@@ -140,6 +148,7 @@
 					@endif
 				</div>
 			</div>
+			@endif
 			@if(count($reviews)>0)
 				<div class="col-lg-12 col-xs-12 text-center profile-box section">
 					<h4 class="text-left t-black mt-0">{{ trans('app.Review') }}</h4>
@@ -164,12 +173,15 @@
 					@endforeach
 				</div>
 			@endif
+			@if(!empty($user->user_introduction))
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Introduction') }}</h4>
 				<p class="text-left">
 					{{$user->user_introduction}}
 				</p>
 			</div>
+			@endif
+			@if(!empty($user->profile_message))
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }}&nbsp;{{ trans('app.Share') }}&nbsp;{{ trans('app.Meshi') }}</h4>
 				<div class="col-lg-12 col-xs-12 p-0">
@@ -183,6 +195,7 @@
 					</div>
 				</div>
 			</div>
+			@endif
 		</div>
 	</div>
 </section>

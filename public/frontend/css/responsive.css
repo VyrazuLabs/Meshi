@@ -1093,4 +1093,12 @@
 		float: none;
 	}
 }
+@media (max-width: 991px) {
+	.create-tax-name{
+		padding-right: 0;
+	}
+	.create-percentage{
+		padding-left: 0;
+	}
+}
 

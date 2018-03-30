@@ -42,8 +42,8 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'UserAuth' => [ 
-            \App\Http\Middleware\UserAuthentication::class,
-        ]
+             \App\Http\Middleware\ProfileSectionAccess::class,
+        ],
     ];
 
     /**

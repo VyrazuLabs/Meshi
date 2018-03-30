@@ -15,7 +15,7 @@
 				<!-- user-login -->			
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card">
-						<h2>Food Register</h2>
+						<h2>{{ trans('app.Food Register') }}</h2>
 						<!-- form -->
 						
 						{!! Form::open(array('url' => route('save_food_item_user'),'files' => true)) !!}
@@ -24,10 +24,13 @@
               	@endif
                 {{Form::hidden('food_item_id',null)}}
 
+                @php 
+                	$selectPlaceholder = trans('app.Please Select'); 
+                @endphp
               	<div class="box-body">
 	                <div class="form-group form-custom-group">
-	                  <label> Category<span>*</span></label>
-	                  {!! Form::select('category_id', $category_id,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Select Category']) !!}
+	                  <label>{{ trans('app.Category') }}<span>*</span></label>
+	                  {!! Form::select('category_id', $category_id,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => $selectPlaceholder ]) !!}
 	                  @if ($errors->has('category_id'))
 	                    <span class="help-block">
 	                      <strong class="strong t-red">{{ $errors->first('category_id') }}</strong>
@@ -36,11 +39,10 @@
 	                </div>
 
 	                <div class="form-group form-custom-group">
-	                  	<label>Name <span>*</span></label>
+	                  	<label>{{ trans('app.Name') }}<span>*</span></label>
 						{!! Form::text('item_name', null, 
 						    array(
-						          'class'=>'form-control', 
-						          'placeholder'=>'Enter Food Item Name')) !!}
+						          'class'=>'form-control')) !!}
 						@if ($errors->has('item_name'))
 						  	<span class="help-block">
 						      <strong class="strong t-red">{{ $errors->first('item_name') }}</strong>
@@ -48,10 +50,9 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Description<span>*</span></label>
+	                  	<label>{{ trans('app.Description') }}<span>*</span></label>
 	                  	{!! Form::textarea('food_description', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'Food Description','rows'=>'4')) !!}
+	                          array('class'=>'form-control','rows'=>'4')) !!}
 	                  	@if ($errors->has('food_description'))
 	                    	<span class="help-block">
 	                      		<strong class="strong t-red">{{ $errors->first('food_description') }}</strong>
@@ -59,10 +60,9 @@
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Short Info<span>*</span></label>
+	                  	<label>{{ trans('app.Short Info') }}<span>*</span></label>
 	                  	{!! Form::textarea('short_info', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'Short Information','rows'=>'3')) !!}
+	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                  	@if ($errors->has('short_info'))
 	                    	<span class="help-block">
 	                      		<strong class="strong t-red">{{ $errors->first('short_info') }}</strong>
@@ -70,7 +70,7 @@
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-		                <label for="exampleInputFile">Upload Food Images <span>*</span></label>
+		                <label for="exampleInputFile">{{ trans('app.Upload Food Images') }} <span>*</span></label>
 		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input' ,'id' => 'food_images') ) !!}
 		                  @if( !empty($food_images) )
 		                    <div class="form-group">
@@ -92,7 +92,7 @@
 		                  @endif
 		            </div>
 		            <div class="form-group form-custom-group">
-		                <label>Date of Delivery <span>*</span></label>
+		                <label>{{ trans('app.Date of Delivery') }} <span>*</span></label>
 		                {!! Form::text('date_of_availability', null, [
 		                                    'class' => 'form-control', 'id' => 'datePicker']) !!}
 		                @if ($errors->has('date_of_availability'))
@@ -101,14 +101,16 @@
 		                  </span>
 		                @endif
 		            </div>
-		            <div class="col-sm-12 col-md-12 col-xs-12 padding-0  input_fields_wrap">
-	                	<button class="ad-mre-btn add_field_button pull-right">Add Time Slot</button>
+		            <div class="col-sm-12 col-md-12 col-xs-12 p-0 input_fields_wrap">
+		            	<div class="col-lg-12 col-xs-12 d-inline-block form-group p-0">
+	                		<button class="btn ad-mre-btn add_field_button pull-right back-orange">{{ trans('app.Add Time Slot') }}</button>
+	                	</div>
 	                	<div class="clearfix"></div>
 	                	@if(!empty($time_of_availability))
 		                  	@foreach($time_of_availability as $key => $slot)
 	                    		<div class="start-time-id">
-			                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 " >
-			                       	 	<label>Start Time <span>*</span></label>
+			                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+			                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
 			                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
 				                        @if ($errors->has('time_of_availability'))
 				                          <span class="help-block">
@@ -116,17 +118,17 @@
 				                          </span>
 				                        @endif
 			                      	</div>
-			                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0" >
+			                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 			                        	<div class="ad-mre-btn pull-right"></div>
-			                        	<label>End Time <span>*</span></label>
+			                        	<label>{{ trans('app.End Time') }} <span>*</span></label>
 			                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
 			                      	</div>
 	                    		</div>
 	                  		@endforeach
 	                	@else
 	                  		<div class="start-time-id">
-	                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 " >
-	                      			<label>Start Time <span>*</span></label>
+	                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+	                      			<label>{{ trans('app.Start Time') }} <span>*</span></label>
 	                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
 
 				                    @if ($errors->has('time_of_availability'))
@@ -135,9 +137,9 @@
 				                        </span>
 				                    @endif
 	                    		</div>
-			                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0" >
+			                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 			                      <div class="ad-mre-btn pull-right"></div>
-			                      <label>End Time <span>*</span></label>
+			                      <label>{{ trans('app.End Time') }} <span>*</span></label>
 			                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
 			                    </div>
 	                  		</div>
@@ -146,11 +148,10 @@
               		<div class="clearfix"></div>
 	                
 	                <div class="form-group form-custom-group">
-	                  	<label>Shipping Fee</label>
+	                  	<label>{{ trans('app.Shipping Fee') }}</label>
 						{!! Form::text('shipping_fee', null, 
 						    array(
-						          'class'=>'form-control', 
-						          'placeholder'=>'Enter Shipping Charge')) !!}
+						          'class'=>'form-control')) !!}
 						@if ($errors->has('shipping_fee'))
 						  	<span class="help-block">
 						      <strong class="strong t-red">{{ $errors->first('shipping_fee') }}</strong>
@@ -158,21 +159,73 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Price <span>*</span></label>
+	                  	<label>{{ trans('app.Price') }} <span>*</span></label>
 						{!! Form::text('price', null, 
 						    array(
 						          'class'=>'form-control', 
-						          'placeholder'=>'Enter Base Amount')) !!}
+						          'id' => 'priceId')) !!}
 						@if ($errors->has('price'))
 						  	<span class="help-block">
 						      <strong class="strong t-red">{{ $errors->first('price') }}</strong>
 						  	</span>
 						@endif
 	                </div>
+	               <!--  <div class="col-sm-12 col-md-12 col-xs-12 p-0 tag_field_wrap">
+	                	<div class="col-lg-12 col-xs-12 float-left form-group">
+	                		<button class="ad-mre-btn add_ag_field pull-right">Add Tag</button>
+	                	</div>
+	                	<div class="clearfix"></div>
+	                	@if(!empty($time_of_availability))
+		                  	@foreach($time_of_availability as $key => $slot)
+	                    		<div class="add-tag">
+			                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pl-0 create-tax-name" >
+			                       	 	<label>Tax Name</label>
+			                        	{!! Form::text('tax[0][tax_name][]', null, 
+							    						array('class'=>'form-control')) !!}
+			                      	</div>
+			                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 p-0" >
+			                        	<div class="ad-mre-btn pull-right"></div>
+			                        	<label>Amount</label>
+			                        	{!! Form::text('tax[0][tax_amount][]', null, array(
+											          'class'=>'form-control')) !!}
+
+			                      	</div>
+			                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pr-0 create-percentage" >
+			                        	<div class="ad-mre-btn pull-right"></div>
+			                        	<label>Percentage(%)</label>
+			                        	{!! Form::text('tax[0][tax_percentage][]', null,  array(
+										          'class'=>'form-control')) !!}
+
+			                      	</div>
+	                    		</div>
+	                  		@endforeach
+	                	@else
+	                  		<div class="add-tag">
+	                    		<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pl-0 create-tax-name" >
+		                       	 	<label>Tax Name</label>
+		                        	{!! Form::text('tax[0][tax_name][]', null, 
+						    						array('class'=>'form-control',)) !!}
+			                    </div>
+		                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 p-0" >
+		                        	<div class="ad-mre-btn pull-right"></div>
+		                        	<label>Amount</label>
+		                        	{!! Form::text('tax[0][tax_amount][]', null, array(
+						          		'class'=>'form-control')) !!}
+		                      	</div>
+		                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pr-0 create-percentage" >
+		                        	<div class="ad-mre-btn pull-right"></div>
+		                        	<label>Percentage(%)</label>
+		                        	{!! Form::text('tax[0][tax_percentage][]', null, array(
+						          		'class'=>'form-control')) !!}
+		                      	</div>
+	                  		</div>
+	                	@endif
+	              	</div>
+              		<div class="clearfix"></div> -->
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
-                  <button type="submit" class="btn btn-success btn-booking">Submit</button>
+                  <button type="submit" class="btn btn-booking">{{ trans('app.Submit') }}</button>
                 </div>
             {!! Form::close() !!}
 					</div>
@@ -209,7 +262,7 @@
 	      if(x < max_fields){ //max input box allowed
 	        x++; //text box increment
 
-	        $(wrapper).append('<div class="start-time-id"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 "><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div>');
+	        $(wrapper).append('<div class="start-time-id"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div>');
 
 	        // $('.blink-cursor').focus();
 	        $('.timepickerid').timepicker({
@@ -222,10 +275,50 @@
 	      e.preventDefault(); $(this).parent('div').remove(); x--;
 	    })
 	});
+
+
+	// append time slots starts here
+  	$(document).ready(function() {
+	    var max_fields      = 10; //maximum input boxes allowed
+	    var wrapper         = $(".tag_field_wrap"); //Fields wrapper
+	    var add_button      = $(".add_ag_field"); //Add button ID
+	    var count = 0;
+
+	    var x = 1; //initlal text box count
+	    $(add_button).on('click',function(e){ //on add input button click
+	      count ++;
+	      e.preventDefault();
+	      if(x < max_fields){ //max input box allowed
+	        x++; //text box increment
+
+	        $(wrapper).append('<div class="add-tag"><div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pl-0 create-tax-name"><label>Tax Name</label><input class="form-control" name="tax[0][tax_name][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 p-0" ><div class="ad-mre-btn pull-right"></div><label>Amount</label><input class="form-control" name="tax[0][tax_amount][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pr-0 create-percentage" ><div class="ad-mre-btn pull-right"></div><label>Percentage(%)</label><input class="form-control" name="tax[0][tax_percentage][]" type="text" value=""></div></div>');
+	      }
+	    });
+	    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+	      e.preventDefault(); $(this).parent('div').remove(); x--;
+	    })
+	});
+
+
 	//Time picker
   	$('.timepickerid').timepicker({
       showMeridian: false,
       // defaultTime: false
     });
+
+
+
+
+ 
+
+
+//     $('#priceId').keypress(function(event){
+//     var regex = /[0-9]|\./;
+//     var text = $("input[type=text]").val();
+//     var keycode = (event.keyCode ? event.keyCode : event.which);
+//     if(keycode == '13' && !(regex.test(text))) {
+//      alert('You pressed a "enter" key in textbox'); 
+// }
+// });
 </script>
 @endsection

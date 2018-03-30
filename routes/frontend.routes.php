@@ -32,6 +32,11 @@ Route::group( ['namespace' => 'Language'], function() {
 
 Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], function() {
 	Route::get('/', array('uses' => 'FrontendController@index'));
+	Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
+	Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
+	Route::get('/shopping cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
+	
+
 	
 	Route::group( ['prefix' => 'food'], function() {
 		Route::group( ['namespace' => 'Food'], function() {
@@ -43,8 +48,8 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 		});
 
 		Route::group( ['namespace' => 'Category'], function() {
-			Route::get('/categories', array('uses' => 'CategoryController@category'));
-			Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'));
+			Route::get('/categories', array('uses' => 'CategoryController@category'))->name('food_categories');
+			Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'))->name('food_all_categories');
 		});
 	});
 });
@@ -54,6 +59,9 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 	// Route::group([ 'middleware' => 'UserAuth' ], function() {
 		Route::group( ['prefix' => 'user','namespace' => 'User','middleware' => ['Language']], function() {
 			Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
+			Route::group([ 'middleware' => 'UserAuth' ], function() {
+				Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+			});
 			Route::get('/register','RegistrationController@register');
 			Route::post('/register','RegistrationController@save')->name('registration');
 		});
