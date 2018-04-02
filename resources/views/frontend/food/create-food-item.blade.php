@@ -147,7 +147,7 @@
 	              	</div>
               		<div class="clearfix"></div>
 	                
-	                <div class="form-group form-custom-group">
+	          <!--       <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Shipping Fee') }}</label>
 						{!! Form::text('shipping_fee', null, 
 						    array(
@@ -157,7 +157,7 @@
 						      <strong class="strong t-red">{{ $errors->first('shipping_fee') }}</strong>
 						  	</span>
 						@endif
-	                </div>
+	                </div> -->
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Price') }} <span>*</span></label>
 						{!! Form::text('price', null, 
@@ -243,6 +243,18 @@
   	$('#datePicker').datepicker({
     	format: 'dd-mm-yyyy',
     	autoclose: true
+  	});
+
+
+  	//FOOD PRICE FIELD SHOULD BE NUMERIC
+  	$('#priceId').keypress(function (e) {
+    	var regex = new RegExp("^[0-9-]+$");
+    	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    	if (regex.test(str)) {
+      		return true;
+    	}
+    	e.preventDefault();
+    	return false;
   	});
 
 	

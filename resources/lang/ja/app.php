@@ -153,7 +153,7 @@ return [
 	'Terms & conditions' => '利用規約',
 	'Shopping cart feature' => 'ショッピングカート機能',
 	'Upload Background Image' => '背景画像をアップロードする',
-
+	'Commission' => '手数料',
 
 
 

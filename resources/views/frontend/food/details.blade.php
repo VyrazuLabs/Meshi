@@ -91,15 +91,17 @@
 								<div class="short-info">
 									<h4>{{ trans('app.Price') }}</h4>
 									<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
-									<p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
+									<!-- <p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
 										@foreach($foodCosting as $key => $costing)
 										<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
 										@endforeach
-									</p>
-									<p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
+									</p> -->
+									<!-- <p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
 										@if(!empty($food_details->shipping_fee))
 											¥ {{$food_details->shipping_fee}}
 										@endif
+									</span></p> -->
+									<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right">¥ {{$commission}}
 									</span></p>
 									<div class="price-line"></div>
 									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>

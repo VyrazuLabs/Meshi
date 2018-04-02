@@ -147,7 +147,7 @@
 	              	</div>
               		<div class="clearfix"></div>
 	                
-	                <div class="form-group form-custom-group">
+	                <!-- <div class="form-group form-custom-group">
 	                  	<label>Shipping Fee</label>
 						{!! Form::text('shipping_fee', null, 
 						    array(
@@ -158,12 +158,13 @@
 						      <strong class="strong">{{ $errors->first('shipping_fee') }}</strong>
 						  	</span>
 						@endif
-	                </div>
+	                </div> -->
 	                <div class="form-group form-custom-group">
 	                  	<label>Price <span>*</span></label>
 						{!! Form::text('price', null, 
 						    array(
 						          'class'=>'form-control', 
+						          'id' => 'foodPrice',
 						          'placeholder'=>'Enter Base Amount')) !!}
 						@if ($errors->has('price'))
 						  	<span class="help-block">
@@ -199,6 +200,18 @@
     	format: 'dd-mm-yyyy',
     	autoclose: true
   	});
+
+
+  	//FOOD PRICE FIELD SHOULD BE NUMERIC
+  $('#foodPrice').keypress(function (e) {
+    var regex = new RegExp("^[0-9-]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+      return true;
+    }
+    e.preventDefault();
+    return false;
+  });
 
 	
 

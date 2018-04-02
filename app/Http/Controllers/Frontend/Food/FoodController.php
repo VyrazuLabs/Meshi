@@ -48,24 +48,30 @@ class FoodController extends Controller
             $foodImages = unserialize($images);
         }
 	      $foodCosting = FoodItemCosting::where('food_item_id',$food_details->food_item_id)->pluck('tax_name','tax_amount');
+         
 
-        $shipping_cost = 0;
-  			if(!empty($food_details->shipping_fee)) {
-  				$shipping_cost = $food_details->shipping_fee;
-  			}
-  			else {
-  				$shipping_fee = 0;
-  			}
-	      $cost = $shipping_cost+$food_details->price;
+        /** calculate total price with tax and shipping fee */
+        //    $shipping_cost = 0;
+  			// if(!empty($food_details->shipping_fee)) {
+  			// 	$shipping_cost = $food_details->shipping_fee;
+  			// }
+  			// else {
+  			// 	$shipping_fee = 0;
+  			// }
+	      //   $cost = $shipping_cost+$food_details->price;
 
-  			foreach ($foodCosting as $key => $costing) {
-  				$cost = $key+$cost;
-  			}
+  			// foreach ($foodCosting as $key => $costing) {
+  			// 	$cost = $key+$cost;
+  			// }
+         
+        $percentage = 5;
+        $commission = ceil($food_details->price*($percentage/100));
+        $cost = $commission+$food_details->price; 
     	}
       else {
         return back();
       }
-    	return view('frontend.food.details',['food_details'=>$food_details,'foodImages'=>$foodImages,'foodCosting'=>$foodCosting,'cost'=>$cost,'time_of_availability'=>$time_of_availability]);
+    	return view('frontend.food.details',['food_details'=>$food_details,'foodImages'=>$foodImages,'foodCosting'=>$foodCosting,'cost'=>$cost,'time_of_availability'=>$time_of_availability,'commission' => $commission]);
     }
 
     // DISPLAY SAVE FOOD PAGE
@@ -107,8 +113,8 @@ class FoodController extends Controller
                                      'time_of_availability' => serialize($timeTable),
                                      'category_id' => $input['category_id'],
                                      'offered_by' => Auth::user()->user_id,
-                                     'shipping_fee' => $input['shipping_fee'],
-                                     'price' => $input['price'],
+                                     // 'shipping_fee' => $input['shipping_fee'],
+                                     'price' => ceil($input['price']),
                                      'short_info' => $input['short_info']
                                   ]);
 
@@ -166,8 +172,8 @@ class FoodController extends Controller
                                             'time_of_availability' => serialize($timeTable),
                                             'offered_by' => Auth::user()->user_id,
                                             'status' => 1,
-                                            'shipping_fee' => $input['shipping_fee'],
-                                            'price' => $input['price'],
+                                            // 'shipping_fee' => $input['shipping_fee'],
+                                            'price' => ceil($input['price']),
                                             'short_info' => $input['short_info']
                                         ]);
 
@@ -225,7 +231,7 @@ class FoodController extends Controller
                                       'category_id' => 'required',
                                       'time_of_availability' => 'required',
                                       'date_of_availability' => 'required',
-                                      'price' => 'required',
+                                      'price' => 'required|numeric',
                                       'short_info' => 'required',
                                     ]);
     }

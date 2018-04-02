@@ -53,8 +53,8 @@ class FoodItemController extends Controller
 		           					 'time_of_availability' => serialize($timeTable),
 						             'category_id' => $input['category_id'],
 		           					 'offered_by' => $input['offered_by'],
-		           					 'shipping_fee' => $input['shipping_fee'],
-		           					 'price' => $input['price'],
+		           					 // 'shipping_fee' => $input['shipping_fee'],
+		           					 'price' => ceil($input['price']),
 		           					 'short_info' => $input['short_info']
 		          				  ]);
 
@@ -112,8 +112,8 @@ class FoodItemController extends Controller
 		           					 		'time_of_availability' => serialize($timeTable),
 		           					 		'offered_by' => $input['offered_by'],
 								            'status' => $input['status'],
-		           					 		'shipping_fee' => $input['shipping_fee'],
-		           					 		'price' => $input['price'],
+		           					 		// 'shipping_fee' => $input['shipping_fee'],
+		           					 		'price' => ceil($input['price']),
 		           					 		'short_info' => $input['short_info']
 							        	]);
 
@@ -172,7 +172,7 @@ class FoodItemController extends Controller
                                       'category_id' => 'required',
                                       'time_of_availability' => 'required',
                                       'date_of_availability' => 'required',
-                                      'price' => 'required',
+                                      'price' => 'required|numeric',
                                       'short_info' => 'required',
                                     ]);
   	}
