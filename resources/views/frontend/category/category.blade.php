@@ -142,7 +142,7 @@
 											<div class="item-image">
 											<a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">
 												@if(!empty($item->foodImages))
-													<img src="{{url('/uploads/food/'.$item->foodImages[0])}}" alt="" class="img-respocive images-featured">
+													<img src="{{url('/uploads/food/'.$item->foodImages[0])}}" alt="" class="img-responsive images-featured caterogy-imgs">
 												@else
 													<img src="{{ url('frontend/images/categories/1.png') }}" alt="Image" class="img-responsive">
 												@endif

@@ -298,6 +298,7 @@
 	                  <label>{{ trans('app.Subsequent address') }}<span>*</span></label>
 	                  	{!! Form::textarea('address', null, 
 	                          array('class'=>'form-control', 
+	                          		'id' => 'addressbox',
 	                                'placeholder'=>$addressPlaceholder,'rows'=>'2')) !!}
 						@if ($errors->has('address'))
 							<span class="help-block">

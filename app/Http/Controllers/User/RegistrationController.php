@@ -46,7 +46,9 @@ class RegistrationController extends Controller
 		        /********* Create lat long from given address ********/
 		        $address = stripslashes($input['address']); //Address
 		        // GET JSON RESULTS FROM THIS REQUEST
-		        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address));
+		        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38');
+
+
 		        $latitude = '';
 		        $longitude = '';
 		        $geo = json_decode($geo, true); // Convert the JSON to an array

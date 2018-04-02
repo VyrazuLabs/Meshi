@@ -240,3 +240,6 @@ iframe{
   background-color: #fff;  
   transition: 0.50s linear;
 }
+.caterogy-imgs{
+  object-fit: cover;
+}
