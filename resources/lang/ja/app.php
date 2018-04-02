@@ -152,6 +152,7 @@ return [
 	'Privacy Policy' => '個人情報保護方針',
 	'Terms & conditions' => '利用規約',
 	'Shopping cart feature' => 'ショッピングカート機能',
+	'Upload Background Image' => '背景画像をアップロードする',
 
 
 

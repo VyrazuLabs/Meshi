@@ -21,13 +21,20 @@
 			@if(Auth::user())
 				@if($user->user_id == Auth::User()->user_id)
 					<a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}"><button class="btn back-orange t-white edit-profile-btn float-right"><i class="fa fa-edit"></i> {{ trans('app.EDIT PROFILE') }}</button></a>
+					
 				@endif
 			@endif
 		</div>
 		<div class="category-info">	
 			<div class="col-sm-12 col-md-12 text-center profile-box p-0">				
 				<div class="recommended-ads">
-					<div class="col-lg-12 col-12  profile-section profile-back">
+				@if(!empty($user->cover_image))
+					<?php $url = url('/uploads/cover/picture/'.$user->cover_image); ?>
+				@else 
+					<?php $url = url('/frontend/images/cover-image.jpg'); ?>
+				@endif
+
+					<div class="col-lg-12 col-12  profile-section profile-back" style="background-image: url(<?php echo $url;?>);">
 						<div class="profile-image-div text-center">
 							<div>
 								@if(!empty($user->image))

@@ -22,6 +22,9 @@ class ProfileController extends Controller
             if(!empty($profile->image)) {
                 $user->image = $profile->image;
             }
+            if(!empty($profile->cover_image)) {
+                $user->cover_image = $profile->cover_image;
+            }
             $user->description = $profile->description;
             $user->total_dishes = $profile->total_dishes;
             $user->phone_number = $profile->phone_number;
@@ -44,6 +47,8 @@ class ProfileController extends Controller
                     if(!empty($profile->image)) {
                         $food->image = $profile->image;
                     }
+
+                    
 
                     if(!empty($food->food_images)) {
                         //getting the food images
@@ -79,8 +84,14 @@ class ProfileController extends Controller
             $profile = ProfileInformation::where('user_id',$user_id)->first();
             if(!empty($profile)) {
                 if(!empty($profile->reason_for_registration)) {
+                    $user->reason_for_registration_edit = explode(',', $profile->reason_for_registration);
                     $user->reason_for_registration = explode(',', $profile->reason_for_registration);
                 }
+
+                if(!empty($profile->cover_image)) {
+                    $user->cover_image = $profile->cover_image;
+                }
+
                 $user->address = $profile->address;
                 $user->phone_number = $profile->phone_number;
                 $user->description = $profile->description;
@@ -95,14 +106,24 @@ class ProfileController extends Controller
                 $user->user_introduction = $profile->user_introduction;
                 $user->profile_message = $profile->profile_message;
                 $user->video_link = $profile->video_link;
+
+        // echo"<pre>";print_r($user);die;
+
             }
         }
+
         else {
             return back();
         }
 
         return view('frontend.auth.user-register',['user'=>$user,'form_type' => 'edit']);
     }
+
+
+    // public function uploadCoverImage(Request $request) {
+    //     $file = $request->file();
+    //     echo"<pre>";print_r($file);die;
+    // }
 
 
 

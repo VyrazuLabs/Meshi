@@ -153,6 +153,7 @@ return [
 	'Privacy Policy' => 'Privacy Policy',
 	'Terms & conditions' => 'Terms & conditions',
 	'Shopping cart feature' => 'Shopping cart feature',
+	'Upload Background Image' => 'Upload Background Image',
 
 	
 

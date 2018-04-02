@@ -121,7 +121,9 @@
 									</div>
 									<div class="col-md-6">
 										@if(Auth::User())
-											<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+											@if((Auth::User()->user_id) != $food_details->offered_by)
+												<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+											@endif
 										@else
 											<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
 										@endif

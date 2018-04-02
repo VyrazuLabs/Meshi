@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Food\FoodItem;
 use App\Models\Category\Category;
 use App\Models\ProfileInformation;
+use Auth;
 
 class FrontendController extends Controller
 {
@@ -17,9 +18,36 @@ class FrontendController extends Controller
         $next_day_of_tomorrow = date('Y-m-d',  strtotime($today . ' +3 day'));
 
         /* food items available on tomorrow */
-        $tomorrow_food_items = FoodItem::where('status',1)
-                                       ->whereDate('date_of_availability',$tomorrow)
-                                       ->get();
+        if(Auth::check()){
+            $tomorrow_food_items = FoodItem::where('status',1)
+                                           ->whereDate('date_of_availability',$tomorrow)
+                                           ->where('offered_by','!=',Auth::User()->user_id)
+                                           ->get();
+
+           $day_after_tomorrow_food_items = FoodItem::where('status',1)
+                                                    ->whereDate('date_of_availability',$day_after_tomorrow)
+                                                    ->where('offered_by','!=',Auth::User()->user_id)
+                                                    ->get();
+
+            $next_day_of_tomorrow_food_items = FoodItem::where('status',1)
+                                                       ->whereDate('date_of_availability',$next_day_of_tomorrow)
+                                                       ->where('offered_by','!=',Auth::User()->user_id)
+                                                       ->get();
+        }
+        else {
+            $tomorrow_food_items = FoodItem::where('status',1)
+                                           ->whereDate('date_of_availability',$tomorrow)
+                                           ->get();
+
+           $day_after_tomorrow_food_items = FoodItem::where('status',1)
+                                                    ->whereDate('date_of_availability',$day_after_tomorrow)
+                                                    ->get();
+
+            $next_day_of_tomorrow_food_items = FoodItem::where('status',1)
+                                                       ->whereDate('date_of_availability',$next_day_of_tomorrow)
+                                                       ->get();
+
+        }
         
     	if(!empty($tomorrow_food_items)) {
     		foreach ($tomorrow_food_items as $key => $food) {
@@ -44,10 +72,6 @@ class FrontendController extends Controller
     	}
 
         /* food items available on day after tomorrow */
-        $day_after_tomorrow_food_items = FoodItem::where('status',1)
-                                       ->whereDate('date_of_availability',$day_after_tomorrow)
-                                       ->get();
-        
         if(!empty($day_after_tomorrow_food_items)) {
             foreach ($day_after_tomorrow_food_items as $key => $food) {
                 $category = Category::where('category_id',$food->category_id)->first();
@@ -72,10 +96,6 @@ class FrontendController extends Controller
 
 
         /* food items available on the next day of day after tomorrow */
-        $next_day_of_tomorrow_food_items = FoodItem::where('status',1)
-                                       ->whereDate('date_of_availability',$next_day_of_tomorrow)
-                                       ->get();
-        
         if(!empty($next_day_of_tomorrow_food_items)) {
             foreach ($next_day_of_tomorrow_food_items as $key => $food) {
                 $category = Category::where('category_id',$food->category_id)->first();
@@ -97,6 +117,7 @@ class FrontendController extends Controller
                 }
             }
         }
+
     	return view('frontend.index',['tomorrow_food_items'=>$tomorrow_food_items,'day_after_tomorrow_food_items'=>$day_after_tomorrow_food_items,'next_day_of_tomorrow_food_items'=>$next_day_of_tomorrow_food_items,'next_day_of_tomorrow'=>$next_day_of_tomorrow]);
     }
 

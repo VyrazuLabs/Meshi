@@ -52,7 +52,7 @@
               	<div class="box-body">
               	@if ( $form_type == 'edit' )
 
-              		<div class="form-group form-custom-group">
+              		<div class="form-group form-custom-group profile-edit-field">
 	                  	<label> Image<span>*</span></label>
 	                  	@if( !empty($user->image) )
 		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
@@ -61,6 +61,20 @@
 	                  	@if ($errors->has('image'))
 	                    	<span class="help-block">
 	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+
+
+	                <div class="form-group form-custom-group profile-edit-field">
+	                  	<label>Cover Image<span>*</span></label>
+	                  	@if( !empty($user->cover_image) )
+		                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
+		                @endif
+	                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
+	                  	@if ($errors->has('cover_image'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
@@ -140,62 +154,62 @@
 		                	@if($user->type == 2)
 			                	<div class="col-md-8 buyer">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }} 
 			                			 Busy with working
 		                           	</label> 
 		                           	<label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'live_alone', null, ['class' => 'check']) }}
 		                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
 		                            </label> 
 		                            <label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'few_restaurants', null, ['class' => 'check']) }}
 		                            	There are few restaurants around the office
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_time', null, ['class' => 'check']) }}
 		                            	I am busy raising children and have no time to make rice
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'like_to_eat', null, ['class' => 'check']) }}
 		                            	I would like to eat a variety of nationalities and people's cooking.
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_reason', null, ['class' => 'check']) }}
 		                            	There is no big reason, but it seems interesting, so I would like to use it
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
 		                            </label>
 		                       	</div>
 		                	@elseif($user->type == 1)
 			                	<div class="col-md-8 seller">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }} 
 			                			 I would like to use someone's help through my cooking
 		                           	</label> 
 		                           	<label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
 		                           		 I want to earn rewards using free time  
 		                            </label> 
 		                            <label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
 		                            	I want to earn more rewards than bytes and parts  
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'hobby', null, ['class' => 'check']) }}
 		                            	I would like to use dishes of my hobbies
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'cooking_class', null, ['class' => 'check']) }}
 		                            	I am opening a cooking class and I want to increase my students by increasing my name
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'SNS_followers', null, ['class' => 'check']) }}
 		                            	I would like to increase my boss name and increase my cook blog and SNS followers
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
 		                            </label>
 		                       	</div>
@@ -440,40 +454,25 @@
 	    return false;
 	});
 
-	//calling a function onchange of user type option
-	// function types() {
-	//   	var userType = $('#select-type').val();
-	//   	$('.create-reason').show();
-	//   	$('.edit-reason').hide();
-
-	//   	//when citizen is selected then hide department select box
-	//   	// if(userType == 1) {
-	//   	// 	$('.seller').show();
-	//    //  	$('.buyer').hide();
-	//   	// }
-	//   	// if(userType == 2) {
-	//    //  	$('.buyer').show();
-	//   	// 	$('.seller').hide();
-	//   	// }
-	// }
-
+	
 	//calling a function onchange of user type option
 	function types() {
 	  	var userType = $('#select-type').val();
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
 
-	  	//when citizen is selected then hide department select box
+	  	$('.edit-reason .buyer').remove();
+	  	$('.edit-reason .seller').remove();
+
 	  	if(userType == 1) {
 	  		$('.seller').show();
 	    	$('.buyer').hide();
-	    	$('.food-video-link').show();
+	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
 	  		$('.seller').hide();
-	    	$('.food-video-link').hide();
-
+	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	  	}
 	}
 	$(document).ready(function(){		

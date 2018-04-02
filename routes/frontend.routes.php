@@ -61,6 +61,7 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 			Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
 			Route::group([ 'middleware' => 'UserAuth' ], function() {
 				Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+				// Route::post('/profile/cover-image', 'ProfileController@uploadCoverImage')->name('upload_cover_image');
 			});
 			Route::get('/register','RegistrationController@register');
 			Route::post('/register','RegistrationController@save')->name('registration');

@@ -19,15 +19,16 @@ class RegistrationController extends Controller
     public function save(Request $request) {
     	$input = $request->input();
 
-    	// echo"<pre>";print_r($input);die;
 
     	$file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
         $profileImageValidator = $this->profileImageValidator($file);
+        $coverImageValidator = $this->coverImageValidator($file);
         
         /* update user */
 	    if(isset($input['user_id'])) {
+
 
 	    	/* check validation for user updation */
 	    	if($userUpdateValidator->fails()) {
@@ -59,17 +60,20 @@ class RegistrationController extends Controller
 		        }
 
 		        /******** update reason for registering ********/
-		        $reason = '';
-		        if( !empty($input['reason_for_registration']) ) {
-		            foreach ( $input['reason_for_registration'] as $value ) {
-		                $reason .= $value.',';
-		            }
+		        // $reason = '';
+		        // if( !empty($input['reason_for_registration']) ) {
+		        //     foreach ( $input['reason_for_registration'] as $value ) {
+		        //         $reason .= $value.',';
+		        //     }
+		        // }
+		        // $reason = substr($reason, 0, -1);
+
+
+		      	$reason = '';
+		        if( !empty($input['reason_for_registration_edit']) ) {
+		        	$modified_array = array_unique($input['reason_for_registration_edit']);
+		        	$reason = implode(',', $modified_array);
 		        }
-		        $reason = substr($reason, 0, -1);
-
-
-
-
 
 				/******** CODES FOR PASSWORD UPDATION STARTS HERE *********/
 		        if(!empty($input['password']) ) {
@@ -147,35 +151,70 @@ class RegistrationController extends Controller
 
  
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
-		        $profileImageValidator = $this->profileImageValidator($file);
-		        if( $profileImageValidator->fails()) {
-		            $errors = $profileImageValidator->errors();
+		        if(!empty($file['image'])) {
+			        $profileImageValidator = $this->profileImageValidator($file);
+			        // echo"<pre>";print_r($file['cover_image']);die;
+			        if( $profileImageValidator->fails()) {
+			            $errors = $profileImageValidator->errors();
 
-		            //WHEN PROFILE PICTURE IS MISSING
-		            if($errors->first('image')) {
-		              if( !empty($profile->image) ) {
-		                $input['image'] = $profile->image;
-		              }
-		            }
-		            else {
-		              $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		              $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
-		            }
-		            //CHECK VALIDATION AGAIN
-		            $profileImageValidator = $this->profileImageValidator($input);
-		            if( $profileImageValidator->fails()) {
-		              return redirect()->back();
-		            }
-		        }
-		        else {
-		            $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		            $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
-		        }
-		        $profile->update(
-                            array('image' => $profile_image));
+			            //WHEN PROFILE PICTURE IS MISSING
+			            if($errors->first('image')) {
+			              if( !empty($profile->image) ) {
+			                $input['image'] = $profile->image;
+			              }
+			            }
+			            else {
+			              $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+			              $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			            }
+			            //CHECK VALIDATION AGAIN
+			            $profileImageValidator = $this->profileImageValidator($input);
+			            if( $profileImageValidator->fails()) {
+			              return redirect()->back();
+			            }
+			        }
+			        else {
+			            $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+			            $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			        }
+			        $profile->update(
+	                            array('image' => $profile_image));
+			    }
 
 
-		        
+
+		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
+		        if(!empty($file['cover_image'])) {
+			        $coverImageValidator = $this->coverImageValidator($file);
+			        if( $coverImageValidator->fails()) {
+			            $errors = $coverImageValidator->errors();
+
+			            //WHEN PROFILE PICTURE IS MISSING
+			            if($errors->first('cover_image')) {
+			              if( !empty($profile->cover_image) ) {
+			                $input['cover_image'] = $profile->cover_image;
+			              }
+			            }
+			            else {
+			              $cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
+			              $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
+			            }
+			            //CHECK VALIDATION AGAIN
+			            $coverImageValidator = $this->coverImageValidator($input);
+			            if( $coverImageValidator->fails()) {
+			              return redirect()->back();
+			            }
+			        }
+			        else {
+			            $cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
+			            $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
+			        }
+			        $profile->update(
+	                            array('cover_image' => $cover_image));
+			    }
+
+
+
 
 
 
@@ -185,6 +224,8 @@ class RegistrationController extends Controller
 	    }
 	    else {
 	    	if($validator->fails() || $profileImageValidator->fails()) {
+
+
 	        	$validator->messages()->merge($profileImageValidator->messages());
 	        	Session::flash('error', "Please Fill The Form Properly.");
 	        	return redirect()->back()->withErrors($validator)->withInput();
@@ -211,12 +252,13 @@ class RegistrationController extends Controller
 	            }
 
 	            $reason = '';
-		        if( !empty($input['reason_for_registration']) ) {
-		            foreach ( $input['reason_for_registration'] as $value ) {
-		                $reason .= $value.',';
-		            }
+		        if( !empty($input['reason_for_registration_edit']) ) {
+		        	$modified_array = array_unique($input['reason_for_registration_edit']);
+		        	$reason = implode(',', $modified_array);
 		        }
 		        $reason = substr($reason, 0, -1);
+
+	            
 
 
 		        $user = User::create([	'user_id' => uniqid(),
@@ -276,7 +318,7 @@ class RegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration' => 'required',
+                                      'reason_for_registration_edit' => 'required',
                                       'job' => 'required',
                                     ]);
   	}
@@ -295,8 +337,9 @@ class RegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration' => 'required',
+                                      'reason_for_registration_edit' => 'required',
                                       'job' => 'required',
+
                                     ]);
   	}
 

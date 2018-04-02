@@ -19,7 +19,9 @@ class UserRegistrationController extends Controller
 
     /* save user information in db */
     public function save(Request $request) {
-    	$input = $request->input();   
+    	$input = $request->input();
+    	// echo "<pre>";
+    	// print_r($input);die;   
     	// echo"<pre>";print_r($input);die;     
     	$file = $request->file();
         $validator = $this->validator($input);
@@ -54,13 +56,15 @@ class UserRegistrationController extends Controller
 
 		        /******** update reason for registering ********/
 		        $reason = '';
-		        if( !empty($input['reason_for_registration']) ) {
-		            foreach ( $input['reason_for_registration'] as $value ) {
-		                $reason .= $value.',';
-		            }
+		        if( !empty($input['reason_for_registration_edit']) ) {
+		        	$modified_array = array_unique($input['reason_for_registration_edit']);
+		        	$reason = implode(',', $modified_array);
 		        }
-		        $reason = substr($reason, 0, -1);
-
+		        
+		        // if (!empty($input['reason_for_registration'])) {
+		        // 	$modified_array = array_unique($input['reason_for_registration']);
+		        // 	$reason = implode(',', $modified_array);
+		        // }
 
 				/******** CODES FOR PASSWORD UPDATION STARTS HERE *********/
 		        if(!empty($input['password']) ) {
@@ -113,6 +117,8 @@ class UserRegistrationController extends Controller
 						            'user_introduction' => $input['user_introduction'],
 						            'profile_message' => $input['profile_message'],
 						            'video_link' => $input['video_link'],
+
+
 					          	]);
 
  
@@ -150,7 +156,10 @@ class UserRegistrationController extends Controller
 		    }
 	    }
 	    else {
+
+
 	    	if($validator->fails() || $profileImageValidator->fails()) {
+
 	        	$validator->messages()->merge($profileImageValidator->messages());
 	        	Session::flash('error', "Please Fill The Form Properly.");
 	        	return redirect()->back()->withErrors($validator)->withInput();
@@ -177,10 +186,9 @@ class UserRegistrationController extends Controller
 	            }
 
 	            $reason = '';
-		        if( !empty($input['reason_for_registration']) ) {
-		            foreach ( $input['reason_for_registration'] as $value ) {
-		                $reason .= $value.',';
-		            }
+		        if( !empty($input['reason_for_registration_edit']) ) {
+		        	$modified_array = array_unique($input['reason_for_registration_edit']);
+		        	$reason = implode(',', $modified_array);
 		        }
 		        $reason = substr($reason, 0, -1);
 
@@ -241,7 +249,7 @@ class UserRegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration' => 'required',
+                                      'reason_for_registration_edit' => 'required',
                                       'job' => 'required',
                                       'user_introduction' => 'required',
                                       'profile_message' => 'required',
@@ -263,7 +271,7 @@ class UserRegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration' => 'required',
+                                      'reason_for_registration_edit' => 'required',
                                       'job' => 'required',
                                       'user_introduction' => 'required',
                                       'profile_message' => 'required'
@@ -304,8 +312,10 @@ class UserRegistrationController extends Controller
     	$profile = ProfileInformation::where('user_id',$user_id)->first();
     	if(!empty($profile)) {
      		if(!empty($profile->reason_for_registration)) {
+	           	$user->reason_for_registration_edit = explode(',', $profile->reason_for_registration);
 	           	$user->reason_for_registration = explode(',', $profile->reason_for_registration);
 	        }
+
 	        $user->address = $profile->address;
 	        $user->phone_number = $profile->phone_number;
 	        $user->description = $profile->description;
@@ -322,6 +332,7 @@ class UserRegistrationController extends Controller
 	        $user->video_link = $profile->video_link;
 
     	}
+
     	return view('admin.create-user',['user'=>$user,'form_type' => 'edit']);
     }
 }

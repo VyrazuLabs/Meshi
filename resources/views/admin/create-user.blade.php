@@ -110,69 +110,69 @@
 		                	@if($user->type == 2)
 			                	<div class="col-md-8 buyer">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }} 
 			                			 Busy with working
 		                           	</label> 
 		                           	<label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'live_alone', null, ['class' => 'check']) }}
 		                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
 		                            </label> 
 		                            <label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'few_restaurants', null, ['class' => 'check']) }}
 		                            	There are few restaurants around the office
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_time', null, ['class' => 'check']) }}
 		                            	I am busy raising children and have no time to make rice
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'like_to_eat', null, ['class' => 'check']) }}
 		                            	I would like to eat a variety of nationalities and people's cooking.
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_reason', null, ['class' => 'check']) }}
 		                            	There is no big reason, but it seems interesting, so I would like to use it
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
 		                            </label>
 		                       	</div>
 		                	@elseif($user->type == 1)
 			                	<div class="col-md-8 seller">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }} 
 			                			 I would like to use someone's help through my cooking
 		                           	</label> 
 		                           	<label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
 		                           		 I want to earn rewards using free time  
 		                            </label> 
 		                            <label>
-		                           		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
+		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
 		                            	I want to earn more rewards than bytes and parts  
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'hobby', null, ['class' => 'check']) }}
 		                            	I would like to use dishes of my hobbies
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'cooking_class', null, ['class' => 'check']) }}
 		                            	I am opening a cooking class and I want to increase my students by increasing my name
 		                            </label> 
 		                            <label> 
-		                            	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'SNS_followers', null, ['class' => 'check']) }}
 		                            	I would like to increase my boss name and increase my cook blog and SNS followers
 		                            </label> 
 		                            <label>
-		                            	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
+		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
 		                            </label>
 		                       	</div>
 		                    @endif
 		                </div>
 	                @endif
-
+		
 	                <div class="form-group form-custom-group create-reason" style="display: none;">
 	                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
 	                	<div class="col-md-8 buyer" style="display: none;">
@@ -236,6 +236,7 @@
                             </label>
                        	</div>
 	                </div>
+	                
 	                <div class="form-group form-custom-group">
 	                  <label>Phone Number<span>*</span></label>
 	                  	{!! Form::text('phone_number', null, 
@@ -424,14 +425,18 @@
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
 
-	  	//when citizen is selected then hide department select box
+	  	$('.edit-reason .buyer').remove();
+	  	$('.edit-reason .seller').remove();
+
 	  	if(userType == 1) {
 	  		$('.seller').show();
 	    	$('.buyer').hide();
+	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
 	  		$('.seller').hide();
+	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	  	}
 	}
 </script>
