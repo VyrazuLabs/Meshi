@@ -28,6 +28,7 @@ class ProfileInformation extends Model
 				            'reason_for_registration',
 				            'job',
 				            'user_introduction',
-				            'profile_message'
+				            'profile_message',
+				            'city'
     					);
 }

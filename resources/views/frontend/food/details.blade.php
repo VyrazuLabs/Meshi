@@ -67,12 +67,17 @@
 					<!-- slider-text -->
 					<div class="col-md-5">
 						<div class="slider-text">
-							<h2>¥{{$food_details->price}}</h2>
-							<h3 class="title">{{$food_details->item_name}}</h3>
-							<p><span>{{ trans('app.Offered by') }}:<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}</a></span>
+							<!-- <h2>¥{{$food_details->price}}</h2> -->
+							<h2>{{$food_details->item_name}}</h2>
+							<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
+							<p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span>
 							<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
 							<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
-							<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
+							@if(!empty($food_details->city))
+								<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->city}}</a></span>
+							@else
+								<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
+							@endif
 							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
 							
 							<!-- short-info -->

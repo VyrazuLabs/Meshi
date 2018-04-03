@@ -33,22 +33,35 @@
 				@else 
 					<?php $url = url('/frontend/images/cover-image.jpg'); ?>
 				@endif
-
-					<div class="col-lg-12 col-12  profile-section profile-back" style="background-image: url(<?php echo $url;?>);">
-						<div class="profile-image-div text-center">
-							<div>
+					<div class="col-lg-12 col-xs-12 p-0 profilecover-imgs">
+						<div class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(<?php echo $url;?>);">
+							<div class="col-md-9 profile-image-div text-center">
 								@if(!empty($user->image))
 									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
 								@else
 									<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
 								@endif
 							</div>
+						</div>
+					</div>
+
+				
+
+					<!-- <div class="col-lg-12 col-12  profile-section profile-back"> -->
+						<!-- <div class="profile-image-div text-center"> -->
+							<!-- <div>
+								@if(!empty($user->image))
+									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
+								@else
+									<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
+								@endif
+							</div> -->
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
-								<p class="profile-title">{{$user->name}}</p>
-								<p class="profile-title-description">{{$user->description}}</p>
+								<p class="profile-title profile-head-title">{{$user->name}}</p>
+								<p class="">{{$user->description}}</p>
 							</div>
-						</div>
+						<!-- </div> -->
 						<div class="col-md-4 profile-timeline">
 							<div class="col-md-6">
 								<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>
@@ -80,7 +93,7 @@
 								</div> -->
 							</div>
 						</div>
-					</div>
+					<!-- </div> -->
 					<div class="col-lg-12 col-12 p-0 profile-description">
 						<div class="col-md-6 float-none profileplace-name">
 							<div class="col-md-6">

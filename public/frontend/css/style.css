@@ -170,7 +170,8 @@ textarea::placeholder{
 body { 
   top: 0px !important; 
 }
-.boxes-card{
+
+.boxes-card{  
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 .profile-descriptions{
@@ -204,12 +205,18 @@ iframe{
   left: 0;
   border: 0;
 }
-.profile-back{  
-  background-image: url("../images/cover-image.jpg");  
-  background-repeat: no-repeat;  
-  background-size: cover;  
-  background-position: center;
+
+
+.profile-back{    
+  background-image: url("../images/cover-image.jpg");    
+  background-repeat: no-repeat;    
+  background-size: cover;    
+  background-position: center;  
+  position: relative;  
+  height: 28.125em;  
+  width: 100%;
 }
+
 .category-box{
   margin-top: 21px;
 }
@@ -245,4 +252,19 @@ iframe{
 }
 .profile-edit-field{
   margin-bottom: 47px;
+}
+.profilemain-box{  
+  position: relative;
+}
+.profile-image-div{    
+  position: absolute;    
+  margin: auto;    
+  left: 0;    
+  right: 0;    
+  bottom: 0;    
+  transform: translateY(50%);
+}
+.profilecover-imgs{    
+  position: relative;    
+  margin-bottom: 7.4375em;
 }

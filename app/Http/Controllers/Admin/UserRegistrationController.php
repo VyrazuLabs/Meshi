@@ -190,7 +190,7 @@ class UserRegistrationController extends Controller
 		        	$modified_array = array_unique($input['reason_for_registration_edit']);
 		        	$reason = implode(',', $modified_array);
 		        }
-		        $reason = substr($reason, 0, -1);
+		        // $reason = substr($reason, 0, -1);
 
 
 		        $user = User::create([	'user_id' => uniqid(),

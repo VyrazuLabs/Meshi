@@ -52,8 +52,22 @@ class RegistrationController extends Controller
 
 		        $latitude = '';
 		        $longitude = '';
+		        $city_name = '';
 		        $geo = json_decode($geo, true); // Convert the JSON to an array
 		        if ($geo['status'] == 'OK') {
+		        	$addressArray = $geo['results'][0]['address_components'];
+		        	foreach ($addressArray as $key => $value) {
+		        		$addressTypeArray = $value['types'];
+		        		if (in_array("locality", $addressTypeArray)){
+					  		// echo"<pre>";print_r($value);die;
+					  		$city_name = $value['short_name'];
+						}
+		        	}
+
+		   //      	if (in_array("locality", $geo['results'][0])){
+					//   echo "Match found";
+					// }
+					// echo"<pre>";print_r($resultsArray);die;
 		            // GET LAT & LONG
 		            $latitude = $geo['results'][0]['geometry']['location']['lat'];
 		            $longitude = $geo['results'][0]['geometry']['location']['lng'];
@@ -109,13 +123,11 @@ class RegistrationController extends Controller
 		        	$videoLink = '';
 		        }
 
-
 		    	$user->update([	'name' => $input['name'],
 					        	'type' => $input['type'],
 					        	'nick_name' => $input['nick_name'],
 					        	'status' => 1
 							 ]);
-
 		        $profile->update([
 									'user_id'  => $user->user_id,
 						            'address' => $input['address'],
@@ -130,25 +142,9 @@ class RegistrationController extends Controller
 						            'profession' => $input['profession'],
 						            'reason_for_registration' => $reason,
 						            'job' => $input['job'],
-						            'video_link' => $videoLink
+						            'video_link' => $videoLink,
+						            'city' => $city_name
 					          	]);
-
-		     //    if ($request->hasFile('cover_image')) {
-		     //        	// echo"bb";die;
-
-	    		// 	$coverImageFile = $request->file('cover_image');
-		     //    	$coverImageValidator = $this->coverImageValidator($coverImageFile);
-		     //    	if( $coverImageValidator->fails()) {
-		     //          return redirect()->back()->withErrors($coverImageValidator)->withInput();
-		     //        }
-		     //        else {
-		     //        	$coverImage = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		     //        	$file['cover_image']->move(public_path().'/uploads/profile/cover-image/', $coverImage);
-		     //        	$profile->update(
-       //                      array('cover_image' => $coverImage));
-		     //        }
-	    		// }
-
  
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
 		        if(!empty($file['image'])) {
@@ -181,15 +177,13 @@ class RegistrationController extends Controller
 	                            array('image' => $profile_image));
 			    }
 
-
-
-		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
+		        /***** CHECK VALIDATION FOR COVER PICTURE *****/
 		        if(!empty($file['cover_image'])) {
 			        $coverImageValidator = $this->coverImageValidator($file);
 			        if( $coverImageValidator->fails()) {
 			            $errors = $coverImageValidator->errors();
 
-			            //WHEN PROFILE PICTURE IS MISSING
+			            //WHEN COVER PICTURE IS MISSING
 			            if($errors->first('cover_image')) {
 			              if( !empty($profile->cover_image) ) {
 			                $input['cover_image'] = $profile->cover_image;
@@ -212,20 +206,12 @@ class RegistrationController extends Controller
 			        $profile->update(
 	                            array('cover_image' => $cover_image));
 			    }
-
-
-
-
-
-
 		    	Session::flash('success', "User updated successfully");
 				return back();
 		    }
 	    }
 	    else {
 	    	if($validator->fails() || $profileImageValidator->fails()) {
-
-
 	        	$validator->messages()->merge($profileImageValidator->messages());
 	        	Session::flash('error', "Please Fill The Form Properly.");
 	        	return redirect()->back()->withErrors($validator)->withInput();
@@ -237,29 +223,35 @@ class RegistrationController extends Controller
 
 		        /* Create lat long from given address */
 	            $address = stripslashes($input['address']); //Address
-	                
-	            // GET JSON RESULTS FROM THIS REQUEST
-	            $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address));
+		        // GET JSON RESULTS FROM THIS REQUEST
+		        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38');
 
-	            $latitude = '';
-	            $longitude = '';
-	            $geo = json_decode($geo, true); // Convert the JSON to an array
-	            if ($geo['status'] == 'OK') {
 
-	                // GET LAT & LONG
-	                $latitude = $geo['results'][0]['geometry']['location']['lat'];
-	                $longitude = $geo['results'][0]['geometry']['location']['lng'];
-	            }
+		        $latitude = '';
+		        $longitude = '';
+		        $city_name = '';
+		        $geo = json_decode($geo, true); // Convert the JSON to an array
+		        if ($geo['status'] == 'OK') {
+		        	$addressArray = $geo['results'][0]['address_components'];
+		        	foreach ($addressArray as $key => $value) {
+		        		$addressTypeArray = $value['types'];
+		        		if (in_array("locality", $addressTypeArray)){
+					  		// echo"<pre>";print_r($value);die;
+					  		$city_name = $value['short_name'];
+						}
+		        	}
+		            // GET LAT & LONG
+		            $latitude = $geo['results'][0]['geometry']['location']['lat'];
+		            $longitude = $geo['results'][0]['geometry']['location']['lng'];
+		        }
+
 
 	            $reason = '';
 		        if( !empty($input['reason_for_registration_edit']) ) {
 		        	$modified_array = array_unique($input['reason_for_registration_edit']);
 		        	$reason = implode(',', $modified_array);
 		        }
-		        $reason = substr($reason, 0, -1);
-
-	            
-
+		        // $reason = substr($reason, 0, -1);
 
 		        $user = User::create([	'user_id' => uniqid(),
 				        				'name' => $input['name'],
@@ -287,7 +279,7 @@ class RegistrationController extends Controller
 									            'job' => $input['job'],
 									            'total_dishes' => 0,
 									            'video_link' => $input['video_link'],
-
+						            			'city' => $city_name
 								          	]);
 	        	Session::flash('success', "User registered successfully");
 
