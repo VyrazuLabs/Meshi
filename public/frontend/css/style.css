@@ -134,7 +134,7 @@
 /* end profile page */
 .images-featured{
   height: 200px;
-  object-fit: contain;
+  object-fit: cover;
 }
 .profile-images{    
   height: 200px;   
@@ -268,3 +268,14 @@ iframe{
   position: relative;    
   margin-bottom: 7.4375em;
 }
+.signin-btn{
+  margin-bottom: 15px;
+}
+/*.user-account select{
+  height: auto;
+  margin-bottom: 0;
+}*/
+/*.user-account input {
+     height: auto; 
+     margin-bottom: 0; 
+}*/

@@ -98,7 +98,7 @@
 															<li><a href="#">{{ trans('app.JPY') }}</a></li>
 														</ul>								
 													</div><!-- category-change -->													
-													 <input type="text"value="" data-slider-min="0" data-slider-max="700" data-slider-step="5" data-slider-value="[250,450]" id="price" ><br />
+													 <input type="text" value="" data-slider-min="0" data-slider-max="700" data-slider-step="5" data-slider-value="[250,450]" id="price" ><br />
 												</div>
 											</div><!--/price-range-->
 										</div><!-- panel-body -->
@@ -133,7 +133,7 @@
 							@if(!empty($food_items))
 								@foreach($food_items as $item)
 									<!-- ad-item -->
-									<div class="ad-item row">
+									<div class="recomended-item row">
 										<!-- item-image -->
 										<div class="item-image-box col-sm-4">
 											<div class="item-image">
@@ -152,9 +152,9 @@
 											<!-- ad-info -->
 											<div class="ad-info">
 												<h3 class="item-price">${{$item->price}}</h3>
-												<h4 class="item-title"><a href="#">{{$item->item_name}}</a></h4>
+												<h4 class="item-title"><a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">{{$item->item_name}}</a></h4>
 												<div class="item-cat">
-													<span><a href="#">{{$item->category_name}}</a></span> /
+													<span>{{$item->category_name}}</span> 
 													
 												</div>										
 											</div><!-- ad-info -->
@@ -162,7 +162,7 @@
 											<!-- ad-meta -->
 											<div class="ad-meta">
 												<div class="meta-content">
-													<span class="dated"><a href="#">{{$item->date}}</a></span>
+													<span class="dated">{{$item->date}}</span>
 													<!-- <a href="#" class="tag"><i class="fa fa-tags"></i> New</a> -->
 												</div>										
 												<!-- item-info-right -->
@@ -174,6 +174,11 @@
 										</div><!-- item-info -->
 									</div><!-- ad-item -->
 								@endforeach
+								<div class="text-center">
+									<ul class="pagination ">
+										{!! $food_items->render() !!}
+									</ul>
+								</div>
 								
 							@endif
 

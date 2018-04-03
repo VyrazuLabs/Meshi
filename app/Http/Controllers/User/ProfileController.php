@@ -25,6 +25,9 @@ class ProfileController extends Controller
             if(!empty($profile->cover_image)) {
                 $user->cover_image = $profile->cover_image;
             }
+            if(!empty($profile->city)) {
+                $user->city = $profile->city;
+            }
             $user->description = $profile->description;
             $user->total_dishes = $profile->total_dishes;
             $user->phone_number = $profile->phone_number;
@@ -47,8 +50,6 @@ class ProfileController extends Controller
                     if(!empty($profile->image)) {
                         $food->image = $profile->image;
                     }
-
-                    
 
                     if(!empty($food->food_images)) {
                         //getting the food images

@@ -106,7 +106,15 @@
 								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
 							</div> -->
 							<div class="col-md-6">
-								<p><strong>{{ trans('app.City') }} :</strong><span> {{$user->address}}</span></p>
+								<p><strong>{{ trans('app.City') }} :</strong>
+									<span> 
+										@if(!empty($user->city))
+											{{$user->city}}
+										@else
+											{{$user->address}}
+										@endif
+									</span>
+								</p>
 							</div>
 						</div>
 					</div>

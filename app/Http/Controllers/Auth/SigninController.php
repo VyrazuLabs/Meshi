@@ -21,35 +21,38 @@ class SigninController extends Controller
 
     public function authentication(Request $request) {
     	$input = $request->input();
-      $validator = $this->validator($input);
-      $remember_me = '';
+        $validator = $this->validator($input);
+        $remember_me = '';
 
-      if(isset($input['remember'])) {
-        $remember_me = $request->get( '_token' );
-      }
+        /* codes for remember me section */
+        if(isset($input['remember'])) {
+            $remember_me = $request->get( '_token' );
+        }
+
+        /* check validation here */
     	if($validator->fails()) {
-        	return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withInput()->withErrors($validator);
         }
         else {
-          	if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
-              if(Auth::User()->type == 1 || Auth::User()->type == 2) {
-
-                $user = User::where('user_id',Auth::User()->user_id);
-                $user->update(['remember_token'=>$remember_me]);
-                if(Auth::User()->type == 1) {
-    	    		    return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
-                }
-                if(Auth::User()->type == 2) {
-                  return redirect('/');
-                }
+            /* only login as EATER or CREATOR if credentials are valid */
+          	if (Auth::attempt(['email' => $input['email'],'password' => $input['password']])) {
+                // type 1 = CREATOR, 2 = EATER
+                if(Auth::User()->type == 1 || Auth::User()->type == 2) { 
+                    $user = User::where('user_id',Auth::User()->user_id)->first();
+                    $user->update(['remember_token'=>$remember_me]);
+                    if(Auth::User()->type == 1) {
+        	    		return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
+                    }
+                    if(Auth::User()->type == 2) {
+                      return redirect('/');
+                    }
             	}
-              else {
-                Auth::logout();
-                Session::flash('error', "Invalid Credentials.");
-              }
-              return redirect()->route('sign_in');
-          }
+                else {
+                    Auth::logout();
+                }
+            }
         }
+        Session::put('login_status', 'Invalid Credentials.');
        	return redirect()->route('sign_in');
     }
 
@@ -68,12 +71,12 @@ class SigninController extends Controller
 
     //RETURN VIEW OF FORGET PASSWORD PAGE
     public function forgetPassword() {
-      return view('frontend.auth.forget-password');
+        return view('frontend.auth.forget-password');
     }
 
     //SEND LINK OF FORGET PASSWORD TO THE USER
     public function sendMail(Request $request) {
-      $input = $request->input();
+        $input = $request->input();
 
         //CHECKING EMAIL IS EMPTY OR NOT
         if($input['email'] == ''){
@@ -110,9 +113,7 @@ class SigninController extends Controller
 
     //RETURN VIEW OF PASSWORD CHANGE PAGE
     public function changeForgetPassword($id,$email) {
-
       $check_token = ForgetPasswordToken::where('token', $id)->first();
-
       if(!empty($check_token)){
             $decripted_email = Crypt::decrypt($email);
             $data = User::where('email',$decripted_email)->first();
@@ -131,15 +132,12 @@ class SigninController extends Controller
 
         $validation = $this->forgetPasswordValidator($input);
         if($validation->fails()){
-                return redirect()->back()->withErrors($validation->errors())->withInput();
+            return redirect()->back()->withErrors($validation->errors())->withInput();
         }
         $data = User::where('email',Crypt::decrypt($input['email_id']))->first();
-        $data->update([
-            'password' => bcrypt($input['password'])
-        ]);
+        $data->update(['password' => bcrypt($input['password'])]);
 
         $forget_password_token = ForgetPasswordToken::where('email', $data['email'])->first();
-        
         $forget_password_token->delete(); 
 
         Session::flash('success','Password has been changed');
@@ -147,8 +145,7 @@ class SigninController extends Controller
     } 
 
     //PASSWORD CHANGE VALIDATION 
-    protected function forgetPasswordValidator(array $data)
-    {
+    protected function forgetPasswordValidator(array $data) {
         return Validator::make($data, [
             'password' => 'required|string|min:6',
             'confirm_password' => 'min:6|same:password'

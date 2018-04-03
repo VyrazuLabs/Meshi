@@ -24,25 +24,16 @@
 								<li><a href="{{ url('/food/create')}}">{{ trans('app.ADD FOOD ITEM') }} </a></li>
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
-								<li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li>
 							@endif
-							
-							<!-- <li><a href="{{ url('food/details') }}">all ads</a></li> -->
-							<!-- <li><a href="#">Help/Support</a></li>  -->
-							<!-- <li><a href="#">Pages</a></li> -->
+							<li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li>
 						@php
 							$choose_type = trans('app.Select Language');
 							$Japanese = trans('app.Japanese');
 						@endphp
-
 						</ul>
-						
 					</div>
-
 				</div>
 
-				
-				
 				<!-- nav-right -->
 				<div class="nav-right">
 					<!-- language-dropdown -->
@@ -54,32 +45,23 @@
 						</ul>								
 					</div> --><!-- language-dropdown -->
 
-					<!-- sign-in -->
-					<!-- <div class="languagedropdown">
-						<div id="google_translate_element" class="headlanguage-select"></div>
-					</div> -->	
 					<div class="language-box ">	
 						<i class="fa fa-language t-orange"></i>
 						@php 
 							$langName =[];
 							if(Session::has('lang_name')) {
 								$langName = Session::get('lang_name');
-                    			
 							}
-
 						@endphp
-							{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose language-select','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
-					</div>			
+						{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose language-select','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
+					</div>
+					<!-- sign-in -->
 					<ul class="sign-in">
-						<li>
-							
 						@if(Auth::User())
-							<i class="fa fa-user"></i>
-							{{Auth::User()->name}}
-						</li>
-			            <li>  <a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
+							<li><i class="fa fa-user"></i>{{Auth::User()->name}}</li>
+			            	<li><a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
 						@else
-						<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
+							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
 						@endif
 					</ul><!-- sign-in -->					
 				</div>

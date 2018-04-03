@@ -19,7 +19,7 @@ class User extends Authenticatable
                             'email',
                             'password',
                             'user_id',
-                            'type', // 1 = seller, 2 = buyer
+                            'type', // 1 = CREATOR, 2 = EATER
                             'nick_name',
                             'status'
     ];
