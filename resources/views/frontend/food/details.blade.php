@@ -173,16 +173,11 @@
 							<h4>{{ trans('app.Some Information') }}</h4>
 							<!-- social-icon -->
 							<ul>
-								<li><i class="fa fa-shopping-cart"></i><a href="#">{{ trans('app.Delivery') }}: {{ trans('app.On schedule time') }}</a></li>
+								<li><i class="fa fa-shopping-cart"></i>{{ trans('app.Regular Purchase') }}: {{ trans('app.Preparing') }}</li>
 								<li>
-									<i class="fa fa-user-plus"></i>
-									<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{ trans('app.More foods by') }} 
-										<span>{{$food_details->made_by}}</span>
-									</a>
+									<i class="fa fa-user-plus"></i>{{ trans('app.Party Order') }}: {{ trans('app.Preparing') }}</span>
+
 								</li>
-								<!-- <li><i class="fa fa-share-square-o" aria-hidden="true"></i><a href="#">Refer to a friend</a></li> -->
-								<!-- <li><i class="fa fa-heart-o"></i><a href="#">Like</a></li> -->
-								<li><i class="fa fa-leaf"></i><a href="#">{{ trans('app.100% Fresh') }}</a></li>
 							</ul><!-- social-icon -->
 						</div>
 					</div>
@@ -200,8 +195,8 @@
 							<img src="{{ url('frontend/images/a1.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>{{ trans('app.Delicious Foods') }}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Handmade Foods') }}</h4>
+						<p>{{ trans('app.Description of Handmade Foods') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -213,8 +208,8 @@
 							<img src="{{ url('frontend/images/a2.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>{{ trans('app.Delivery On Time')}}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Food Delivery') }}</h4>
+						<p>{{ trans('app.Description of Food Delivery') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -226,8 +221,8 @@
 							<img src="{{ url('frontend/images/a3.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
 
-						<h4>{{ trans('app.Reasonable Price') }}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Community') }}</h4>
+						<p>{{ trans('app.Description of Community') }}</p>
 					</div>
 				</div><!-- single-cta -->
 			</div><!-- row -->

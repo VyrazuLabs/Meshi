@@ -260,8 +260,8 @@
 						<div class="cta-icon icon-secure">
 							<img src="{{ url('frontend/images/a1.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>{{ trans('app.Delicious Foods') }}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Handmade Foods') }}</h4>
+						<p>{{ trans('app.Description of Handmade Foods') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -272,8 +272,8 @@
 						<div class="cta-icon icon-support">
 							<img src="{{ url('frontend/images/a2.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>{{ trans('app.Delivery On Time') }}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Food Delivery') }}</h4>
+						<p>{{ trans('app.Description of Food Delivery') }}</p>
 					</div>
 				</div><!-- single-cta -->
 
@@ -284,8 +284,8 @@
 						<div class="cta-icon icon-trading">
 							<img src="{{ url('frontend/images/a3.png') }}" alt="Icon" class="img-responsive">
 						</div><!-- cta-icon -->
-						<h4>{{ trans('app.Reasonable Price') }}</h4>
-						<p>{{ trans('app.Lorem ipsum') }}</p>
+						<h4>{{ trans('app.Community') }}</h4>
+						<p>{{ trans('app.Description of Community') }}</p>
 					</div>
 				</div><!-- single-cta -->
 			</div>

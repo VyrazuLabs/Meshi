@@ -3,9 +3,12 @@
 return [
 	'HOME' => 'HOME',
 	'Sign In' => 'Sign In',
-	'Delicious Foods' => 'Delicious Foods',
-	'Delivery On Time' => 'Delivery On Time',
-	'Reasonable Price' => 'Reasonable Price',
+	'Handmade Foods' => 'Handmade foods',
+    'Description of Handmade Foods' => 'Handmade foods',
+    'Food Delivery' => 'Delivery',
+    'Description of Food Delivery' => 'Delivery',
+    'Community' => 'Community',
+    'Description of Community' => 'Handmade foods',
 	'Quik Links' => 'Quik Links',
 	'Tomorrow' => 'Tomorrow',
 	'Day After Tomorrow' => 'Day After Tomorrow',
@@ -111,7 +114,7 @@ return [
 	'Lorem ipsum' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
 	'Facebook' => 'Facebook',
 	'Copyright' => 'Copyright',
-	'Developed by' => 'Developed by',
+    'sharemeshi' => 'sharemeshi',
 	'Vyrazu' => 'Vyrazu',
 	'Labs' => 'Labs',
 	'Share' => 'Share',
@@ -156,10 +159,10 @@ return [
 	'Upload Background Image' => 'Upload Background Image',
 	'Commission' => 'Commission',
 
-	
+    'Preparing' => 'Preparing',
+    'Regular Purchase' => 'Regular Purchase',
 
-
-
+    'Party Order' => 'Party Order',
 
 
 ];

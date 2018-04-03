@@ -69,7 +69,7 @@
         
         <div class="footer-bottom clearfix text-center">
             <div class="container">
-                <p>{{ trans('app.Copyright') }} &copy; 2016. {{ trans('app.Developed by') }} <a href="http://themeregion.com/">{{ trans('app.Vyrazu') }} {{ trans('app.Labs') }}</a></p>
+                <p>{{ trans('app.Copyright') }} &copy; 2018. <a href="https://sharemeshi.com/">{{ trans('app.sharemeshi') }}</a></p>
             </div>
         </div><!-- footer-bottom -->
     </footer><!-- footer -->
