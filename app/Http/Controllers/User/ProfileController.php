@@ -102,7 +102,6 @@ class ProfileController extends Controller
                 $user->municipality = $profile->municipality;
                 $user->gender = $profile->gender;
                 $user->profession = $profile->profession;
-                $user->job = $profile->job;
                 $user->image = $profile->image;
                 $user->user_introduction = $profile->user_introduction;
                 $user->profile_message = $profile->profile_message;

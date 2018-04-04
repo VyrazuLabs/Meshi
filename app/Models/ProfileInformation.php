@@ -26,7 +26,6 @@ class ProfileInformation extends Model
 				            'gender',
 				            'profession',
 				            'reason_for_registration',
-				            'job',
 				            'user_introduction',
 				            'profile_message',
 				            'city'

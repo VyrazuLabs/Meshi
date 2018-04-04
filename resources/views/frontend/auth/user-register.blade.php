@@ -308,18 +308,7 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                <div class="form-group form-custom-group">
-	                  <label>{{ trans('app.Subsequent address') }}<span>*</span></label>
-	                  	{!! Form::textarea('address', null, 
-	                          array('class'=>'form-control', 
-	                          		'id' => 'addressbox',
-	                                'placeholder'=>$addressPlaceholder,'rows'=>'2')) !!}
-						@if ($errors->has('address'))
-							<span class="help-block">
-								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
-							</span>
-						@endif
-	                </div>
+	                
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Description') }}<span>*</span></label>
 	                  	{!! Form::textarea('description', null, 
@@ -373,6 +362,18 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
+	                  <label>{{ trans('app.Subsequent address') }}<span>*</span></label>
+	                  	{!! Form::textarea('address', null, 
+	                          array('class'=>'form-control', 
+	                          		'id' => 'addressbox',
+	                                'placeholder'=>$addressPlaceholder,'rows'=>'2')) !!}
+						@if ($errors->has('address'))
+							<span class="help-block">
+								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
+							</span>
+						@endif
+	                </div>
+	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.sex') }}<span>*</span></label>
 	                    {{ Form::select('gender', ['male' => $male_sex, 'female' => $female_sex, 'other' => $other_sex], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('gender'))
@@ -382,7 +383,7 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>{{ trans('app.Profession') }}<span>*</span></label>
+	                  	<label>{{ trans('app.Job') }}<span>*</span></label>
 	                    {{ Form::select('profession', [
 	                    	'1' => $profession_present, 
 	                    	'2' => $profession_currently, 
@@ -392,16 +393,6 @@
 						@if ($errors->has('profession'))
 							<span class="help-block">
 							  <strong class="strong t-red">{{ $errors->first('profession') }}</strong>
-							</span>
-						@endif
-	                </div>
-	                <div class="form-group form-custom-group">
-	                  	<label>{{ trans('app.Job') }}<span>*</span></label>
-	                  	{!! Form::text('job', null, 
-	                          array('class'=>'form-control')) !!}
-						@if ($errors->has('job'))
-							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('job') }}</strong>
 							</span>
 						@endif
 	                </div>

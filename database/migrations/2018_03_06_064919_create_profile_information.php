@@ -33,7 +33,6 @@ class CreateProfileInformation extends Migration
             $table->string('gender');
             $table->string('profession');
             $table->longText('reason_for_registration')->nullable();
-            $table->string('job');
             $table->longText('user_introduction')->nullable();
             $table->longText('profile_message')->nullable();
             $table->timestamps();

@@ -113,7 +113,6 @@ class UserRegistrationController extends Controller
 						            'gender' => $input['gender'],
 						            'profession' => $input['profession'],
 						            'reason_for_registration' => $reason,
-						            'job' => $input['job'],
 						            'user_introduction' => $input['user_introduction'],
 						            'profile_message' => $input['profile_message'],
 						            'video_link' => $input['video_link'],
@@ -217,7 +216,6 @@ class UserRegistrationController extends Controller
 									            'gender' => $input['gender'],
 									            'profession' => $input['profession'],
 									            'reason_for_registration' => $reason,
-									            'job' => $input['job'],
 									            'total_dishes' => 0,
 									            'user_introduction' => $input['user_introduction'],
 						            			'profile_message' => $input['profile_message'],
@@ -250,7 +248,6 @@ class UserRegistrationController extends Controller
                                       'gender' => 'required',
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required',
-                                      'job' => 'required',
                                       'user_introduction' => 'required',
                                       'profile_message' => 'required',
                                     ]);
@@ -272,7 +269,6 @@ class UserRegistrationController extends Controller
                                       'gender' => 'required',
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required',
-                                      'job' => 'required',
                                       'user_introduction' => 'required',
                                       'profile_message' => 'required'
                                     ]);
@@ -325,7 +321,6 @@ class UserRegistrationController extends Controller
 	        $user->municipality = $profile->municipality;
 	        $user->gender = $profile->gender;
 	        $user->profession = $profile->profession;
-	        $user->job = $profile->job;
 	        $user->image = $profile->image;
 	        $user->user_introduction = $profile->user_introduction;
 	        $user->profile_message = $profile->profile_message;

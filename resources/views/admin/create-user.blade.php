@@ -249,17 +249,7 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                <div class="form-group form-custom-group">
-	                  <label>Address<span>*</span></label>
-	                  	{!! Form::textarea('address', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'Enter Address','rows'=>'2')) !!}
-						@if ($errors->has('address'))
-							<span class="help-block">
-								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
-							</span>
-						@endif
-	                </div>
+	                
 	                <div class="form-group form-custom-group">
 	                  <label>Video Link(Embed Code)</label>
 	                  	{!! Form::textarea('video_link', null, 
@@ -342,6 +332,17 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
+	                  <label>Address<span>*</span></label>
+	                  	{!! Form::textarea('address', null, 
+	                          array('class'=>'form-control','id' => 'addressbox',
+	                                'placeholder'=>'Enter Address','rows'=>'2')) !!}
+						@if ($errors->has('address'))
+							<span class="help-block">
+								<strong class="strong t-red">{{ $errors->first('address') }}</strong>
+							</span>
+						@endif
+	                </div>
+	                <div class="form-group form-custom-group">
 	                  	<label>Gender<span>*</span></label>
 	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('gender'))
@@ -351,7 +352,7 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Profession<span>*</span></label>
+	                  	<label>Job<span>*</span></label>
 	                    {{ Form::select('profession', [
 	                    	'1' => 'Housewives(byte part and others,present)', 
 	                    	'2' => 'Housewives(byte,part other,currently none)', 
@@ -361,16 +362,6 @@
 						@if ($errors->has('profession'))
 							<span class="help-block">
 							  <strong class="strong t-red">{{ $errors->first('profession') }}</strong>
-							</span>
-						@endif
-	                </div>
-	                <div class="form-group form-custom-group">
-	                  	<label>Job<span>*</span></label>
-	                  	{!! Form::text('job', null, 
-	                          array('class'=>'form-control')) !!}
-						@if ($errors->has('job'))
-							<span class="help-block">
-							  <strong class="strong t-red">{{ $errors->first('job') }}</strong>
 							</span>
 						@endif
 	                </div>
@@ -438,6 +429,15 @@
 	  		$('.seller').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	  	}
+	}
+
+	$(document).ready(function(){		
+		initAutocomplete('addressbox');	
+	})
+	function initAutocomplete(selector) {	  
+		var indexMoveFrom = new google.maps.places.Autocomplete(	      
+			(document.getElementById(selector)),	      
+			{types: ['geocode']});	
 	}
 </script>
 @endsection

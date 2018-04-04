@@ -141,7 +141,6 @@ class RegistrationController extends Controller
 						            'gender' => $input['gender'],
 						            'profession' => $input['profession'],
 						            'reason_for_registration' => $reason,
-						            'job' => $input['job'],
 						            'video_link' => $videoLink,
 						            'city' => $city_name
 					          	]);
@@ -276,7 +275,6 @@ class RegistrationController extends Controller
 									            'gender' => $input['gender'],
 									            'profession' => $input['profession'],
 									            'reason_for_registration' => $reason,
-									            'job' => $input['job'],
 									            'total_dishes' => 0,
 									            'video_link' => $input['video_link'],
 						            			'city' => $city_name
@@ -310,8 +308,7 @@ class RegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration_edit' => 'required',
-                                      'job' => 'required',
+                                      'reason_for_registration_edit' => 'required'
                                     ]);
   	}
 
@@ -329,8 +326,7 @@ class RegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration_edit' => 'required',
-                                      'job' => 'required',
+                                      'reason_for_registration_edit' => 'required'
 
                                     ]);
   	}

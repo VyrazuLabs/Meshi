@@ -84,6 +84,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ url('/js/demo.js') }}"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places"></script>
+
     <!-- PNOTIFY js -->
     <script type="text/javascript" src="{{ url('js/pnotify.custom.min.js') }}"></script>
 
