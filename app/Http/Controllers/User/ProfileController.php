@@ -38,13 +38,13 @@ class ProfileController extends Controller
                 $user->video_link = $profile->video_link;
             }
 
-            $food_items = FoodItem::where('status',1)->where('offered_by',$user_id)->get();
+            $food_items = FoodItem::where('status',1)->where('offered_by',$user_id)->orderBy('date_of_availability','ASC')->get();
             if(!empty($food_items)) {
                 foreach ($food_items as $key => $food) {
                     $category = Category::where('category_id',$food->category_id)->first();
                     $food->category_name = $category->category_name;
                     $food->price = $food->price;
-                    $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+                    $food->date = date('Y-m-d', strtotime($food->date_of_availability));
 
                     $profile = ProfileInformation::where('user_id',$user_id)->first();
                     if(!empty($profile->image)) {

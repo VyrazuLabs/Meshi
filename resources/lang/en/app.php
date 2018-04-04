@@ -158,11 +158,10 @@ return [
 	'Shopping cart feature' => 'Shopping cart feature',
 	'Upload Background Image' => 'Upload Background Image',
 	'Commission' => 'Commission',
-
     'Preparing' => 'Preparing',
     'Regular Purchase' => 'Regular Purchase',
-
     'Party Order' => 'Party Order',
+    'Profile Edit' => 'Profile Edit',
 
 
 ];

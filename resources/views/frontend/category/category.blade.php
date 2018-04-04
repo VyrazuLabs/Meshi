@@ -52,57 +52,10 @@
 								</div><!-- panel -->
 
 								<!-- panel -->
-								<div class="panel-default panel-faq">
-									<!-- panel-heading -->
-									<div class="panel-heading">
-										<a data-toggle="collapse" data-parent="#accordion" href="#accordion-two">
-											<h4 class="panel-title">{{ trans('app.Condition') }}<span class="pull-right"><i class="fa fa-plus"></i></span></h4>
-										</a>
-									</div><!-- panel-heading -->
-
-									<div id="accordion-two" class="panel-collapse collapse">
-										<!-- panel-body -->
-										<div class="panel-body">
-											<label for="new"><input type="checkbox" name="new" id="new"> {{ trans('app.New') }}</label>
-											<label for="used"><input type="checkbox" name="used" id="used"> {{ trans('app.Used') }}</label>
-										</div><!-- panel-body -->
-									</div>
-								</div><!-- panel -->
+								<!-- panel -->
 
 								<!-- panel -->
-								<div class="panel-default panel-faq">
-									<!-- panel-heading -->
-									<div class="panel-heading">
-										<a data-toggle="collapse" data-parent="#accordion" href="#accordion-three">
-											<h4 class="panel-title">
-											{{ trans('app.Price') }}
-											<span class="pull-right"><i class="fa fa-plus"></i></span>
-											</h4>
-										</a>
-									</div><!-- panel-heading -->
-
-									<div id="accordion-three" class="panel-collapse collapse">
-										<!-- panel-body -->
-										<div class="panel-body">
-											<div class="price-range"><!--price-range-->
-												<div class="price">
-													<span>$100 - <strong>$700</strong></span>
-													<div class="dropdown category-dropdown pull-right">	
-														<a data-toggle="dropdown" href="#"><span class="change-text">'{{ trans('app.USD') }}</span><i class="fa fa-caret-square-o-down"></i></a>
-														<ul class="dropdown-menu category-change">
-															<li><a href="#">{{ trans('app.USD') }}</a></li>
-															<li><a href="#">AUD</a></li>
-															<li><a href="#">{{ trans('app.EUR') }}</a></li>
-															<li><a href="#">{{ trans('app.GBP') }}</a></li>
-															<li><a href="#">{{ trans('app.JPY') }}</a></li>
-														</ul>								
-													</div><!-- category-change -->													
-													 <input type="text" value="" data-slider-min="0" data-slider-max="700" data-slider-step="5" data-slider-value="[250,450]" id="price" ><br />
-												</div>
-											</div><!--/price-range-->
-										</div><!-- panel-body -->
-									</div>
-								</div><!-- panel -->
+								<!-- panel -->
 							</div><!-- panel-group -->
 						</div>
 					</div><!-- accordion-->
@@ -207,11 +160,11 @@
 						</div>
 					</div><!-- recommended-ads -->
 
-					<div class="col-md-2 hidden-xs hidden-sm">
+					<!-- <div class="col-md-2 hidden-xs hidden-sm">
 						<div class="advertisement text-center">
 							<a href="#"><img src="{{ url('frontend/images/categories/Side-ad.png') }}" alt="" class="img-responsive"></a>
 						</div>
-					</div>
+					</div> -->
 				</div>	
 			</div>
 		</div><!-- container -->

@@ -30,11 +30,13 @@ class CategoryController extends Controller
         $food_items = FoodItem::where('status',1)
                               ->where('date_of_availability','>',$today)
                               ->where('offered_by','!=',Auth::User()->user_id)
+                              ->orderBy('date_of_availability','ASC')
                               ->paginate(5);
       }
       else {
         $food_items = FoodItem::where('status',1)
                               ->where('date_of_availability','>',$today)
+                              ->orderBy('date_of_availability','ASC')
                               ->paginate(5);
       }
 
@@ -43,7 +45,7 @@ class CategoryController extends Controller
           $category = Category::where('category_id',$food->category_id)->first();
           $food->category_name = $category->category_name;
           $food->price = $food->price;
-          $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+          $food->date = date('Y-m-d', strtotime($food->date_of_availability));
           $food->time = date('h:i a', strtotime($food->time_of_availability));
 
           $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
@@ -81,11 +83,13 @@ class CategoryController extends Controller
         $food_items = FoodItem::where('status',1)
                               ->where('date_of_availability','>',$today)
                               ->where('offered_by','!=',Auth::User()->user_id)
+                              ->orderBy('date_of_availability','ASC')
                               ->paginate(5);
       }
       else {
         $food_items = FoodItem::where('status',1)
                               ->where('date_of_availability','>',$today)
+                              ->orderBy('date_of_availability','ASC')
                               ->paginate(5);
       }
 
@@ -94,7 +98,7 @@ class CategoryController extends Controller
           $category = Category::where('category_id',$food->category_id)->first();
           $food->category_name = $category->category_name;
           $food->price = $food->price;
-          $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+          $food->date = date('Y-m-d', strtotime($food->date_of_availability));
           $food->time = date('h:i a', strtotime($food->time_of_availability));
 
           $profile = ProfileInformation::where('user_id',$food->offered_by)->first();

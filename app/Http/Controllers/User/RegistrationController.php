@@ -309,7 +309,7 @@ class RegistrationController extends Controller
                                       'gender' => 'required',
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required'
-                                    ]);
+                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason for registration']);
   	}
 
   	protected function userUpdateValidator($request) {
@@ -328,7 +328,7 @@ class RegistrationController extends Controller
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required'
 
-                                    ]);
+                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason for registration']);
   	}
 
   	protected function passwordValidator($request) {

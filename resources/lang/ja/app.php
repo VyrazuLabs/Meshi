@@ -148,7 +148,7 @@ return [
 	'Shopping cart feature' => 'ショッピングカート機能',
 	'Upload Background Image' => '背景画像をアップロードする',
 	'Commission' => '手数料',
-
+	'Profile Edit' => 'プロフィールの編集',
     'Preparing' => '準備中',
     'Regular Purchase' => '定期配送',
     'Party Order' => 'パーティ用のご注文'

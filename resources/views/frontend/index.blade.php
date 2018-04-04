@@ -355,43 +355,43 @@
 				//        group: 'category',
 		        markers: [
 				//            Markers for Doctor Search
-		            {latitude: 51.5131094, longitude: -0.176425, icon: ''+url+'/mapicon/1.png', html: {
+		            {latitude: 51.5131094, longitude: -0.176425, icon: ''+url+'/mapicon/11.png', html: {
 		                    content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.511218, longitude: -0.147124, icon: ''+url+'/mapicon/2.png', html: {
+		            {latitude: 51.511218, longitude: -0.147124, icon: ''+url+'/mapicon/12.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.515918, longitude: -0.219050, icon: ''+url+'/mapicon/3.png', html: {
+		            {latitude: 51.515918, longitude: -0.219050, icon: ''+url+'/mapicon/13.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.4941563, longitude: -0.1710176, icon: ''+url+'/mapicon/4.png', html: {
+		            {latitude: 51.4941563, longitude: -0.1710176, icon: ''+url+'/mapicon/14.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.5238585, longitude: -0.0950225, icon: ''+url+'/mapicon/5.png', html: {
+		            {latitude: 51.5238585, longitude: -0.0950225, icon: ''+url+'/mapicon/15.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.4965787, longitude: -0.1169972, icon: ''+url+'/mapicon/6.png', html: {
+		            {latitude: 51.4965787, longitude: -0.1169972, icon: ''+url+'/mapicon/16.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-					{latitude: 51.5096738, longitude: -0.2753873, icon: ''+url+'/mapicon/6.png', html: {
+					{latitude: 51.5096738, longitude: -0.2753873, icon: ''+url+'/mapicon/17.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.4965787, longitude: -0.199223, icon: ''+url+'/mapicon/7.png', html: {
+		            {latitude: 51.4965787, longitude: -0.199223, icon: ''+url+'/mapicon/18.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.4925041, longitude: -0.2363018, icon: ''+url+'/mapicon/8.png', html: {
+		            {latitude: 51.4925041, longitude: -0.2363018, icon: ''+url+'/mapicon/icon.png', html: {
 		                     content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		                }},
-		            {latitude: 51.5202758, longitude: -0.118047, icon: ''+url+'/mapicon/1.png', html: {
+		            {latitude: 51.5202758, longitude: -0.118047, icon: ''+url+'/mapicon/19.png', html: {
 		                 content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		            }},
-					{latitude: 51.5249492, longitude: -0.2450565, icon: ''+url+'/mapicon/1.png', html: {
+					{latitude: 51.5249492, longitude: -0.2450565, icon: ''+url+'/mapicon/16.png', html: {
 		                 content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		            }},
-					{latitude: 51.532054, longitude: -0.1639875, icon: ''+url+'/mapicon/8.png', html: {
+					{latitude: 51.532054, longitude: -0.1639875, icon: ''+url+'/mapicon/15.png', html: {
 		                 content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		            }},
-					{latitude: 51.5082309, longitude: -0.076872, icon: ''+url+'/mapicon/3.png', html: {
+					{latitude: 51.5082309, longitude: -0.076872, icon: ''+url+'/mapicon/11.png', html: {
 		                 content: '<h5>ThemeRegion Ads Portal.</h5>Lorem ipsum dolor sit amet,<br/> consectetur adipisicing elit sed <br /><a href="#">Visit Store</a>'
 		            }},
 		            

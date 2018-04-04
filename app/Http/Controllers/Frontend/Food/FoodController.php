@@ -28,7 +28,7 @@ class FoodController extends Controller
   			$category = Category::where('category_id',$food_details->category_id)->first();
   			$food_details->category_name = $category->category_name;
         $food_details->price = $food_details->price;
-        $food_details->date = date('d-m-Y', strtotime($food_details->date_of_availability));
+        $food_details->date = date('Y-m-d', strtotime($food_details->date_of_availability));
         // $food_details->time = date('h:i: a', strtotime($food_details->time_of_availability));
 
         $profile = ProfileInformation::where('user_id',$food_details->offered_by)->first();

@@ -18,21 +18,7 @@
                 {{Form::hidden('user_id',null)}}
 
               	<div class="box-body">
-              		@if ( $form_type == 'edit' )
-
-              		<div class="form-group form-custom-group">
-	                  	<label> Image<span>*</span></label>
-	                  	@if( !empty($user->image) )
-		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
-		                @endif
-	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
-	                  	@if ($errors->has('image'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	              	@endif
+              		
 	                <div class="form-group form-custom-group">
 	                  	<label>Name <span>*</span></label>
 						{!! Form::text('name', null, 
@@ -236,26 +222,6 @@
                             </label>
                        	</div>
 	                </div>
-	                
-	                <div class="form-group form-custom-group">
-	                  <label>Phone Number<span>*</span></label>
-	                  	{!! Form::text('phone_number', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'09012345678',
-	                                'id' => 'phone')) !!}
-	                  @if ($errors->has('phone_number'))
-	                    <span class="help-block">
-	                      <strong class="strong t-red">{{ $errors->first('phone_number') }}</strong>
-	                    </span>
-	                  @endif
-	                </div>
-	                
-	                <div class="form-group form-custom-group">
-	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link', null, 
-	                          array('class'=>'form-control','rows'=>'3')) !!}
-	                 
-	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Description<span>*</span></label>
 	                  	{!! Form::textarea('description', null, 
@@ -268,28 +234,6 @@
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
-	                  	@if ($errors->has('user_introduction'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                <div class="form-group form-custom-group">
-	                  	<label>Profile Message<span>*</span></label>
-	                  	{!! Form::textarea('profile_message', null, 
-	                          array('class'=>'form-control', 
-	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
-	                  	@if ($errors->has('profile_message'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                <div class="form-group form-custom-group">
 	                  	<label>Age<span>*</span></label>
 	                    {{ Form::select('age', ['10' => "10's", '20' => "20's", '30' => "Thirties", '40' => 'Forties', '50' => 'Fifties', '60' => "60's", '70' => "70's", '80' => "Age 80" ], null, ['placeholder' => '-- Please Select Age --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('age'))
@@ -297,6 +241,18 @@
 							  <strong class="strong t-red">{{ $errors->first('age') }}</strong>
 							</span>
 						@endif
+	                </div>
+	                <div class="form-group form-custom-group">
+	                  <label>Phone Number<span>*</span></label>
+	                  	{!! Form::text('phone_number', null, 
+	                          array('class'=>'form-control', 
+	                                'placeholder'=>'09012345678',
+	                                'id' => 'phone')) !!}
+	                  @if ($errors->has('phone_number'))
+	                    <span class="help-block">
+	                      <strong class="strong t-red">{{ $errors->first('phone_number') }}</strong>
+	                    </span>
+	                  @endif
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Zipcode(7 digits)<span>*</span></label>
@@ -365,6 +321,33 @@
 							</span>
 						@endif
 	                </div>
+	                <div class="form-group form-custom-group">
+	                  <label>Video Link(Embed Code)</label>
+	                  	{!! Form::textarea('video_link', null, 
+	                          array('class'=>'form-control','rows'=>'3')) !!}
+	                </div>
+	                <div class="form-group form-custom-group">
+	                  	<label>User Introduction<span>*</span></label>
+	                  	{!! Form::textarea('user_introduction', null, 
+	                          array('class'=>'form-control', 
+	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
+	                  	@if ($errors->has('user_introduction'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	                <div class="form-group form-custom-group">
+	                  	<label>Profile Message<span>*</span></label>
+	                  	{!! Form::textarea('profile_message', null, 
+	                          array('class'=>'form-control', 
+	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
+	                  	@if ($errors->has('profile_message'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
               		@if ( $form_type == 'create' )
 		                <div class="form-group form-custom-group">
 		                  	<label> Image<span>*</span></label>
@@ -386,6 +369,20 @@
 	                    </span>
 	                  @endif
 	                </div>
+	                @if ( $form_type == 'edit' )
+              		<div class="form-group form-custom-group">
+	                  	<label> Image<span>*</span></label>
+	                  	@if( !empty($user->image) )
+		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
+		                @endif
+	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
+	                  	@if ($errors->has('image'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	              	@endif
 	                
 	                <!-- /.box-body -->
 	            </div>
@@ -415,6 +412,8 @@
 	  	var userType = $('#select-type').val();
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
+	  	$('.seller').children().children().prop('checked', false);	  	
+		$('.buyer').children().children().prop('checked', false);
 
 	  	$('.edit-reason .buyer').remove();
 	  	$('.edit-reason .seller').remove();

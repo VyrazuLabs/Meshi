@@ -54,7 +54,7 @@ class FrontendController extends Controller
     			$category = Category::where('category_id',$food->category_id)->first();
     			$food->category_name = $category->category_name;
                 $food->price = $food->price;
-                $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+                $food->date = date('Y-m-d', strtotime($food->date_of_availability));
                 $food->time = date('h:i a', strtotime($food->time_of_availability));
 
                 $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
@@ -77,7 +77,7 @@ class FrontendController extends Controller
                 $category = Category::where('category_id',$food->category_id)->first();
                 $food->category_name = $category->category_name;
                 $food->price = $food->price;
-                $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+                $food->date = date('Y-m-d', strtotime($food->date_of_availability));
                 $food->time = date('h:i a', strtotime($food->time_of_availability));
 
                 $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
@@ -101,7 +101,7 @@ class FrontendController extends Controller
                 $category = Category::where('category_id',$food->category_id)->first();
                 $food->category_name = $category->category_name;
                 $food->price = $food->price;
-                $food->date = date('d-m-Y', strtotime($food->date_of_availability));
+                $food->date = date('Y-m-d', strtotime($food->date_of_availability));
                 $food->time = date('h:i a', strtotime($food->time_of_availability));
 
                 $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
