@@ -28,7 +28,7 @@
 						<div class="col-md-12 col-xs-12 text-center">
 							<div class="col-md-8 float-none d-inline-block">
 								<div class="about-text">
-									<h3 class="t-black about-text-title">{{ trans('app.About Us') }}</h3>
+									<h3 class="t-black about-text-title">シェアメシの想い</h3>
 									<!-- description-paragraph -->
 									<div class="description-paragraph">
 										<p class="about-us-text">おすそ分け文化、はじめませんか？</p>
@@ -37,7 +37,7 @@
 									
 									<!-- description-paragraph -->
 									<div class="description-paragraph">
-										<p class="about-us-text">高度経済成長期、日本にはご近所づきあいという素晴らしい文化がありました。ご近所同士のふれあい、見守り、おすそ分け.......</p>
+										<p class="about-us-text">高度経済成長期、日本にはご近所づきあいという素晴らしい文化が<br/>ありました。ご近所同士のふれあい、見守り、おすそ分け.......</p>
 									</div>
 									<!-- description-paragraph -->
 									<!-- description-paragraph -->
@@ -49,7 +49,10 @@
 									<div class="description-paragraph">
 										<p class="about-us-text mb-0">シェアメシは、手料理の「おすそ分け」を通して、ご近所付き合いという『「顔の見える」地域社会を取り戻す事』、女性の活躍促進をミッションとしてサービスをご提供しております。</p>
 									</div>
-									<!-- description-paragraph --> 
+									<!-- description-paragraph -->
+									<div class="description-paragraph">
+										<p class="about-us-text mb-0">シェアメシプロジェクト 加藤 紘二郎・今永 敦志</p>
+									</div>
 								</div>
 							</div>
 						</div><!-- about-text -->
