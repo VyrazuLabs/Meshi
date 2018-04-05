@@ -80,7 +80,7 @@ class UserRegistrationController extends Controller
 
 		        /***** CODES FOR PHONE NUMBER UPDATION STARTS HERE *****/
 		        if($profile->phone_number != $input['phone_number']) {
-		          	$phone_number_validator = $this->updatePhoneNumberValidator($input);
+		          	$phone_number_validator = $this->phone_number_validator($input);
 		          	if($phone_number_validator->fails()) {
 		            	Session::flash('error', "Please enter a valid phone number.");
 		            	return redirect()->back()->withErrors($phone_number_validator);

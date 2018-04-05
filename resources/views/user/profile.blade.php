@@ -35,13 +35,13 @@
 				@endif
 					<div class="col-lg-12 col-xs-12 p-0 profilecover-imgs">
 						<div class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(<?php echo $url;?>);">
-							<div class="col-md-9 profile-image-div text-center">
+							<!-- <div class="col-md-9 profile-image-div text-center">
 								@if(!empty($user->image))
 									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
 								@else
 									<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
 								@endif
-							</div>
+							</div> -->
 						</div>
 					</div>
 
@@ -59,7 +59,7 @@
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
 								<p class="profile-title profile-head-title">{{$user->name}}</p>
-								<p class="">{{$user->description}}</p>
+								<p class="">@php echo nl2br($user->description); @endphp</p>
 							</div>
 						<!-- </div> -->
 						<div class="col-md-4 profile-timeline">

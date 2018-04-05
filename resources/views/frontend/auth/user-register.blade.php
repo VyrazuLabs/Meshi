@@ -260,7 +260,7 @@
 				                <div class="form-group form-custom-group">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
 				                  	{!! Form::textarea('description', null, 
-				                          array('class'=>'form-control','rows'=>'3')) !!}
+				                          array('class'=>'form-control','rows'=>'5')) !!}
 				                  	@if ($errors->has('description'))
 				                    	<span class="help-block">
 				                      		<strong class="strong t-red">{{ $errors->first('description') }}</strong>
