@@ -36,8 +36,6 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 	Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
 	Route::get('/shopping cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
 	
-
-	
 	Route::group( ['prefix' => 'food'], function() {
 		Route::group( ['namespace' => 'Food'], function() {
 			Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
@@ -55,37 +53,34 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 });
 
 //ROUTES FOR AUTHENTICATED USERS
-// Route::group([ 'middleware' => 'auth' ], function() {
-	// Route::group([ 'middleware' => 'UserAuth' ], function() {
-		Route::group( ['prefix' => 'user','namespace' => 'User','middleware' => ['Language']], function() {
-			Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
-			Route::group([ 'middleware' => 'UserAuth' ], function() {
-				Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
-				// Route::post('/profile/cover-image', 'ProfileController@uploadCoverImage')->name('upload_cover_image');
-			});
-			Route::get('/register','RegistrationController@register');
-			Route::post('/register','RegistrationController@save')->name('registration');
-		});
-	// });
-// });
+Route::group( ['prefix' => 'user','namespace' => 'User','middleware' => ['Language']], function() {
+	Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
+	Route::group([ 'middleware' => 'UserAuth' ], function() {
+		Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+	});
+
+	// ROUTES FOR CART SECTION //
+	Route::group( ['namespace' => 'Cart'], function() {
+		Route::get('/cart','CartController@viewCart')->name('view_cart');
+	});
 
 
+	Route::get('/register','RegistrationController@register');
+	Route::post('/register','RegistrationController@save')->name('registration');
+});
 
+
+	
 
 
 /*****************************************
-	ROUTES FOR STRIPE PAYMENT GATEWAY
+	ROUTES FOR PAYPAL PAYMENT GATEWAY
 ****************************************/
 Route::group( ['prefix' => 'order','namespace' => 'Order','middleware' => ['Language']], function() {
 	Route::post('/add-to-cart', 'OrderController@addToCart')->name('add_to_cart');
-	// Route::get('/make-order/{food_item_id}', 'OrderController@makeOrder')->name('make_order');
-	// Route::get('/make-order/{food_item_id}', 'OrderController@makeOrderWithPaypal')->name('make_order');
 	Route::group( ['prefix' => 'payment'], function() {
-		// Route::post('/make-payment', 'PaymentController@makePayment')->name('make_payment');
 		Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
 		Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
-
-
 	});
 });
 

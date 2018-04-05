@@ -10,12 +10,12 @@
 @section('content')
 
 <!-- signin-page -->
-	<section id="" class="clearfix user-page">
+	<section id="" class="clearfix user-page sign-back">
 		<div class="container">
 			<div class="row text-center">
 				<!-- user-login -->			
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-					<div class="user-account boxes-card">
+					<div class="user-account boxes-card signin-box">
 						@if ($form_type == 'edit')
 							<h2>{{ trans('app.Profile Edit') }}</h2>
 						@else

@@ -1,0 +1,16 @@
+@media screen and (max-width: 576px) {    
+	.cart-content{		
+		width: 100%;		
+		padding-left: 0px;	
+	}	
+	.cart-image-box{		
+		width: 100%;	
+	}	
+	.cart-content-details{	
+		width: 100%;		
+		text-align: center;	
+	}	
+	.cart-content-btn-div{		
+		width: 100%;	
+	}
+}
