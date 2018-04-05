@@ -343,8 +343,9 @@ iframe{
   padding: 31px 0px;
 }
 .cart-order-btn{  
-  padding: 11px 39px;  
-  color: #fff;
+  padding: 13px 27px;    
+  color: #fff;    
+  font-size: 16px;
 }
 .cart-order-btn:hover,
 .cart-order-btn:focus{  
@@ -381,5 +382,15 @@ iframe{
   padding: 4px 6px;
 }
 /* end cart */
+
+/* start about us*/
+.about-text-title{  
+  margin-bottom: 18px;
+}
+.about-us-text{  
+  font-size: 20px;  
+  margin-bottom: 18px;
+}
+/* end about us */
 
 

@@ -9,8 +9,8 @@
                         <div class="footer-widget">
                             <h3>{{ trans('app.Quik Links') }}</h3>
                             <ul>
-                                <li><a href="#">{{ trans('app.About Us') }}</a></li>
-                                <li><a href="#">{{ trans('app.Contact Us') }}</a></li>
+                                <li><a href="{{route('about_us')}}">{{ trans('app.About Us') }}</a></li>
+                                <li><a href="{{ route('contact_us')}}">{{ trans('app.Contact Us') }}</a></li>
                                 <li><a href="#">{{ trans('app.Food Festival') }}</a></li>
                                 <li><a href="#">{{ trans('app.All Cities') }}</a></li>
                                 <li><a href="#">{{ trans('app.Help & Support') }}</a></li>

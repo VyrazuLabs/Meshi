@@ -162,6 +162,11 @@ return [
     'Regular Purchase' => 'Regular Purchase',
     'Party Order' => 'Party Order',
     'Profile Edit' => 'Profile Edit',
+    'Corporate Info' => 'Corporate Info',
+    'Send Us Your Feedback' => 'Send Us Your Feedback',
+    'Submit Your Message' => 'Submit Your Message',
+    'Address' =>' Address',
+    'Phone' => 'Phone',
 
 
 ];

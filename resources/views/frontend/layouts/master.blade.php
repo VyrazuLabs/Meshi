@@ -29,6 +29,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places"></script>
 	  <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
 	  <script src="{{ url('frontend/js/goMap.js') }}"></script>
+
     <script src="{{ url('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('frontend/js/smoothscroll.min.js') }}"></script>
     <script src="{{ url('frontend/js/scrollup.min.js') }}"></script>

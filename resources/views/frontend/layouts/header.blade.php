@@ -44,9 +44,9 @@
 							<li><a href="#">Other Country</a></li>
 						</ul>								
 					</div> --><!-- language-dropdown -->
-					<div class="cart-box-list">
+					<!-- <div class="cart-box-list">
 						<a href="{{route('view_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">3</span></a>
-					</div>
+					</div> -->
 					<div class="language-box ">	
 						<i class="fa fa-language t-orange"></i>
 						@php 

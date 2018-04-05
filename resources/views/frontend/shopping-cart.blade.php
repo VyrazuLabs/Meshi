@@ -1,9 +1,7 @@
-
-
 @extends('frontend.layouts.master')
 
 @section('title')
-  Shopping Cart
+  {{ trans('app.Shopping cart feature') }}
 @endsection
 
 @section('add-meta')
@@ -11,8 +9,6 @@
 @endsection
 
 @section('content')
-
-
 	<section id="" class="clearfix page">
 		<div class="container">
 			<div class="faq-page">
@@ -26,8 +22,7 @@
 				</div>
 								
 				<div class="accordion">
-					<div class="panel-group" id="accordion">			
-
+					<div class="panel-group" id="accordion">	
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading active-faq">
 								<a data-toggle="collapse" data-parent="#accordion" href="#faq-one">
@@ -156,24 +151,7 @@
 			</div><!-- contaioner -->
 		</section><!-- something-sell -->
 	</section>
-	
-	
-
-   	<!--/Preset Style Chooser--> 
-	<div class="style-chooser">
-		<div class="style-chooser-inner">
-			<a href="#" class="toggler"><i class="fa fa-life-ring fa-spin"></i></a>
-			<h4>Presets</h4>
-			<ul class="preset-list clearfix">
-				<li class="preset1 active" data-preset="1"><a href="#" data-color="preset1"></a></li>
-				<li class="preset2" data-preset="2"><a href="#" data-color="preset2"></a></li>
-				<li class="preset3" data-preset="3"><a href="#" data-color="preset3"></a></li>        
-				<li class="preset4" data-preset="4"><a href="#" data-color="preset4"></a></li>
-			</ul>
-		</div>
-	</div>
-	<!--/End:Preset Style Chooser-->
-	@endsection
+@endsection
 
 @section('add-js')
 @endsection

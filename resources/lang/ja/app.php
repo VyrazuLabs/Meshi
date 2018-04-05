@@ -151,8 +151,12 @@ return [
 	'Profile Edit' => 'プロフィールの編集',
     'Preparing' => '準備中',
     'Regular Purchase' => '定期配送',
-    'Party Order' => 'パーティ用のご注文'
-
+    'Party Order' => 'パーティ用のご注文',
+    'Corporate Info' => '企業情報',
+    'Send Us Your Feedback' => 'あなたのフィードバックをお送りください',
+    'Submit Your Message' => 'メッセージを送信する',
+    'Address' => '住所',
+    'Phone' => '電話',
 
 ];
 

@@ -34,7 +34,9 @@ Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], funct
 	Route::get('/', array('uses' => 'FrontendController@index'));
 	Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
 	Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
-	Route::get('/shopping cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
+	Route::get('/shopping-cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
+	Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
+	Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
 	
 	Route::group( ['prefix' => 'food'], function() {
 		Route::group( ['namespace' => 'Food'], function() {
