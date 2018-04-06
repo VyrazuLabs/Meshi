@@ -7,28 +7,37 @@ use App\Http\Controllers\Controller;
 use Session;
 use Validator;
 use App\Models\Feedback\Feedback;
+use Mail;
 
 class FeedbackController extends Controller
 {
-    /* send */
-    public function sendFeedback(Request $request) {
-        $input = $request->input();
-        $validator = $this->validator($input);
+  /* send */
+  public function sendFeedback(Request $request) {
+      $input = $request->input();
+      $validator = $this->validator($input);
 
-        if($validator->fails()) {
-            Session::flash('error', "Please Fill The Form Properly.");
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        else {
-            Feedback::create(['feedback_id' => uniqid(),
-                              'name' => $input['name'],
-                              'email' => $input['email'],
-                              'subject' => $input['subject'],
-                              'message' => $input['message']
-                            ]);
-            Session::flash('success','Send Successfully.');
-        }
-        return back();
+      if($validator->fails()) {
+          Session::flash('error', "Please Fill The Form Properly.");
+          return redirect()->back()->withErrors($validator)->withInput();
+      }
+      else {
+        Feedback::create(['feedback_id' => uniqid(),
+                          'name' => $input['name'],
+                          'email' => $input['email'],
+                          'subject' => $input['subject'],
+                          'message' => $input['message']
+                        ]);
+
+        //****** CODE FOR MAIL SENDING ******//
+        $email = 'contact@sharemeshi.com'; //this email is for feedback section
+        // $email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+        Mail::send('feedback.feedback-mail',['subject'=>$input['subject'],'messages' => $input['message'], 'name' => $input['name'], 'sender' => $input['email']], function($message) use ($input,$email) {
+          $message->to($email)
+                  ->subject('FEEDBACK');
+        });
+        Session::flash('success','Send Successfully.');
+      }
+      return back();
     }
 
 

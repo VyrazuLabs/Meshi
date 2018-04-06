@@ -36,7 +36,7 @@
 								<div class="item active">
 									<div class="carousel-image">
 										<!-- image-wrapper -->
-										<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive ">
+										<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
 											
 									</div>
 								</div><!-- item -->
@@ -45,7 +45,7 @@
 									<div class="item">
 										<div class="carousel-image">
 											<!-- image-wrapper -->
-											<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive">
+											<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
 												
 										</div>
 									</div><!-- item -->

@@ -1763,7 +1763,7 @@ transform: scale(1.05) rotate(2deg);
 }
 
 #product-carousel .carousel-control {
-	opacity:0;
+	/*opacity:0;*/
 }
 
 #product-carousel:hover .carousel-control {
