@@ -30,45 +30,60 @@ Route::group( ['namespace' => 'Language'], function() {
 });
 
 
-Route::group( [ 'namespace' => 'Frontend', 'middleware' => ['Language'] ], function() {
-	Route::get('/', array('uses' => 'FrontendController@index'));
-	Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
-	Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
-	Route::get('/shopping-cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
-	Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
-	Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
-	
-	Route::group( ['prefix' => 'food'], function() {
-		Route::group( ['namespace' => 'Food'], function() {
-			Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
-			Route::group( [ 'middleware' => 'SignInRouteAccessUser' ], function() {
-				Route::get('/create', 'FoodController@create')->name('food_create');
-				Route::post('/save', 'FoodController@save')->name('save_food_item_user');
+Route::group( ['middleware' => ['Language'] ], function() {
+	Route::group( [ 'namespace' => 'Frontend'], function() {
+		Route::get('/', array('uses' => 'FrontendController@index'));
+		Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
+		Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
+		Route::get('/shopping-cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
+		Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
+		Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
+		
+		
+		Route::group( ['prefix' => 'food'], function() {
+			Route::group( ['namespace' => 'Food'], function() {
+				Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
+				Route::group( [ 'middleware' => 'SignInRouteAccessUser' ], function() {
+					Route::get('/create', 'FoodController@create')->name('food_create');
+					Route::post('/save', 'FoodController@save')->name('save_food_item_user');
+				});
+			});
+
+			Route::group( ['namespace' => 'Category'], function() {
+				Route::get('/categories', array('uses' => 'CategoryController@category'))->name('food_categories');
+				Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'))->name('food_all_categories');
 			});
 		});
-
-		Route::group( ['namespace' => 'Category'], function() {
-			Route::get('/categories', array('uses' => 'CategoryController@category'))->name('food_categories');
-			Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'))->name('food_all_categories');
-		});
 	});
+	Route::group( [ 'namespace' => 'Feedback'], function() {
+		Route::post('/send-feedback', array('uses' => 'FeedbackController@sendFeedback'))->name('send_feedback');
+	});
+
 });
 
-//ROUTES FOR AUTHENTICATED USERS
-Route::group( ['prefix' => 'user','namespace' => 'User','middleware' => ['Language']], function() {
-	Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
-	Route::group([ 'middleware' => 'UserAuth' ], function() {
-		Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+//ROUTES FOR USER SECTION
+Route::group( ['prefix' => 'user','middleware' => ['Language']], function() {
+
+	Route::group( ['namespace' => 'User'], function() {
+		Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
+
+		//ROUTES FOR AUTHENTICATED USERS
+		Route::group([ 'middleware' => 'UserAuth' ], function() {
+			Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+		});
+		// ROUTES FOR CART SECTION //
+			Route::group( ['namespace' => 'Cart'], function() {
+				Route::get('/cart','CartController@viewCart')->name('view_cart');
+				Route::get('/empty-cart','CartController@emptyCart')->name('empty_cart');
+			});
+		Route::get('/register','RegistrationController@register');
+		Route::post('/register','RegistrationController@save')->name('registration');
 	});
 
-	// ROUTES FOR CART SECTION //
-	Route::group( ['namespace' => 'Cart'], function() {
-		Route::get('/cart','CartController@viewCart')->name('view_cart');
+	// ROUTES FOR ORDER SECTION //
+	Route::group( ['namespace' => 'Order'], function() {
+		Route::get('/order-details','OrderController@orderDetails')->name('order_details');
 	});
-
-
-	Route::get('/register','RegistrationController@register');
-	Route::post('/register','RegistrationController@save')->name('registration');
 });
 
 

@@ -9,6 +9,7 @@ use App\Models\Category\Category;
 use App\Models\ProfileInformation;
 use Auth;
 
+
 class FrontendController extends Controller
 {
     public function index() {
@@ -120,7 +121,6 @@ class FrontendController extends Controller
 
     	return view('frontend.index',['tomorrow_food_items'=>$tomorrow_food_items,'day_after_tomorrow_food_items'=>$day_after_tomorrow_food_items,'next_day_of_tomorrow_food_items'=>$next_day_of_tomorrow_food_items,'next_day_of_tomorrow'=>$next_day_of_tomorrow]);
     }
-
     public function privacy() {
         return view('frontend.privacy-policy');
     }
@@ -130,14 +130,13 @@ class FrontendController extends Controller
     public function cart() {
         return view('frontend.shopping-cart');
     }
-
     public function aboutUs() {
         return view('frontend.about-us');
     }
-
     public function contactUs() {
         return view('frontend.contact-us');
     }
+    
 
 
 

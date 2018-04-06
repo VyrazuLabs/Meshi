@@ -167,6 +167,9 @@ return [
     'Submit Your Message' => 'Submit Your Message',
     'Address' =>' Address',
     'Phone' => 'Phone',
+    'Order Details' => 'Order Details',
+    'Subject' => 'Subject',
+    'Message' => 'Message',
 
 
 ];

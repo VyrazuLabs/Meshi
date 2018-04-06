@@ -157,6 +157,9 @@ return [
     'Submit Your Message' => 'メッセージを送信する',
     'Address' => '住所',
     'Phone' => '電話',
+    'Order Details' => '注文詳細',
+    'Subject' => '件名',
+    'Message' => 'メッセージ',
 
 ];
 

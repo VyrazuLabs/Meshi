@@ -30,7 +30,7 @@
 							$choose_type = trans('app.Select Language');
 							$Japanese = trans('app.Japanese');
 						@endphp
-							<li><a href="/terms">{{ trans('app.Terms & conditions') }}</a></li>
+							<li><a href="{{ url('/terms') }}">{{ trans('app.Terms & conditions') }}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -47,6 +47,9 @@
 					</div> --><!-- language-dropdown -->
 					<!-- <div class="cart-box-list">
 						<a href="{{route('view_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">3</span></a>
+					</div>
+					<div class="cart-box-list">
+						<a href="{{route('empty_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">0</span></a>
 					</div> -->
 					<div class="language-box ">	
 						<i class="fa fa-language t-orange"></i>

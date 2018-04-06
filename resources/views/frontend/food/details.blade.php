@@ -20,7 +20,6 @@
 			</ol><!-- breadcrumb -->						
 			<h2 class="title t-orange">{{ $food_details->category_name }}</h2>
 				@endif
-
 		</div>
 		
 
@@ -37,7 +36,7 @@
 								<div class="item active">
 									<div class="carousel-image">
 										<!-- image-wrapper -->
-										<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive">
+										<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive ">
 											
 									</div>
 								</div><!-- item -->

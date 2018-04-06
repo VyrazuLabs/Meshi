@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers\Feedback;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Session;
+use Validator;
+use App\Models\Feedback\Feedback;
+
+class FeedbackController extends Controller
+{
+    /* send */
+    public function sendFeedback(Request $request) {
+        $input = $request->input();
+        $validator = $this->validator($input);
+
+        if($validator->fails()) {
+            Session::flash('error', "Please Fill The Form Properly.");
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        else {
+            Feedback::create(['feedback_id' => uniqid(),
+                              'name' => $input['name'],
+                              'email' => $input['email'],
+                              'subject' => $input['subject'],
+                              'message' => $input['message']
+                            ]);
+            Session::flash('success','Send Successfully.');
+        }
+        return back();
+    }
+
+
+    //VALIDATOR FOR FEEDBACK CREATION
+    protected function validator($request) {
+        return Validator::make($request,[
+                                      'name' => 'required',
+                                      'email' => 'required|email',
+                                      'subject' => 'required',
+                                      'message' => 'required'
+                                    ]);
+    }
+
+    public function lists() {
+    	$feedbacks = Feedback::orderBy('created_at','DESC')->get();
+    	return view('feedback.list-feedback',['feedbacks'=>$feedbacks]);
+    }
+
+    public function view($feedback_id = null) {
+    	$feedback = Feedback::where('feedback_id',$feedback_id)->first();
+    	return view('feedback.view-feedback',['feedback'=>$feedback]);
+    }
+}

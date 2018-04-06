@@ -77,7 +77,7 @@
 						</div>
 					</div>
 					<div class="col-lg-12 col-xs-12 p-0 text-center cart-order-btn-div">
-						<button type="button" class="btn back-orange cart-order-btn">Order Place</button>
+						<a href="{{route('order_details')}}" class="btn back-orange cart-order-btn">Order Place</a>
 					</div>
 				</div>
 			</div>
