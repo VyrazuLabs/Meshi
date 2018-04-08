@@ -9,7 +9,7 @@ return [
     'Description of Food Delivery' => 'ご近所さん(メシクリエータ)にご自宅に届けてもらうことや、指定場所で受け取ることも可能です',
     'Community' => '地域の方とのふれあいを',
     'Description of Community' => 'ご家庭料理を楽むことを通して、身近な地域の方々とのふれあいが楽しめます',
-	'Quik Links' => '',
+	'Quik Links' => 'リンク',
 	'Tomorrow' => '明日',
 	'Day After Tomorrow' => '明後日',
 	'Foods' => 'カテゴリー',
