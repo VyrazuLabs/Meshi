@@ -2,7 +2,7 @@
 
 return [
 	'HOME' => 'ホーム',
-	'Sign In' => 'サインイン',
+	'Sign In' => 'ログイン',
 	'Handmade Foods' => 'おいしい家庭料理',
     'Description of Handmade Foods' => 'ご近所さん(メシクリエータ)が作る栄養満点のご家庭の味をお手軽に味わえます',
     'Food Delivery' => 'ご自宅やご指定の場所にお届け',
@@ -144,7 +144,8 @@ return [
 	'All' => 'すべて',
 	'Bestselling' => 'ベストセラー',
 	'Privacy Policy' => '個人情報保護方針',
-	'Terms & conditions' => 'Q&A',
+	'Terms & conditions' => '利用規約',
+    'FAQ' => 'Q&A',
 	'Shopping cart feature' => 'ショッピングカート機能',
 	'Upload Background Image' => '背景画像をアップロードする',
 	'Commission' => '手数料',

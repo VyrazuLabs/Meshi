@@ -30,7 +30,7 @@
 							$choose_type = trans('app.Select Language');
 							$Japanese = trans('app.Japanese');
 						@endphp
-							<li><a href="{{ url('/terms') }}">{{ trans('app.Terms & conditions') }}</a></li>
+							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
 					</div>
 				</div>
