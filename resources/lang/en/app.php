@@ -155,6 +155,7 @@ return [
 	'Bestselling' => 'Bestselling',
 	'Privacy Policy' => 'Privacy Policy',
 	'Terms & conditions' => 'Terms & conditions',
+    'FAQ' => 'FAQ',
 	'Shopping cart feature' => 'Shopping cart feature',
 	'Upload Background Image' => 'Upload Background Image',
 	'Commission' => 'Commission',
