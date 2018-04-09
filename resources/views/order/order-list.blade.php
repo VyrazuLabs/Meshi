@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-  Category List
+  Order List
 @endsection
 
 @section('add-meta')

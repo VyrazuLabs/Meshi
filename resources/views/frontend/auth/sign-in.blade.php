@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-	ShareMeshi
+	{{ trans('app.sharemeshi') }}
 @endsection
 
 @section('add-meta')
