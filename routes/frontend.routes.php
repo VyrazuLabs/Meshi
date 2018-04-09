@@ -32,6 +32,7 @@ Route::group( ['namespace' => 'Language'], function() {
 
 Route::group( ['middleware' => ['Language'] ], function() {
 	Route::group( [ 'namespace' => 'Frontend'], function() {
+		//ROUTES FOR CMS PAGES
 		Route::get('/', array('uses' => 'FrontendController@index'));
 		Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
 		Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
@@ -40,7 +41,7 @@ Route::group( ['middleware' => ['Language'] ], function() {
 		Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
 		Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
 		
-		
+		//ROUTES FOR FOOD ITEM SECTION
 		Route::group( ['prefix' => 'food'], function() {
 			Route::group( ['namespace' => 'Food'], function() {
 				Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
@@ -49,13 +50,14 @@ Route::group( ['middleware' => ['Language'] ], function() {
 					Route::post('/save', 'FoodController@save')->name('save_food_item_user');
 				});
 			});
-
+			//ROUTES FOR FOOD CATEGORY SECTION
 			Route::group( ['namespace' => 'Category'], function() {
 				Route::get('/categories', array('uses' => 'CategoryController@category'))->name('food_categories');
 				Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'))->name('food_all_categories');
 			});
 		});
 	});
+	//ROUTES FOR FEEDBACK SECTION
 	Route::group( [ 'namespace' => 'Feedback'], function() {
 		Route::post('/send-feedback', array('uses' => 'FeedbackController@sendFeedback'))->name('send_feedback');
 	});
