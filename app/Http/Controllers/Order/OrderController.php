@@ -59,7 +59,9 @@ class OrderController extends Controller
     // 	return view('order.make-order-with-paypal',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
     // }
 
-
+  	public function orderDetails() {
+  		return view('order.order-details');
+  	}
 
 
 

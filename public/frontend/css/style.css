@@ -4,6 +4,9 @@
 .mt-0{
 	margin-top: 0;
 }
+.m-auto{
+  margin: auto;
+}
 .t-black{
 	color: #000;
 }
@@ -393,4 +396,16 @@ iframe{
 }
 /* end about us */
 
-
+/* start empty cart */
+.empty-cart-img{  
+  margin-bottom: 27px;
+}
+.empty-cart-text{  
+  font-size: 1.5em;
+}
+/* end cart empty*/
+.carousel-details-imgs{
+  max-height: 350px;
+  width: 100%;
+  object-fit: contain;
+}

@@ -2,14 +2,14 @@
 
 return [
 	'HOME' => 'ホーム',
-	'Sign In' => 'サインイン',
+	'Sign In' => 'ログイン',
 	'Handmade Foods' => 'おいしい家庭料理',
     'Description of Handmade Foods' => 'ご近所さん(メシクリエータ)が作る栄養満点のご家庭の味をお手軽に味わえます',
     'Food Delivery' => 'ご自宅やご指定の場所にお届け',
     'Description of Food Delivery' => 'ご近所さん(メシクリエータ)にご自宅に届けてもらうことや、指定場所で受け取ることも可能です',
     'Community' => '地域の方とのふれあいを',
     'Description of Community' => 'ご家庭料理を楽むことを通して、身近な地域の方々とのふれあいが楽しめます',
-	'Quik Links' => '',
+	'Quik Links' => 'リンク',
 	'Tomorrow' => '明日',
 	'Day After Tomorrow' => '明後日',
 	'Foods' => 'カテゴリー',
@@ -144,7 +144,8 @@ return [
 	'All' => 'すべて',
 	'Bestselling' => 'ベストセラー',
 	'Privacy Policy' => '個人情報保護方針',
-	'Terms & conditions' => 'Q&A',
+	'Terms & conditions' => '利用規約',
+    'FAQ' => 'Q&A',
 	'Shopping cart feature' => 'ショッピングカート機能',
 	'Upload Background Image' => '背景画像をアップロードする',
 	'Commission' => '手数料',
@@ -157,6 +158,9 @@ return [
     'Submit Your Message' => 'メッセージを送信する',
     'Address' => '住所',
     'Phone' => '電話',
+    'Order Details' => '注文詳細',
+    'Subject' => '件名',
+    'Message' => 'メッセージ',
 
 ];
 

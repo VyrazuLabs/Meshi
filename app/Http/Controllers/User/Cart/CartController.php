@@ -10,4 +10,7 @@ class CartController extends Controller
     public function viewCart() {
     	return view('cart.cart');
     }
+    public function emptyCart() {
+    	return view('cart.empty-cart');
+    }
 }

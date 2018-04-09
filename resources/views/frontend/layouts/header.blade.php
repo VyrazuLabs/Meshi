@@ -14,7 +14,6 @@
 					<a class="navbar-brand" href="{{ url('/')}}"><img class="img-responsive" src="{{ url('frontend/images/Logo.png') }}" alt="Logo"></a>
 				</div>
 				<!-- /navbar-header -->
-				
 				<div class="navbar-left">
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
@@ -25,12 +24,9 @@
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
 							@endif
-							<li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li>
-						@php
-							$choose_type = trans('app.Select Language');
-							$Japanese = trans('app.Japanese');
-						@endphp
-							<li><a href="/terms">{{ trans('app.Terms & conditions') }}</a></li>
+							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
+						
+							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -47,17 +43,11 @@
 					</div> --><!-- language-dropdown -->
 					<!-- <div class="cart-box-list">
 						<a href="{{route('view_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">3</span></a>
-					</div> -->
-					<div class="language-box ">	
-						<i class="fa fa-language t-orange"></i>
-						@php 
-							$langName =[];
-							if(Session::has('lang_name')) {
-								$langName = Session::get('lang_name');
-							}
-						@endphp
-						{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose language-select','placeholder' => "$choose_type", 'id'=>'languageSwitcher']) }}
 					</div>
+					<div class="cart-box-list">
+						<a href="{{route('empty_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">0</span></a>
+					</div> -->
+
 					<!-- sign-in -->
 					<ul class="sign-in">
 						@if(Auth::User())
@@ -65,8 +55,22 @@
 			            	<li><a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
 						@else
 							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
+							<li><a href="{{ url('/sign-up') }}"> {{ trans('app.Sign Up here') }} </a></li>
 						@endif
-					</ul><!-- sign-in -->					
+					</ul><!-- sign-in -->
+
+					<div class="language-box ">
+						<i class="fa fa-language t-orange"></i>
+						@php
+							$choose_type = trans('app.Select Language');
+							$japanese = trans('app.Japanese');
+							$langName =[];
+							if(Session::has('lang_name')) {
+								$langName = Session::get('lang_name');
+							}
+						@endphp
+						{{ Form::select('language', ['ja' => $japanese,'en' => 'English'], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
+					</div>
 				</div>
 				<!-- nav-right -->
 			</div><!-- container -->
