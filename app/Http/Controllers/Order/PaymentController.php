@@ -29,6 +29,8 @@ use PayPal\Api\Transaction;
 use URL;
 use Redirect;
 use Illuminate\Support\Facades\Input;
+use App\Models\User;
+use Mail;
 
 
 class PaymentController extends Controller
@@ -340,6 +342,28 @@ class PaymentController extends Controller
 
             \Session::put('success','Payment success');
             Session::flash('success','Payment success');
+
+            //****** CODE FOR MAIL SENDING ******//
+            $buyer = User::where('user_id',Auth::User()->user_id)->first()->name;
+            $buyerEmail = User::where('user_id',Auth::User()->user_id)->first()->email;
+            $orderNumber = $order->order_number;
+            $price = $order->total_price;
+            $bookingDate = $order->date_of_order;
+
+	        $email = 'purchased@sharemeshi.com'; //this email is for purchase section
+	        //$email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+	        Mail::send('order.puchase-item-mail',['buyer'=>$buyer,'orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
+	          $message->to($email)
+	                  ->subject('Payment Successful');
+	        });
+
+	        $email = $buyerEmail; //this email is for purchase section
+	        //$email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+	        Mail::send('order.payment-succesful',['orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
+	          $message->to($email)
+	                  ->subject('Payment Successful');
+	        });
+
             return redirect('/');
             //return Redirect::route('driver_bidding_list', ['move_id' => $move_id]);
         }

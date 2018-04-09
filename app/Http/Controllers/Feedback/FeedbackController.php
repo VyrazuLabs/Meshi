@@ -11,14 +11,14 @@ use Mail;
 
 class FeedbackController extends Controller
 {
-  /* send */
+  /* send feedback */
   public function sendFeedback(Request $request) {
       $input = $request->input();
       $validator = $this->validator($input);
 
       if($validator->fails()) {
-          Session::flash('error', "Please Fill The Form Properly.");
-          return redirect()->back()->withErrors($validator)->withInput();
+        Session::flash('error', "Please Fill The Form Properly.");
+        return redirect()->back()->withErrors($validator)->withInput();
       }
       else {
         Feedback::create(['feedback_id' => uniqid(),
