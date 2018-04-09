@@ -14,7 +14,6 @@
 					<a class="navbar-brand" href="{{ url('/')}}"><img class="img-responsive" src="{{ url('frontend/images/Logo.png') }}" alt="Logo"></a>
 				</div>
 				<!-- /navbar-header -->
-				
 				<div class="navbar-left">
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
@@ -25,11 +24,8 @@
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
 							@endif
-{{--							<li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li>--}}
-						@php
-							$choose_type = trans('app.Select Language');
-							$Japanese = trans('app.Japanese');
-						@endphp
+							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
+						
 							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
 					</div>
@@ -66,12 +62,14 @@
 					<div class="language-box ">
 						<i class="fa fa-language t-orange"></i>
 						@php
+							$choose_type = trans('app.Select Language');
+							$japanese = trans('app.Japanese');
 							$langName =[];
 							if(Session::has('lang_name')) {
 								$langName = Session::get('lang_name');
 							}
 						@endphp
-						{{ Form::select('language', ['en' => 'English', 'ja' => $Japanese], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
+						{{ Form::select('language', ['ja' => $japanese,'en' => 'English'], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
 					</div>
 				</div>
 				<!-- nav-right -->
