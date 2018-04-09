@@ -26,7 +26,19 @@
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
 	  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places"></script>
+    @php
+      $langName =[];
+      if(Session::has('lang_name')) {
+        $langName = Session::get('lang_name');
+      }
+    @endphp
+    @if($langName == 'ja')
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=ja"></script>
+    @elseif($langName == 'en')
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=en"></script>
+    @else
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=ja"></script>
+    @endif
 	  <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
 	  <script src="{{ url('frontend/js/goMap.js') }}"></script>
 
