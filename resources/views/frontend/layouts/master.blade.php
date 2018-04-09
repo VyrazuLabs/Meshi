@@ -26,7 +26,7 @@
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
 	  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=ja"></script>
 	  <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
 	  <script src="{{ url('frontend/js/goMap.js') }}"></script>
 
