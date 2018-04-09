@@ -22,7 +22,6 @@ class CreateProfileInformation extends Migration
             $table->string('long');
             $table->longText('description');
             $table->string('image');
-            $table->string('cover_image')->nullable();
             $table->string('video_link')->nullable();
             $table->integer('age');
             $table->string('created_by')->nullable();
