@@ -376,12 +376,7 @@ textarea {
 /* ==========================================================================
  	Main
  ========================================================================== */
-#main {
- 	background-image: url(../images/bg/main.png);
- 	background-repeat: no-repeat;
- 	background-position: top center;
- 	background-color: #f7f7f7;
-}
+
 
 #main.home-default {
 	padding-bottom:0;

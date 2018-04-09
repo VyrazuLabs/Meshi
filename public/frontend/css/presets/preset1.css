@@ -161,10 +161,6 @@ a.verified i,
 	background-color: rgba(0,0,0,0.50);
 }
 
-#main {
- 	background-image: url(../../images/bg/main.png);
-}
-
 #download.parallax-section:before {
 	background: -moz-linear-gradient(left,  rgba(55,180,78,0.9) 0%, rgba(49,178,91,0.9) 24%, rgba(27,171,137,0.96) 77%, rgba(21,169,151,0.94) 100%); 
 	background: -webkit-linear-gradient(left,  rgba(55,180,78,0.9) 0%,rgba(49,178,91,0.9) 24%,rgba(27,171,137,0.96) 77%,rgba(21,169,151,0.94) 100%);

@@ -127,6 +127,9 @@ class FrontendController extends Controller
     public function terms() {
         return view('frontend.Terms & conditions');
     }
+    public function faq() {
+        return view('frontend.faq');
+    }
     public function cart() {
         return view('frontend.shopping-cart');
     }

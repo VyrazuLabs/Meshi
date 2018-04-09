@@ -162,9 +162,6 @@ a.verified i,
 	background-color:rgba(242, 101, 34, 0.4);
 }
 
-#main {
- 	background-image: url(../../images/bg/main1.png);
-}
 
 #download.parallax-section:before, 
 .home-one .parallax-section:before {
