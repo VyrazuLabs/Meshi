@@ -179,12 +179,15 @@ class FoodItemController extends Controller
 
     public function edit($food_item_id=null) {
     	$food_images = '';
+    	$time_of_availability = '';
     	$category_id = Category::where('status',1)->pluck('category_name','category_id');
     	$offered_by = User::where('type',1)->pluck('name','user_id');
     	$food_items = FoodItem::where('food_item_id',$food_item_id)->first();
 
 		//CONVERTING DATE FORMAT
-    	$food_items->date_of_availability = date('d-m-Y', strtotime($food_items->date_of_availability));
+    	if(!empty($food_items->date_of_availability)) {
+    		$food_items->date_of_availability = date('d-m-Y', strtotime($food_items->date_of_availability));
+    	}
 
     	if(!empty($food_items->food_images)) {
     		//getting the food images
@@ -193,8 +196,10 @@ class FoodItemController extends Controller
     	}
 
     	//UNSERIALIZE TIME SLOT HERE
-	    $time_of_availability = unserialize($food_items->time_of_availability);
-	    $time_of_availability = array_filter($time_of_availability); 
+    	if(!empty($food_items->time_of_availability)) {
+	    	$time_of_availability = unserialize($food_items->time_of_availability);
+	    	$time_of_availability = array_filter($time_of_availability); 
+	    }
 
     	return view('food.create-food-item',['form_type' => 'edit','food_items'=>$food_items,'category_id'=>$category_id,'offered_by'=>$offered_by,'food_images'=>$food_images,'time_of_availability'=>$time_of_availability]);
     }
