@@ -109,6 +109,7 @@
 									</span></p>
 									<div class="price-line"></div>
 									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>
+									<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
 								</div>
 								<!-- price -->
 								<!-- contact-with -->
