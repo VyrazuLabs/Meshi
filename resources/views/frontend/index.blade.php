@@ -350,10 +350,12 @@
                 latitude: 35.5625,
                 longitude: 139.7161,
 		        zoom: 15,
-		        scaleControl: true,
-		        scrollwheel: false,
-				//        group: 'category',
-		        markers: [
+		        scaleControl: false,
+                zoomControl: false,
+                mapTypeControl: false,
+                navigationControl: false,
+                disableDoubleClickZoom: true,
+                markers: [
                     {latitude: 35.5625, longitude: 139.7161, icon: '' + url + '/mapicon/character.png'},
                     {latitude: 35.55416, longitude: 139.71254, icon: '' + url + '/mapicon/icon1.png'},
                     {latitude: 35.55875, longitude: 139.72415, icon: '' + url + '/mapicon/character.png'},
@@ -375,79 +377,83 @@
 
 	    (function(){
 
-	        var map;
-
-	        map = new GMaps({
-	            el: '#gmap',
-	            lat: 48.8612228,
-	            lng: 2.313042,
-	            scrollwheel:false,
-	            zoom: 6,
-	            zoomControl : true,
-	            panControl : true,
-	            streetViewControl : true,
-	            mapTypeControl: false,
-	            overviewMapControl: true,
-	            clickable: false
-	        });
-
-	        var image = '';
-	        map.addMarker({
-	            lat: 48.8612228,
-	            lng: 2.313042,
-	            icon: image,
-	            animation: google.maps.Animation.DROP,
-	            verticalAlign: 'bottom',
-	            horizontalAlign: 'center',
-	            backgroundColor: '#d3cfcf',
-	        });
-
-
-	        var styles = [ 
-
-	        {
-	            "featureType": "road",
-	            "stylers": [
-	            { "color": "#969696" }
-	            ]
-	        },{
-	            "featureType": "water",
-	            "stylers": [
-	            { "color": "#cecece" }
-	            ]
-	        },{
-	            "featureType": "landscape",
-	            "stylers": [
-	            { "color": "#efefef" }
-	            ]
-	        },{
-	            "elementType": "labels.text.fill",
-	            "stylers": [
-	            { "color": "#555555" }
-	            ]
-	        },{
-	            "featureType": "poi",
-	            "stylers": [
-	            { "color": "#cfcfcf" }
-	            ]
-	        },{
-	            "elementType": "labels.text",
-	            "stylers": [
-	            { "saturation": 1 },
-	            { "weight": 0.1 },
-	            { "color": "#848484" }
-	            ]
-	        }
-
-	        ];
-
-	        map.addStyle({
-	            styledMapName:"Styled Map",
-	            styles: styles,
-	            mapTypeId: "map_style"  
-	        });
-
-	        map.setStyle("map_style");
+            // var map;
+            //
+            // map = new GMaps({
+	         //    el: '#gmap',
+	         //    lat: 48.8612228,
+	         //    lng: 2.313042,
+	         //    scrollwheel:false,
+	         //    zoom: 60,
+	         //    zoomControl : false,
+	         //    panControl : true,
+	         //    streetViewControl : true,
+	         //    mapTypeControl: false,
+	         //    overviewMapControl: true,
+	         //    clickable: false
+            // });
+            //
+            // var image = '';
+            // map.addMarker({
+	         //    lat: 48.8612228,
+	         //    lng: 2.313042,
+	         //    icon: image,
+	         //    animation: google.maps.Animation.DROP,
+	         //    verticalAlign: 'bottom',
+	         //    horizontalAlign: 'center',
+	         //    backgroundColor: '#d3cfcf',
+            // });
+            //
+            //
+            // var styles = [
+            //
+            // {
+	         //    "featureType": "road",
+	         //    "stylers": [
+	         //    { "color": "#969696" }
+	         //    ]
+            // },{
+	         //    "featureType": "water",
+	         //    "stylers": [
+	         //    { "color": "#cecece" }
+	         //    ]
+            // },{
+	         //    "featureType": "landscape",
+	         //    "stylers": [
+	         //    { "color": "#efefef" }
+	         //    ]
+            // },{
+	         //    "elementType": "labels.text.fill",
+	         //    "stylers": [
+	         //    { "color": "#555555" }
+	         //    ]
+            // },{
+	         //    "featureType": "poi",
+	         //    "stylers": [
+	         //    { "color": "#cfcfcf" }
+	         //    ]
+            // },{
+	         //    "elementType": "labels.text",
+	         //    "stylers": [
+	         //    { "saturation": 1 },
+	         //    { "weight": 0.1 },
+	         //    { "color": "#848484" }
+	         //    ]
+            // }
+            //
+            // ];
+            //
+            // map.addStyle({
+	         //    styledMapName:"Styled Map",
+	         //    styles: styles,
+	         //    mapTypeId: "map_style"
+            // });
+            //
+            // map.setStyle("map_style");
+            // console.log(map.getMaximumResolution());
+            // map.getMinimumResolution = function(){return 15;};
+            // map.getMaximumResolution = function(){return 15;};
+            // console.log(map);
 	    }()); 
 	</script>
 @endsection
