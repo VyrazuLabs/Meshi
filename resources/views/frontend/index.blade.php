@@ -355,15 +355,15 @@
 				//        group: 'category',
 		        markers: [
                     {latitude: 35.5625, longitude: 139.7161, icon: '' + url + '/mapicon/character.png'},
-                    {latitude: 35.55519, longitude: 139.71788, icon: '' + url + '/mapicon/icon1.png'},
+                    {latitude: 35.55416, longitude: 139.71254, icon: '' + url + '/mapicon/icon1.png'},
                     {latitude: 35.55875, longitude: 139.72415, icon: '' + url + '/mapicon/character.png'},
                     {latitude: 35.5642, longitude: 138.7161, icon: '' + url + '/mapicon/character.png'},
                     {latitude: 35.56595, longitude: 139.70959, icon: '' + url + '/mapicon/character.png'},
-                    {latitude: 35.56874, longitude: 139.70102, icon: '' + url + '/mapicon/icon3.png'},
-                    {latitude: 35.57477, longitude: 139.69856, icon: '' + url + '/mapicon/character.png'},
+                    {latitude: 35.56604, longitude: 139.69665, icon: '' + url + '/mapicon/icon3.png'},
+                    {latitude: 35.57477, longitude: 139.69635, icon: '' + url + '/mapicon/character.png'},
                     {latitude: 35.56913, longitude: 139.68733, icon: '' + url + '/mapicon/character.png'},
                     {latitude: 35.58555, longitude: 139.70637, icon: '' + url + '/mapicon/character.png'},
-                    {latitude: 35.55215, longitude: 139.74082, icon: '' + url + '/mapicon/icon2.png'},
+                    {latitude: 35.55389, longitude: 139.73061, icon: '' + url + '/mapicon/icon2.png'},
                     {latitude: 35.56317, longitude: 139.7053, icon: '' + url + '/mapicon/character.png'}
                 ]
 		    });
