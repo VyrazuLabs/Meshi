@@ -55,7 +55,7 @@
 			            	<li><a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
 						@else
 							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
-							<li><a href="{{ url('/sign-up') }}"> {{ trans('app.Sign Up here') }} </a></li>
+							<li><a href="{{ url('/user/register') }}"> {{ trans('app.Sign Up here') }} </a></li>
 						@endif
 					</ul><!-- sign-in -->
 

@@ -20,27 +20,9 @@
 				<h2 class="title d-inline-block t-orange">{{ trans('app.Contact Us') }}</h2>
 			</div>
 
-			<!-- gmap -->
-			<div id="gmap"></div>
 			<div class="corporate-info">
 				<div class="row">
-					<!-- contact-info -->
-					<div class="col-sm-4">
-						<div class="contact-info">
-							<h2>{{ trans('app.Corporate Info') }}</h2>
-							<address>
-								<p><strong>{{ trans('app.Address') }}: </strong>1234 Street Name, City Name, Country</p>
-								<p><strong>{{ trans('app.Phone') }}:</strong> <a href="#">(123) 456-7890</a></p>
-								<p><strong>{{ trans('app.Email') }}: </strong><a href="#">info@company.com</a></p>
-							</address>
-							<ul class="social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div><!-- contact-info -->
-					@php 
+					@php
 	                	$name = trans('app.Name'); 
 	                	$emailId = trans('app.Email'); 
 	                	$subject = trans('app.Subject');
@@ -48,7 +30,7 @@
 	                @endphp
 
 					<!-- feedback -->
-					<div class="col-sm-8">
+					<div class="col-sm-12">
 						<div class="feedback">
 							<h2>{{ trans('app.Send Us Your Feedback') }}</h2>
 							{!! Form::open(array('url' => route('send_feedback'),'class' => 'contact-form')) !!}
