@@ -111,7 +111,12 @@
 				                  @endif
 				                </div>
 				                <div class="form-group form-custom-group">
-				                  <label>{{ trans('app.User Type') }}<span>*</span></label><br/>
+				                  <label>{{ trans('app.User Type') }}<span>*</span></label>
+				                  <span id="typeCreator" class="t-orange" data-toggle="tooltip" title="Tooltip for food creator" style="display: none;">
+				                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+				                  </span>
+				                  <span id="typeEater" data-toggle="tooltip" title="Tooltip for food eater" style="display: none;"><i class="fa fa-question-circle" aria-hidden="true"></i>
+				                  </span><br/>
 									<span>※ メシクリエーターとして登録しても、他のメシクリエーターからの購入が可能です。</span>
 
 				                  {{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
@@ -262,6 +267,7 @@
 
 				                <div class="form-group form-custom-group">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
+				                  	<span class="t-orange" data-toggle="tooltip" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry."><i class="fa fa-question-circle" aria-hidden="true"></i></span>
 				                  	{!! Form::textarea('description', null, 
 				                          array('class'=>'form-control','rows'=>'5')) !!}
 				                  	@if ($errors->has('description'))
@@ -458,13 +464,18 @@
 	    	$('.buyer').hide();
 	    	$('.food-video-link').show();
 	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
+	    	$('#typeCreator').show();
+	    	$('#typeEater').hide();
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
 	  		$('.seller').hide();
 	    	$('.food-video-link').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
+	    	$('#typeCreator').hide();
+	    	$('#typeEater').show();
 	  	}
+
 	}
 	$(document).ready(function(){		
 		initAutocomplete('addressbox');
@@ -478,5 +489,11 @@
 			(document.getElementById(selector)),	      
 			{types: ['geocode']});	
 	}
+
+
+	// code for tool tip
+	$(document).ready(function(){
+  		$('[data-toggle="tooltip"]').tooltip();
+	});
 </script>
 @endsection
