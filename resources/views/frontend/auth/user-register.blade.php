@@ -264,12 +264,14 @@
 
 				                <div class="form-group form-custom-group creator-description">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
-									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>　　はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>・衛生面について注意していること<br/>・イーターさんへのメッセージ・届けたい想い" style="display: none; width: 300px">
+									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>　　はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！<br/>・衛生面について注意していること<br/>包丁やまな板などを使用後アルコールで拭いています。
+料理前に、必ず手の消毒を行なっています。<br/>・イーターさんへのメッセージ・届けたい想い<br/>旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
 				                  	</span>
 				                  	{!! Form::textarea('description', null,
 				                          array('class'=>'form-control','rows'=>'5',
-				                          'placeholder'=>'・自己紹介&#013;&#010;はじめまして、大田区西馬込に住む主婦です。&#013;&#010;・得意な料理&#013;&#010;・衛生面について注意していること&#013;&#010;・イーターさんへのメッセージ・届けたい想い'
+				                          'placeholder'=>'・自己紹介&#013;&#010;はじめまして、大田区西馬込に住む主婦です。&#013;&#010;趣味の料理をいかして、地域の方と仲良くなりたいと思い、シェアメシに登録しました^ ^&#013;&#010;・得意な料理&#013;&#010;煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！&#013;&#010;・衛生面について注意していること&#013;&#010;包丁やまな板などを使用後アルコールで拭いています。
+料理前に、必ず手の消毒を行なっています。&#013;&#010;・イーターさんへのメッセージ・届けたい想い&#013;&#010;旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。'
 				                          )) !!}
 				                  	@if ($errors->has('description'))
 				                    	<span class="help-block">
