@@ -264,7 +264,7 @@
 
 				                <div class="form-group form-custom-group creator-description">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
-									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>　　はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！<br/>・衛生面について注意していること<br/>包丁やまな板などを使用後アルコールで拭いています。
+									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！<br/>・衛生面について注意していること<br/>包丁やまな板などを使用後アルコールで拭いています。
 料理前に、必ず手の消毒を行なっています。<br/>・イーターさんへのメッセージ・届けたい想い<br/>旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
 				                  	</span>

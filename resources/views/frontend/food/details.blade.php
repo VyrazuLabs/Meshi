@@ -101,7 +101,7 @@
 									<p>※メシクリエーターの方が心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 								</div>
 								<!-- price -->
-								<p class="icon detail-price-list"><span class="detail-date">Date:</span><span><a href="#"> {{$food_details->date}}</a></span></p>
+								<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->date}}</a></span></p>
 								<!-- contact-with -->
 
 								<div class="contact-with">
