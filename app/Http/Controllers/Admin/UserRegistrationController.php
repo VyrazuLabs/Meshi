@@ -19,10 +19,7 @@ class UserRegistrationController extends Controller
 
     /* save user information in db */
     public function save(Request $request) {
-    	$input = $request->input();
-    	// echo "<pre>";
-    	// print_r($input);die;   
-    	// echo"<pre>";print_r($input);die;     
+    	$input = $request->input();   
     	$file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
@@ -298,7 +295,7 @@ class UserRegistrationController extends Controller
   	
 
     public function lists() {
-    	$users = User::where('status',1)->whereIn('type',['1','2'])->get();
+    	$users = User::whereIn('type',['1','2'])->get();
     	return view('admin.user-list',['users'=>$users]);
     }
 

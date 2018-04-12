@@ -113,11 +113,6 @@
 				                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
 				                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
 				                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
-					                        @if ($errors->has('time_of_availability'))
-					                          <span class="help-block">
-					                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
-					                          </span>
-					                        @endif
 				                      	</div>
 				                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 				                        	<div class="ad-mre-btn pull-right"></div>
@@ -133,18 +128,17 @@
 		                  			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
 		                      			<label>{{ trans('app.Start Time') }} <span>*</span></label>
 		                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
-
-					                    @if ($errors->has('time_of_availability'))
-					                        <span class="help-block">
-					                         	<strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
-					                        </span>
-					                    @endif
 		                    		</div>
 				                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 				                      <div class="ad-mre-btn pull-right"></div>
 				                      <label>{{ trans('app.End Time') }} <span>*</span></label>
 				                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
 				                    </div>
+				                    @if ($errors->has('time_of_availability'))
+			                          <span class="help-block">
+			                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
+			                          </span>
+			                        @endif
 		                  		</div>
 		                  	</div>
 	                	@endif
