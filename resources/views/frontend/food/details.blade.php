@@ -98,7 +98,7 @@
 									<div class="price-line"></div>
 									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
 									<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
-									<p>※メシクリエーターの方が心を込めてつくっておりますので、時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
+									<p>※メシクリエーターの方が心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 								</div>
 								<!-- price -->
 								<p class="icon detail-price-list"><span class="detail-date">Date:</span><span><a href="#"> {{$food_details->date}}</a></span></p>

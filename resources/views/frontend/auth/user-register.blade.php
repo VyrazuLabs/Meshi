@@ -396,7 +396,10 @@
 				                @endif
 			              		@if ( $form_type == 'create' )
 					                <div class="form-group form-custom-group">
-					                  	<label> {{ trans('app.Upload Image') }}<span>*</span></label>
+					                  	<label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
+										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。
+											シェアメシTOP画面の地図への表示の際には、位置情報は域内でランダムに表示され、住所が特定されることはございませんのでご安心ください。<br/>
+											※ 地図にご登録頂いた写真が表示されるまでには少し時間をいただいております。</p>
 					                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
 					                  	@if ($errors->has('image'))
 					                    	<span class="help-block">
