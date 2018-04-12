@@ -32,7 +32,7 @@ class UserRegistrationController extends Controller
 	    if(isset($input['user_id'])) {
 	    	/* check validation for user updation */
 	    	if($userUpdateValidator->fails()) {
-	        	Session::flash('error', "Please Fill The Form Properly.");
+	        	Session::flash('error', trans('validation.form_error'));
 	        	return redirect()->back()->withErrors($userUpdateValidator)->withInput();
 	        }
 	        else {
@@ -160,7 +160,7 @@ class UserRegistrationController extends Controller
 	    	if($validator->fails() || $profileImageValidator->fails()) {
 
 	        	$validator->messages()->merge($profileImageValidator->messages());
-	        	Session::flash('error', "Please Fill The Form Properly.");
+	        	Session::flash('error', trans('validation.form_error'));
 	        	return redirect()->back()->withErrors($validator)->withInput();
 	        }
 	        else {

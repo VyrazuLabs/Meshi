@@ -73,7 +73,7 @@ return [
 	'Municipality' => '市区町村',
 	'sex' => '性別',
 	'Profession' => '職業',
-	'Job' => 'ジョブ',
+	'Job' => '職業',
 	'Upload Image' => '画像をアップロード',
 	'type_messiator' => 'メシイーター(家庭料理を食べたい方)',
 	'type_mesh_creator' => 'メシクリエーター(家庭料理をご提供したい方)',

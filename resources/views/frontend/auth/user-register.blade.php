@@ -130,7 +130,7 @@
 					                	@if($user->type == 2)
 						                	<div class="col-md-8 buyer">
 						                		<label>
-						                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }} 
+						                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }}
 						                			 Busy with working
 					                           	</label> 
 					                           	<label>
@@ -464,8 +464,12 @@
 	  	}
 	}
 	$(document).ready(function(){		
-		initAutocomplete('addressbox');	
-	})
+		initAutocomplete('addressbox');
+
+		if ($('.help-block').length > 0) {
+            types();
+		}
+	});
 	function initAutocomplete(selector) {	  
 		var indexMoveFrom = new google.maps.places.Autocomplete(	      
 			(document.getElementById(selector)),	      
