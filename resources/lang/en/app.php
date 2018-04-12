@@ -43,6 +43,7 @@ return [
 	'Select Your Time' => 'Select Your Time',
 	'Buy Now' => 'Buy Now',
 	'Description' => 'Description',
+    'FoodDescription' => 'Description',
 	'Profile' =>'Profile',
 	'Dishes' => 'Dishes',
 	'Reviews' => 'Reviews',

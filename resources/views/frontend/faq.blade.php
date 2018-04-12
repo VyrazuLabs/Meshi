@@ -72,7 +72,9 @@
 
 							<div id="faq-three" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>メシイーターさんのご自宅またはメシイーターさんのご指定される場所にお届け頂きます。</p>
+									<p>基本的にメシイーターさんのご自宅にお届けいただきます。</p>
+									<p>場所の変更の依頼があった場合は、運営からご連絡をさせて頂きます。</p>
+									<p>※近日公開予定のバージョンアップ版では、自宅以外のお届けも可能となるよう、チャット機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -310,6 +312,25 @@
 							<div id="eater-three" class="panel-collapse collapse">
 								<div class="panel-body">
 									<p>お料理は基本的にメシクリエーターさんご本人、あるいはそのご家族によってお届けされます。これは手料理のお届けまでをメシクリエーターさん本人またはご家族に行っていただくことで、その思いも地域のメシイーターさんにお届けいただいたり、見守り役としての役目も果たして頂くなど、シェアメシを通してメシクリエーターさんとのコミュニケーションや繋がりを楽しんで頂きたいと願っておりますためです。お受け取り頂き、お食事を済まされた後、メシクリエーターさんへの評価をお願いしております。</p>
+								</div>
+							</div>
+						</div><!-- panel -->
+
+						<div class="panel panel-default panel-faq">
+							<div class="panel-heading">
+								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-four">
+									<h4 class="panel-title">
+										お届け場所は自宅以外にできないの？
+										<span class="pull-right"><i class="fa fa-plus"></i></span>
+									</h4>
+								</a>
+							</div><!-- panel-heading -->
+
+							<div id="eater-four" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>現時点では、ご自宅へのお届けをお願いしております。</p>
+									<p>ただし自宅以外へのお届けをどうしても希望される場合は、運営にご連絡ください。ご連絡は<a href="/contact-us">こちら</a>から。</p>
+									<p>※近日公開予定のバージョンアップ版では、自宅以外のお届けも可能となるよう、チャット機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
