@@ -74,7 +74,7 @@ return [
 	'sex' => '性別',
 	'Profession' => '職業',
 	'Job' => '職業',
-	'Upload Image' => '画像をアップロード',
+	'Upload Image' => 'プロフィール画像をアップロード',
 	'type_messiator' => 'メシイーター(家庭料理を食べたい方)',
 	'type_mesh_creator' => 'メシクリエーター(家庭料理をご提供したい方)',
 	'Reason why you want to use share map (multiple selections possible)' => 'シェアメシを利用したい理由(複数選択可)',

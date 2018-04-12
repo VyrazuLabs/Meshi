@@ -111,12 +111,15 @@
 				                  @endif
 				                </div>
 				                <div class="form-group form-custom-group">
-				                  <label>{{ trans('app.User Type') }}<span>*</span></label>
+				                  <label>{{ trans('app.User Type') }}<span>*</span></label><br/>
+									<span>※ メシクリエーターとして登録しても、他のメシクリエーターからの購入が可能です。</span>
+
 				                  {{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
 				                  @if ($errors->has('type'))
 				                    <span class="help-block">
 				                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
 				                    </span>
+
 				                  @endif
 				                  @if ($errors->has('reason_for_registration_edit'))
 				                    <span class="help-block">

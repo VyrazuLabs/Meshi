@@ -351,6 +351,7 @@
                 longitude: 139.7161,
 		        zoom: 15,
 		        scaleControl: false,
+                scrollwheel: false,
                 zoomControl: false,
                 mapTypeControl: false,
                 navigationControl: false,

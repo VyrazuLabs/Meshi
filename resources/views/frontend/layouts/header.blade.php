@@ -60,7 +60,6 @@
 					</ul><!-- sign-in -->
 
 					<div class="language-box ">
-						<i class="fa fa-language t-orange"></i>
 						@php
 							$choose_type = trans('app.Select Language');
 							$japanese = trans('app.Japanese');
