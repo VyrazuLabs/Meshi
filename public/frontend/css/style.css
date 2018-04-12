@@ -409,3 +409,6 @@ iframe{
   width: 100%;
   object-fit: contain;
 }
+.time-cross{
+  cursor: pointer;
+}

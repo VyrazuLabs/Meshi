@@ -1,5 +1,14 @@
+.error{
+	color: red;
+}
 .p-0{
 	padding: 0;
+}
+.pl-0{
+	padding-left: 0;
+}
+.pr-0{
+	padding-right: 0;
 }
 .timetable-btn{
 	float: right;
@@ -10,5 +19,14 @@
 }
 .t-red{
 	color: red;
+}
+.float-right{
+	float: right;
+}
+.create-food-timestart{
+	padding-left: 0;
+}
+.create-food-timeend{
+	padding-right: 0;
 }
 

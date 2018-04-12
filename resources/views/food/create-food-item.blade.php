@@ -22,7 +22,7 @@
 	                  <label> Category<span>*</span></label>
 	                  {!! Form::select('category_id', $category_id,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Select Category']) !!}
 	                  @if ($errors->has('category_id'))
-	                    <span class="help-block">
+	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('category_id') }}</strong>
 	                    </span>
 	                  @endif
@@ -35,7 +35,7 @@
 						          'class'=>'form-control', 
 						          'placeholder'=>'Enter Food Item Name')) !!}
 						@if ($errors->has('item_name'))
-						  	<span class="help-block">
+						  	<span class="help-block error">
 						      <strong class="strong">{{ $errors->first('item_name') }}</strong>
 						  	</span>
 						@endif
@@ -46,18 +46,18 @@
 	                          array('class'=>'form-control', 
 	                                'placeholder'=>'Food Description','rows'=>'4')) !!}
 	                  	@if ($errors->has('food_description'))
-	                    	<span class="help-block">
+	                    	<span class="help-block error">
 	                      		<strong class="strong">{{ $errors->first('food_description') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Short Info<span>*</span></label>
+	                  	<label>Short Info</label>
 	                  	{!! Form::textarea('short_info', null, 
 	                          array('class'=>'form-control', 
 	                                'placeholder'=>'Short Information','rows'=>'3')) !!}
 	                  	@if ($errors->has('short_info'))
-	                    	<span class="help-block">
+	                    	<span class="help-block error">
 	                      		<strong class="strong">{{ $errors->first('short_info') }}</strong>
 	                    	</span>
 	                  	@endif
@@ -66,7 +66,7 @@
 	                  <label> Offered By<span>*</span></label>
 	                  {!! Form::select('offered_by', $offered_by,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Select User']) !!}
 	                  @if ($errors->has('offered_by'))
-	                    <span class="help-block">
+	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('offered_by') }}</strong>
 	                    </span>
 	                  @endif
@@ -88,7 +88,7 @@
 		                    </div>
 		                  @endif
 		                  @if ($errors->has('food_images'))
-		                  <span class="help-block">
+		                  <span class="help-block error">
 		                     <strong class="strong">{{ $errors->first('food_images') }}</strong>
 		                  </span>
 		                  @endif
@@ -98,51 +98,58 @@
 		                {!! Form::text('date_of_availability', null, [
 		                                    'class' => 'form-control', 'id' => 'datePicker']) !!}
 		                @if ($errors->has('date_of_availability'))
-		                  <span class="help-block">
+		                  <span class="help-block error">
 		                    <strong class="strong">{{ $errors->first('date_of_availability') }}</strong>
 		                  </span>
 		                @endif
 		            </div>
-		            <div class="col-sm-12 col-md-12 col-xs-12 padding-0  input_fields_wrap">
-	                	<button class="ad-mre-btn add_field_button pull-right">Add Time Slot</button>
+		            <div class="col-sm-12 col-md-12 col-xs-12 p-0  input_fields_wrap">
+		            	<div class="col-lg-12 col-xs-12 form-group p-0">
+	                		<button class="ad-mre-btn add_field_button pull-right">Add Time Slot</button>
+	                	</div>
 	                	<div class="clearfix"></div>
 	                	@if(!empty($time_of_availability))
 		                  	@foreach($time_of_availability as $key => $slot)
-	                    		<div class="start-time-id">
-			                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 " >
-			                       	 	<label>Start Time <span>*</span></label>
-			                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
-				                        @if ($errors->has('time_of_availability'))
-				                          <span class="help-block">
-				                            <strong class="strong">{{ $errors->first('time_of_availability') }}</strong>
-				                          </span>
-				                        @endif
-			                      	</div>
-			                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0" >
-			                        	<div class="ad-mre-btn pull-right"></div>
-			                        	<label>End Time <span>*</span></label>
-			                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
-			                      	</div>
-	                    		</div>
+		                  		<div class="col-lg-12 col-xs-12 p-0">
+		                  			<i class="fa fa-times float-right time-cross" aria-hidden="true"></i>
+		                    		<div class="start-time-id">
+				                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 create-food-timestart" >
+				                       	 	<label>Start Time <span>*</span></label>
+				                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
+					                        @if ($errors->has('time_of_availability'))
+					                          <span class="help-block error">
+					                            <strong class="strong">{{ $errors->first('time_of_availability') }}</strong>
+					                          </span>
+					                        @endif
+				                      	</div>
+				                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timeend" >
+				                        	<div class="ad-mre-btn pull-right"></div>
+				                        	<label>End Time <span>*</span></label>
+				                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
+				                      	</div>
+		                    		</div>
+		                    	</div>
 	                  		@endforeach
 	                	@else
-	                  		<div class="start-time-id">
-	                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 " >
-	                      			<label>Start Time <span>*</span></label>
-	                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
+	                		<div class="col-lg-12 col-xs-12 p-0">
+		                  		<div class="start-time-id">
+		                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 create-food-timestart" >
+		                      			<label>Start Time <span>*</span></label>
+		                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
 
-				                    @if ($errors->has('time_of_availability'))
-				                        <span class="help-block">
-				                         	<strong class="strong">{{ $errors->first('time_of_availability') }}</strong>
-				                        </span>
-				                    @endif
-	                    		</div>
-			                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0" >
-			                      <div class="ad-mre-btn pull-right"></div>
-			                      <label>End Time <span>*</span></label>
-			                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
-			                    </div>
-	                  		</div>
+					                    @if ($errors->has('time_of_availability'))
+					                        <span class="help-block error error">
+					                         	<strong class="strong">{{ $errors->first('time_of_availability') }}</strong>
+					                        </span>
+					                    @endif
+		                    		</div>
+				                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timeend" >
+				                      <div class="ad-mre-btn pull-right"></div>
+				                      <label>End Time <span>*</span></label>
+				                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
+				                    </div>
+		                  		</div>
+		                  	</div>
 	                	@endif
 	              	</div>
               		<div class="clearfix"></div>
@@ -154,7 +161,7 @@
 						          'class'=>'form-control', 
 						          'placeholder'=>'Enter Shipping Charge')) !!}
 						@if ($errors->has('shipping_fee'))
-						  	<span class="help-block">
+						  	<span class="help-block error">
 						      <strong class="strong">{{ $errors->first('shipping_fee') }}</strong>
 						  	</span>
 						@endif
@@ -167,7 +174,7 @@
 						          'id' => 'foodPrice',
 						          'placeholder'=>'Enter Base Amount')) !!}
 						@if ($errors->has('price'))
-						  	<span class="help-block">
+						  	<span class="help-block error">
 						      <strong class="strong">{{ $errors->first('price') }}</strong>
 						  	</span>
 						@endif
@@ -176,7 +183,7 @@
 	                  <label> Status<span>*</span></label>
 	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 	                  @if ($errors->has('status'))
-	                    <span class="help-block">
+	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('status') }}</strong>
 	                    </span>
 	                  @endif
@@ -230,8 +237,7 @@
 	      if(x < max_fields){ //max input box allowed
 	        x++; //text box increment
 
-	        $(wrapper).append('<div class="start-time-id"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 padding-0 "><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pdng-right-0"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div>');
-
+	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross" onclick="closetimeslot(this)" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timestart"><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timeend"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
 	        // $('.blink-cursor').focus();
 	        $('.timepickerid').timepicker({
 		      showMeridian: false,
@@ -241,12 +247,19 @@
 	    });
 	    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
 	      e.preventDefault(); $(this).parent('div').remove(); x--;
-	    })
+	    });
 	});
 	//Time picker
   	$('.timepickerid').timepicker({
       showMeridian: false,
       // defaultTime: false
     });
+    $('.time-cross').click(function(){
+    	closetimeslot(this);
+	});
+
+    function closetimeslot(selector) {
+		$(selector).parent().remove();
+    }
 </script>
 @endsection

@@ -89,6 +89,8 @@ return [
     'url'                  => 'The :attribute format is invalid.',
 
     'form_error' => 'Please Fill The Form Properly',
+    'time_slot_error' => 'Time slot can not be null',
+    
 
     /*
     |--------------------------------------------------------------------------

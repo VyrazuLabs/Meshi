@@ -39,3 +39,4 @@
   <link rel="stylesheet" href="{{ url('css/pnotify.custom.min.css') }}">
   <!-- custom css -->
   <link rel="stylesheet" href="{{ url('css/style.css') }}">
+  <link rel="stylesheet" href="{{ url('css/admin-responsive.css') }}">

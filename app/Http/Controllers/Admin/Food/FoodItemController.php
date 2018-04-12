@@ -23,87 +23,114 @@ class FoodItemController extends Controller
 
     public function save(Request $request) {
     	$input = $request->input(); 
-        $validator = $this->validator($input);
-        // $timeTable = [];
+        $createItemValidator = $this->createItemValidator($input);
+        $updateItemValidator = $this->updateItemValidator($input);
+        $timeslotValidator = $this->timeslotValidator($input);
 
-        $startTime = array_column($input['time_of_availability'], 'start_time');
-        $endTime = array_column($input['time_of_availability'], 'end_time');
-        foreach ($startTime as $key => $start) {
-          foreach ($endTime as $key => $end) {
-            $timeTable = array_combine($start,$end);
-          }
+        // $timeTable = [];
+        if(isset($input['time_of_availability'])) {
+	        $startTime = array_column($input['time_of_availability'], 'start_time');
+	        $endTime = array_column($input['time_of_availability'], 'end_time');
+	        foreach ($startTime as $key => $start) {
+	          foreach ($endTime as $key => $end) {
+	            $timeTable = array_combine($start,$end);
+	          }
+	        }
+        }
+        else {
+        	$timeTable = '';
         }
 
-        /* check validation */
-    	if($validator->fails()) {
-	        Session::flash('error', trans('validation.form_error'));
-	        return redirect()->back()->withErrors($validator)->withInput();
-	    }
-	    else {
-	    	//CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
-    		$date = str_replace('/', '-', $input['date_of_availability']);
-    		$dates = date('Y-m-d', strtotime($date));
+        //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
+        if(isset($input['date_of_availability'])) {
+			$date = str_replace('/', '-', $input['date_of_availability']);
+			$dates = date('Y-m-d', strtotime($date));
+		}
 
-	    	if(isset($input['food_item_id'])) {
-	    		$food_item = FoodItem::where('food_item_id',$input['food_item_id'])->first();
-	    		$food_item->update([ 'item_name' => $input['item_name'],
-		            				 'food_description' => $input['food_description'],
-		           					 'status' => $input['status'],
-		           					 'date_of_availability' => $dates,
-		           					 'time_of_availability' => serialize($timeTable),
-						             'category_id' => $input['category_id'],
-		           					 'offered_by' => $input['offered_by'],
-		           					 // 'shipping_fee' => $input['shipping_fee'],
-		           					 'price' => ceil($input['price']),
-		           					 'short_info' => $input['short_info']
-		          				  ]);
 
-	    		if ($request->hasFile('food_images')) {
-		          $files = $request->file('food_images');
-		          $input_data = $request->all();
-
-		          $foodImageValidator = Validator::make(
-		              $input_data, [
-		              'food_images.*' => 'required|mimes:jpg,jpeg,png'
-		              ],[
-		                  'food_images.*.required' => 'Please upload an image',
-		                  'food_images.*.mimes' => 'Only jpeg,png images are allowed',
-		              ]
-		          );
-
-		          if($foodImageValidator->fails()) {
-		            Session::flash('error', "Image should be in jpg,jpeg or png format.");
-		            return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-		          }
-
-		          else {
-		            foreach($files as $file){
-		              $filename = $file->getClientOriginalName();
-		              $extension = $file->getClientOriginalExtension();
-		              $picture = "food_".uniqid().".".$extension;
-		              $destinationPath = public_path().'/uploads/food/';
-		              $file->move($destinationPath, $picture);
-
-		              //STORE NEW IMAGES IN THE ARRAY VARAIBLE
-		              $new_images[] = $picture;
-		                
-		              // UNSERIALIZE EXISTING IMAGES
-		              $old_images = unserialize($food_item->food_images);
-		              if(!empty($old_images)){
-		                //MERGE NEW IMAGES AND EXISTING IMAGES
-		                $total_images = array_merge($new_images,$old_images);
-		              }
-		              else {
-		                $total_images = $new_images;
-		              }
-		            }
-		            $food_item->update(['food_images' =>serialize($total_images)]); 
-		          }
-		        }
-	    		Session::flash('success', "Updated successfully.");
-				return back();
+        if(isset($input['food_item_id'])) {
+	    	if($timeslotValidator->fails()) {
+			    Session::flash('error', trans('validation.time_slot_error'));
+			    return redirect()->back()->withErrors($timeslotValidator)->withInput();
 	    	}
 	    	else {
+	        	/* check validation */
+		    	if($updateItemValidator->fails()) {
+			        Session::flash('error', trans('validation.form_error'));
+		     		// $timeslotValidator->messages()->merge($validator->messages());
+			        return redirect()->back()->withErrors($updateItemValidator)->withInput();
+			    }
+			    else {
+
+		    		$food_item = FoodItem::where('food_item_id',$input['food_item_id'])->first();
+		    		$food_item->update([ 'item_name' => $input['item_name'],
+			            				 'food_description' => $input['food_description'],
+			           					 'status' => $input['status'],
+			           					 'date_of_availability' => $dates,
+			           					 'time_of_availability' => serialize($timeTable),
+							             'category_id' => $input['category_id'],
+			           					 'offered_by' => $input['offered_by'],
+			           					 // 'shipping_fee' => $input['shipping_fee'],
+			           					 'price' => ceil($input['price']),
+			           					 'short_info' => $input['short_info']
+			          				  ]);
+
+		    		if ($request->hasFile('food_images')) {
+			          $files = $request->file('food_images');
+			          $input_data = $request->all();
+
+			          $foodImageValidator = Validator::make(
+			              $input_data, [
+			              'food_images.*' => 'required|mimes:jpg,jpeg,png'
+			              ],[
+			                  'food_images.*.required' => 'Please upload an image',
+			                  'food_images.*.mimes' => 'Only jpeg,png images are allowed',
+			              ]
+			          );
+
+			          if($foodImageValidator->fails()) {
+			            Session::flash('error', "Image should be in jpg,jpeg or png format.");
+			            return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
+			          }
+
+			          else {
+			            foreach($files as $file){
+			              $filename = $file->getClientOriginalName();
+			              $extension = $file->getClientOriginalExtension();
+			              $picture = "food_".uniqid().".".$extension;
+			              $destinationPath = public_path().'/uploads/food/';
+			              $file->move($destinationPath, $picture);
+
+			              //STORE NEW IMAGES IN THE ARRAY VARAIBLE
+			              $new_images[] = $picture;
+			                
+			              // UNSERIALIZE EXISTING IMAGES
+			              $old_images = unserialize($food_item->food_images);
+			              if(!empty($old_images)){
+			                //MERGE NEW IMAGES AND EXISTING IMAGES
+			                $total_images = array_merge($new_images,$old_images);
+			              }
+			              else {
+			                $total_images = $new_images;
+			              }
+			            }
+			            $food_item->update(['food_images' =>serialize($total_images)]); 
+			          }
+			        }
+		    		Session::flash('success', "Updated successfully.");
+					return back();
+			    }
+	    	}
+
+	    }
+	    else {
+	        /* check validation */
+	    	if($createItemValidator->fails()) {
+		        Session::flash('error', trans('validation.form_error'));
+	     		// $timeslotValidator->messages()->merge($validator->messages());
+		        return redirect()->back()->withErrors($createItemValidator)->withInput();
+		    }
+		    else {
 	    		$food = FoodItem::create([	'food_item_id' => uniqid(),
 								            'item_name' => $input['item_name'],
 								            'category_id' => $input['category_id'],
@@ -160,20 +187,39 @@ class FoodItemController extends Controller
 	        	Session::flash('success', "Created successfully.");
 				return back();
 	    	}
-    	}
+	    }
+
     }
 
     //VALIDATOR FOR CREATE FOOD ITEM
-  	protected function validator($request) {
+  	protected function createItemValidator($request) {
     	return Validator::make($request,[
                                       'item_name' => 'required',
                                       'food_description' => 'required',
                                       'status' => 'required',
                                       'category_id' => 'required',
-                                      'time_of_availability' => 'required',
                                       'date_of_availability' => 'required',
                                       'price' => 'required|numeric',
-                                      'short_info' => 'required',
+                                      'time_of_availability' => 'required'
+                                    ]);
+  	}
+
+  	//VALIDATOR FOR CREATE FOOD ITEM
+  	protected function updateItemValidator($request) {
+    	return Validator::make($request,[
+                                      'item_name' => 'required',
+                                      'food_description' => 'required',
+                                      'status' => 'required',
+                                      'category_id' => 'required',
+                                      'date_of_availability' => 'required',
+                                      'price' => 'required|numeric',
+                                    ]);
+  	}
+
+  	//VALIDATOR FOR CREATE TIME SLOT
+  	protected function timeslotValidator($request) {
+    	return Validator::make($request,[
+                                      'time_of_availability' => 'required'
                                     ]);
   	}
 

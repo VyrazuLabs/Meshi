@@ -108,41 +108,45 @@
 	                	<div class="clearfix"></div>
 	                	@if(!empty($time_of_availability))
 		                  	@foreach($time_of_availability as $key => $slot)
-	                    		<div class="start-time-id">
-			                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
-			                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
-			                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
-				                        @if ($errors->has('time_of_availability'))
-				                          <span class="help-block">
-				                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
-				                          </span>
-				                        @endif
-			                      	</div>
-			                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
-			                        	<div class="ad-mre-btn pull-right"></div>
-			                        	<label>{{ trans('app.End Time') }} <span>*</span></label>
-			                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
-			                      	</div>
-	                    		</div>
+		                  		<div class="col-lg-12 col-xs-12 p-0 float-left">
+		                    		<div class="start-time-id float-left">
+				                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+				                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
+				                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
+					                        @if ($errors->has('time_of_availability'))
+					                          <span class="help-block">
+					                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
+					                          </span>
+					                        @endif
+				                      	</div>
+				                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+				                        	<div class="ad-mre-btn pull-right"></div>
+				                        	<label>{{ trans('app.End Time') }} <span>*</span></label>
+				                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
+				                      	</div>
+		                    		</div>
+		                    	</div>
 	                  		@endforeach
 	                	@else
-	                  		<div class="start-time-id">
-	                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
-	                      			<label>{{ trans('app.Start Time') }} <span>*</span></label>
-	                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
+	                		<div class="col-lg-12 col-xs-12 p-0 float-left">
+		                  		<div class="start-time-id float-left">
+		                  			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+		                      			<label>{{ trans('app.Start Time') }} <span>*</span></label>
+		                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
 
-				                    @if ($errors->has('time_of_availability'))
-				                        <span class="help-block">
-				                         	<strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
-				                        </span>
-				                    @endif
-	                    		</div>
-			                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
-			                      <div class="ad-mre-btn pull-right"></div>
-			                      <label>{{ trans('app.End Time') }} <span>*</span></label>
-			                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
-			                    </div>
-	                  		</div>
+					                    @if ($errors->has('time_of_availability'))
+					                        <span class="help-block">
+					                         	<strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
+					                        </span>
+					                    @endif
+		                    		</div>
+				                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+				                      <div class="ad-mre-btn pull-right"></div>
+				                      <label>{{ trans('app.End Time') }} <span>*</span></label>
+				                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
+				                    </div>
+		                  		</div>
+		                  	</div>
 	                	@endif
 	              	</div>
               		<div class="clearfix"></div>
@@ -274,8 +278,10 @@
 	      if(x < max_fields){ //max input box allowed
 	        x++; //text box increment
 
-	        $(wrapper).append('<div class="start-time-id"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div>');
-
+	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
+	        $(".time-cross").click(function(){
+	        	$(this).parent().remove();
+	        });
 	        // $('.blink-cursor').focus();
 	        $('.timepickerid').timepicker({
 		      showMeridian: false,
