@@ -25,7 +25,7 @@ class ReviewController extends Controller
 
       /* check validation */
     	if($validator->fails()) {
-	      Session::flash('error', "Please Fill The Form Properly.");
+	      Session::flash('error', trans('validation.form_error'));
 	      return redirect()->back()->withErrors($validator)->withInput();
 	    }
 	    else {

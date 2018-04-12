@@ -35,10 +35,7 @@ class FoodController extends Controller
         if(!empty($profile->image)) {
           $food_details->image = $profile->image;
         }
-        if(!empty($profile->city)) {
-          $food_details->city = $profile->city;
-        }
-        $food_details->address = $profile->address;
+        $food_details->municipality = $profile->municipality;
 
         $user = User::where('user_id',$food_details->offered_by)->first();
         if(!empty($user)) {
@@ -99,7 +96,7 @@ class FoodController extends Controller
 
         /* check validation */
         if($validator->fails()) {
-            Session::flash('error', "Please Fill The Form Properly.");
+            Session::flash('error', trans('validation.form_error'));
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else {

@@ -32,7 +32,7 @@ class RegistrationController extends Controller
 
 	    	/* check validation for user updation */
 	    	if($userUpdateValidator->fails()) {
-	        	Session::flash('error', "Please Fill The Form Properly.");
+	        	Session::flash('error', trans('validation.form_error'));
         		return redirect()->back()->withInput()->withErrors($userUpdateValidator);
 
 	        }
@@ -212,7 +212,7 @@ class RegistrationController extends Controller
 	    else {
 	    	if($validator->fails() || $profileImageValidator->fails()) {
 	        	$validator->messages()->merge($profileImageValidator->messages());
-	        	Session::flash('error', "Please Fill The Form Properly.");
+	        	Session::flash('error', trans('validation.form_error'));
 	        	return redirect()->back()->withErrors($validator)->withInput();
 	        }
 	        else {
@@ -309,7 +309,7 @@ class RegistrationController extends Controller
                                       'gender' => 'required',
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required'
-                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason for registration']);
+                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
   	}
 
   	protected function userUpdateValidator($request) {
@@ -328,7 +328,7 @@ class RegistrationController extends Controller
                                       'profession' => 'required',
                                       'reason_for_registration_edit' => 'required'
 
-                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason for registration']);
+                                    ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
   	}
 
   	protected function passwordValidator($request) {

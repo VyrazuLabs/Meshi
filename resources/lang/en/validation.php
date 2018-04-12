@@ -88,6 +88,8 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
+    'form_error' => 'Please Fill The Form Properly',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
