@@ -214,7 +214,7 @@
 				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }}&nbsp;{{ trans('app.Share') }}&nbsp;{{ trans('app.Meshi') }}</h4>
 				<div class="col-lg-12 col-xs-12 p-0">
 					<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 message-logo-div">
-						<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive">
+						<img src="{{ url('frontend/images/logo.png') }}" class="img-responsive">
 					</div>
 					<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
 						<p class="text-left">
