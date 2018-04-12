@@ -262,7 +262,7 @@
 
 				                </div>
 
-				                <div class="form-group form-custom-group">
+				                <div class="form-group form-custom-group creator-description">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
 									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>　　はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>・衛生面について注意していること<br/>・イーターさんへのメッセージ・届けたい想い" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
