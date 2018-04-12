@@ -1450,7 +1450,7 @@ transform: scale(1.05) rotate(2deg);
 #accordion .panel-body a {
 	/*color: #000000;*/
 	font-weight: 500;
-	font-size: 16px;
+	/*font-size: 16px;*/
 	line-height: 28px;
 }
 
