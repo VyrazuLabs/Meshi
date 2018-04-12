@@ -205,7 +205,7 @@
 							</div>
 						</div><!-- panel -->
 
-						<h4>3. キャンセルについて</h4>
+						<h4>3. キャンセル、お届け時間変更について</h4>
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#accordion" href="#faq-eleven">
@@ -234,7 +234,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#accordion" href="#faq-twelve">
 									<h4 class="panel-title">
-										購入決済完了後、手料理の提供時間を変更をしたい場合どうなるの？
+										購入決済完了後、手料理の提供時間の変更をしたい場合どうなるの？
 										<span class="pull-right"><i class="fa fa-plus"></i></span>
 									</h4>
 								</a>
@@ -242,9 +242,9 @@
 
 							<div id="faq-twelve" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>時間調整の際はコンタクトフォームから運営までご連絡ください。</p>
+									<p>時間調整の際は<a href="/contact-us">コンタクトフォーム</a>から運営までご連絡ください。</p>
 									<p>なるべく時間調整が発生しないようにお願いをしております。</p>
-									<p>どうしても時間調整せざるを得ない場合は、コンタクトフォームよりお問い合わせください。</p>
+									<p>どうしても時間調整せざるを得ない場合は、<a href="/contact-us">コンタクトフォーム</a>よりお問い合わせください。</p>
 
 									<p>もし時間調整が成立しない場合は</p>
 
@@ -318,6 +318,25 @@
 
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
+								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-five">
+									<h4 class="panel-title">
+										お料理のお届け場所は？
+										<span class="pull-right"><i class="fa fa-plus"></i></span>
+									</h4>
+								</a>
+							</div><!-- panel-heading -->
+
+							<div id="eater-five" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>基本的にメシイーターさんのご自宅にお届けいただきます。</p>
+									<p>場所の変更の依頼があった場合は、運営からご連絡をさせて頂きます。</p>
+									<p>※近日公開予定のバージョンアップ版では、自宅以外のお届けも可能となるよう、チャット機能を追加予定です。</p>
+								</div>
+							</div>
+						</div><!-- panel -->
+
+						<div class="panel panel-default panel-faq">
+							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-four">
 									<h4 class="panel-title">
 										お届け場所は自宅以外にできないの？
@@ -331,23 +350,6 @@
 									<p>現時点では、ご自宅へのお届けをお願いしております。</p>
 									<p>ただし自宅以外へのお届けをどうしても希望される場合は、運営にご連絡ください。ご連絡は<a href="/contact-us">こちら</a>から。</p>
 									<p>※近日公開予定のバージョンアップ版では、自宅以外のお届けも可能となるよう、チャット機能を追加予定です。</p>
-								</div>
-							</div>
-						</div><!-- panel -->
-
-						<div class="panel panel-default panel-faq">
-							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-five">
-									<h4 class="panel-title">
-										お料理のお届け場所は？
-									<span class="pull-right"><i class="fa fa-plus"></i></span>
-									</h4>
-								</a>
-							</div><!-- panel-heading -->
-
-							<div id="eater-five" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p>メシイーターさんのご自宅またはメシイーターさんのご指定される場所にお届け頂けます。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -386,7 +388,7 @@
 							</div>
 						</div><!-- panel -->
 
-
+						<h4>2. 価格について</h4>
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-eight">
@@ -404,8 +406,41 @@
 							</div>
 						</div><!-- panel -->
 
+						<div class="panel panel-default panel-faq">
+							<div class="panel-heading">
+								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-thirteen">
+									<h4 class="panel-title">
+										値引き交渉はできるの？
+										<span class="pull-right"><i class="fa fa-plus"></i></span>
+									</h4>
+								</a>
+							</div><!-- panel-heading -->
 
-						<h4>2. 登録について</h4>
+							<div id="eater-thirteen" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>基本的に値引き交渉は応じる事が出来ません。メシクリエーターさんは鮮度の高く、手間暇のかかった手料理を提供されておりますので、値引きする事は難しいです。</p>
+								</div>
+							</div>
+						</div><!-- panel -->
+
+						<div class="panel panel-default panel-faq">
+							<div class="panel-heading">
+								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-fourteen">
+									<h4 class="panel-title">
+										値段が少し高く感じるのだけど？
+										<span class="pull-right"><i class="fa fa-plus"></i></span>
+									</h4>
+								</a>
+							</div><!-- panel-heading -->
+
+							<div id="eater-fourteen" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>例えば、有機野菜や無農薬野菜は、スーパーなどで見かける一般の野菜と比べ、価格が高いことが多いです。なぜ高いのか。これは、「野菜の栽培にかけられている手間」が違ってくるからというのが理由のひとつです。大量生産される一般の野菜は、科学肥料や化学合成農薬などが使われるため、効率よく栄養を与えることができたり、害虫や雑草を駆除することができます。シェアメシのメシクリエーターさんは、調理時に添加物を加えることなく、全て手作りで手間暇かけて愛情のこもったお料理を提供されています。またお値段には、地域貢献/見守り料、及び配送料が含まれています。</p>
+								</div>
+							</div>
+						</div><!-- panel -->
+
+						<h4>3. 登録について</h4>
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-nine">
@@ -422,6 +457,8 @@
 								</div>
 							</div>
 						</div><!-- panel -->
+
+						<h4>4. キャンセル、お届け時間変更について</h4>
 
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
@@ -470,60 +507,6 @@
 									<p><b>＜メシイーターさんによる変更の場合＞</b></p>
 									<p>時間調整のタイミングによっては、キャンセル扱いになりますので、全額または半額のキャンセル料が発生することがあります。</p>
 									<p>※ 近日公開予定のバージョンアップ版では、時間調整関連の機能を追加予定です。</p>
-								</div>
-							</div>
-						</div><!-- panel -->
-
-						<div class="panel panel-default panel-faq">
-							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-thirteen">
-									<h4 class="panel-title">
-										値引き交渉はできるの？
-										<span class="pull-right"><i class="fa fa-plus"></i></span>
-									</h4>
-								</a>
-							</div><!-- panel-heading -->
-
-							<div id="eater-thirteen" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p>基本的に値引き交渉は応じる事が出来ません。メシクリエーターさんは鮮度の高く、手間暇のかかった手料理を提供されておりますので、値引きする事は難しいです。</p>
-								</div>
-							</div>
-						</div><!-- panel -->
-
-						<div class="panel panel-default panel-faq">
-							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-fourteen">
-									<h4 class="panel-title">
-										値段が少し高く感じるのだけど？
-										<span class="pull-right"><i class="fa fa-plus"></i></span>
-									</h4>
-								</a>
-							</div><!-- panel-heading -->
-
-							<div id="eater-fourteen" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p>例えば、有機野菜や無農薬野菜は、スーパーなどで見かける一般の野菜と比べ、価格が高いことが多いです。なぜ高いのか。これは、「野菜の栽培にかけられている手間」が違ってくるからというのが理由のひとつです。大量生産される一般の野菜は、科学肥料や化学合成農薬などが使われるため、効率よく栄養を与えることができたり、害虫や雑草を駆除することができます。シェアメシのメシクリエーターさんは、調理時に添加物を加えることなく、全て手作りで手間暇かけて愛情のこもったお料理を提供されています。またお値段には、地域貢献/見守り料、及び配送料が含まれています。</p>
-								</div>
-							</div>
-						</div><!-- panel -->
-
-
-						<h4>3. キャンセルについて</h4>
-						<div class="panel panel-default panel-faq">
-							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-fifteen">
-									<h4 class="panel-title">
-										手料理をキャンセルした場合どうなるの？
-										<span class="pull-right"><i class="fa fa-plus"></i></span>
-									</h4>
-								</a>
-							</div><!-- panel-heading -->
-
-							<div id="eater-fifteen" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p>＜イーターさんによる変更の場合＞
-									<p>キャンセルについては、クリエーターさんの設定した時間次第でそれに準じる形となります。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
