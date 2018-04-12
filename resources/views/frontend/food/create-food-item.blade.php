@@ -50,7 +50,7 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>{{ trans('app.Description') }}<span>*</span></label>
+	                  	<label>{{ trans('app.FoodDescription') }}<span>*</span></label>
 	                  	{!! Form::textarea('food_description', null, 
 	                          array('class'=>'form-control','rows'=>'4')) !!}
 	                  	@if ($errors->has('food_description'))
