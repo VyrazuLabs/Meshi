@@ -35,7 +35,7 @@ class FoodController extends Controller
         if(!empty($profile->image)) {
           $food_details->image = $profile->image;
         }
-        $food_details->city = $profile->city;
+        $food_details->municipality = $profile->municipality;
 
         $user = User::where('user_id',$food_details->offered_by)->first();
         if(!empty($user)) {

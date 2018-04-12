@@ -72,7 +72,7 @@
 							<p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span>
 							<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
 							<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
-							<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->city}}</a></span>
+							<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span>
 							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
 							
 							{!! Form::open(array('id'=>"buy_now_form")) !!}
