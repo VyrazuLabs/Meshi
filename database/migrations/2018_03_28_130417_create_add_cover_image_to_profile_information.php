@@ -14,7 +14,7 @@ class CreateAddCoverImageToProfileInformation extends Migration
     public function up()
     {
         Schema::table('profile_information', function (Blueprint $table) {
-            $table->string('cover_image')->after('image');
+            $table->string('cover_image')->after('image')->nullable();
             
         });
     }
