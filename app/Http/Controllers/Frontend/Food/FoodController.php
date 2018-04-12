@@ -115,7 +115,7 @@ class FoodController extends Controller
                                      'offered_by' => Auth::user()->user_id,
                                      // 'shipping_fee' => $input['shipping_fee'],
                                      'price' => ceil($input['price']),
-                                     'short_info' => $input['short_info']
+                                     // 'short_info' => $input['short_info']
                                   ]);
 
                 if ($request->hasFile('food_images')) {
@@ -174,7 +174,7 @@ class FoodController extends Controller
                                             'status' => 1,
                                             // 'shipping_fee' => $input['shipping_fee'],
                                             'price' => ceil($input['price']),
-                                            'short_info' => $input['short_info']
+                                            // 'short_info' => $input['short_info']
                                         ]);
 
                 $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
@@ -232,7 +232,7 @@ class FoodController extends Controller
                                       'time_of_availability' => 'required',
                                       'date_of_availability' => 'required',
                                       'price' => 'required|numeric',
-                                      'short_info' => 'required',
+                                      // 'short_info' => 'required',
                                     ]);
     }
 

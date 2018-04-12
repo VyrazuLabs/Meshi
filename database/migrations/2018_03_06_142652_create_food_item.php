@@ -22,7 +22,7 @@ class CreateFoodItem extends Migration
             $table->date('date_of_availability');
             $table->longText('time_of_availability');
             $table->longText('food_description');
-            $table->longText('short_info');
+            $table->longText('short_info')->nullable();
             $table->string('offered_by');
             $table->string('shipping_fee')->nullable();
             $table->string('price');

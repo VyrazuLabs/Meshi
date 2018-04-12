@@ -59,7 +59,7 @@
 	                    	</span>
 	                  	@endif
 	                </div>
-	                <div class="form-group form-custom-group">
+	               <!--  <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Short Info') }}<span>*</span></label>
 	                  	{!! Form::textarea('short_info', null, 
 	                          array('class'=>'form-control','rows'=>'3')) !!}
@@ -68,7 +68,7 @@
 	                      		<strong class="strong t-red">{{ $errors->first('short_info') }}</strong>
 	                    	</span>
 	                  	@endif
-	                </div>
+	                </div> -->
 	                <div class="form-group form-custom-group">
 		                <label for="exampleInputFile">{{ trans('app.Upload Food Images') }} <span>*</span></label>
 		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input' ,'id' => 'food_images') ) !!}
