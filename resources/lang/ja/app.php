@@ -162,7 +162,7 @@ return [
     'Order Details' => '注文詳細',
     'Subject' => '件名',
     'Message' => 'メッセージ',
-    'Deliverable Area' => '配信可能エリア',
+    'Deliverable Area' => '配送可能エリア',
 
 ];
 
