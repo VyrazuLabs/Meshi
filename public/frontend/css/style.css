@@ -412,3 +412,9 @@ iframe{
 .time-cross{
   cursor: pointer;
 }
+.detail-date{
+  font-weight: 500;
+  color: #272727 !important;
+  margin-bottom: 19px;
+  font-size: 18px !important;
+}

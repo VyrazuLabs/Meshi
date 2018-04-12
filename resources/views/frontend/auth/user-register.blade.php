@@ -365,6 +365,20 @@
 										</span>
 									@endif
 				                </div>
+				                @if($form_type == 'edit' && Auth::User()->type == 1)
+					                <div class="form-group form-custom-group deliverable-area">
+					                  	<label>{{ trans('app.Deliverable Area') }}</label>
+					                  	{!! Form::text('deliverable_area', null, 
+					                          array('class'=>'form-control')) !!}
+					                </div>
+				                @endif
+				                @if($form_type == 'create')
+					                <div class="form-group form-custom-group deliverable-area">
+				                  		<label>{{ trans('app.Deliverable Area') }}</label>
+				                  		{!! Form::text('deliverable_area', null, 
+				                          array('class'=>'form-control')) !!}
+				                	</div>
+				                @endif
 				                @if($form_type == 'create')
 					                <div class="form-group form-custom-group food-video-link" style="display: none;">
 					                  <label>Video Link(Embed Code)</label>
@@ -463,6 +477,7 @@
 	  		$('.seller').show();
 	    	$('.buyer').hide();
 	    	$('.food-video-link').show();
+	    	$('.deliverable-area').show();
 	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').show();
 	    	$('#typeEater').hide();
@@ -471,6 +486,7 @@
 	    	$('.buyer').show();
 	  		$('.seller').hide();
 	    	$('.food-video-link').hide();
+	    	$('.deliverable-area').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').hide();
 	    	$('#typeEater').show();

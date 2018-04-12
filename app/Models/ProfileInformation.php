@@ -28,6 +28,7 @@ class ProfileInformation extends Model
 				            'reason_for_registration',
 				            'user_introduction',
 				            'profile_message',
-				            'city'
+				            'city',
+				            'deliverable_area'
     					);
 }

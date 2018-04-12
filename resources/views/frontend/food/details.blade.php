@@ -71,7 +71,7 @@
 							<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
 							<p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span>
 							<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
-							<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
+							<!-- <span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span> -->
 							<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span>
 							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
 							
@@ -82,7 +82,7 @@
 								<!-- price -->
 								<div class="short-info">
 									<h4>{{ trans('app.Price') }}</h4>
-									<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right">¥ {{$food_details->price}}</span></p>
+									<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right"><strong>¥ {{$food_details->price}}</strong></span></p>
 									<!-- <p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
 										@foreach($foodCosting as $key => $costing)
 										<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
@@ -93,15 +93,17 @@
 											¥ {{$food_details->shipping_fee}}
 										@endif
 									</span></p> -->
-									<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right">¥ {{$commission}}
+									<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ {{$commission}}</strong>
 									</span></p>
 									<div class="price-line"></div>
-									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right">¥ {{$cost}}</span></p>
+									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
 									<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
 									<p>※メシクリエーターの方が心を込めてつくっておりますので、時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 								</div>
 								<!-- price -->
+								<p class="icon detail-price-list"><span class="detail-date">Date:</span><span><a href="#"> {{$food_details->date}}</a></span></p>
 								<!-- contact-with -->
+
 								<div class="contact-with">
 									<div class="col-md-6 p-0">
 										<div class="form-group">

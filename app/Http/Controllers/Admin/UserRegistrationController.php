@@ -113,6 +113,8 @@ class UserRegistrationController extends Controller
 						            'user_introduction' => $input['user_introduction'],
 						            'profile_message' => $input['profile_message'],
 						            'video_link' => $input['video_link'],
+						            'deliverable_area' => $input['deliverable_area']
+
 
 
 					          	]);
@@ -217,6 +219,8 @@ class UserRegistrationController extends Controller
 									            'user_introduction' => $input['user_introduction'],
 						            			'profile_message' => $input['profile_message'],
 						            			'video_link' => $input['video_link'],
+						            			'deliverable_area' => $input['deliverable_area']
+
 
 								          	]);
 	        	Session::flash('success', "User registered successfully");
@@ -322,6 +326,8 @@ class UserRegistrationController extends Controller
 	        $user->user_introduction = $profile->user_introduction;
 	        $user->profile_message = $profile->profile_message;
 	        $user->video_link = $profile->video_link;
+	        $user->deliverable_area = $profile->deliverable_area;
+	        
 
     	}
 

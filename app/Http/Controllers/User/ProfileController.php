@@ -106,9 +106,7 @@ class ProfileController extends Controller
                 $user->user_introduction = $profile->user_introduction;
                 $user->profile_message = $profile->profile_message;
                 $user->video_link = $profile->video_link;
-
-        // echo"<pre>";print_r($user);die;
-
+                $user->deliverable_area = $profile->deliverable_area;
             }
         }
 

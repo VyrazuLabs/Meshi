@@ -348,6 +348,16 @@
 	                    	</span>
 	                  	@endif
 	                </div>
+	                <div class="form-group form-custom-group">
+	                  	<label>Deliverable Area</label>
+						{!! Form::text('deliverable_area', null, 
+					                          array('class'=>'form-control')) !!}
+						@if ($errors->has('deliverable_area'))
+						  	<span class="help-block error">
+						      <strong class="strong">{{ $errors->first('deliverable_area') }}</strong>
+						  	</span>
+						@endif
+	                </div>
               		@if ( $form_type == 'create' )
 		                <div class="form-group form-custom-group">
 		                  	<label> Image<span>*</span></label>
@@ -359,6 +369,8 @@
 		                  	@endif
 		                </div>
 		            @endif
+
+
 
 	                <div class="form-group form-custom-group">
 	                  <label> Status<span>*</span></label>

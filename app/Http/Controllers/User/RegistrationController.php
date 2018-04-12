@@ -142,7 +142,8 @@ class RegistrationController extends Controller
 						            'profession' => $input['profession'],
 						            'reason_for_registration' => $reason,
 						            'video_link' => $videoLink,
-						            'city' => $city_name
+						            'city' => $city_name,
+						            'deliverable_area' => $input['deliverable_area']
 					          	]);
  
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
@@ -277,7 +278,9 @@ class RegistrationController extends Controller
 									            'reason_for_registration' => $reason,
 									            'total_dishes' => 0,
 									            'video_link' => $input['video_link'],
-						            			'city' => $city_name
+						            			'city' => $city_name,
+						            			'deliverable_area' => $input['deliverable_area']
+
 								          	]);
 	        	Session::flash('success', "User registered successfully");
 

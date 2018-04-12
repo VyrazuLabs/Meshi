@@ -172,6 +172,8 @@ return [
     'Order Details' => 'Order Details',
     'Subject' => 'Subject',
     'Message' => 'Message',
+    'Deliverable Area' => 'Deliverable Area',
+    
 
 
 ];
