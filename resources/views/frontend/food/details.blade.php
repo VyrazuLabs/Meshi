@@ -74,19 +74,9 @@
 							<span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span>
 							@if(!empty($food_details->city))
 								<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->city}}</a></span>
-							@else
-								<span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->address}}</a></span>
 							@endif
 							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
 							
-							<!-- short-info -->
-							<div class="short-info">
-								<h4>{{ trans('app.Short Info') }}</h4>
-								<!-- <p><strong>Ingredients: </strong><a href="#">flour,baking powder,salt and sugar,eggs etc.</a> </p>
-								<p><strong>Contains: </strong><a href="#">5 Pcs of Pancakes</a> </p> -->
-								<p>{{$food_details->short_info}}</p>
-							</div>
-							<!-- short-info -->
 							{!! Form::open(array('id'=>"buy_now_form")) !!}
 	                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
 	                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
