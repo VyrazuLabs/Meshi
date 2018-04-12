@@ -112,11 +112,8 @@
 				                </div>
 				                <div class="form-group form-custom-group">
 				                  <label>{{ trans('app.User Type') }}<span>*</span></label>
-				                  <span id="typeCreator" class="t-orange" data-toggle="tooltip" title="Tooltip for food creator" style="display: none;">
-				                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-				                  </span>
-				                  <span id="typeEater" data-toggle="tooltip" title="Tooltip for food eater" style="display: none;"><i class="fa fa-question-circle" aria-hidden="true"></i>
-				                  </span><br/>
+
+				                  <br/>
 									<span>※ メシクリエーターとして登録しても、他のメシクリエーターからの購入が可能です。</span>
 
 				                  {{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
@@ -267,9 +264,13 @@
 
 				                <div class="form-group form-custom-group">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
-				                  	<span class="t-orange" data-toggle="tooltip" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry."><i class="fa fa-question-circle" aria-hidden="true"></i></span>
-				                  	{!! Form::textarea('description', null, 
-				                          array('class'=>'form-control','rows'=>'5')) !!}
+									<span id="typeCreator" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>　　はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>・衛生面について注意していること<br/>・イーターさんへのメッセージ・届けたい想い" style="display: none; width: 300px">
+				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
+				                  	</span>
+				                  	{!! Form::textarea('description', null,
+				                          array('class'=>'form-control','rows'=>'5',
+				                          'placeholder'=>'・自己紹介&#013;&#010;はじめまして、大田区西馬込に住む主婦です。&#013;&#010;・得意な料理&#013;&#010;・衛生面について注意していること&#013;&#010;・イーターさんへのメッセージ・届けたい想い'
+				                          )) !!}
 				                  	@if ($errors->has('description'))
 				                    	<span class="help-block">
 				                      		<strong class="strong t-red">{{ $errors->first('description') }}</strong>
@@ -480,7 +481,6 @@
 	    	$('.deliverable-area').show();
 	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').show();
-	    	$('#typeEater').hide();
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
@@ -489,7 +489,6 @@
 	    	$('.deliverable-area').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').hide();
-	    	$('#typeEater').show();
 	  	}
 
 	}
