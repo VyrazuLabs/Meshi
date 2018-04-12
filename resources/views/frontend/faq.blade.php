@@ -38,7 +38,7 @@
 							<div id="faq-one" class="panel-collapse collapse collapse in">
 								<div class="panel-body">
 									<p>お料理を作り、地域に貢献頂く方のことです。</p>
-									<p>おすそ分けしたいお料理をシェアメシサイト上にアップし、メシメシイーターさんへおすそ分けいただく方です。地域貢献/見守り、配送、手料理の３点について値付けを頂きます。</p>
+									<p>おすそ分けしたいお料理をシェアメシサイト上にアップし、メシイーターさんへおすそ分けいただく方です。地域貢献/見守り、配送、手料理の３点について値付けを頂きます。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -180,7 +180,8 @@
 									<p>1.おすそ分けしたいお料理写真、おすすめポイントなどを記載いただいた後、提供可能日、時間を選択頂き、シェアメシサイト上にアップ下さい。</p>
 									<p>2.予約が入ればイーターさんが指定した時間にお届け頂き完了です。</p>
 									<p></p>
-									<p>※なおご登録後、運営から順次、写真撮影、動画撮影などの手配をひとりひとりに丁寧に行わせて頂きますので、ご連絡をお待ち下さい。（写真撮影や、動画撮影を行わせて頂くことで、メシイーターの方々がメシクリエーターの方々をより身近に感じることができ、より選ばれやすくなります！）</p>
+									<p>※なおご登録後、運営から順次、写真撮影、動画撮影などの手配をひとりひとりに丁寧に行わせて頂きますので、ご連絡をお待ち下さい。</p>
+									<p>（写真撮影や、動画撮影を行わせて頂くことで、メシイーターの方々がメシクリエーターの方々をより身近に感じることができ、より選ばれやすくなります！）</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -207,7 +208,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#accordion" href="#faq-eleven">
 									<h4 class="panel-title">
-										手料理をキャンセルした場合どうなるの？
+										購入決済完了後、手料理の依頼をキャンセルしたい場合どうなるの？
 										<span class="pull-right"><i class="fa fa-plus"></i></span>
 									</h4>
 								</a>
@@ -215,8 +216,14 @@
 
 							<div id="faq-eleven" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>＜クリエーターさんによるキャンセル＞</p>
-									<p>お支払いされません</p>
+									<p>なるべくキャンセルが発生しないようにお願いをしております。</p>
+									<p>どうしてもキャンセルせざるを得ない場合は、<a href="/contact-us">コンタクトフォーム</a>よりお問い合わせください。</p>
+
+									<p><b>＜メシクリエーターさんからのキャンセルの場合＞</b></p>
+									<p>お料理代金はお支払いされません。</p>
+									<p><b>＜メシイーターさんからのキャンセルの場合＞</b></p>
+									<p>運営よりご連絡いたします。キャンセルのタイミングによっては、購入金額の一部をお支払い致します。</p>
+									<p>※ 近日公開予定のバージョンアップ版では、キャンセル関連の機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -225,7 +232,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#accordion" href="#faq-twelve">
 									<h4 class="panel-title">
-										手料理の提供時間を変更をしたい場合、どうなるの？
+										購入決済完了後、手料理の提供時間を変更をしたい場合どうなるの？
 										<span class="pull-right"><i class="fa fa-plus"></i></span>
 									</h4>
 								</a>
@@ -233,13 +240,19 @@
 
 							<div id="faq-twelve" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>時間調整はチャット上でお願いしております。もし時間調整が成立しない場合は</p>
+									<p>時間調整の際はコンタクトフォームから運営までご連絡ください。</p>
+									<p>なるべく時間調整が発生しないようにお願いをしております。</p>
+									<p>どうしても時間調整せざるを得ない場合は、コンタクトフォームよりお問い合わせください。</p>
+
+									<p>もし時間調整が成立しない場合は</p>
+
+
 									<p><b>＜メシクリエーターさんからの変更の場合＞</b></p>
-									<p>メシイーターさん：メシイーターさん側に全額返金されます。</p>
-									<p>メシクリエーターさん：お支払いされません</p>
+									<p>お料理代金は、お支払いされません。</p>
 
 									<p><b>＜メシイーターさんによる変更の場合＞</b></p>
-									<p>キャンセルについては、メシクリエーターさんの設定した時間次第でそれに準じる形となります。</p>
+									<p>時間調整のタイミングによっては、キャンセル扱いになりますので、購入金額の一部をお支払い致します。</p>
+									<p>※ 近日公開予定のバージョンアップ版では、時間調整関連の機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -248,7 +261,8 @@
 				</div>
 				<h3 class="t-black">メシイーターさんについて</h3>
 				<div class="accordion">
-					<div class="panel-group" id="eateraccordion">			
+					<div class="panel-group" id="eateraccordion">
+						<h4>1. 基本情報</h4>
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-one">
@@ -278,8 +292,7 @@
 
 							<div id="eater-two" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>料理の味の感じ方は人それぞれです。シェアメシでは、様々なメシクリエーターさんからあなにあったメシクリエーターさんを選んで頂くことができます。ぜひあなただけのお気に入りのメシクリエーターさんを見つけてみてください。</p>
-									<p>手数料は申請金額が1万円未満の場合216円、1万円以上は無料となっております。</p>
+									<p>料理の味の感じ方は人それぞれです。シェアメシでは、様々なメシクリエーターさんからあなに合ったメシクリエーターさんを選んで頂くことができます。ぜひあなただけのお気に入りのメシクリエーターさんを見つけてみてください。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -303,24 +316,6 @@
 
 						<div class="panel panel-default panel-faq">
 							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-four">
-									<h4 class="panel-title">
-										Q.登録後の手料理公開までの方法を教えて下さい。
-									<span class="pull-right"><i class="fa fa-plus"></i></span>
-									</h4>
-								</a>
-							</div><!-- panel-heading -->
-
-							<div id="eater-four" class="panel-collapse collapse">
-								<div class="panel-body">
-									<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius.</p>									
-									<p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi,</p>
-								</div>
-							</div>
-						</div><!-- panel -->
-
-						<div class="panel panel-default panel-faq">
-							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-five">
 									<h4 class="panel-title">
 										お料理のお届け場所は？
@@ -331,7 +326,7 @@
 
 							<div id="eater-five" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>メシイーターさんのご自宅またはメシイーターさんのご指定される場所にお届け頂きます。</p>
+									<p>メシイーターさんのご自宅またはメシイーターさんのご指定される場所にお届け頂けます。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -402,7 +397,7 @@
 
 							<div id="eater-nine" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>詳細住所は公開されません。「丁目」より前のエリア情報のみ、メシクリエーターさんに対して親近感が湧くように表示されます。（例：大田区、蒲田本町まで）</p>
+									<p>詳細住所は公開されません。メシクリエーターさんに対して親近感が湧くように、エリア名称のみ表示されます。（例：大田区、蒲田本町まで）</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -411,7 +406,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-ten">
 									<h4 class="panel-title">
-										手料理の依頼をキャンセルした場合どうなるの？
+										購入決済完了後、手料理をキャンセルしたい場合どうなるの？
 										<span class="pull-right"><i class="fa fa-plus"></i></span>
 									</h4>
 								</a>
@@ -419,12 +414,14 @@
 
 							<div id="eater-ten" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p><b>＜メシクリエーターさんによるキャンセル＞</b></p>
-									<p>メシイーターさん：メシイーターさん側に全額返金されます。</p>
-									<p>メシクリエーターさん：お支払いされません</p>
-									<p><b>＜メシイーターさんによるキャンセル＞</b></p>
-									<p>メシクリエーターさんの設定した時間次第となります。</p>
-									<p>詳細は各メシクリエーターさんのお料理のページをご確認ください</p>
+									<p>なるべくキャンセルが発生しないようにお願いをしております。</p>
+									<p>どうしてもキャンセルせざるを得ない場合は、<a href="/contact-us">コンタクトフォーム</a>よりお問い合わせください。</p>
+
+									<p><b>＜メシイーターさんからのキャンセルの場合＞</b></p>
+									<p>キャンセルのタイミングによっては、全額または半額のキャンセル料が発生することがあります。</p>
+									<p><b>＜メシクリエーターさんからのキャンセルの場合＞</b></p>
+									<p>運営よりご連絡いたします。お料理代金は全額支払い戻しされます。</p>
+									<p>※ 近日公開予定のバージョンアップ版では、キャンセル関連の機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
@@ -433,7 +430,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-eleven">
 									<h4 class="panel-title">
-										手料理の時間変更をしたい場合、どうなるの？
+										購入決済完了後、手料理の時間変更をしたい場合、どうなるの？
 										<span class="pull-right"><i class="fa fa-plus"></i></span>
 									</h4>
 								</a>
@@ -441,13 +438,17 @@
 
 							<div id="eater-eleven" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>時間調整はチャット上でお願いしております。もし時間調整が成立しない場合は、</p>
+									<p>時間調整の際はコンタクトフォームから運営までご連絡ください。</p>
+									<p>なるべく時間調整が発生しないようにお願いをしております。</p>
+									<p>ただしどうしても時間調整をしたい場合は、<a href="/contact-us">コンタクトフォーム</a>よりお問い合わせください。</p>
+									<p>もし時間調整が成立しない場合は</p>
+
 									<p><b>＜メシクリエーターさんからの変更の場合＞</b></p>
-									<p>メシイーターさん：メシイーターさん側に全額返金されます。</p>
-									<p>メシクリエーターさん：お支払いされません</p>
+									<p>全額支払い戻しされます。</p>
 
 									<p><b>＜メシイーターさんによる変更の場合＞</b></p>
-									<p>キャンセルについては、メシクリエーターさんの設定した時間次第でそれに準じる形となります。</p>
+									<p>時間調整のタイミングによっては、キャンセル扱いになりますので、全額または半額のキャンセル料が発生することがあります。</p>
+									<p>※ 近日公開予定のバージョンアップ版では、時間調整関連の機能を追加予定です。</p>
 								</div>
 							</div>
 						</div><!-- panel -->
