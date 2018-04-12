@@ -268,7 +268,7 @@
 							<div class="panel-heading">
 								<a data-toggle="collapse" data-parent="#eateraccordion" href="#eater-one">
 									<h4 class="panel-title">
-										メシイーターって何？
+										メシイーターってなに？
 									<span class="pull-right"><i class="fa fa-minus"></i></span>
 									</h4>
 								</a>
