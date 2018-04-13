@@ -15,7 +15,7 @@
 			<!-- breadcrumb -->
 			<ol class="breadcrumb new-breadcrumb">
 				<li><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
-				<li><a href="#">{{$user->name}}</a></li>
+				<li><a href="#">{{$user->nick_name}}</a></li>
 			</ol><!-- breadcrumb -->						
 			<h2 class="title t-orange d-inline-block">{{ trans('app.Profile')}}</h2>
 			@if(Auth::user())
@@ -58,7 +58,7 @@
 							</div> -->
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
-								<p class="profile-title profile-head-title">{{$user->name}}</p>
+								<p class="profile-title profile-head-title">{{$user->nick_name}}</p>
 								<p class="">@php echo nl2br($user->description); @endphp</p>
 							</div>
 						<!-- </div> -->
