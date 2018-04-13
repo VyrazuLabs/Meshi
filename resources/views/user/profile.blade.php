@@ -15,7 +15,7 @@
 			<!-- breadcrumb -->
 			<ol class="breadcrumb new-breadcrumb">
 				<li><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
-				<li><a href="#">{{$user->name}}</a></li>
+				<li><a href="#">{{$user->nick_name}}</a></li>
 			</ol><!-- breadcrumb -->						
 			<h2 class="title t-orange d-inline-block">{{ trans('app.Profile')}}</h2>
 			@if(Auth::user())
@@ -58,22 +58,22 @@
 							</div> -->
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
-								<p class="profile-title profile-head-title">{{$user->name}}</p>
+								<p class="profile-title profile-head-title">{{$user->nick_name}}</p>
 								<p class="">@php echo nl2br($user->description); @endphp</p>
 							</div>
 						<!-- </div> -->
-						<div class="col-md-4 profile-timeline">
-							<div class="col-md-6">
-								<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>
-								<p class="t-black">{{ trans('app.Dishes')}}</p>
-							</div>
+						{{--<div class="col-md-4 profile-timeline">--}}
+							{{--<div class="col-md-6">--}}
+								{{--<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>--}}
+								{{--<p class="t-black">{{ trans('app.Dishes')}}</p>--}}
+							{{--</div>--}}
 							<!-- <div class="col-md-4">
 								<p class="timeline-numbers mb-0">105</p>
 								<p class="t-black">Favourites</p>
 							</div> -->
-							<div class="col-md-6">
-								<p class="timeline-numbers mb-0">{{count($reviews)}}</p>
-								<p class="t-black">{{ trans('app.Reviews') }}</p>
+							{{--<div class="col-md-6">--}}
+								{{--<p class="timeline-numbers mb-0">{{count($reviews)}}</p>--}}
+								{{--<p class="t-black">{{ trans('app.Reviews') }}</p>--}}
 								<!-- <div class="rating">
 									<span class="t-black">
 										<i class="fa fa-star" aria-hidden="true"></i>
@@ -91,8 +91,8 @@
 										<i class="fa fa-star" aria-hidden="true"></i>
 									</span>
 								</div> -->
-							</div>
-						</div>
+							{{--</div>--}}
+						{{--</div>--}}
 					<!-- </div> -->
 					<div class="col-lg-12 col-12 p-0 profile-description">
 						<div class="col-md-8 float-none profileplace-name">
@@ -207,7 +207,7 @@
 			@endif
 			@if(!empty($user->profile_message))
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
-				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }}&nbsp;{{ trans('app.Share') }}&nbsp;{{ trans('app.Meshi') }}</h4>
+				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }} </h4>
 				<div class="col-lg-12 col-xs-12 p-0">
 					<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 message-logo-div">
 						<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive">
