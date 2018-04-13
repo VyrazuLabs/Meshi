@@ -192,7 +192,7 @@
 					<!-- featured-top -->
 					<div class="col-sm-12">
 						<div class="featured-top">
-							<h4>{{ date('d-m-Y', strtotime($next_day_of_tomorrow))}}</h4>
+							<h4>{{ date('Y-m-d', strtotime($next_day_of_tomorrow))}}</h4>
 						</div>
 					</div><!-- featured-top -->
 				</div>
