@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileInformation extends Model
-{
+{	
+    use SoftDeletes;
+
     protected $table = 'profile_information';
 	public $fillable = array(
     						'user_id',
@@ -31,4 +34,7 @@ class ProfileInformation extends Model
 				            'city',
 				            'deliverable_area'
     					);
+
+    protected $dates = ['deleted_at'];
+	
 }
