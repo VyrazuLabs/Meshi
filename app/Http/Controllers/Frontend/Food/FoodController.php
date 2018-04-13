@@ -47,6 +47,11 @@ class FoodController extends Controller
             $images = $food_details->food_images;
             $foodImages = unserialize($images);
         }
+
+        if(!empty($profile->deliverable_area)) {
+          $food_details->deliverable_area = $profile->deliverable_area;
+        }
+
 	      $foodCosting = FoodItemCosting::where('food_item_id',$food_details->food_item_id)->pluck('tax_name','tax_amount');
          
 
