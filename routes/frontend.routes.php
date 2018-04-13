@@ -47,6 +47,7 @@ Route::group( ['middleware' => ['Language'] ], function() {
 				Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
 				Route::group( [ 'middleware' => 'SignInRouteAccessUser' ], function() {
 					Route::get('/create', 'FoodController@create')->name('food_create');
+					Route::get('/lists', 'FoodController@lists')->name('food_list');
 					Route::post('/save', 'FoodController@save')->name('save_food_item_user');
 				});
 			});

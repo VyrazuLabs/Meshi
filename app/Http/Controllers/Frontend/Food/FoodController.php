@@ -249,4 +249,17 @@ class FoodController extends Controller
                                       'tax_percentage' => 'required'
                                     ]);
     }
+
+
+    public function lists() {
+      $foods = FoodItem::where('offered_by',Auth::User()->user_id)->where('status',1)->get();
+      foreach ($foods as $key => $food) {
+        $category = Category::where('status',1)->where('category_id',$food->category_id)->first();
+        if(!empty($category)) {
+          $food->category_name = $category->category_name;
+        }
+        
+      }
+      return view('frontend.food.food-list',['foods'=>$foods]);
+    }
 }
