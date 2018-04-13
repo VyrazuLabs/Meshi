@@ -52,7 +52,7 @@ return [
 	'Share Video' => '動画をシェアする',
 	'Review' => 'レビュー',
 	'Introduction' => '自己紹介',
-	'Message From' => 'シェアメシからのご推薦文',
+	'Message From' => 'シェアメシからのご推薦',
 	'Some Information' => 'その他の情報',
 	'User' => 'ユーザー',
 	'Login' => 'ログイン',

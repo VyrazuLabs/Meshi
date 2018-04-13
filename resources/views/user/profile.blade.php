@@ -54,7 +54,6 @@
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
 								<p class="profile-title profile-head-title">{{$user->nick_name}}</p>
-								<p class="">@php echo nl2br($user->description); @endphp</p>
 							</div>
 						<!-- </div> -->
 						{{--<div class="col-md-4 profile-timeline">--}}
@@ -196,7 +195,7 @@
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Introduction') }}</h4>
 				<p class="text-left">
-					{{$user->user_introduction}}
+					@php echo nl2br($user->description); @endphp
 				</p>
 			</div>
 			@endif
