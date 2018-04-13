@@ -207,7 +207,7 @@
 			@endif
 			@if(!empty($user->profile_message))
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
-				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }}&nbsp;{{ trans('app.Share') }}&nbsp;{{ trans('app.Meshi') }}</h4>
+				<h4 class="text-left t-black mt-0">{{ trans('app.Message From') }} </h4>
 				<div class="col-lg-12 col-xs-12 p-0">
 					<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 message-logo-div">
 						<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive">
