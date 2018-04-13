@@ -95,7 +95,7 @@
 						</div>
 					<!-- </div> -->
 					<div class="col-lg-12 col-12 p-0 profile-description">
-						<div class="col-md-6 float-none profileplace-name">
+						<div class="col-md-8 float-none profileplace-name">
 							<div class="col-md-6">
 								<p><strong>{{ trans('app.Nickname') }} :</strong><span> {{ $user->nick_name }}</span></p>
 							</div>
@@ -106,13 +106,9 @@
 								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
 							</div> -->
 							<div class="col-md-6">
-								<p><strong>{{ trans('app.City') }} :</strong>
+								<p><strong>{{ trans('app.Deliverable Area') }} :</strong>
 									<span> 
-										@if(!empty($user->city))
-											{{$user->city}}
-										@else
-											{{$user->address}}
-										@endif
+										{{$user->deliverable_area}}
 									</span>
 								</p>
 							</div>

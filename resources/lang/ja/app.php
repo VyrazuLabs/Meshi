@@ -123,7 +123,7 @@ return [
 	'CATEGORY' => 'カテゴリー',
 	'Category' => 'カテゴリー',
 	'Upload Food Images' => 'お料理の写真をアップロードする',
-	'Date of Delivery' => '配達日',
+	'Date of Delivery' => 'お届け日',
 	'Start Time' => '開始時間',
 	'End Time' => '終了時間',
 	'Add Time Slot' => 'お料理のお届け時間を追加する',
@@ -152,7 +152,7 @@ return [
 	'Commission' => '手数料',
 	'Profile Edit' => 'プロフィールの編集',
     'Preparing' => '準備中',
-    'Regular Purchase' => '定期配送',
+    'Regular Purchase' => '定期お届け',
     'Party Order' => 'パーティ用のご注文',
     'Corporate Info' => '企業情報',
     'Send Us Your Feedback' => 'お問い合わせフォーム',
@@ -162,7 +162,7 @@ return [
     'Order Details' => '注文詳細',
     'Subject' => '件名',
     'Message' => 'メッセージ',
-    'Deliverable Area' => '配送可能エリア',
+    'Deliverable Area' => 'お届け可能エリア',
 
 ];
 
