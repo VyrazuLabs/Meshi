@@ -62,18 +62,18 @@
 								<p class="">@php echo nl2br($user->description); @endphp</p>
 							</div>
 						<!-- </div> -->
-						<div class="col-md-4 profile-timeline">
-							<div class="col-md-6">
-								<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>
-								<p class="t-black">{{ trans('app.Dishes')}}</p>
-							</div>
+						{{--<div class="col-md-4 profile-timeline">--}}
+							{{--<div class="col-md-6">--}}
+								{{--<p class="timeline-numbers mb-0">{{$user->total_dishes}}</p>--}}
+								{{--<p class="t-black">{{ trans('app.Dishes')}}</p>--}}
+							{{--</div>--}}
 							<!-- <div class="col-md-4">
 								<p class="timeline-numbers mb-0">105</p>
 								<p class="t-black">Favourites</p>
 							</div> -->
-							<div class="col-md-6">
-								<p class="timeline-numbers mb-0">{{count($reviews)}}</p>
-								<p class="t-black">{{ trans('app.Reviews') }}</p>
+							{{--<div class="col-md-6">--}}
+								{{--<p class="timeline-numbers mb-0">{{count($reviews)}}</p>--}}
+								{{--<p class="t-black">{{ trans('app.Reviews') }}</p>--}}
 								<!-- <div class="rating">
 									<span class="t-black">
 										<i class="fa fa-star" aria-hidden="true"></i>
@@ -91,8 +91,8 @@
 										<i class="fa fa-star" aria-hidden="true"></i>
 									</span>
 								</div> -->
-							</div>
-						</div>
+							{{--</div>--}}
+						{{--</div>--}}
 					<!-- </div> -->
 					<div class="col-lg-12 col-12 p-0 profile-description">
 						<div class="col-md-8 float-none profileplace-name">
