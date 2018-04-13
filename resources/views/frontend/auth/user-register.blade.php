@@ -284,8 +284,7 @@
 料理前に、必ず手の消毒を行なっています。<br/>・イーターさんへのメッセージ・届けたい想い<br/>旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
 				                  	</span>
-				                  	<span id="typeEater" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>はじめまして、大田区西馬込に住む主婦です。<br/>・得意な料理<br/>煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！<br/>・衛生面について注意していること<br/>包丁やまな板などを使用後アルコールで拭いています。
-料理前に、必ず手の消毒を行なっています。<br/>・イーターさんへのメッセージ・届けたい想い<br/>旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。" style="display: none; width: 300px">
+				                  	<span id="typeEater" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>はじめまして、大田区在住で、妻と子供2人の4人暮らしをしております。<br/>夫婦共働きで忙しく、栄養が偏りがちになっており、素敵なメシクリエーターさんの手料理を楽しみたいと思い、登録しました！<br/>・お好きなお料理のジャンルや味付け<br/>家庭料理らしい薄い味付けが好みです<br/>一般的な和食から、変わったジャンルの料理まで色々試して見たいと思っています<br/>・メシクリエーターさんへのメッセージ、その他地域の方との関わり方についての思い<br/>シェアメシを通じて、ご近所さんと友人のような関係性を気づいていけたらと思っています。慣れてきたら自分もクリエーターになってみたいと思ってますので、ぜひ色々と教えてください^ ^" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
 				                  	</span>
 				                  	{!! Form::textarea('description', null,
