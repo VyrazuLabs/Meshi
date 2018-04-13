@@ -51,7 +51,7 @@ return [
 	'Schedule' => 'スケジュール',
 	'Share Video' => '動画をシェアする',
 	'Review' => 'レビュー',
-	'Introduction' => '前書き',
+	'Introduction' => '自己紹介',
 	'Message From' => 'シェアメシからのご推薦文',
 	'Some Information' => 'その他の情報',
 	'User' => 'ユーザー',
