@@ -42,7 +42,7 @@ return [
 	'Select Your Time' => 'お届け時間を選択',
 	'Buy Now' => '購入する',
 	'Description' => '自己紹介',
-    'FoodDescription' => 'お料理の説明',
+    'FoodDescription' => 'お料理詳細',
 	'Profile' =>'プロフィール',
 	'Dishes' => '料理',
 	'Reviews' => 'レビュー',

@@ -163,7 +163,7 @@
 							</div>
 							<div class="col-md-9">
 								<div class="">
-									<h4>{{ trans('app.Description') }}</h4>
+									<h4>{{ trans('app.FoodDescription') }}</h4>
 									<p>{{$food_details->food_description}}</p>
 								</div>
 							</div>
