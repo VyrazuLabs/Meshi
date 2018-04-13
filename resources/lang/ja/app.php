@@ -163,6 +163,8 @@ return [
     'Subject' => '件名',
     'Message' => 'メッセージ',
     'Deliverable Area' => 'お届け可能エリア',
+    'FOOD LIST' => '食品リスト',
+    'Edit Food' => '食べ物を編集する',
 
 ];
 

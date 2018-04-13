@@ -427,3 +427,34 @@ iframe{
 .details-info{
   padding-top: 1em;
 }
+
+
+/* start food listing of creator start */
+.food-listing-date{    
+  margin-left: 10px;
+}
+.food-creator-list-btn{    
+  min-width: 7em;    
+  color: #a0a0a0;    
+  background-color: transparent;    
+  border: 1px solid #a0a0a0;    
+  font-size: 13px;    
+  padding: 5px 12px;    
+  transition: 0.25s ease-in-out;
+}
+.food-creator-list-edit{    
+  background-color: #f26522;    
+  color: #fff;    
+  border: 1px solid #f26522;    
+  margin-left: 7px;
+}
+.food-creator-list-edit:hover,.food-creator-list-edit:focus{    
+  color: #f26522;    
+  background-color: transparent;
+}
+.food-creator-btn-group {    
+  margin-top: 55px;
+}
+.food-creator-pricebtn{    
+  float: right;
+}

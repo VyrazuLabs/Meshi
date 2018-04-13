@@ -115,14 +115,12 @@
 
 				                  <br/>
 									<span>※ メシクリエーターとして登録しても、他のメシクリエーターからの購入が可能です。</span>
-
-				                  {{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
-				                  @if ($errors->has('type'))
-				                    <span class="help-block">
-				                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
-				                    </span>
-
-				                  @endif
+				                  	{{ Form::select('type', ['1' => $type_mesh_creator, '2' => $type_messiator], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
+				                  	@if ($errors->has('type'))
+					                    <span class="help-block">
+					                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
+					                    </span>
+				                  	@endif
 				                  @if ($errors->has('reason_for_registration_edit'))
 				                    <span class="help-block">
 				                      <strong class="strong t-red">{{ $errors->first('reason_for_registration_edit') }}</strong>
@@ -131,67 +129,67 @@
 				                </div>
 				                @if($form_type == 'edit')
 					                <div class="form-group form-custom-group reason edit-reason">
-					                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
+					                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('app.Reason why you want to use share map (multiple selections possible)') }}</font></font></label>
 					                	@if($user->type == 2)
-						                	<div class="col-md-8 buyer">
+						                	<div class="col-md-8 buyer test">
 						                		<label>
 						                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }}
-						                			 Busy with working
+						                			 {{ trans('app.Busy with working') }}
 					                           	</label> 
 					                           	<label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'live_alone', null, ['class' => 'check']) }}
-					                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
+					                           		{{ trans('app.I got bored with convenience stores, medium meals, and other lunches because I live alone') }}
 					                            </label> 
 					                            <label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'few_restaurants', null, ['class' => 'check']) }}
-					                            	There are few restaurants around the office
+					                            	{{ trans('app.There are few restaurants around the office')}}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_time', null, ['class' => 'check']) }}
-					                            	I am busy raising children and have no time to make rice
+					                            	{{ trans('app.I am busy raising children and have no time to make rice') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'like_to_eat', null, ['class' => 'check']) }}
-					                            	I would like to eat a variety of nationalities and people's cooking.
+					                            	{{ trans('app.I would like to eat a variety of nationalities and peoples cooking') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_reason', null, ['class' => 'check']) }}
-					                            	There is no big reason, but it seems interesting, so I would like to use it
+					                            	{{ trans('app.There is no big reason, but it seems interesting, so I would like to use it') }}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
-					                            	Other
+					                            	{{ trans('app.Other') }}
 					                            </label>
 					                       	</div>
 					                	@elseif($user->type == 1)
-						                	<div class="col-md-8 seller">
+						                	<div class="col-md-8 seller test2">
 						                		<label>
 						                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }} 
-						                			 I would like to use someone's help through my cooking
+						                			 {{ trans("app.I would like to use someone's help through my cooking") }}
 					                           	</label> 
 					                           	<label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-					                           		 I want to earn rewards using free time  
+					                           		{{ trans('app.I want to earn rewards using free time') }}
 					                            </label> 
 					                            <label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-					                            	I want to earn more rewards than bytes and parts  
+					                            	{{ trans('app.I want to earn more rewards than bytes and parts') }}  
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'hobby', null, ['class' => 'check']) }}
-					                            	I would like to use dishes of my hobbies
+					                            	{{ trans('app.I would like to use dishes of my hobbies') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'cooking_class', null, ['class' => 'check']) }}
-					                            	I am opening a cooking class and I want to increase my students by increasing my name
+					                            	{{ trans('app.I am opening a cooking class and I want to increase my students by increasing my name') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'SNS_followers', null, ['class' => 'check']) }}
-					                            	I would like to increase my boss name and increase my cook blog and SNS followers
+					                            	{{ trans('app.I would like to increase my boss name and increase my cook blog and SNS followers') }}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
-					                            	Other
+					                            	{{ trans('app.Other') }}
 					                            </label>
 					                       	</div>
 					                    @endif
@@ -259,8 +257,26 @@
 			                            	{{ trans('app.Other') }}
 			                            </label>
 			                       	</div>
-
 				                </div>
+
+			
+				                <input type="hidden" id="creatorDescriptionID" value="・自己紹介
+はじめまして、大田区西馬込に住む主婦です趣味の料理をいかして、地域の方と仲良くなりたいと思い、シェアメシに登録しました^ ^
+・得意な料理
+煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！・衛生面について注意していること
+包丁やまな板などを使用後アルコールで拭いています。
+料理前に、必ず手の消毒を行なっています。
+・イーターさんへのメッセージ・届けたい想い
+旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。">
+
+				                <input type="hidden" id="eaterDescriptionID" value="・自己紹介
+はじめまして、大田区在住で、妻と子供2人の4人暮らしをしております。
+夫婦共働きで忙しく、栄養が偏りがちになっており、素敵なメシクリエーターさんの手料理を楽しみたいと思い、登録しました！
+・お好きなお料理のジャンルや味付け
+家庭料理らしい薄い味付けが好みです
+一般的な和食から、変わったジャンルの料理まで色々試して見たいと思っています
+・メシクリエーターさんへのメッセージ、その他地域の方との関わり方についての思い
+シェアメシを通じて、ご近所さんと友人のような関係性を気づいていけたらと思っています。慣れてきたら自分もクリエーターになってみたいと思ってますので、ぜひ色々と教えてください^ ^">
 
 				                <div class="form-group form-custom-group creator-description">
 				                  	<label>{{ trans('app.Description') }}<span>*</span></label>
@@ -268,10 +284,11 @@
 料理前に、必ず手の消毒を行なっています。<br/>・イーターさんへのメッセージ・届けたい想い<br/>旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。" style="display: none; width: 300px">
 				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
 				                  	</span>
+				                  	<span id="typeEater" class="t-orange" data-toggle="tooltip" data-html="true" data-trigger="click" title="・自己紹介<br/>はじめまして、大田区在住で、妻と子供2人の4人暮らしをしております。<br/>夫婦共働きで忙しく、栄養が偏りがちになっており、素敵なメシクリエーターさんの手料理を楽しみたいと思い、登録しました！<br/>・お好きなお料理のジャンルや味付け<br/>家庭料理らしい薄い味付けが好みです<br/>一般的な和食から、変わったジャンルの料理まで色々試して見たいと思っています<br/>・メシクリエーターさんへのメッセージ、その他地域の方との関わり方についての思い<br/>シェアメシを通じて、ご近所さんと友人のような関係性を気づいていけたらと思っています。慣れてきたら自分もクリエーターになってみたいと思ってますので、ぜひ色々と教えてください^ ^" style="display: none; width: 300px">
+				                  		<i class="fa fa-question-circle" aria-hidden="false"></i>
+				                  	</span>
 				                  	{!! Form::textarea('description', null,
-				                          array('class'=>'form-control','rows'=>'5',
-				                          'placeholder'=>'・自己紹介&#013;&#010;はじめまして、大田区西馬込に住む主婦です。&#013;&#010;趣味の料理をいかして、地域の方と仲良くなりたいと思い、シェアメシに登録しました^ ^&#013;&#010;・得意な料理&#013;&#010;煮物や、手の込んだ揚げ物などの和食から、グリーンカレーなどのエスニック料理まで得意です！&#013;&#010;・衛生面について注意していること&#013;&#010;包丁やまな板などを使用後アルコールで拭いています。
-料理前に、必ず手の消毒を行なっています。&#013;&#010;・イーターさんへのメッセージ・届けたい想い&#013;&#010;旬のものを積極的に取り入れたいと思っており、お料理で季節を感じていただければ幸いです^ ^ お料理を通じて、地域の方と仲良くなれればと思っています！よろしくお願い致します。'
+				                          array('class'=>'form-control','rows'=>'7','id' => 'descriptionID'
 				                          )) !!}
 				                  	@if ($errors->has('description'))
 				                    	<span class="help-block">
@@ -468,10 +485,13 @@
 	    return false;
 	});
 
-	
+
 	//calling a function onchange of user type option
 	function types() {
 	  	var userType = $('#select-type').val();
+		var creatorPlaceholder = $('#creatorDescriptionID').val();
+		var eaterPlaceholder = $('#eaterDescriptionID').val();
+
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
 		$('.seller').children().children().prop('checked', false);	  	
@@ -486,6 +506,9 @@
 	    	$('.deliverable-area').show();
 	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').show();
+	    	$('#typeEater').hide();
+    		$('#descriptionID').prop('placeholder',creatorPlaceholder);
+
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
@@ -494,6 +517,9 @@
 	    	$('.deliverable-area').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 	    	$('#typeCreator').hide();
+	    	$('#typeEater').show();
+    		$('#descriptionID').prop('placeholder',eaterPlaceholder);
+
 	  	}
 
 	}
@@ -515,5 +541,9 @@
 	$(document).ready(function(){
   		$('[data-toggle="tooltip"]').tooltip();
 	});
+
+	
+
+	
 </script>
 @endsection

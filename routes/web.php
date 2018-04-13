@@ -47,6 +47,7 @@ Route::group( [ 'middleware' => 'auth','prefix' => 'admin'], function() {
 				Route::post('/save', 'UserRegistrationController@save')->name('save_user');
 				Route::get('/list', 'UserRegistrationController@lists')->name('list_user');
 				Route::get('/edit/{user_id}', 'UserRegistrationController@edit')->name('edit_user');
+				Route::get('/delete/{user_id}', 'UserRegistrationController@delete')->name('delete_user');
 			});
 			Route::group( ['prefix' => 'category'], function() {
 				Route::get('/create', 'CategoryController@create')->name('create_category');

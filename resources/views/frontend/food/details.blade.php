@@ -22,51 +22,48 @@
 				@endif
 		</div>
 		
-
-		<div class="section slider">					
-			<div class="row">
-				<!-- carousel -->
-				<div class="col-md-7">
-					<div id="product-carousel" class="carousel slide" data-ride="carousel">
-						<!-- Wrapper for slides -->
-						<div class="carousel-inner" role="listbox">
-
-							@if(!empty($foodImages))
-								<!-- item -->
-								<div class="item active">
-									<div class="carousel-image">
-										<!-- image-wrapper -->
-										<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
-											
-									</div>
-								</div><!-- item -->
-								@foreach($foodImages as $image)
+		@if(!empty($foodImages))
+			@php $size = sizeof($foodImages); @endphp
+			<div class="section slider">					
+				<div class="row">
+					@if($size > 1)
+						<!-- carousel -->
+						<div class="col-md-7">
+							<div id="product-carousel" class="carousel slide" data-ride="carousel">
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner" role="listbox">
 									<!-- item -->
-									<div class="item">
+									<div class="item active">
 										<div class="carousel-image">
 											<!-- image-wrapper -->
-											<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
-												
+											<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
 										</div>
 									</div><!-- item -->
-								@endforeach
-							@endif
-						</div><!-- carousel-inner -->
+									@foreach($foodImages as $image)
+										<!-- item -->
+										<div class="item">
+											<div class="carousel-image">
+												<!-- image-wrapper -->
+												<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
+													
+											</div>
+										</div><!-- item -->
+									@endforeach
+								</div><!-- carousel-inner -->
 
-						<!-- Controls -->
-						<a class="left carousel-control" href="#product-carousel" role="button" data-slide="prev">
-							<i class="fa fa-chevron-left"></i>
-						</a>
-						<a class="right carousel-control" href="#product-carousel" role="button" data-slide="next">
-							<i class="fa fa-chevron-right"></i>
-						</a><!-- Controls -->
-					</div>
-				</div><!-- Controls -->	
-				@if(!empty($food_details))
-					<!-- slider-text -->
-					<div class="col-md-5">
-						<div class="slider-text">
-							<!-- <h2>¥{{$food_details->price}}</h2> -->
+								<!-- Controls -->
+								<a class="left carousel-control" href="#product-carousel" role="button" data-slide="prev">
+									<i class="fa fa-chevron-left"></i>
+								</a>
+								<a class="right carousel-control" href="#product-carousel" role="button" data-slide="next">
+									<i class="fa fa-chevron-right"></i>
+								</a><!-- Controls -->
+							</div>
+						</div><!-- Controls -->	
+					@else
+						<!-- carousel -->
+						<div class="col-md-7">
+							@if($size == 1)
 							<h2>{{$food_details->item_name}}</h2>
 							<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
 							<!-- <p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span> -->
@@ -80,69 +77,88 @@
 	                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
 
 								<!-- price -->
-								<div class="short-info details-info">
-									<h4>{{ trans('app.Price') }}</h4>
-									<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right"><strong>¥ {{$food_details->price}}</strong></span></p>
-									<!-- <p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
-										@foreach($foodCosting as $key => $costing)
-										<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
-										@endforeach
-									</p> -->
-									<!-- <p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
-										@if(!empty($food_details->shipping_fee))
-											¥ {{$food_details->shipping_fee}}
-										@endif
-									</span></p> -->
-									<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ {{$commission}}</strong>
-									</span></p>
-									<div class="price-line"></div>
-									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
-									<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
-									<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
-
-									<h4>{{ trans('app.Deliverable Area') }}:</h4>
-									<span style="font-size: 14px;font-weight: bold;color: #272727;">{{$food_details->deliverable_area}}</span>
-
-									<h4>{{ trans('app.Date of Delivery') }}:</h4>
-									<span style="font-size: 16px;font-weight: bold;color: #272727;">{{$food_details->date}}</span>
+								<div class="">
+									<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
 								</div>
-								<!-- price -->
-
-
-
-								<!-- contact-with -->
-
-								<div class="contact-with">
-									<div class="col-md-6 p-0">
-										<div class="form-group">
-											<select onchange="checkForValue(this)" class="form-control" name="slot">
-												<option value="">{{ trans('app.Select Your Time') }}</option>
-												@if(!empty($time_of_availability))
-				                  					@foreach($time_of_availability as $key => $slot)
-														<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
-													@endforeach
-												@endif
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										@if(Auth::User())
-											@if((Auth::User()->user_id) != $food_details->offered_by)
-												<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
-											@endif
-										@else
-											<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
-										@endif
-										<!-- </a> -->
-
-									</div>
-								</div><!-- contact-with -->
-		            		{!! Form::close() !!}
+							@endif
 						</div>
-					</div><!-- slider-text -->	
-				@endif			
-			</div>				
-		</div><!-- slider -->
+					@endif
+					@if(!empty($food_details))
+							<!-- slider-text -->
+							<div class="col-md-5">
+								<div class="slider-text">
+									<!-- <h2>¥{{$food_details->price}}</h2> -->
+									<h2>{{$food_details->item_name}}</h2>
+									<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
+									<!-- <p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span> -->
+									<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
+									<!-- <span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span> -->
+									<!-- <span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span> -->
+									<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
+									
+									{!! Form::open(array('id'=>"buy_now_form")) !!}
+			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
+			                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
+
+										<!-- price -->
+										<div class="short-info details-info">
+											<h4>{{ trans('app.Price') }}</h4>
+											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right"><strong>¥ {{$food_details->price}}</strong></span></p>
+											<!-- <p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
+												@foreach($foodCosting as $key => $costing)
+												<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
+												@endforeach
+											</p> -->
+											<!-- <p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
+												@if(!empty($food_details->shipping_fee))
+													¥ {{$food_details->shipping_fee}}
+												@endif
+											</span></p> -->
+											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ {{$commission}}</strong>
+											</span></p>
+											<div class="price-line"></div>
+											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
+											<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
+											<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
+										</div>
+										<!-- price -->
+										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Deliverable Area') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->deliverable_area}}</a></span></p>
+
+										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->date}}</a></span></p>
+										<!-- contact-with -->
+
+										<div class="contact-with">
+											<div class="col-md-6 p-0">
+												<div class="form-group">
+													<select onchange="checkForValue(this)" class="form-control" name="slot">
+														<option value="">{{ trans('app.Select Your Time') }}</option>
+														@if(!empty($time_of_availability))
+						                  					@foreach($time_of_availability as $key => $slot)
+																<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
+															@endforeach
+														@endif
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												@if(Auth::User())
+													@if((Auth::User()->user_id) != $food_details->offered_by)
+														<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+													@endif
+												@else
+													<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
+												@endif
+												<!-- </a> -->
+
+											</div>
+										</div><!-- contact-with -->
+				            		{!! Form::close() !!}
+								</div>
+							</div><!-- slider-text -->	
+						@endif
+				</div>
+			</div>
+		@endif
 
 		@if(!empty($food_details))
 			<div class="description-info">

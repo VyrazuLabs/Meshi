@@ -15,18 +15,22 @@
 				<!-- user-login -->			
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card">
+					@if($form_type == 'edit')
+						<h2>{{ trans('app.Edit Food') }}</h2>
+					@else
 						<h2>{{ trans('app.Food Register') }}</h2>
+					@endif
 						<!-- form -->
 						
 						{!! Form::open(array('url' => route('save_food_item_user'),'files' => true)) !!}
-            	@if(!empty($food_items))
-                	{{ Form::model($food_items) }}
-              	@endif
-                {{Form::hidden('food_item_id',null)}}
+		            	@if(!empty($food_items))
+		                	{{ Form::model($food_items) }}
+		              	@endif
+		                {{Form::hidden('food_item_id',null)}}
 
-                @php 
-                	$selectPlaceholder = trans('app.Please Select'); 
-                @endphp
+		                @php 
+                			$selectPlaceholder = trans('app.Please Select'); 
+                		@endphp
               	<div class="box-body">
 	                <div class="form-group form-custom-group">
 	                  <label>{{ trans('app.Category') }}<span>*</span></label>
@@ -109,6 +113,7 @@
 	                	@if(!empty($time_of_availability))
 		                  	@foreach($time_of_availability as $key => $slot)
 		                  		<div class="col-lg-12 col-xs-12 p-0 float-left">
+		                  		<i class="fa fa-times float-right time-cross" aria-hidden="true"></i>
 		                    		<div class="start-time-id float-left">
 				                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
 				                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
@@ -272,7 +277,7 @@
 	      if(x < max_fields){ //max input box allowed
 	        x++; //text box increment
 
-	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
+	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross " onclick="closetimeslot(this)" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
 	        $(".time-cross").click(function(){
 	        	$(this).parent().remove();
 	        });
@@ -319,6 +324,14 @@
       minuteStep: 30,
 	  // defaultTime: false
     });
+
+    $('.time-cross').click(function(){
+    	closetimeslot(this);
+	});
+
+    function closetimeslot(selector) {
+		$(selector).parent().remove();
+    }
 
 
 

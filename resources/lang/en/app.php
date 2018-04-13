@@ -173,6 +173,8 @@ return [
     'Subject' => 'Subject',
     'Message' => 'Message',
     'Deliverable Area' => 'Deliverable Area',
+    'FOOD LIST' => 'FOOD LIST',
+    'Edit Food' => 'Edit Food',
     
 
 

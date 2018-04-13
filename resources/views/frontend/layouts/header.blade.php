@@ -21,6 +21,7 @@
 							@if(Auth::user() && Auth::user()->type == 1)
 								<li><a href="{{route('profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.PROFILE') }}</a></li>
 								<li><a href="{{ url('/food/create')}}">{{ trans('app.ADD FOOD ITEM') }} </a></li>
+								<li><a href="{{ url('/food/lists')}}">{{ trans('app.FOOD LIST') }} </a></li>
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
 							@endif

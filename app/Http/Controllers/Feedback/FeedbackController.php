@@ -29,8 +29,8 @@ class FeedbackController extends Controller
                         ]);
 
         //****** CODE FOR MAIL SENDING ******//
-        $email = 'contact@sharemeshi.com'; //this email is for feedback section
-        // $email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+        // $email = 'contact@sharemeshi.com'; //this email is for feedback section
+        $email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
         Mail::send('feedback.feedback-mail',['subject'=>$input['subject'],'messages' => $input['message'], 'name' => $input['name'], 'sender' => $input['email']], function($message) use ($input,$email) {
           $message->to($email)
                   ->subject('FEEDBACK');

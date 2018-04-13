@@ -9,6 +9,12 @@ use Auth;
 use Session;
 use App\Models\User;
 use App\Models\ProfileInformation;
+use App\Models\Food\FoodItem;
+use App\Models\Food\FoodItemCosting;
+use App\Models\Order\Order;
+use App\Models\Review\Review;
+use App\Models\Payment\Payments;
+
 
 class UserRegistrationController extends Controller
 {	
@@ -275,7 +281,6 @@ class UserRegistrationController extends Controller
                                     ]);
   	}
 
-
   	protected function passwordValidator($request) {
     	return Validator::make($request,[
                                       'password' => 'required|min:6',
@@ -296,13 +301,10 @@ class UserRegistrationController extends Controller
                                     ]);
   	}
 
-  	
-
     public function lists() {
     	$users = User::whereIn('type',['1','2'])->get();
     	return view('admin.user-list',['users'=>$users]);
     }
-
 
     public function edit($user_id = null) {
     	$user = User::where('user_id',$user_id)->first();
@@ -332,5 +334,48 @@ class UserRegistrationController extends Controller
     	}
 
     	return view('admin.create-user',['user'=>$user,'form_type' => 'edit']);
+    }
+
+    public function delete($user_id = null) {
+
+    	$user = User::where('user_id',$user_id)->first();
+    	if (!empty($user)) {
+    		$profile = ProfileInformation::where('user_id',$user_id)->first();
+    		$foodItem = FoodItem::where('offered_by',$user_id)->first();
+    		$review = Review::where('user_id',$user_id)->first();
+    		$reviewedBy = Review::where('reviewed_by',$user_id)->first();
+    		$order = Order::where('ordered_by',$user_id)->first();
+
+    		if(!empty($user)) {
+    			$user->delete();
+    		}
+    		if(!empty($foodItem)) {
+    			$foodItemCosting = FoodItemCosting::where('food_item_id',$foodItem->food_item_id)->first();
+    			if(!empty($foodItemCosting)) {
+    				$foodItemCosting->delete();
+    			}
+    			$foodItem->delete();
+    		}
+    		if(!empty($profile)) {
+    			$profile->delete();
+    		}
+    		
+    		if(!empty($review)) {
+    			$review->delete();
+    		}
+    		if(!empty($reviewedBy)) {
+    			$reviewedBy->delete();
+    		}
+    		if(!empty($order)) {
+    			$payment = Payments::where('order_id',$order->order_id)->first();
+    			if(!empty($payment)) {
+    				$payment->delete();
+    			}
+    			$order->delete();
+    		}
+    		
+    	}
+	    Session::flash('success', "Deleted successfully");
+    	return back();
     }
 }

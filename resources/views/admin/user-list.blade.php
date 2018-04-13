@@ -47,7 +47,10 @@
                     Inactive
                   @endif
                 </td>
-                <td><a href="{{route('edit_user',['user_id' => $user['user_id']])}}" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                <td>
+                  <a href="{{route('edit_user',['user_id' => $user['user_id']])}}" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a href="{{route('delete_user',['user_id' => $user['user_id']])}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
               </tr>
             @endforeach
             
