@@ -25,8 +25,8 @@ class ProfileController extends Controller
             if(!empty($profile->cover_image)) {
                 $user->cover_image = $profile->cover_image;
             }
-            if(!empty($profile->city)) {
-                $user->city = $profile->city;
+            if(!empty($profile->deliverable_area)) {
+                $user->deliverable_area = $profile->deliverable_area;
             }
             $user->description = $profile->description;
             $user->total_dishes = $profile->total_dishes;

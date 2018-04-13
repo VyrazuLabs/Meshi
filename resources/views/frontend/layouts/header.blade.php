@@ -25,7 +25,8 @@
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
 							@endif
 							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
-						
+
+							<li><a href="{{ url('/about-us') }}">{{ trans('app.About Us') }}</a> </li>
 							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
 					</div>
