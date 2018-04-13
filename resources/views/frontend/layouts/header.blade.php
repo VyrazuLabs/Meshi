@@ -52,7 +52,7 @@
 					<!-- sign-in -->
 					<ul class="sign-in">
 						@if(Auth::User())
-							<li><i class="fa fa-user"></i>{{Auth::User()->name}}</li>
+							<li><i class="fa fa-user"></i>{{Auth::User()->nick_name}}</li>
 			            	<li><a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
 						@else
 							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
