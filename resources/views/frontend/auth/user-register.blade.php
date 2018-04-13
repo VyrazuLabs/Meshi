@@ -129,67 +129,67 @@
 				                </div>
 				                @if($form_type == 'edit')
 					                <div class="form-group form-custom-group reason edit-reason">
-					                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
+					                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('app.Reason why you want to use share map (multiple selections possible)') }}</font></font></label>
 					                	@if($user->type == 2)
-						                	<div class="col-md-8 buyer">
+						                	<div class="col-md-8 buyer test">
 						                		<label>
 						                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }}
-						                			 Busy with working
+						                			 {{ trans('app.Busy with working') }}
 					                           	</label> 
 					                           	<label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'live_alone', null, ['class' => 'check']) }}
-					                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
+					                           		{{ trans('app.I got bored with convenience stores, medium meals, and other lunches because I live alone') }}
 					                            </label> 
 					                            <label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'few_restaurants', null, ['class' => 'check']) }}
-					                            	There are few restaurants around the office
+					                            	{{ trans('app.There are few restaurants around the office')}}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_time', null, ['class' => 'check']) }}
-					                            	I am busy raising children and have no time to make rice
+					                            	{{ trans('app.I am busy raising children and have no time to make rice') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'like_to_eat', null, ['class' => 'check']) }}
-					                            	I would like to eat a variety of nationalities and people's cooking.
+					                            	{{ trans('app.I would like to eat a variety of nationalities and peoples cooking') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_reason', null, ['class' => 'check']) }}
-					                            	There is no big reason, but it seems interesting, so I would like to use it
+					                            	{{ trans('app.There is no big reason, but it seems interesting, so I would like to use it') }}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
-					                            	Other
+					                            	{{ trans('app.Other') }}
 					                            </label>
 					                       	</div>
 					                	@elseif($user->type == 1)
-						                	<div class="col-md-8 seller">
+						                	<div class="col-md-8 seller test2">
 						                		<label>
 						                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }} 
-						                			 I would like to use someone's help through my cooking
+						                			 {{ trans("app.I would like to use someone's help through my cooking") }}
 					                           	</label> 
 					                           	<label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-					                           		 I want to earn rewards using free time  
+					                           		{{ trans('app.I want to earn rewards using free time') }}
 					                            </label> 
 					                            <label>
 					                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-					                            	I want to earn more rewards than bytes and parts  
+					                            	{{ trans('app.I want to earn more rewards than bytes and parts') }}  
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'hobby', null, ['class' => 'check']) }}
-					                            	I would like to use dishes of my hobbies
+					                            	{{ trans('app.I would like to use dishes of my hobbies') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'cooking_class', null, ['class' => 'check']) }}
-					                            	I am opening a cooking class and I want to increase my students by increasing my name
+					                            	{{ trans('app.I am opening a cooking class and I want to increase my students by increasing my name') }}
 					                            </label> 
 					                            <label> 
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'SNS_followers', null, ['class' => 'check']) }}
-					                            	I would like to increase my boss name and increase my cook blog and SNS followers
+					                            	{{ trans('app.I would like to increase my boss name and increase my cook blog and SNS followers') }}
 					                            </label> 
 					                            <label>
 					                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
-					                            	Other
+					                            	{{ trans('app.Other') }}
 					                            </label>
 					                       	</div>
 					                    @endif
