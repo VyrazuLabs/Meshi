@@ -99,11 +99,17 @@
 									<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
 									<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
 									<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
+
+									<h4>{{ trans('app.Deliverable Area') }}:</h4>
+									<span style="font-size: 14px;font-weight: bold;color: #272727;">{{$food_details->deliverable_area}}</span>
+
+									<h4>{{ trans('app.Date of Delivery') }}:</h4>
+									<span style="font-size: 16px;font-weight: bold;color: #272727;">{{$food_details->date}}</span>
 								</div>
 								<!-- price -->
-								<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Deliverable Area') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->deliverable_area}}</a></span></p>
 
-								<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->date}}</a></span></p>
+
+
 								<!-- contact-with -->
 
 								<div class="contact-with">

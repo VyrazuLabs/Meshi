@@ -12,11 +12,6 @@
 <section id="" class="clearfix category-page">
 	<div class="container">
 		<div class="breadcrumb-section">
-			<!-- breadcrumb -->
-			<ol class="breadcrumb new-breadcrumb">
-				<li><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
-				<li><a href="#">{{$user->nick_name}}</a></li>
-			</ol><!-- breadcrumb -->						
 			<h2 class="title t-orange d-inline-block">{{ trans('app.Profile')}}</h2>
 			@if(Auth::user())
 				@if($user->user_id == Auth::User()->user_id)
