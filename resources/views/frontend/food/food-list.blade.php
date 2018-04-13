@@ -27,15 +27,15 @@
 						<div class="cart-item">
 							<div class="col-lg-9 col-md-9 col-xs-12 p-0">
 								<h3 class="t-black cart-item-title">{{$food->item_name}}</h3>
-								<h5><span><strong class="t-orange">Category:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> Date:</strong> 14/04/2018</span></h5>
+								<h5><span><strong class="t-orange">Category:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> Date:</strong> {{$food->date}}</span></h5>
 								<h5 class="t-black"><strong>Description</strong></h5>
-								<p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+								<p class="mb-0">{{$food->food_description}}</p>
 							</div>
 							<div class="col-lg-3 col-md-3 col-xs-12 p-0 food-creator-pricebtn">
-								<h3 class="t-orange text-right mt-0">Price ¥350.00</h3>
+								<h3 class="t-orange text-right mt-0">Price ¥{{$food->price}}</h3>
 								<div class="food-creator-btn-group float-right">
-									<button type="button" class="btn text-right food-creator-list-btn">Remove</button>
-									<button type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">Edit</button>
+									<a href="{{route('delete_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn">Remove</a>
+									<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">Edit</a>
 								</div>
 							</div>
 						</div>
@@ -46,17 +46,7 @@
 						<!-- pagination  -->
 						<div class="text-center">
 							<ul class="pagination ">
-								<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a>...</a></li>
-								<li><a href="#">10</a></li>
-								<li><a href="#">20</a></li>
-								<li><a href="#">30</a></li>
-								<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>			
+								{!! $foods->render() !!}
 							</ul>
 						</div><!-- pagination  -->
 					</div>
