@@ -140,7 +140,7 @@
                                                                     $duration = 30 * 60;
 																@endphp
 
-																@for($i = $startTime; $i < $endTime; $i += $duration)
+																@for($i = $startTime; $i <= $endTime; $i += $duration)
 																	@php
 																		$start = date( 'H:i', $i);
                                                                         $end = date( 'H:i', $i + $duration)
