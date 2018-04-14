@@ -94,7 +94,7 @@
 														@endif
 													@endforeach
 												@else
-													<img src="{{ url('frontend/images/categories/1.png') }}" alt="Image" class="img-responsive">
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="Image" class="img-responsive">
 												@endif
 											</a>
 											</div><!-- item-image -->
