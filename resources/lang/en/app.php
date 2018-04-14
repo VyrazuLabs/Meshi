@@ -66,6 +66,7 @@ return [
 	'Do not have an account' => 'Do not have an account',
 	'Sign Up here' => 'Sign Up here',
 	'Name' =>'Name',
+    'FoodName' => 'Food Name',
 	'User Register' => 'Member registration (free)',
 	'Email' => 'Email',
 	'Password' => 'Password',

@@ -43,7 +43,7 @@
 	                </div>
 
 	                <div class="form-group form-custom-group">
-	                  	<label>{{ trans('app.Name') }}<span>*</span></label>
+	                  	<label>{{ trans('app.FoodName') }}<span>*</span></label>
 						{!! Form::text('item_name', null, 
 						    array(
 						          'class'=>'form-control')) !!}
