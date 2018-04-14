@@ -49,7 +49,7 @@ return [
 	'Nickname' => 'ニックネーム',
 	'City' => 'お住まい',
 	'Schedule' => 'スケジュール',
-	'Share Video' => '動画をシェアする',
+	'Share Video' => 'ご紹介動画',
 	'Review' => 'レビュー',
 	'Introduction' => '自己紹介',
 	'Message From' => 'シェアメシからのご推薦',

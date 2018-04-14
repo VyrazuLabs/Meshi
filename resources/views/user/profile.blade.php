@@ -53,7 +53,9 @@
 							</div> -->
 							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-descriptions">
 
-								<p class="profile-title profile-head-title">{{$user->nick_name}}</p>
+
+								<p class="profile-title profile-head-title">
+									<span style="font-size: 14px;">{{ trans('app.Nickname') }} :</span>{{$user->nick_name}}</p>
 							</div>
 						<!-- </div> -->
 						{{--<div class="col-md-4 profile-timeline">--}}
@@ -90,16 +92,13 @@
 					<!-- </div> -->
 					<div class="col-lg-12 col-12 p-0 profile-description">
 						<div class="col-md-8 float-none profileplace-name">
-							<div class="col-md-6">
-								<p><strong>{{ trans('app.Nickname') }} :</strong><span> {{ $user->nick_name }}</span></p>
-							</div>
 							<!-- <div class="col-md-3">
 								<p><strong>EmailId :</strong><span> {{$user->email}}</span></p>
 							</div>
 							<div class="col-md-3">
 								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
 							</div> -->
-							<div class="col-md-6">
+							<div class="col-md-8 col-md-offset-2">
 								<p><strong>{{ trans('app.Deliverable Area') }} :</strong>
 									<span> 
 										{{$user->deliverable_area}}
