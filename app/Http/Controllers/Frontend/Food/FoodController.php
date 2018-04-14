@@ -46,8 +46,7 @@ class FoodController extends Controller
             //getting the food images
             $images = $food_details->food_images;
             $foodImages = unserialize($images);
-          // echo"<pre>";print_r($foodImages);die;
-            
+
         }
 
         if(!empty($profile->deliverable_area)) {

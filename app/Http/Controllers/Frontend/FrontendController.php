@@ -64,8 +64,6 @@ class FrontendController extends Controller
                 }
 
                 if(!empty($food->food_images)) {
-          // echo"<pre>";print_r($food->food_images);die;
-
                     //getting the food images
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
@@ -89,8 +87,6 @@ class FrontendController extends Controller
                 }
 
                 if(!empty($food->food_images)) {
-          // echo"<pre>";print_r($food->food_images);die;
-
                     //getting the food images
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
@@ -115,8 +111,6 @@ class FrontendController extends Controller
                 }
 
                 if(!empty($food->food_images)) {
-          // echo"<pre>";print_r($food->food_images);die;
-                    
                     //getting the food images
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
