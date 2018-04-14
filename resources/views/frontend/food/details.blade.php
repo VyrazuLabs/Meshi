@@ -124,17 +124,29 @@
 										<!-- price -->
 										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Deliverable Area') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->deliverable_area}}</a></span></p>
 
-										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->date}}</a></span></p>
+										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#" id="delivery-date"> {{$food_details->date}}</a></span></p>
 										<!-- contact-with -->
 
 										<div class="contact-with">
 											<div class="col-md-6 p-0">
 												<div class="form-group">
-													<select onchange="checkForValue(this)" class="form-control" name="slot">
+													<select id="select-deliverable-time" onchange="checkForValue(this)" class="form-control" name="slot">
 														<option value="">{{ trans('app.Select Your Time') }}</option>
 														@if(!empty($time_of_availability))
-						                  					@foreach($time_of_availability as $key => $slot)
-																<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
+															@foreach($time_of_availability as $key => $slot)
+																@php
+																	$startTime = strtotime($food_details->date. $key);
+                                                                    $endTime = strtotime($food_details->date. $slot);
+                                                                    $duration = 30 * 60;
+																@endphp
+
+																@for($i = $startTime; $i < $endTime; $i += $duration)
+																	@php
+																		$start = date( 'H:i', $i);
+                                                                        $end = date( 'H:i', $i + $duration)
+																	@endphp
+																	<option value="{{$start}}-{{$end}}" data-start-time="{{$start}}" data-end-time="{{$end}}">{{$start}}-{{$end}}</option>
+																@endfor
 															@endforeach
 														@endif
 													</select>
@@ -301,6 +313,7 @@ function checkForValue(param) {
 		$('#buy_now_btn_bfr_login').attr('href', '#');
 	}
 }
+
 
 </script>
 @endsection
