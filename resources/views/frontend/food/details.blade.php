@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+
 <section id="" class="clearfix details-page">
 	<div class="container">
 		<div class="breadcrumb-section">
@@ -150,6 +151,14 @@
 															@endforeach
 														@endif
 													</select>
+													<!-- <select onchange="checkForValue(this)" class="form-control" name="slot">
+														<option value="">{{ trans('app.Select Your Time') }}</option>
+														@if(!empty($time_of_availability))
+						                  					@foreach($time_of_availability as $key => $slot)
+																<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
+															@endforeach
+														@endif
+													</select> -->
 												</div>
 											</div>
 											<div class="col-md-6">

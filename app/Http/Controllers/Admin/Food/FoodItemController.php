@@ -232,7 +232,7 @@ class FoodItemController extends Controller
 
 		//CONVERTING DATE FORMAT
     	if(!empty($food_items->date_of_availability)) {
-    		$food_items->date_of_availability = date('d-m-Y', strtotime($food_items->date_of_availability));
+    		$food_items->date_of_availability = date('Y-m-d', strtotime($food_items->date_of_availability));
     	}
 
     	if(!empty($food_items->food_images)) {
@@ -251,13 +251,18 @@ class FoodItemController extends Controller
     }
 
     public function lists() {
-    	$food_items = FoodItem::where('status',1)->get();
+    	$food_items = FoodItem::get();
     	if(!empty($food_items)) {
     		foreach ($food_items as $key => $food) {
+    			$user = User::where('user_id',$food->offered_by)->first();
+    			if(!empty($user)) {
+    				$food->creator_name = $user->nick_name;
+    			}
     			$category = Category::where('category_id',$food->category_id)->first();
     			if(!empty($category)) {
     				$food->category_name = $category->category_name;
     			}
+
     		}
     	}
     	return view('food.list-food-item',['food_items'=>$food_items]);

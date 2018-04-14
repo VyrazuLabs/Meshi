@@ -16,8 +16,10 @@
             <thead>
             <tr>
               <th>Sl. No.</th>
-              <th>Name</th>
+              <th>Creator Name</th>
+              <th>Item Name</th>
               <th>Category</th>
+              <th>Delivery Date</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -27,17 +29,19 @@
             @foreach($food_items as $food)
               <tr>
                 <td>{{$i++}}</td>
+                <td>{{$food->creator_name}}</td>
                 <td>{{$food->item_name}}</td>
                 <td>{{$food->category_name}}</td>
+                <td>{{$food->date_of_availability}}</td>
                 <td>
                   @if($food->status == 1)
                     Active
-                  @elseif($food->status == 2)
+                  @else
                     Inactive
                   @endif
                 </td>
                 <td>
-                  <a href="{{route('add_food_item_costing',['food_item_id' => $food['food_item_id']])}}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                  <!-- <a href="{{route('add_food_item_costing',['food_item_id' => $food['food_item_id']])}}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
                   <a href="{{route('edit_food_item',['food_item_id' => $food['food_item_id']])}}" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 </td>
               </tr>
