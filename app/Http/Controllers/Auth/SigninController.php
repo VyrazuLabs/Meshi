@@ -107,8 +107,8 @@ class SigninController extends Controller
             ]);
 
             //SEND MAIL
-            Mail::send('frontend.email.forget_password_email',['name'=>$name,'name' => 'Share Meshi','email' => $email,'uniqueid' => $uniqueid],function($message) use($email,$name){
-                $message->from('vyrazulabs@gmail.com', $name = null)->to($email,$name)->subject('Your password reset link');
+            Mail::send('frontend.email.forget_password_email',['name'=>$name,'name' => 'Sharemeshi','email' => $email,'uniqueid' => $uniqueid],function($message) use($email,$name){
+                $message->from('contact@sharemeshi.com', $name = null)->to($email,$name)->subject('Your password reset link');
             });
             Session::flash('success', "Mail has been sent");
             return redirect()->back();

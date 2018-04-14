@@ -136,12 +136,12 @@
                                                                     $duration = 30 * 60;
 																@endphp
 
-																@for($i = $startTime; $i < $endTime; $i += $duration)
+																@for($i = $startTime; $i <= $endTime; $i += $duration)
 																	@php
 																		$start = date( 'H:i', $i);
                                                                         $end = date( 'H:i', $i + $duration)
 																	@endphp
-																	<option value="{{$start}}-{{$end}}" data-start-time="{{$start}}" data-end-time="{{$end}}">{{$start}}-{{$end}}</option>
+																	<option value="{{$start}}">{{$start}}</option>
 																@endfor
 															@endforeach
 														@endif
@@ -167,6 +167,7 @@
 												<!-- </a> -->
 
 											</div>
+											<p>※前後5分程度の余裕を見てお待ちください</p>
 										</div><!-- contact-with -->
 				            		{!! Form::close() !!}
 								</div>

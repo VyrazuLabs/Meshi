@@ -47,7 +47,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											{!! Form::email('email', null, 
+											{!! Form::email('email', null,
 				                          		array('class'=>'form-control','placeholder' => $emailId)) !!}
 				                          	@if ($errors->has('email'))
 											  	<span class="help-block">
