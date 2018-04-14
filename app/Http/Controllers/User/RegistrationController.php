@@ -18,8 +18,6 @@ class RegistrationController extends Controller
 
     public function save(Request $request) {
     	$input = $request->input();
-
-
     	$file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
@@ -28,28 +26,21 @@ class RegistrationController extends Controller
         
         /* update user */
 	    if(isset($input['user_id'])) {
-
-
 	    	/* check validation for user updation */
 	    	if($userUpdateValidator->fails()) {
 	        	Session::flash('error', trans('validation.form_error'));
         		return redirect()->back()->withInput()->withErrors($userUpdateValidator);
-
 	        }
 	        else {
-
 	        	
 	        	/* get user and their profile details */
 	        	$user = User::where('user_id',$input['user_id'])->first();
 				$profile = ProfileInformation::where('user_id',$input['user_id'])->first();
 
-
 		        /********* Create lat long from given address ********/
 		        $address = stripslashes($input['address']); //Address
 		        // GET JSON RESULTS FROM THIS REQUEST
 		        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38');
-
-
 		        $latitude = '';
 		        $longitude = '';
 		        $city_name = '';
@@ -59,30 +50,16 @@ class RegistrationController extends Controller
 		        	foreach ($addressArray as $key => $value) {
 		        		$addressTypeArray = $value['types'];
 		        		if (in_array("locality", $addressTypeArray)){
-					  		// echo"<pre>";print_r($value);die;
 					  		$city_name = $value['short_name'];
 						}
 		        	}
-
-		   //      	if (in_array("locality", $geo['results'][0])){
-					//   echo "Match found";
-					// }
-					// echo"<pre>";print_r($resultsArray);die;
+		   
 		            // GET LAT & LONG
 		            $latitude = $geo['results'][0]['geometry']['location']['lat'];
 		            $longitude = $geo['results'][0]['geometry']['location']['lng'];
 		        }
 
 		        /******** update reason for registering ********/
-		        // $reason = '';
-		        // if( !empty($input['reason_for_registration']) ) {
-		        //     foreach ( $input['reason_for_registration'] as $value ) {
-		        //         $reason .= $value.',';
-		        //     }
-		        // }
-		        // $reason = substr($reason, 0, -1);
-
-
 		      	$reason = '';
 		        if( !empty($input['reason_for_registration_edit']) ) {
 		        	$modified_array = array_unique($input['reason_for_registration_edit']);
