@@ -292,9 +292,11 @@ class PaymentController extends Controller
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-            \Session::put('error','Payment failed');
+            // \Session::put('error','Payment failed');
             // return Redirect::route('addmoney.paywithpaypal');
-            return Redirect::route('make_order',[$foodItemId]);
+            Session::flash('error','Payment failed');
+            return redirect('food/details/'.$foodItemId);
+            
         }
         $payment = Payment::get($payment_id, $this->_api_context);
         /** PaymentExecution object includes information necessary **/
@@ -367,8 +369,11 @@ class PaymentController extends Controller
             return redirect('/');
             //return Redirect::route('driver_bidding_list', ['move_id' => $move_id]);
         }
-        \Session::put('error','Payment failed');
-        return Redirect::route('make_order',[$foodItemId]);
+        // \Session::put('error','Payment failed');
+        // return Redirect::route('make_order',[$foodItemId]);
+
+        Session::flash('error','Payment failed');
+        return redirect('food/details/'.$foodItemId);
     }
 
 }
