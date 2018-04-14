@@ -83,7 +83,9 @@ class FoodController extends Controller
   // DISPLAY SAVE FOOD PAGE
   public function create() {
     $deliverable_area = '';
-    $category_id = Category::where('status',1)->pluck('category_name','category_id');
+    $category_id = Category::where('status',1)
+                           ->orderBy('id','ASC')
+                           ->pluck('category_name','category_id');
     $offered_by = User::where('type',1)->pluck('name','user_id');
     $profile = ProfileInformation::where('user_id',Auth::User()->user_id)->first();
    
@@ -95,7 +97,6 @@ class FoodController extends Controller
 
   // SAVE FOOD
   public function save(Request $request) {
-
     $input = $request->input(); 
     $createItemValidator = $this->createItemValidator($input);
     $updateItemValidator = $this->updateItemValidator($input);
@@ -344,7 +345,10 @@ class FoodController extends Controller
     $food_images = '';
     $time_of_availability = '';
     $deliverable_area = '';
-    $category_id = Category::where('status',1)->pluck('category_name','category_id');
+    $category_id = Category::where('status',1)
+                           ->orderBy('id','ASC')
+                           ->pluck('category_name','category_id');
+                           
     $offered_by = User::where('type',1)->pluck('name','user_id');
     $food_items = FoodItem::where('food_item_id',$food_item_id)->first();
     $profile = ProfileInformation::where('user_id',Auth::User()->user_id)->first();
