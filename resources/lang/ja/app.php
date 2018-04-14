@@ -32,7 +32,7 @@ return [
 	'Select Language' => '表示言語を選択する',
 	'Japanese' => '日本語',
 	'Home' => 'ホーム',
-	'Food Details' => '食品の詳細',
+	'Food Details' => 'お料理の詳細',
 	'Offered by' => 'メシクリエーター',
 	'Short Info' => '料理に関する補足',
 	'Price' => '価格',
