@@ -140,10 +140,11 @@ class FoodController extends Controller
                                'time_of_availability' => serialize($timeTable),
                                'category_id' => $input['category_id'],
                                'price' => ceil($input['price']),
+                               'deliverable_area' => $input['deliverable_area']
                               ]);
 
           $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
-          $profile->update(['deliverable_area' => $input['deliverable_area']]);
+          // $profile->update(['deliverable_area' => $input['deliverable_area']]);
 
           if ($request->hasFile('food_images')) {
             $files = $request->file('food_images');
@@ -210,13 +211,12 @@ class FoodController extends Controller
                                     'time_of_availability' => serialize($timeTable),
                                     'offered_by' => Auth::user()->user_id,
                                     'status' => 1,
-                                    // 'shipping_fee' => $input['shipping_fee'],
                                     'price' => ceil($input['price']),
-                                    // 'short_info' => $input['short_info']
+                                    'deliverable_area' => $input['deliverable_area']
                                 ]);
 
         $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
-        $profile->update(['deliverable_area' => $input['deliverable_area']]);
+        // $profile->update(['deliverable_area' => $input['deliverable_area']]);
 
         if($profile->total_dishes == 0) {
           $profile->update(['total_dishes' => 1]);
@@ -353,7 +353,10 @@ class FoodController extends Controller
     $food_items = FoodItem::where('food_item_id',$food_item_id)->first();
     $profile = ProfileInformation::where('user_id',Auth::User()->user_id)->first();
    
-    if(!empty($profile)) {
+    if(!empty($food_items->deliverable_area)) {
+      $deliverable_area = $food_items->deliverable_area;
+    }
+    else {
       $deliverable_area = $profile->deliverable_area;
     }
 

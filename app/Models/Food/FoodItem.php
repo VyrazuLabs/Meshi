@@ -22,7 +22,8 @@ class FoodItem extends Model
 				            'status',
 				            'shipping_fee',
 				            'price',
-				            'short_info'
+				            'short_info',
+				            'deliverable_area'
     					);
 
     protected $dates = ['deleted_at'];
