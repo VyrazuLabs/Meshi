@@ -6,6 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
+                @if(Session::has('login_status'))
+                    <p class="alert alert-danger load-limit">{{ Session::get('login_status') }}</p>
+                @endif
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -66,4 +69,6 @@
         </div>
     </div>
 </div>
+ {!! Session::forget('login_status'); !!}
+
 @endsection
