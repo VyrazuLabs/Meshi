@@ -273,6 +273,7 @@ class FoodItemController extends Controller
     /* DELETE FOOD IMAGES */
   	public function delete( $food_image = null,$food_item_id = null ) {
 	    $food_item = FoodItem::where('food_item_id',$food_item_id)->first();
+	    $imgArray = [];
 	    if(!empty($food_item)) {
 		    if(!empty($food_item->food_images)) {
 		    	$images = unserialize($food_item->food_images);
@@ -287,10 +288,14 @@ class FoodItemController extends Controller
 			          unlink(public_path().'/uploads/food/'.$delete_image); 
 			        }
 			      } 
+			      else {
+			      	$imgArray[] = $delete_image;
+			      }
 			    }
 		    }
+
 		    //AFTER DELETION UPDATE REMAINING IMAGES 
-		    $new_food_images = $food_item->update(['food_images' => serialize($images) ]);
+		    $new_food_images = $food_item->update(['food_images' => serialize($imgArray) ]);
 		    Session::flash('success', "Food image deleted.");
 		}
 	    return redirect()->back();
