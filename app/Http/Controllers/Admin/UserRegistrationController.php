@@ -27,9 +27,12 @@ class UserRegistrationController extends Controller
     public function save(Request $request) {
     	$input = $request->input();   
     	$file = $request->file();
+    	// echo"<pre>";print_r($file);die;
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
         $profileImageValidator = $this->profileImageValidator($file);
+        $coverImageValidator = $this->coverImageValidator($file);
+
         
         /* update user */
 	    if(isset($input['user_id'])) {
@@ -127,32 +130,65 @@ class UserRegistrationController extends Controller
 
  
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
-		        $profileImageValidator = $this->profileImageValidator($file);
-		        if( $profileImageValidator->fails()) {
-		            $errors = $profileImageValidator->errors();
+		        if(!empty($file['image'])) {
+			        $profileImageValidator = $this->profileImageValidator($file);
+			        // echo"<pre>";print_r($file['cover_image']);die;
+			        if( $profileImageValidator->fails()) {
+			            $errors = $profileImageValidator->errors();
 
-		            //WHEN PROFILE PICTURE IS MISSING
-		            if($errors->first('image')) {
-		              if( !empty($profile->image) ) {
-		                $input['image'] = $profile->image;
-		              }
-		            }
-		            else {
-		              $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		              $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
-		            }
-		            //CHECK VALIDATION AGAIN
-		            $profileImageValidator = $this->profileImageValidator($input);
-		            if( $profileImageValidator->fails()) {
-		              return redirect()->back();
-		            }
-		        }
-		        else {
-		            $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		            $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
-		        }
-		        $profile->update(
-                            array('image' => $profile_image));
+			            //WHEN PROFILE PICTURE IS MISSING
+			            if($errors->first('image')) {
+			              if( !empty($profile->image) ) {
+			                $input['image'] = $profile->image;
+			              }
+			            }
+			            else {
+			              $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+			              $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			            }
+			            //CHECK VALIDATION AGAIN
+			            $profileImageValidator = $this->profileImageValidator($input);
+			            if( $profileImageValidator->fails()) {
+			              return redirect()->back();
+			            }
+			        }
+			        else {
+			            $profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+			            $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			        }
+			        $profile->update(
+	                            array('image' => $profile_image));
+			    }
+
+		        /***** CHECK VALIDATION FOR COVER PICTURE *****/
+		        if(!empty($file['cover_image'])) {
+			        $coverImageValidator = $this->coverImageValidator($file);
+			        if( $coverImageValidator->fails()) {
+			            $errors = $coverImageValidator->errors();
+
+			            //WHEN COVER PICTURE IS MISSING
+			            if($errors->first('cover_image')) {
+			              if( !empty($profile->cover_image) ) {
+			                $input['cover_image'] = $profile->cover_image;
+			              }
+			            }
+			            else {
+			              $cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
+			              $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
+			            }
+			            //CHECK VALIDATION AGAIN
+			            $coverImageValidator = $this->coverImageValidator($input);
+			            if( $coverImageValidator->fails()) {
+			              return redirect()->back();
+			            }
+			        }
+			        else {
+			            $cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
+			            $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
+			        }
+			        $profile->update(
+	                            array('cover_image' => $cover_image));
+			    }
 
 
 		    	Session::flash('success', "User updated successfully");
@@ -160,8 +196,6 @@ class UserRegistrationController extends Controller
 		    }
 	    }
 	    else {
-
-
 	    	if($validator->fails() || $profileImageValidator->fails()) {
 
 	        	$validator->messages()->merge($profileImageValidator->messages());
@@ -169,9 +203,12 @@ class UserRegistrationController extends Controller
 	        	return redirect()->back()->withErrors($validator)->withInput();
 	        }
 	        else {
+	        	if(!empty($file['image'])) {
+		        	$profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
+			        $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			    }
 
-	        	$profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
-		        $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
+			    
 
 		        /* Create lat long from given address */
 	            $address = stripslashes($input['address']); //Address
@@ -205,7 +242,7 @@ class UserRegistrationController extends Controller
 							        	'nick_name' => $input['nick_name'],
 							        	'status' => $input['status']
 							        ]);
-		        ProfileInformation::create([
+		        $profile = ProfileInformation::create([
 			        							'user_id'  => $user->user_id,
 									            'phone_number'  => $input['phone_number'],
 									            'address' => $input['address'],
@@ -226,9 +263,13 @@ class UserRegistrationController extends Controller
 						            			'profile_message' => $input['profile_message'],
 						            			'video_link' => $input['video_link'],
 						            			'deliverable_area' => $input['deliverable_area']
-
-
 								          	]);
+		        if(!empty($file['cover_image'])) {
+		        	$cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
+			        $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
+			        $profile->update(
+	                            array('cover_image' => $cover_image));
+			    }
 	        	Session::flash('success', "User registered successfully");
 	        }
 	    }
@@ -254,9 +295,7 @@ class UserRegistrationController extends Controller
                                       'municipality' => 'required',
                                       'gender' => 'required',
                                       'profession' => 'required',
-                                      'reason_for_registration_edit' => 'required',
-                                      'user_introduction' => 'required',
-                                      'profile_message' => 'required',
+                                      'reason_for_registration_edit' => 'required'
                                     ]);
   	}
 
@@ -295,6 +334,13 @@ class UserRegistrationController extends Controller
                                     ]);
   	}
 
+  	//VALIDATOR FOR COVER IMAGE
+  	protected function coverImageValidator($request){
+    	return Validator::make($request,[
+                                      'cover_image' => 'required|mimes:jpeg,png,jpg',
+                                    ]);
+  	}
+
   	protected function phone_number_validator($request) {
     	return Validator::make($request,[
                                       'phone_number' => 'required|unique:profile_information'
@@ -314,6 +360,10 @@ class UserRegistrationController extends Controller
 	           	$user->reason_for_registration_edit = explode(',', $profile->reason_for_registration);
 	           	$user->reason_for_registration = explode(',', $profile->reason_for_registration);
 	        }
+
+	        if(!empty($profile->cover_image)) {
+                $user->cover_image = $profile->cover_image;
+            }
 
 	        $user->address = $profile->address;
 	        $user->phone_number = $profile->phone_number;
