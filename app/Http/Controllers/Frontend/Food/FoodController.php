@@ -188,9 +188,9 @@ class FoodController extends Controller
       }
       else {
         /* check validation */
-        if($validator->fails()) {
+        if($createItemValidator->fails()) {
             Session::flash('error', trans('validation.form_error'));
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($createItemValidator)->withInput();
         }
         else {
           //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
@@ -324,7 +324,6 @@ class FoodController extends Controller
       return Validator::make($request,[
                                       'item_name' => 'required',
                                       'food_description' => 'required',
-                                      'status' => 'required',
                                       'category_id' => 'required',
                                       'date_of_availability' => 'required',
                                       'price' => 'required|numeric',
