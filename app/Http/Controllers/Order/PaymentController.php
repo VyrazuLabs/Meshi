@@ -351,14 +351,14 @@ class PaymentController extends Controller
             $bookingDate = $order->date_of_order;
 
 	        // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
-	        $email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
 	        Mail::send('order.puchase-item-mail',['buyer'=>$buyer,'orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
 	          $message->to($email)
 	                  ->subject('Payment Successful');
 	        });
 
 	        // $email = $buyerEmail; //this email is for purchase section
-	        $email = 'mail2ankitadeb@gmail.com'; //this email is for testing purpose
+	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
 	        Mail::send('order.payment-succesful',['orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
 	          $message->to($email)
 	                  ->subject('Payment Successful');

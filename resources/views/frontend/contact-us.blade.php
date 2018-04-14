@@ -37,7 +37,7 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											{!! Form::text('name', null, array('class'=>'form-control', 'placeholder' => $name)) !!}
+											{!! Form::text('name', 'test', array('class'=>'form-control', 'placeholder' => $name)) !!}
 											@if ($errors->has('name'))
 											  	<span class="help-block">
 											      <strong class="strong t-red">{{ $errors->first('name') }}</strong>
@@ -47,7 +47,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											{!! Form::email('email', null, 
+											{!! Form::email('email', 'a.imanaga@gmail.com',
 				                          		array('class'=>'form-control','placeholder' => $emailId)) !!}
 				                          	@if ($errors->has('email'))
 											  	<span class="help-block">
@@ -58,7 +58,7 @@
 									</div>
 									<div class="col-sm-12">
 										<div class="form-group">
-											{!! Form::text('subject', null, array('class'=>'form-control', 'placeholder' => $subject)) !!}
+											{!! Form::text('subject', 'title', array('class'=>'form-control', 'placeholder' => $subject)) !!}
 											@if ($errors->has('subject'))
 											  	<span class="help-block">
 											      <strong class="strong t-red">{{ $errors->first('subject') }}</strong>
@@ -69,7 +69,7 @@
 									
 									<div class="col-sm-12">
 										<div class="form-group">
-											{!! Form::textarea('message', null, array('class'=>'form-control', 'placeholder' => $message,'rows' => '7')) !!}
+											{!! Form::textarea('message', 'aabb', array('class'=>'form-control', 'placeholder' => $message,'rows' => '7')) !!}
 											@if ($errors->has('message'))
 											  	<span class="help-block">
 											      <strong class="strong t-red">{{ $errors->first('message') }}</strong>

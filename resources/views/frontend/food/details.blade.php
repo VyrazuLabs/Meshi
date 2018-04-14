@@ -145,7 +145,7 @@
 																		$start = date( 'H:i', $i);
                                                                         $end = date( 'H:i', $i + $duration)
 																	@endphp
-																	<option value="{{$start}}-{{$end}}" data-start-time="{{$start}}" data-end-time="{{$end}}">{{$start}}-{{$end}}</option>
+																	<option value="{{$start}}">{{$start}}</option>
 																@endfor
 															@endforeach
 														@endif

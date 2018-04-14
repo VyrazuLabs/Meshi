@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'vyrazulabs@gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.sendgrid.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'vyrazulabs@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'SHARE MESHI'),
+        'address' => env('MAIL_FROM_ADDRESS', 'contact@sharemeshi.com'),
+        'name' => env('MAIL_FROM_NAME', 'sharemeshi'),
     ],
 
     /*
