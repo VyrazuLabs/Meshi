@@ -18,8 +18,12 @@
 					<div class="user-account boxes-card signin-box">
 						<h2>{{ trans('app.User') }} {{ trans('app.Login') }}</h2>
 						<!-- form -->
+						
 						@if(Session::has('login_status'))
             				<p class="alert alert-danger load-limit">{{ Session::get('login_status') }}</p>
+        				@endif
+        				@if(Session::has('inactive_status'))
+            				<p class="alert alert-danger load-limit">{{ Session::get('inactive_status') }}</p>
         				@endif
 						<form method="POST" action="{{ route('authentication') }}">
 	                        {{ csrf_field() }}
@@ -61,6 +65,8 @@
 		</div><!-- container -->
 	</section><!-- signin-page -->
  {!! Session::forget('login_status'); !!}
+ {!! Session::forget('inactive_status'); !!}
+ 
 
 	
 

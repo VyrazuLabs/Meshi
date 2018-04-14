@@ -36,19 +36,27 @@ class SigninController extends Controller
         else {
             /* only login as EATER or CREATOR if credentials are valid */
           	if (Auth::attempt(['email' => $input['email'],'password' => $input['password']])) {
-                // type 1 = CREATOR, 2 = EATER
-                if(Auth::User()->type == 1 || Auth::User()->type == 2) { 
-                    $user = User::where('user_id',Auth::User()->user_id)->first();
-                    $user->update(['remember_token'=>$remember_me]);
-                    if(Auth::User()->type == 1) {
-        	    		return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
+                $status = Auth::user()->status;
+                if( $status == 1 ) {
+                    // type 1 = CREATOR, 2 = EATER
+                    if(Auth::User()->type == 1 || Auth::User()->type == 2) { 
+                        $user = User::where('user_id',Auth::User()->user_id)->first();
+                        $user->update(['remember_token'=>$remember_me]);
+                        if(Auth::User()->type == 1) {
+            	    		return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
+                        }
+                        if(Auth::User()->type == 2) {
+                          return redirect('/');
+                        }
+                	}
+                    else {
+                        Auth::logout();
                     }
-                    if(Auth::User()->type == 2) {
-                      return redirect('/');
-                    }
-            	}
+                }
                 else {
                     Auth::logout();
+                    Session::put('inactive_status', 'Your account is inactive.');
+                    return redirect()->route('sign_in');
                 }
             }
         }
