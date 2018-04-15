@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Models\Food\FoodItem;
+use App\Models\ProfileInformation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -271,6 +273,8 @@ class PaymentController extends Controller
 
 	        /** add payment ID to session **/
 	        Session::put('paypal_payment_id', $payment->getId());
+
+            Session::put('purchased_cart_id', $cart_id);
 	        if(isset($redirect_url)) {
 	            /** redirect to paypal **/
 	            return Redirect::away($redirect_url);
@@ -289,6 +293,9 @@ class PaymentController extends Controller
 
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
+
+        $cart_id = Session::get('purchased_cart_id');
+
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
@@ -319,7 +326,8 @@ class PaymentController extends Controller
 
             /** Here Write your database logic like that insert record or value in database if you want **/
             if(!empty($amount)) {
-            	$cart = Cart::where('food_item_id',$foodItemId)->first();
+            	$cart = Cart::where('cart_id', $cart_id)->first();
+            	$food = FoodItem::where('food_item_id', $foodItemId)->first();
             	
                 //CREATE RANDOM NUMBER
         		$random_num = strtoupper(uniqid(mt_rand(1,999))); 
@@ -328,7 +336,7 @@ class PaymentController extends Controller
 						           'order_id' => uniqid(),
 						           'order_number' => 'OD'.$random_num,
 						           'ordered_by' => Auth::User()->user_id,
-						           'date_of_order' => date("Y-m-d"),
+						           'date_of_order' => $food->date_of_availability,
 						           'total_price' => $amount,
 						           'time' => $cart->time,
 						           'status' => 1 //paid
@@ -346,25 +354,33 @@ class PaymentController extends Controller
             Session::flash('success','Payment success');
 
             //****** CODE FOR MAIL SENDING ******//
-            $buyer = User::where('user_id',Auth::User()->user_id)->first()->name;
-            $buyerEmail = User::where('user_id',Auth::User()->user_id)->first()->email;
+            $buyerUserId = Auth::User()->user_id;
+            $buyer = User::where('user_id', $buyerUserId)->first();
+            $buyerProfile = ProfileInformation::where('user_id', $buyerUserId)->first();
             $orderNumber = $order->order_number;
             $price = $order->total_price;
             $bookingDate = $order->date_of_order;
+            $creator = User::where('user_id', $food->offered_by)->first();
 
 	        // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
 	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
-	        Mail::send('order.puchase-item-mail',['buyer'=>$buyer,'orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
-	          $message->to($email)
-	                  ->subject('Payment Successful');
-	        });
+            Mail::send('order.puchase-item-mail', [
+                'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'buyerProfile' => $buyerProfile,
+                'creator' => $creator, 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate
+            ], function ($message) use ($email) {
+                $message->to($email)
+                    ->subject('【シェアメシ】新規のご注文のお知らせ');
+            });
 
-	        // $email = $buyerEmail; //this email is for purchase section
-	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
-	        Mail::send('order.payment-succesful',['orderNumber' => $orderNumber, 'price' => $price, 'bookingDate' => $bookingDate], function($message) use ($email) {
-	          $message->to($email)
-	                  ->subject('Payment Successful');
-	        });
+	        $email = $buyer->email; //this email is for purchase section
+//	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
+            Mail::send('order.payment-succesful', [
+                'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'creator' => $creator,
+                'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate
+            ], function ($message) use ($email) {
+                $message->to($email)
+                    ->subject('【シェアメシ】ご購入いただきありがとうございます');
+            });
 
             return redirect('/');
             //return Redirect::route('driver_bidding_list', ['move_id' => $move_id]);

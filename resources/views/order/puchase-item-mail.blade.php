@@ -1,4 +1,23 @@
-<p> Buyer Name : {{$buyer}} </p>
-<p> Order Number : {{$orderNumber}} </p>
-<p> Price : {{$price}} </p>
-<p> Date : {{$bookingDate}} </p>
+<p> {{ $creator->nick_name }} 様</p>
+<br/>
+<p> 新規のご注文が入りましたので、ご連絡いたします。</p>
+<p> ご注文内容: {{ $food->item_name }} (https://sharemeshi.com/food/details/{{ $food->food_item_id }})</p>
+<p>お届け希望日: {{ $food->date_of_availability }} {{ $order->time }}</p>
+<br/>
+<p>
+    メシイーター名：{{ $buyer->nick_name }} ({{ $buyer->name }} 様)<br/>
+    住所: {{ $buyerProfile->prefectures }}{{ $buyerProfile->municipality }}{{ $buyerProfile->address }}<br/>
+    ご連絡先: {{ $buyerProfile->phone_number }}</p>
+<br/>
+<p>※ お時間に遅れそうな場合や、道が不明な場合は直接ご連絡いただければと思います。</p>
+<br/>
+<p>
+    ご不明な点がございましたらお気軽にご連絡ください。<br/>
+    よろしくお願いいたします。
+</p>
+<p>
+    --<br/>
+    シェアメシ<br/>
+    人と人を食でつなぐ、全く新しいシェアリングエコノミーサービス<br/>
+    https://sharemeshi.com<br/>
+</p>
