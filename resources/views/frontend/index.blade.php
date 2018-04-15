@@ -358,16 +358,22 @@
                 disableDoubleClickZoom: true,
                 markers: [
                     {latitude: 35.5625, longitude: 139.7161, icon: '' + url + '/mapicon/charactor.png'},
-                    {latitude: 35.55416, longitude: 139.71254, icon: '' + url + '/mapicon/user2.png'},
-                    {latitude: 35.55875, longitude: 139.72415, icon: '' + url + '/mapicon/charactor.png'},
                     {latitude: 35.5642, longitude: 138.7161, icon: '' + url + '/mapicon/charactor.png'},
                     {latitude: 35.56595, longitude: 139.70959, icon: '' + url + '/mapicon/charactor.png'},
-                    {latitude: 35.56604, longitude: 139.69665, icon: '' + url + '/mapicon/user3.png'},
                     {latitude: 35.57477, longitude: 139.69635, icon: '' + url + '/mapicon/charactor.png'},
                     {latitude: 35.56913, longitude: 139.68733, icon: '' + url + '/mapicon/charactor.png'},
                     {latitude: 35.58555, longitude: 139.70637, icon: '' + url + '/mapicon/charactor.png'},
+                    {latitude: 35.56317, longitude: 139.7053, icon: '' + url + '/mapicon/charactor.png'},
                     {latitude: 35.55389, longitude: 139.73061, icon: '' + url + '/mapicon/user1.png'},
-                    {latitude: 35.56317, longitude: 139.7053, icon: '' + url + '/mapicon/charactor.png'}
+                    {latitude: 35.55416, longitude: 139.71254, icon: '' + url + '/mapicon/user2.png'},
+                    {latitude: 35.56604, longitude: 139.69665, icon: '' + url + '/mapicon/user3.png'},
+                    {latitude: 35.594912, longitude: 139.681057, icon: '' + url + '/mapicon/5ad1e502ad8f1.png'},
+					{latitude: 35.594912, longitude: 139.681057, icon: '' + url + '/mapicon/5ad1e502ad8f1.png'},
+                    {latitude: 35.556392, longitude: 139.725880, icon: '' + url + '/mapicon/5ad1d3815d447.png'},
+                    {latitude: 35.556605, longitude: 139.725880, icon: '' + url + '/mapicon/5ad1c4e53b88a.png'},
+                    {latitude: 35.572387, longitude: 139.707566, icon: '' + url + '/mapicon/5ad1bcc313395.png'},
+                    {latitude: 35.563625, longitude: 139.707788, icon: '' + url + '/mapicon/5ad2255fc7b61.png'},
+                    {latitude: 35.570664, longitude: 139.714478, icon: '' + url + '/mapicon/charactor.png'}
                 ]
 		    });
 		});
