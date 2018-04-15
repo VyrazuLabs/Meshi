@@ -78,9 +78,13 @@
 									<div class="featured-image">
 										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
 											@if(!empty($food->foodImages))
-												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive images-featured">
+												@foreach($food->foodImages as $key=>$food_image)
+													@if($key == 0)
+														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+													@endif
+												@endforeach
 											@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
 											@endif
 										</a>
 										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
@@ -142,9 +146,13 @@
 									<div class="featured-image">
 										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
 											@if(!empty($food->foodImages))
-												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive images-featured">
+												@foreach($food->foodImages as $key=>$food_image)
+													@if($key == 0)
+														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+													@endif
+												@endforeach
 											@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
 											@endif
 										</a>
 										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
@@ -206,9 +214,13 @@
 									<div class="featured-image">
 										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
 											@if(!empty($food->foodImages))
-												<img src="{{url('/uploads/food/'.$food->foodImages[0])}}" alt="" class="img-respocive images-featured">
+												@foreach($food->foodImages as $key=>$food_image)
+													@if($key == 0)
+														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+													@endif
+												@endforeach
 											@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
 											@endif
 										</a>
 										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->

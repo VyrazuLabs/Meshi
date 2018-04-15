@@ -105,6 +105,11 @@
 		                  </span>
 		                @endif
 		            </div>
+		            <div class="form-group form-custom-group deliverable-area">
+                  		<label>{{ trans('app.Deliverable Area') }}</label>
+                  		{!! Form::text('deliverable_area', $deliverable_area, 
+                          array('class'=>'form-control')) !!}
+                	</div>
 		            <div class="col-sm-12 col-md-12 col-xs-12 p-0 input_fields_wrap">
 		            	<div class="col-lg-12 col-xs-12 d-inline-block form-group p-0">
 	                		<button class="btn ad-mre-btn add_field_button pull-right back-orange">{{ trans('app.Add Time Slot') }}</button>

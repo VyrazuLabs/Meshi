@@ -23,66 +23,61 @@
 				@endif
 		</div>
 		
-		@if(!empty($foodImages))
-			@php $size = sizeof($foodImages); @endphp
+		
 			<div class="section slider">					
 				<div class="row">
-					@if($size > 1)
-						<!-- carousel -->
-						<div class="col-md-7">
-							<div id="product-carousel" class="carousel slide" data-ride="carousel">
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner" role="listbox">
-									<!-- item -->
-									<div class="item active">
-										<div class="carousel-image">
-											<!-- image-wrapper -->
-											<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
-										</div>
-									</div><!-- item -->
-									@foreach($foodImages as $image)
+					@if(!empty($foodImages))
+						@php $size = sizeof($foodImages); @endphp
+						@if($size > 1)
+							<!-- carousel -->
+							<div class="col-md-7">
+								<div id="product-carousel" class="carousel slide" data-ride="carousel">
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner" role="listbox">
 										<!-- item -->
-										<div class="item">
-											<div class="carousel-image">
-												<!-- image-wrapper -->
-												<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
-													
+										@foreach($foodImages as $key=>$image)
+											@if($key == 0)
+											<div class="item active">
+												<div class="carousel-image">
+													<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
+												</div>
 											</div>
-										</div><!-- item -->
-									@endforeach
-								</div><!-- carousel-inner -->
+											@else
+												<!-- item -->
+												<div class="item">
+													<div class="carousel-image">
+														<!-- image-wrapper -->
+														<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
+															
+													</div>
+												</div><!-- item -->							
+											@endif
+										@endforeach
+									</div><!-- carousel-inner -->
 
-								<!-- Controls -->
-								<a class="left carousel-control" href="#product-carousel" role="button" data-slide="prev">
-									<i class="fa fa-chevron-left"></i>
-								</a>
-								<a class="right carousel-control" href="#product-carousel" role="button" data-slide="next">
-									<i class="fa fa-chevron-right"></i>
-								</a><!-- Controls -->
-							</div>
-						</div><!-- Controls -->	
-					@else
-						<!-- carousel -->
-						<div class="col-md-7">
-							@if($size == 1)
-							<h2>{{$food_details->item_name}}</h2>
-							<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
-							<!-- <p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span> -->
-							<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
-							<!-- <span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span> -->
-							<!-- <span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span> -->
-							<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
-							
-							{!! Form::open(array('id'=>"buy_now_form")) !!}
-	                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
-	                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
-
-								<!-- price -->
+									<!-- Controls -->
+									<a class="left carousel-control" href="#product-carousel" role="button" data-slide="prev">
+										<i class="fa fa-chevron-left"></i>
+									</a>
+									<a class="right carousel-control" href="#product-carousel" role="button" data-slide="next">
+										<i class="fa fa-chevron-right"></i>
+									</a><!-- Controls -->
+								</div>
+							</div><!-- Controls -->	
+						@else
+							<!-- carousel -->
+							<div class="col-md-7">
 								<div class="">
 									<img src="{{url('/uploads/food/'.$foodImages[0])}}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
 								</div>
-							@endif
+							</div>
+						@endif
+					@else
+					<div class="col-md-7">
+						<div class="">
+							<img src="{{ url('frontend/images/featured/food1.png') }}" alt="Featured Image" class="img-responsive  carousel-details-imgs">
 						</div>
+					</div>
 					@endif
 					@if(!empty($food_details))
 							<!-- slider-text -->
@@ -187,10 +182,11 @@
 				            		{!! Form::close() !!}
 								</div>
 							</div><!-- slider-text -->	
-						@endif
+					@endif
+					
 				</div>
 			</div>
-		@endif
+		
 
 		@if(!empty($food_details))
 			<div class="description-info">

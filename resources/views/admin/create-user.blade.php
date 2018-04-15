@@ -299,7 +299,7 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Gender<span>*</span></label>
+	                  	<label>Sex<span>*</span></label>
 	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('gender'))
 							<span class="help-block">
@@ -321,12 +321,13 @@
 							</span>
 						@endif
 	                </div>
-	                <div class="form-group form-custom-group">
+	                @if(($form_type == 'edit') && $user->type == 1)
+	                <div class="form-group form-custom-group creator-video-link" >
 	                  <label>Video Link(Embed Code)</label>
 	                  	{!! Form::textarea('video_link', null, 
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                </div>
-	                <div class="form-group form-custom-group">
+	                <div class="form-group form-custom-group creator-introduction" >
 	                  	<label>User Introduction<span>*</span></label>
 	                  	{!! Form::textarea('user_introduction', null, 
 	                          array('class'=>'form-control', 
@@ -337,7 +338,7 @@
 	                    	</span>
 	                  	@endif
 	                </div>
-	                <div class="form-group form-custom-group">
+	                <div class="form-group form-custom-group creator-profile-message" >
 	                  	<label>Profile Message<span>*</span></label>
 	                  	{!! Form::textarea('profile_message', null, 
 	                          array('class'=>'form-control', 
@@ -348,7 +349,7 @@
 	                    	</span>
 	                  	@endif
 	                </div>
-	                <div class="form-group form-custom-group">
+	                <div class="form-group form-custom-group creator-deliverable-area" >
 	                  	<label>Deliverable Area</label>
 						{!! Form::text('deliverable_area', null, 
 					                          array('class'=>'form-control')) !!}
@@ -358,20 +359,44 @@
 						  	</span>
 						@endif
 	                </div>
-              		@if ( $form_type == 'create' )
-		                <div class="form-group form-custom-group">
-		                  	<label> Image<span>*</span></label>
-		                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
-		                  	@if ($errors->has('image'))
-		                    	<span class="help-block">
-		                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
-		                    	</span>
-		                  	@endif
-		                </div>
-		            @endif
-
-
-
+	                @endif
+	                <div class="form-group form-custom-group creator-video-link" style="display: none;">
+	                  <label>Video Link(Embed Code)</label>
+	                  	{!! Form::textarea('video_link', null, 
+	                          array('class'=>'form-control','rows'=>'3')) !!}
+	                </div>
+	                <div class="form-group form-custom-group creator-introduction" style="display: none;">
+	                  	<label>User Introduction<span>*</span></label>
+	                  	{!! Form::textarea('user_introduction', null, 
+	                          array('class'=>'form-control', 
+	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
+	                  	@if ($errors->has('user_introduction'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	                <div class="form-group form-custom-group creator-profile-message" style="display: none;">
+	                  	<label>Profile Message<span>*</span></label>
+	                  	{!! Form::textarea('profile_message', null, 
+	                          array('class'=>'form-control', 
+	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
+	                  	@if ($errors->has('profile_message'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	                <div class="form-group form-custom-group creator-deliverable-area" style="display: none;">
+	                  	<label>Deliverable Area</label>
+						{!! Form::text('deliverable_area', null, 
+					                          array('class'=>'form-control')) !!}
+						@if ($errors->has('deliverable_area'))
+						  	<span class="help-block error">
+						      <strong class="strong">{{ $errors->first('deliverable_area') }}</strong>
+						  	</span>
+						@endif
+	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> Status<span>*</span></label>
 	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
@@ -381,8 +406,8 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                @if ( $form_type == 'edit' )
-              		<div class="form-group form-custom-group">
+      
+              		<div class="form-group form-custom-group d-inline-block user-editcoverimg">
 	                  	<label> Image<span>*</span></label>
 	                  	@if( !empty($user->image) )
 		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
@@ -394,7 +419,35 @@
 	                    	</span>
 	                  	@endif
 	                </div>
-	              	@endif
+	                @if($form_type == 'create')
+	                <div class="form-group form-custom-group creator-cover-image" style="display: none;">
+	                  	<label>Cover Image</label>
+	                  	@if( !empty($user->cover_image) )
+		                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
+		                @endif
+	                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
+	                  	@if ($errors->has('cover_image'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	                @endif
+	                @if(($form_type == 'edit') && $user->type == 1)
+	                <div class="form-group form-custom-group creator-cover-image d-inline-block user-editcoverimg">
+	                  	<label>Cover Image</label>
+	                  	@if( !empty($user->cover_image) )
+		                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
+		                @endif
+	                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
+	                  	@if ($errors->has('cover_image'))
+	                    	<span class="help-block">
+	                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
+	                    	</span>
+	                  	@endif
+	                </div>
+	                @endif
+	              	
 	                
 	                <!-- /.box-body -->
 	            </div>
@@ -434,11 +487,22 @@
 	  		$('.seller').show();
 	    	$('.buyer').hide();
 	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
+	    	$('.creator-cover-image').show();
+	    	$('.creator-deliverable-area').show();
+	    	$('.creator-video-link').show();
+	    	$('.creator-introduction').show();
+	    	$('.creator-profile-message').show();
 	  	}
 	  	if(userType == 2) {
 	    	$('.buyer').show();
 	  		$('.seller').hide();
 	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
+	    	$('.creator-cover-image').hide();
+	    	$('.creator-deliverable-area').hide();
+	    	$('.creator-video-link').hide();
+	    	$('.creator-introduction').hide();
+	    	$('.creator-profile-message').hide();
+
 	  	}
 	}
 

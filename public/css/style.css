@@ -10,6 +10,9 @@
 .pr-0{
 	padding-right: 0;
 }
+.d-inline-block{
+	display: inline-block;
+}
 .timetable-btn{
 	float: right;
 }
@@ -29,4 +32,6 @@
 .create-food-timeend{
 	padding-right: 0;
 }
-
+.user-editcoverimg{
+	width: 100%;
+}
