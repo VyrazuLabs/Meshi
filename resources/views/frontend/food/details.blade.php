@@ -129,51 +129,61 @@
 										<!-- contact-with -->
 
 										<div class="contact-with">
-											<div class="col-md-6 p-0">
-												<div class="form-group">
-													<select id="select-deliverable-time" onchange="checkForValue(this)" class="form-control" name="slot">
-														<option value="">{{ trans('app.Select Your Time') }}</option>
-														@if(!empty($time_of_availability))
-															@foreach($time_of_availability as $key => $slot)
-																@php
-																	$startTime = strtotime($food_details->date. $key);
-                                                                    $endTime = strtotime($food_details->date. $slot);
-                                                                    $duration = 30 * 60;
-																@endphp
-
-																@for($i = $startTime; $i <= $endTime; $i += $duration)
+											<div class="row">
+												<div class="col-md-6 p-0">
+													<div class="form-group">
+														<select id="select-deliverable-time" onchange="checkForValue(this)" class="form-control" name="slot">
+															<option value="">{{ trans('app.Select Your Time') }}</option>
+															@if(!empty($time_of_availability))
+																@foreach($time_of_availability as $key => $slot)
 																	@php
-																		$start = date( 'H:i', $i);
-                                                                        $end = date( 'H:i', $i + $duration)
+																		$startTime = strtotime($food_details->date. $key);
+																		$endTime = strtotime($food_details->date. $slot);
+																		$duration = 30 * 60;
 																	@endphp
-																	<option value="{{$start}}">{{$start}}</option>
-																@endfor
-															@endforeach
+
+																	@for($i = $startTime; $i <= $endTime; $i += $duration)
+																		@php
+																			$start = date( 'H:i', $i);
+																			$end = date( 'H:i', $i + $duration)
+																		@endphp
+																		<option value="{{$start}}">{{$start}}</option>
+																	@endfor
+																@endforeach
+															@endif
+														</select>
+														<!-- <select onchange="checkForValue(this)" class="form-control" name="slot">
+															<option value="">{{ trans('app.Select Your Time') }}</option>
+															@if(!empty($time_of_availability))
+																@foreach($time_of_availability as $key => $slot)
+																	<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
+																@endforeach
+															@endif
+														</select> -->
+													</div>
+												</div>
+												<div class="col-md-6">
+													@if(Auth::User())
+														@php
+														$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
+														$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
+														$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
+														@endphp
+														@if((Auth::User()->user_id) != $food_details->offered_by && $isShow)
+															<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
 														@endif
-													</select>
-													<!-- <select onchange="checkForValue(this)" class="form-control" name="slot">
-														<option value="">{{ trans('app.Select Your Time') }}</option>
-														@if(!empty($time_of_availability))
-						                  					@foreach($time_of_availability as $key => $slot)
-																<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
-															@endforeach
-														@endif
-													</select> -->
+													@else
+														<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
+													@endif
+													<!-- </a> -->
+
 												</div>
 											</div>
-											<div class="col-md-6">
-												@if(Auth::User())
-													@if((Auth::User()->user_id) != $food_details->offered_by)
-														<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
-													@endif
-												@else
-													<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
-												@endif
-												<!-- </a> -->
-
+											<div class="row">
+												<p>※前後5分程度の余裕を見てお待ちください</p>
 											</div>
-											<p>※前後5分程度の余裕を見てお待ちください</p>
 										</div><!-- contact-with -->
+
 				            		{!! Form::close() !!}
 								</div>
 							</div><!-- slider-text -->	
