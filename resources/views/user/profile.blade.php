@@ -190,7 +190,7 @@
 					@endforeach
 				</div>
 			@endif
-			@if(!empty($user->user_introduction))
+			@if(!empty($user->description))
 			<div class="col-lg-12 col-xs-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Introduction') }}</h4>
 				<p class="text-left">
