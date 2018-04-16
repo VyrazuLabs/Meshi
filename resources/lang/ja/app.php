@@ -15,7 +15,7 @@ return [
 	'Foods' => 'カテゴリー',
 	'Follow us on' => 'SNS',
 	'Newsletter' => 'メールマガジン',
-	'About Us' => 'シェアメシとは',
+	'About Us' => 'シェアメシの想い',
 	'Contact Us' => 'お問い合わせ',
 	'Food Festival' => 'フードフェスティバル',
 	'All Cities' => 'すべての都市',
