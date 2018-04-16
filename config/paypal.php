@@ -1,8 +1,8 @@
 <?php
 return array(
     /** set your paypal credential **/
-    'client_id' => 'ATo3-V52yDqwvlXloPTLQvNCLa51iGNBp4U9PBBngscps-6LC_ZJhrbXgaJxguruMipx8Se1MOQVoGkT',
-    'secret' => 'ENZV-aBGfbsDQk8wWwO3PTKCc5jwuRQEO6Y2WdOXcLH8PeJUZkmAQp3yixEOmtsge4v18YE5QxP9e0WD',
+    'client_id' => env('PAYPAL_CLIENT_KEY'),
+    'secret' => env('PAYPAL_SECRET'),
     /**
     * SDK configuration 
     */
@@ -10,7 +10,7 @@ return array(
     /**
     * Available option 'sandbox' or 'live'
     */
-    'mode' => 'live',
+    'mode' => env('PAYPAL_MODE'),
     /**
     * Specify the max request time in seconds
     */
