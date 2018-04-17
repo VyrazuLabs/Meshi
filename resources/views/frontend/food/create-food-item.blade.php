@@ -368,27 +368,15 @@
 		$(selector).parent().remove();
     }
 
+	// food-item-date
+	 $(function () {
+	    $('.food-item-date').datetimepicker({
+	        // format: 'L'
+	        // AutoClose: false
+	        format: 'YYYY-MM-DD HH:mm:ss',
+	        locale: 'ja'
 
-
-
- 
-
-
-//     $('#priceId').keypress(function(event){
-//     var regex = /[0-9]|\./;
-//     var text = $("input[type=text]").val();
-//     var keycode = (event.keyCode ? event.keyCode : event.which);
-//     if(keycode == '13' && !(regex.test(text))) {
-//      alert('You pressed a "enter" key in textbox'); 
-// }
-// });
-// food-item-date
- $(function () {
-    $('.food-item-date').datetimepicker({
-        // format: 'L'
-        // AutoClose: false
-        format: 'YYYY-MM-DD HH:mm:ss',
-    });
-});
+	    });
+	});
 </script>
 @endsection

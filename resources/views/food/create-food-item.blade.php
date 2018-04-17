@@ -292,6 +292,7 @@
 	        // format: 'L'
 	        // AutoClose: false
 	        format: 'YYYY-MM-DD HH:mm:ss',
+	        locale: 'ja'
 	    });
 	});
 </script>

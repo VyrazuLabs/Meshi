@@ -65,6 +65,8 @@
 	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
     <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
+    
     <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
     <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
