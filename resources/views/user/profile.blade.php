@@ -124,47 +124,49 @@
 				<div class="row">
 					@if(!empty($food_items))
 						@foreach($food_items as $food)
-							<!-- featured -->
-							<div class="col-md-4 col-lg-3">
+							@if($food->category_status == 1)
 								<!-- featured -->
-								<div class="featured">
-									<div class="featured-image">
-										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-											@if(!empty($food->foodImages))
-												@foreach($food->foodImages as $key=>$food_image)
-													@if($key == 0)
-														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
-													@endif
-												@endforeach
-											@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
-											@endif
-										</a>
-										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-									</div>
-									
-									<!-- ad-info -->
-									<div class="ad-info">
-										<h3 class="item-price">&yen;{{$food->price}}</h3>
-										<h4 class="item-title">{{$food->item_name}}</h4>
-										<div class="item-cat">
-											<span>{{$food->category_name}}</span> 
+								<div class="col-md-4 col-lg-3">
+									<!-- featured -->
+									<div class="featured">
+										<div class="featured-image">
+											<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+												@if(!empty($food->foodImages))
+													@foreach($food->foodImages as $key=>$food_image)
+														@if($key == 0)
+															<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+														@endif
+													@endforeach
+												@else
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+												@endif
+											</a>
+											<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
 										</div>
-									</div><!-- ad-info -->
-									
-									<!-- ad-meta -->
-									<div class="ad-meta">
-										<div class="meta-content">
-											<span class="dated">{{$food->date}}</span>
-										</div>									
-										<!-- item-info-right -->
-										<!-- <div class="user-option pull-right">
-											<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-											<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
-										</div> --><!-- item-info-right -->
-									</div><!-- ad-meta -->
+										
+										<!-- ad-info -->
+										<div class="ad-info">
+											<h3 class="item-price">&yen;{{$food->price}}</h3>
+											<h4 class="item-title">{{$food->item_name}}</h4>
+											<div class="item-cat">
+												<span>{{$food->category_name}}</span> 
+											</div>
+										</div><!-- ad-info -->
+										
+										<!-- ad-meta -->
+										<div class="ad-meta">
+											<div class="meta-content">
+												<span class="dated">{{$food->date}}</span>
+											</div>									
+											<!-- item-info-right -->
+											<!-- <div class="user-option pull-right">
+												<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+												<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+											</div> --><!-- item-info-right -->
+										</div><!-- ad-meta -->
+									</div><!-- featured -->
 								</div><!-- featured -->
-							</div><!-- featured -->
+							@endif
 						@endforeach
 					@endif
 				</div>

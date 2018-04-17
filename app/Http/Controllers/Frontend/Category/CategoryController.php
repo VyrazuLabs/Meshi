@@ -28,23 +28,26 @@ class CategoryController extends Controller
 
     $today = date("Y-m-d");
     /* food items available */
+    $food_items = FoodItem::where('status',1)
+                          ->where('date_of_availability','>',$today)
+                          ->orderBy('date_of_availability','ASC');
     if(Auth::check()){
-      $food_items = FoodItem::where('status',1)
-                            ->where('date_of_availability','>',$today)
-                            ->where('offered_by','!=',Auth::User()->user_id)
-                            ->orderBy('date_of_availability','ASC')
-                            ->paginate(5);
+      $food_items = $food_items->where('offered_by','!=',Auth::User()->user_id)
+                               ->paginate(5);
     }
     else {
-      $food_items = FoodItem::where('status',1)
-                            ->where('date_of_availability','>',$today)
-                            ->orderBy('date_of_availability','ASC')
-                            ->paginate(5);
+      $food_items = $food_items->paginate(5);
     }
 
     if(!empty($food_items)) {
       foreach ($food_items as $key => $food) {
         $category = Category::where('category_id',$food->category_id)->first();
+        if($category->status == 1) {
+          $food->category_status = 1;
+        }
+        else {
+          $food->category_status = 0;
+        }
         $food->category_name = $category->category_name;
         $food->price = $food->price;
         $food->date = date('Y-m-d', strtotime($food->date_of_availability));
@@ -62,6 +65,7 @@ class CategoryController extends Controller
         }
       }
     }
+
   	return view('frontend.category.category',['categories'=>$categories,'sub_categories'=>$sub_categories,'food_items'=>$food_items]);
   }
 
@@ -85,23 +89,26 @@ class CategoryController extends Controller
 
     $today = date("Y-m-d");
     /* food items available */
+    $food_items = FoodItem::where('status',1)
+                          ->where('date_of_availability','>',$today)
+                          ->orderBy('date_of_availability','ASC');
     if(Auth::check()){
-      $food_items = FoodItem::where('status',1)
-                            ->where('date_of_availability','>',$today)
-                            ->where('offered_by','!=',Auth::User()->user_id)
-                            ->orderBy('date_of_availability','ASC')
-                            ->paginate(5);
+      $food_items = $food_items->where('offered_by','!=',Auth::User()->user_id)
+                               ->paginate(5);
     }
     else {
-      $food_items = FoodItem::where('status',1)
-                            ->where('date_of_availability','>',$today)
-                            ->orderBy('date_of_availability','ASC')
-                            ->paginate(5);
+      $food_items = $food_items->paginate(5);
     }
 
     if(!empty($food_items)) {
       foreach ($food_items as $key => $food) {
         $category = Category::where('category_id',$food->category_id)->first();
+        if($category->status == 1) {
+          $food->category_status = 1;
+        }
+        else {
+          $food->category_status = 0;
+        }
         $food->category_name = $category->category_name;
         $food->price = $food->price;
         $food->date = date('Y-m-d', strtotime($food->date_of_availability));

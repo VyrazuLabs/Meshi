@@ -203,13 +203,19 @@ class FrontendController extends Controller
         $day_after_tomorrow_food_list = [];
         $next_day_of_tomorrow_food_list = [];
 
-        /* food items available according to publication period */
-        $foodItems =  DB::select( DB::raw("SELECT * FROM `food_item` WHERE ".$today." = start_publication_date OR ".$today." = end_publication_date OR ('".$day_end_range."' > start_publication_date AND '".$day_start_range."' < end_publication_date)") );
+        /* available active food items according to publication period */
+        $foodItems =  DB::select( DB::raw("SELECT * FROM `food_item` WHERE status = '1' AND (".$today." = start_publication_date OR ".$today." = end_publication_date OR ('".$day_end_range."' > start_publication_date AND '".$day_start_range."' < end_publication_date))") );
         
         if(!empty($foodItems)) {
             foreach ($foodItems as $key => $food) {
                 $food->date = date('Y-m-d', strtotime($food->date_of_availability));
                 $category = Category::where('category_id',$food->category_id)->first();
+                if($category->status == 1) {
+                    $food->category_status = 1;
+                }
+                else {
+                    $food->category_status = 0;
+                }
                 $food->category_name = $category->category_name;
                 $food->price = $food->price;
                 $food->date = date('Y-m-d', strtotime($food->date_of_availability));
@@ -233,17 +239,24 @@ class FrontendController extends Controller
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
                 }
-                
-                if($food->date == $today && $food->user_status == 1) {
+
+                /* check if the delivery date is today and food creator is active and food category is active */
+                if($food->date == $today && $food->user_status == 1  && $food->category_status == 1) {
                     $today_food_list[] = $food;
                 }
-                if($food->date == $tomorrow && $food->user_status == 1) {
+
+                /* check if the delivery date is tomorrow and food creator is active and food category is active */
+                if($food->date == $tomorrow && $food->user_status == 1  && $food->category_status == 1) {
                     $tomorrow_food_list[] = $food;
                 }
-                if($food->date == $day_after_tomorrow && $food->user_status == 1) {
+
+                /* check if the delivery date is day after tomorrow and food creator is active and food category is active */
+                if($food->date == $day_after_tomorrow && $food->user_status == 1 && $food->category_status == 1) {
                     $day_after_tomorrow_food_list[] = $food;
                 }
-                if($food->date == $next_day_of_tomorrow && $food->user_status == 1) {
+
+                /* check if the delivery date is 'next_day_of_tomorrow' and food creator is active and food category is active */
+                if($food->date == $next_day_of_tomorrow && $food->user_status == 1  && $food->category_status == 1) {
                     $next_day_of_tomorrow_food_list[] = $food;
                 }
             }

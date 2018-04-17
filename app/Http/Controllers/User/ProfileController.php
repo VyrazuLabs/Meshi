@@ -47,6 +47,13 @@ class ProfileController extends Controller
             if(!empty($food_items)) {
                 foreach ($food_items as $key => $food) {
                     $category = Category::where('category_id',$food->category_id)->first();
+                    if($category->status == 1) {
+                        $food->category_status = 1;
+                    }
+                    else {
+                        $food->category_status = 0;
+                    }
+
                     $food->category_name = $category->category_name;
                     $food->price = $food->price;
                     $food->date = date('Y-m-d', strtotime($food->date_of_availability));

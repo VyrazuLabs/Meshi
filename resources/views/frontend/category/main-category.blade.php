@@ -81,51 +81,53 @@
 
 							@if(!empty($food_items))
 								@foreach($food_items as $item)
-									<!-- ad-item -->
-									<div class="recomended-item row">
-										<!-- item-image -->
-										<div class="item-image-box col-sm-4">
-											<div class="item-image">
-											<a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">
-												@if(!empty($item->foodImages))
-													@foreach($item->foodImages as $key=>$food_image)
-														@if($key == 0)
-															<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-responsive images-featured caterogy-imgs">
-														@endif
-													@endforeach
-												@else
-													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="Image" class="img-responsive">
-												@endif
-											</a>
-											</div><!-- item-image -->
-										</div>
-										
-										<!-- rending-text -->
-										<div class="item-info col-sm-8">
-											<!-- ad-info -->
-											<div class="ad-info">
-												<h3 class="item-price">${{$item->price}}</h3>
-												<h4 class="item-title"><a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">{{$item->item_name}}</a></h4>
-												<div class="item-cat">
-													<span>{{$item->category_name}}</span> 
-													
-												</div>										
-											</div><!-- ad-info -->
+									@if($item->category_status == 1)
+										<!-- ad-item -->
+										<div class="recomended-item row">
+											<!-- item-image -->
+											<div class="item-image-box col-sm-4">
+												<div class="item-image">
+												<a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">
+													@if(!empty($item->foodImages))
+														@foreach($item->foodImages as $key=>$food_image)
+															@if($key == 0)
+																<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-responsive images-featured caterogy-imgs">
+															@endif
+														@endforeach
+													@else
+														<img src="{{ url('frontend/images/featured/food1.png') }}" alt="Image" class="img-responsive">
+													@endif
+												</a>
+												</div><!-- item-image -->
+											</div>
 											
-											<!-- ad-meta -->
-											<div class="ad-meta">
-												<div class="meta-content">
-													<span class="dated">{{$item->date}}</span>
-													<!-- <a href="#" class="tag"><i class="fa fa-tags"></i> New</a> -->
-												</div>										
-												<!-- item-info-right -->
-												<!-- <div class="user-option pull-right">
-													<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-													<a class="online" href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-user"></i> </a>											
-												</div> --><!-- item-info-right -->
-											</div><!-- ad-meta -->
-										</div><!-- item-info -->
-									</div><!-- ad-item -->
+											<!-- rending-text -->
+											<div class="item-info col-sm-8">
+												<!-- ad-info -->
+												<div class="ad-info">
+													<h3 class="item-price">${{$item->price}}</h3>
+													<h4 class="item-title"><a href="{{route('food_details',['food_item_id' => $item->food_item_id])}}">{{$item->item_name}}</a></h4>
+													<div class="item-cat">
+														<span>{{$item->category_name}}</span> 
+														
+													</div>										
+												</div><!-- ad-info -->
+												
+												<!-- ad-meta -->
+												<div class="ad-meta">
+													<div class="meta-content">
+														<span class="dated">{{$item->date}}</span>
+														<!-- <a href="#" class="tag"><i class="fa fa-tags"></i> New</a> -->
+													</div>										
+													<!-- item-info-right -->
+													<!-- <div class="user-option pull-right">
+														<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+														<a class="online" href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-user"></i> </a>											
+													</div> --><!-- item-info-right -->
+												</div><!-- ad-meta -->
+											</div><!-- item-info -->
+										</div><!-- ad-item -->
+									@endif
 								@endforeach
 								<div class="text-center">
 									<ul class="pagination ">
