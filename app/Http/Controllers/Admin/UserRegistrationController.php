@@ -27,13 +27,12 @@ class UserRegistrationController extends Controller
     public function save(Request $request) {
     	$input = $request->input();   
     	$file = $request->file();
-    	// echo"<pre>";print_r($file);die;
+
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
         $profileImageValidator = $this->profileImageValidator($file);
         $coverImageValidator = $this->coverImageValidator($file);
 
-        
         /* update user */
 	    if(isset($input['user_id'])) {
 	    	/* check validation for user updation */
@@ -45,7 +44,6 @@ class UserRegistrationController extends Controller
 	        	/* get user and their profile details */
 	        	$user = User::where('user_id',$input['user_id'])->first();
 				$profile = ProfileInformation::where('user_id',$input['user_id'])->first();
-
 
 		        /********* Create lat long from given address ********/
 		        $address = stripslashes($input['address']); //Address
@@ -66,12 +64,7 @@ class UserRegistrationController extends Controller
 		        	$modified_array = array_unique($input['reason_for_registration_edit']);
 		        	$reason = implode(',', $modified_array);
 		        }
-		        
-		        // if (!empty($input['reason_for_registration'])) {
-		        // 	$modified_array = array_unique($input['reason_for_registration']);
-		        // 	$reason = implode(',', $modified_array);
-		        // }
-
+		      
 				/******** CODES FOR PASSWORD UPDATION STARTS HERE *********/
 		        if(!empty($input['password']) ) {
 		          	$passwordValidator = $this->passwordValidator($input);
@@ -99,7 +92,6 @@ class UserRegistrationController extends Controller
 		          $profile->update([ 'phone_number' => $input['phone_number']]);
 		        }
 
-
 		    	$user->update([	'name' => $input['name'],
 					        	'type' => $input['type'],
 					        	'nick_name' => $input['nick_name'],
@@ -123,16 +115,12 @@ class UserRegistrationController extends Controller
 						            'profile_message' => $input['profile_message'],
 						            'video_link' => $input['video_link'],
 						            'deliverable_area' => $input['deliverable_area']
-
-
-
 					          	]);
 
- 
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
 		        if(!empty($file['image'])) {
 			        $profileImageValidator = $this->profileImageValidator($file);
-			        // echo"<pre>";print_r($file['cover_image']);die;
+
 			        if( $profileImageValidator->fails()) {
 			            $errors = $profileImageValidator->errors();
 
@@ -189,8 +177,6 @@ class UserRegistrationController extends Controller
 			        $profile->update(
 	                            array('cover_image' => $cover_image));
 			    }
-
-
 		    	Session::flash('success', "User updated successfully");
 				return back();
 		    }
@@ -207,9 +193,7 @@ class UserRegistrationController extends Controller
 		        	$profile_image = 'user_picture'.time().".".$file['image']->getClientOriginalExtension();
 			        $file['image']->move(public_path().'/uploads/profile/picture/', $profile_image);
 			    }
-
 			    
-
 		        /* Create lat long from given address */
 	            $address = stripslashes($input['address']); //Address
 	                
@@ -220,7 +204,6 @@ class UserRegistrationController extends Controller
 	            $longitude = '';
 	            $geo = json_decode($geo, true); // Convert the JSON to an array
 	            if ($geo['status'] == 'OK') {
-
 	                // GET LAT & LONG
 	                $latitude = $geo['results'][0]['geometry']['location']['lat'];
 	                $longitude = $geo['results'][0]['geometry']['location']['lng'];
@@ -231,8 +214,6 @@ class UserRegistrationController extends Controller
 		        	$modified_array = array_unique($input['reason_for_registration_edit']);
 		        	$reason = implode(',', $modified_array);
 		        }
-		        // $reason = substr($reason, 0, -1);
-
 
 		        $user = User::create([	'user_id' => uniqid(),
 				        				'name' => $input['name'],
@@ -264,6 +245,7 @@ class UserRegistrationController extends Controller
 						            			'video_link' => $input['video_link'],
 						            			'deliverable_area' => $input['deliverable_area']
 								          	]);
+
 		        if(!empty($file['cover_image'])) {
 		        	$cover_image = 'user_cover_picture'.time().".".$file['cover_image']->getClientOriginalExtension();
 			        $file['cover_image']->move(public_path().'/uploads/cover/picture/', $cover_image);
@@ -352,6 +334,7 @@ class UserRegistrationController extends Controller
     	return view('admin.user-list',['users'=>$users]);
     }
 
+    /* view of user details updation form  */
     public function edit($user_id = null) {
     	$user = User::where('user_id',$user_id)->first();
     	$profile = ProfileInformation::where('user_id',$user_id)->first();
@@ -379,15 +362,13 @@ class UserRegistrationController extends Controller
 	        $user->profile_message = $profile->profile_message;
 	        $user->video_link = $profile->video_link;
 	        $user->deliverable_area = $profile->deliverable_area;
-	        
-
     	}
 
     	return view('admin.create-user',['user'=>$user,'form_type' => 'edit']);
     }
 
+    /* deleting users and other related informations */
     public function delete($user_id = null) {
-
     	$user = User::where('user_id',$user_id)->first();
     	if (!empty($user)) {
     		$profile = ProfileInformation::where('user_id',$user_id)->first();
@@ -396,31 +377,46 @@ class UserRegistrationController extends Controller
     		$reviewedBy = Review::where('reviewed_by',$user_id)->first();
     		$order = Order::where('ordered_by',$user_id)->first();
 
+    		/* delete user */
     		if(!empty($user)) {
     			$user->delete();
     		}
+
+    		/* check for all food items created by teh user */
     		if(!empty($foodItem)) {
     			$foodItemCosting = FoodItemCosting::where('food_item_id',$foodItem->food_item_id)->first();
+
+    			/* delete all food items costings related with the food items */
     			if(!empty($foodItemCosting)) {
     				$foodItemCosting->delete();
     			}
+    			/* delete all food items created by the user */
     			$foodItem->delete();
     		}
+
+    		/* delete profile details of the user */
     		if(!empty($profile)) {
     			$profile->delete();
     		}
     		
+    		/* delete reviews of the user */
     		if(!empty($review)) {
     			$review->delete();
     		}
+
+    		/* delete all the reviews given by the user */
     		if(!empty($reviewedBy)) {
     			$reviewedBy->delete();
     		}
+
+    		/* check for orders i.e. ordered by the user */
     		if(!empty($order)) {
     			$payment = Payments::where('order_id',$order->order_id)->first();
+    			/* delete payment details of the user */
     			if(!empty($payment)) {
     				$payment->delete();
     			}
+    			/* delete order details of the user */
     			$order->delete();
     		}
     		

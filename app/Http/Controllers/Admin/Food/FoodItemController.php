@@ -14,13 +14,15 @@ use App\Models\ProfileInformation;
 
 
 class FoodItemController extends Controller
-{
+{	
+	/* view of food item creation form */
     public function create() {
     	$category_id = Category::where('status',1)->pluck('category_name','category_id');
     	$offered_by = User::where('type',1)->pluck('name','user_id');
     	return view('food.create-food-item',['form_type' => 'create','category_id'=>$category_id,'offered_by'=>$offered_by]);
     }
 
+    /* create and update food item here */
     public function save(Request $request) {
     	$input = $request->input(); 
         $createItemValidator = $this->createItemValidator($input);
@@ -59,7 +61,6 @@ class FoodItemController extends Controller
 	      $end_time = date('h:i:s', strtotime($endDate));
 	    }
 
-
         if(isset($input['food_item_id'])) {
 	    	if($timeslotValidator->fails()) {
 			    Session::flash('error', trans('validation.time_slot_error'));
@@ -73,7 +74,6 @@ class FoodItemController extends Controller
 			        return redirect()->back()->withErrors($updateItemValidator)->withInput();
 			    }
 			    else {
-
 		    		$food_item = FoodItem::where('food_item_id',$input['food_item_id'])->first();
 		    		$food_item->update([ 'item_name' => $input['item_name'],
 			            				 'food_description' => $input['food_description'],
@@ -92,52 +92,50 @@ class FoodItemController extends Controller
 			          				  ]);
 
 		    		if ($request->hasFile('food_images')) {
-			          $files = $request->file('food_images');
-			          $input_data = $request->all();
+			        	$files = $request->file('food_images');
+			          	$input_data = $request->all();
 
-			          $foodImageValidator = Validator::make(
-			              $input_data, [
-			              'food_images.*' => 'required|mimes:jpg,jpeg,png'
-			              ],[
-			                  'food_images.*.required' => 'Please upload an image',
-			                  'food_images.*.mimes' => 'Only jpeg,png images are allowed',
-			              ]
-			          );
+				        $foodImageValidator = Validator::make(
+				            $input_data, [
+				              'food_images.*' => 'required|mimes:jpg,jpeg,png'
+				              ],[
+				                'food_images.*.required' => 'Please upload an image',
+				                'food_images.*.mimes' => 'Only jpeg,png images are allowed',
+				            ]
+				        );
 
-			          if($foodImageValidator->fails()) {
-			            Session::flash('error', "Image should be in jpg,jpeg or png format.");
-			            return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-			          }
+			          	if($foodImageValidator->fails()) {
+			            	Session::flash('error', "Image should be in jpg,jpeg or png format.");
+			            	return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
+			          	}
+			          	else {
+				            foreach($files as $file){
+								$filename = $file->getClientOriginalName();
+								$extension = $file->getClientOriginalExtension();
+								$picture = "food_".uniqid().".".$extension;
+								$destinationPath = public_path().'/uploads/food/';
+								$file->move($destinationPath, $picture);
 
-			          else {
-			            foreach($files as $file){
-			              $filename = $file->getClientOriginalName();
-			              $extension = $file->getClientOriginalExtension();
-			              $picture = "food_".uniqid().".".$extension;
-			              $destinationPath = public_path().'/uploads/food/';
-			              $file->move($destinationPath, $picture);
+								//STORE NEW IMAGES IN THE ARRAY VARAIBLE
+								$new_images[] = $picture;
 
-			              //STORE NEW IMAGES IN THE ARRAY VARAIBLE
-			              $new_images[] = $picture;
-			                
-			              // UNSERIALIZE EXISTING IMAGES
-			              $old_images = unserialize($food_item->food_images);
-			              if(!empty($old_images)){
-			                //MERGE NEW IMAGES AND EXISTING IMAGES
-			                $total_images = array_merge($new_images,$old_images);
-			              }
-			              else {
-			                $total_images = $new_images;
-			              }
-			            }
-			            $food_item->update(['food_images' =>serialize($total_images)]); 
-			          }
+								// UNSERIALIZE EXISTING IMAGES
+								$old_images = unserialize($food_item->food_images);
+								if(!empty($old_images)){
+									//MERGE NEW IMAGES AND EXISTING IMAGES
+									$total_images = array_merge($new_images,$old_images);
+								}
+								else {
+									$total_images = $new_images;
+								}
+				            }
+			            	$food_item->update(['food_images' =>serialize($total_images)]); 
+			          	}
 			        }
 		    		Session::flash('success', "Updated successfully.");
 					return back();
 			    }
 	    	}
-
 	    }
 	    else {
 	        /* check validation */
@@ -187,28 +185,26 @@ class FoodItemController extends Controller
 					  ]
 					);
 
-		          if($foodImageValidator->fails()) {
-		            Session::flash('error', "Image should be in jpg,jpeg or png format.");
-		            return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-		          }
-
-		          else {
-		            foreach($files as $file){
-		              $filename = $file->getClientOriginalName();
-		              $extension = $file->getClientOriginalExtension();
-		              $picture = "food_".uniqid().".".$extension;
-		              $destinationPath = public_path().'/uploads/food/';
-		              $file->move($destinationPath, $picture);
-		              $food_images[] = $picture;
-		            }
-		            $food->update(['food_images' => serialize($food_images)]);
-		          }
+		          	if($foodImageValidator->fails()) {
+		            	Session::flash('error', "Image should be in jpg,jpeg or png format.");
+		            	return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
+		          	}
+		          	else {
+		            	foreach($files as $file){
+		              		$filename = $file->getClientOriginalName();
+		              		$extension = $file->getClientOriginalExtension();
+		              		$picture = "food_".uniqid().".".$extension;
+		              		$destinationPath = public_path().'/uploads/food/';
+		              		$file->move($destinationPath, $picture);
+		              		$food_images[] = $picture;
+		            	}
+		            	$food->update(['food_images' => serialize($food_images)]);
+		          	}
 		        }
 	        	Session::flash('success', "Created successfully.");
 				return back();
 	    	}
 	    }
-
     }
 
     //VALIDATOR FOR CREATE FOOD ITEM
@@ -249,6 +245,7 @@ class FoodItemController extends Controller
                                     ]);
   	}
 
+  	/* view of food item updation form */
     public function edit($food_item_id=null) {
     	$food_images = '';
     	$time_of_availability = '';
@@ -281,6 +278,7 @@ class FoodItemController extends Controller
     	return view('food.create-food-item',['form_type' => 'edit','food_items'=>$food_items,'category_id'=>$category_id,'offered_by'=>$offered_by,'food_images'=>$food_images,'time_of_availability'=>$time_of_availability]);
     }
 
+    /* shows list of food items */
     public function lists() {
     	$food_items = FoodItem::get();
     	if(!empty($food_items)) {
@@ -293,7 +291,6 @@ class FoodItemController extends Controller
     			if(!empty($category)) {
     				$food->category_name = $category->category_name;
     			}
-
     		}
     	}
     	return view('food.list-food-item',['food_items'=>$food_items]);
@@ -309,19 +306,19 @@ class FoodItemController extends Controller
 		    if(!empty($food_item->food_images)) {
 		    	$images = unserialize($food_item->food_images);
 			    foreach ($images as $key => $delete_image) {
-			      if($delete_image == $food_image){
+			      	if($delete_image == $food_image){
 
-			        //DELETE SELECTED IMAGE FROM DATABASE
-			        unset($images[$key]);
+				        //DELETE SELECTED IMAGE FROM DATABASE
+				        unset($images[$key]);
 
-			        //DELETE THE SAME IMAGE FROM FOLDER
-			        if(file_exists(public_path().'/uploads/food/'.$delete_image)) {
-			          unlink(public_path().'/uploads/food/'.$delete_image); 
-			        }
-			      } 
-			      else {
-			      	$imgArray[] = $delete_image;
-			      }
+				        //DELETE THE SAME IMAGE FROM FOLDER
+				        if(file_exists(public_path().'/uploads/food/'.$delete_image)) {
+				          	unlink(public_path().'/uploads/food/'.$delete_image); 
+				        }
+			      	} 
+			      	else {
+			      		$imgArray[] = $delete_image;
+			      	}
 			    }
 		    }
 

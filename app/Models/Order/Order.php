@@ -20,6 +20,7 @@ class Order extends Model
 				           'long',
 				           'address',
 				           'date_of_order',
+				           'date_of_delivery',
 				           'time',			           
 				           'total_price',
 				           'status'
