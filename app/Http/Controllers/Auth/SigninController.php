@@ -13,12 +13,13 @@ use Crypt;
 use App\Models\ForgetPasswordToken;
 
 class SigninController extends Controller
-{
+{   
+    /* view of creator/eater login form */
     public function signIn() {
     	return view('frontend.auth.sign-in');
     }
 
-
+    /* login as eater or creator */
     public function authentication(Request $request) {
     	$input = $request->input();
         $validator = $this->validator($input);
@@ -64,6 +65,7 @@ class SigninController extends Controller
        	return redirect()->route('sign_in');
     }
 
+    /* validator for login form */
   	protected function validator($request) {
     	return Validator::make($request,[
                                       'email' => 'required',
@@ -71,6 +73,7 @@ class SigninController extends Controller
                                     ]);
   	}
 
+    /* function for signing out from the application */
   	public function signOut() {           
         Auth::logout();
         return redirect('/');
@@ -99,7 +102,6 @@ class SigninController extends Controller
             $email = $input['email'];
             $name = $data['name'];
             $uniqueid = uniqid();
-            // Session::put('uniqueid',$uniqueid);
 
             ForgetPasswordToken::create([
               'email' => $email,

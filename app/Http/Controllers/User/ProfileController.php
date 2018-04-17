@@ -14,10 +14,10 @@ use Auth;
 class ProfileController extends Controller
 {   
     public function profile($user_id = null) {
-
-    	// $profile_details = [];
+        /* getting the user associated with the user id*/
     	$user = User::where('user_id',$user_id)->first();
         if(!empty($user)) {
+            /* getting teh profile information of teh user */
             $profile = ProfileInformation::where('user_id',$user_id)->first();
             if(!empty($profile->image)) {
                 $user->image = $profile->image;
@@ -38,7 +38,12 @@ class ProfileController extends Controller
                 $user->video_link = $profile->video_link;
             }
 
-            $food_items = FoodItem::where('status',1)->where('offered_by',$user_id)->orderBy('date_of_availability','ASC')->get();
+            /* get all the active food items created by the user */
+            $food_items = FoodItem::where('status',1)
+                                  ->where('offered_by',$user_id)
+                                  ->orderBy('date_of_availability','ASC')
+                                  ->get();
+
             if(!empty($food_items)) {
                 foreach ($food_items as $key => $food) {
                     $category = Category::where('category_id',$food->category_id)->first();
@@ -59,6 +64,7 @@ class ProfileController extends Controller
                 }
             }
 
+            /* get the reviews of the user */
             $reviews = Review::where('user_id',$user_id)->get();
             foreach ($reviews as $key => $review) {
                 $profile = ProfileInformation::where('user_id',$review->reviewed_by)->first();
@@ -78,8 +84,8 @@ class ProfileController extends Controller
     	return view('user.profile',['user'=>$user,'food_items'=>$food_items,'reviews'=>$reviews]);
     }
 
+    /* get the view of user profile updation form */
     public function edit($user_id = null) {
-        
         if($user_id == Auth::User()->user_id) {
             $user = User::where('user_id',$user_id)->first();
             $profile = ProfileInformation::where('user_id',$user_id)->first();
@@ -109,7 +115,6 @@ class ProfileController extends Controller
                 $user->deliverable_area = $profile->deliverable_area;
             }
         }
-
         else {
             return back();
         }

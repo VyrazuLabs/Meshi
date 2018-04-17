@@ -13,7 +13,6 @@ class LanguageController extends Controller
 {
     public function changeLanguage(Request $request) {
     	if($request->ajax()) {
-    		// echo"<pre>";print_r($request->locale);die;
         	Session::put('lang_name', $request->locale);
 
     		$request->session()->put('locale', $request->locale);

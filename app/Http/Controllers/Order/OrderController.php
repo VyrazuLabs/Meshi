@@ -13,6 +13,7 @@ use Auth;
 
 class OrderController extends Controller
 {	
+	/* adding items in cart */
 	public function addToCart() {
 		$input = Input::all();
 		$cartValidator = $this->cartValidator($input);

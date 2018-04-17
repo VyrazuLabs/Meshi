@@ -9,6 +9,7 @@ use App\Models\Category\Category;
 use App\Models\ProfileInformation;
 use Auth;
 use DB;
+use App\Models\User;
 
 class FrontendController extends Controller
 {
@@ -190,7 +191,6 @@ class FrontendController extends Controller
 
     public function index() {
         $today = date("Y-m-d");
-        // $today_range = $today." 00:00:00";
         $tomorrow = date('Y-m-d',  strtotime($today . ' +1 day'));
         $day_after_tomorrow = date('Y-m-d',  strtotime($today . ' +2 day'));
         $next_day_of_tomorrow = date('Y-m-d',  strtotime($today . ' +3 day'));
@@ -220,22 +220,30 @@ class FrontendController extends Controller
                     $food->image = $profile->image;
                 }
 
+                $user = User::where('user_id',$food->offered_by)->first();
+                if($user->status == 1) {
+                    $food->user_status = 1;
+                }
+                else {
+                    $food->user_status = 0;
+                }
+
                 if(!empty($food->food_images)) {
                     //getting the food images
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
                 }
-
-                if($food->date == $today) {
+                
+                if($food->date == $today && $food->user_status == 1) {
                     $today_food_list[] = $food;
                 }
-                if($food->date == $tomorrow) {
+                if($food->date == $tomorrow && $food->user_status == 1) {
                     $tomorrow_food_list[] = $food;
                 }
-                if($food->date == $day_after_tomorrow) {
+                if($food->date == $day_after_tomorrow && $food->user_status == 1) {
                     $day_after_tomorrow_food_list[] = $food;
                 }
-                if($food->date == $next_day_of_tomorrow) {
+                if($food->date == $next_day_of_tomorrow && $food->user_status == 1) {
                     $next_day_of_tomorrow_food_list[] = $food;
                 }
             }

@@ -14,7 +14,8 @@ use Session;
 use Auth;
 
 class FoodController extends Controller
-{
+{ 
+  /* view of food details page */
   public function details($food_item_id = null) {
   	$food_details = FoodItem::where('food_item_id',$food_item_id)->first();
   	$foodImages = [];
@@ -25,30 +26,35 @@ class FoodController extends Controller
       $time_of_availability = unserialize($food_details->time_of_availability);
       $time_of_availability = array_filter($time_of_availability); 
 
+      /* getting the category name of the food */
 			$category = Category::where('category_id',$food_details->category_id)->first();
 			$food_details->category_name = $category->category_name;
-      $food_details->price = $food_details->price;
+
+      /* getting the delivery date of the food item */
       $food_details->date = date('Y-m-d', strtotime($food_details->date_of_availability));
       // $food_details->time = date('h:i: a', strtotime($food_details->time_of_availability));
 
+      /* get the profile information of the creator */
       $profile = ProfileInformation::where('user_id',$food_details->offered_by)->first();
       if(!empty($profile->image)) {
         $food_details->image = $profile->image;
       }
       $food_details->municipality = $profile->municipality;
 
+      /* get the name of the creator */
       $user = User::where('user_id',$food_details->offered_by)->first();
       if(!empty($user)) {
-          $food_details->made_by = $user->name;
+        $food_details->made_by = $user->name;
       }
 
+      /* get all the food item images */
       if(!empty($food_details->food_images)) {
-          //getting the food images
-          $images = $food_details->food_images;
-          $foodImages = unserialize($images);
-
+        //getting the food images
+        $images = $food_details->food_images;
+        $foodImages = unserialize($images);
       }
 
+      /* getting the deliverable area of the food item */
       if(!empty($profile->deliverable_area)) {
         $food_details->deliverable_area = $profile->deliverable_area;
       }
@@ -57,6 +63,10 @@ class FoodController extends Controller
        
 
       /** calculate total price with tax and shipping fee */
+      $percentage = 5;
+      $commission = ceil($food_details->price*($percentage/100));
+      $cost = $commission+$food_details->price; 
+
       //    $shipping_cost = 0;
 			// if(!empty($food_details->shipping_fee)) {
 			// 	$shipping_cost = $food_details->shipping_fee;
@@ -69,10 +79,6 @@ class FoodController extends Controller
 			// foreach ($foodCosting as $key => $costing) {
 			// 	$cost = $key+$cost;
 			// }
-       
-      $percentage = 5;
-      $commission = ceil($food_details->price*($percentage/100));
-      $cost = $commission+$food_details->price; 
   	}
     else {
       return back();
@@ -80,28 +86,35 @@ class FoodController extends Controller
   	return view('frontend.food.details',['food_details'=>$food_details,'foodImages'=>$foodImages,'foodCosting'=>$foodCosting,'cost'=>$cost,'time_of_availability'=>$time_of_availability,'commission' => $commission]);
   }
 
-  // DISPLAY SAVE FOOD PAGE
+  // view of food creation form 
   public function create() {
     $deliverable_area = '';
+
+    /* getting all the active categories in ascending order */
     $category_id = Category::where('status',1)
                            ->orderBy('id','ASC')
                            ->pluck('category_name','category_id');
+
+    /* get all list of active creators */                       
     $offered_by = User::where('type',1)->pluck('name','user_id');
+
+    /* getting the profile information of logged in user */
     $profile = ProfileInformation::where('user_id',Auth::User()->user_id)->first();
-   
     if(!empty($profile)) {
       $deliverable_area = $profile->deliverable_area;
     }
+
     return view('frontend.food.create-food-item',['form_type' => 'create','category_id'=>$category_id,'offered_by'=>$offered_by,'deliverable_area'=>$deliverable_area]);
   }
 
-  // SAVE FOOD
+  /* create and update food details here */
   public function save(Request $request) {
     $input = $request->input(); 
     $createItemValidator = $this->createItemValidator($input);
     $updateItemValidator = $this->updateItemValidator($input);
     $timeslotValidator = $this->timeslotValidator($input);
 
+    /* checking for time slot */
     if(isset($input['time_of_availability'])) {
       $startTime = array_column($input['time_of_availability'], 'start_time');
       $endTime = array_column($input['time_of_availability'], 'end_time');
@@ -115,25 +128,29 @@ class FoodController extends Controller
       $timeTable = '';
     }
 
-    //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
+    //CONVERTING INPUT DATE INTO y-m-d FORMAT
     if(isset($input['date_of_availability'])) {
       $date = str_replace('/', '-', $input['date_of_availability']);
       $dates = date('Y-m-d', strtotime($date));
     }
 
+    /* split publication start date and time here */
     if(isset($input['start_publication_date'])) {
       $startDate = str_replace('/', '-', $input['start_publication_date']);
       $start_date = date('Y-m-d', strtotime($startDate));
       $start_time = date('h:i:s', strtotime($startDate));
     }
 
+    /* split publication end date and time here */
     if(isset($input['end_publication_date'])) {
       $endDate = str_replace('/', '-', $input['end_publication_date']);
       $end_date = date('Y-m-d', strtotime($endDate));
       $end_time = date('h:i:s', strtotime($endDate));
     }
 
+    /* update food details here */
     if(isset($input['food_item_id'])) {
+      /* check for time slot validation */
       if($timeslotValidator->fails()) {
         Session::flash('error', trans('validation.time_slot_error'));
         return redirect()->back()->withErrors($timeslotValidator)->withInput();
@@ -159,9 +176,7 @@ class FoodController extends Controller
                                'end_publication_time' => $end_time,
                               ]);
 
-          $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
-          // $profile->update(['deliverable_area' => $input['deliverable_area']]);
-
+          /* updating food images */
           if ($request->hasFile('food_images')) {
             $files = $request->file('food_images');
             $input_data = $request->all();
@@ -215,12 +230,6 @@ class FoodController extends Controller
         return redirect()->back()->withErrors($createItemValidator)->withInput();
       }
       else {
-        // //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
-        // $date = str_replace('/', '-', $input['date_of_availability']);
-        // $dates = date('Y-m-d', strtotime($date));
-
-
-
         $food = FoodItem::create([  'food_item_id' => uniqid(),
                                     'item_name' => $input['item_name'],
                                     'category_id' => $input['category_id'],
@@ -238,8 +247,8 @@ class FoodController extends Controller
                                 ]);
 
         $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
-        // $profile->update(['deliverable_area' => $input['deliverable_area']]);
 
+        /* update total number of dishes made by the creator */
         if($profile->total_dishes == 0) {
           $profile->update(['total_dishes' => 1]);
         }
@@ -248,7 +257,7 @@ class FoodController extends Controller
           $profile->update(['total_dishes' => $totalDishes]);
         }
 
-        //multiple Image Upload
+        /* Upload food images */
         if ($request->hasFile('food_images')) {
           $files = $request->file('food_images');
           $input_data = $request->all();
@@ -341,7 +350,7 @@ class FoodController extends Controller
                                   ]);
   }
 
-
+  /* list of food items created by the logged in user */
   public function lists() {
     $foods = FoodItem::where('offered_by',Auth::User()->user_id)
                      ->where('status',1)
@@ -358,7 +367,7 @@ class FoodController extends Controller
     return view('frontend.food.food-list',['foods'=>$foods]);
   }
 
-
+  /* delete food items */
   public function delete($food_item_id = null) {
     $foodItem = FoodItem::where('food_item_id',$food_item_id)->first();
     if(!empty($foodItem)) {
@@ -368,18 +377,25 @@ class FoodController extends Controller
     return back();
   }
 
+  /* view of food item updation form */
   public function editFood($food_item_id = null) {
     $food_images = '';
     $time_of_availability = '';
     $deliverable_area = '';
+
+    /* get all the active categories in ascending order */
     $category_id = Category::where('status',1)
                            ->orderBy('id','ASC')
                            ->pluck('category_name','category_id');
-                           
+    
+    /* get all the active creators */                        
     $offered_by = User::where('type',1)->pluck('name','user_id');
-    $food_items = FoodItem::where('food_item_id',$food_item_id)->first();
+
+    /* get the profile information of logged in user */
     $profile = ProfileInformation::where('user_id',Auth::User()->user_id)->first();
-   
+
+
+    $food_items = FoodItem::where('food_item_id',$food_item_id)->first();
     if(!empty($food_items->deliverable_area)) {
       $deliverable_area = $food_items->deliverable_area;
     }
@@ -394,8 +410,8 @@ class FoodController extends Controller
 
     if(!empty($food_items->food_images)) {
       //getting the food images
-        $images = $food_items->food_images;
-        $food_images = unserialize($images);
+      $images = $food_items->food_images;
+      $food_images = unserialize($images);
     }
 
     //UNSERIALIZE TIME SLOT HERE
@@ -404,11 +420,11 @@ class FoodController extends Controller
       $time_of_availability = array_filter($time_of_availability); 
     }
 
+    /* concatenate publication date and time*/
     if(!empty($food_items->start_publication_date) && !empty($food_items->end_publication_date)) {
       $food_items->start_publication_date = $food_items->start_publication_date." ".$food_items->start_publication_time;
       $food_items->end_publication_date = $food_items->end_publication_date." ".$food_items->end_publication_time;
     }
-
 
     return view('frontend.food.create-food-item',['form_type' => 'edit','food_items'=>$food_items,'category_id'=>$category_id,'offered_by'=>$offered_by,'food_images'=>$food_images,'time_of_availability'=>$time_of_availability,'deliverable_area'=>$deliverable_area]);
   }

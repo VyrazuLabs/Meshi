@@ -16,6 +16,7 @@ class RegistrationController extends Controller
     	return view('frontend.auth.user-register',['form_type' => 'create']);
     }
 
+    /* register creator and eater here */
     public function save(Request $request) {
     	$input = $request->input();
     	$file = $request->file();
@@ -126,7 +127,6 @@ class RegistrationController extends Controller
 		        /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
 		        if(!empty($file['image'])) {
 			        $profileImageValidator = $this->profileImageValidator($file);
-			        // echo"<pre>";print_r($file['cover_image']);die;
 			        if( $profileImageValidator->fails()) {
 			            $errors = $profileImageValidator->errors();
 
