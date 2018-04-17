@@ -166,6 +166,7 @@ return [
     'Deliverable Area' => 'お届け可能エリア',
     'FOOD LIST' => '登録したお料理一覧',
     'Edit Food' => '食べ物を編集する',
+    'Today' => '今日',
 
 ];
 

@@ -17,8 +17,15 @@
 		<div class="container">
 		<div class="row">
 		</div><!-- row -->
+		@php 
+			$date_today = date("Y-m-d"); 
+			$date_tomorrow = date('Y-m-d',  strtotime($date_today . ' +1 day'));
+        	$date_after_tomorrow = date('Y-m-d',  strtotime($date_today . ' +2 day'));
+        	$date_next_day_of_tomorrow = date('Y-m-d',  strtotime($date_today . ' +3 day'));
+		@endphp
+
 		<!-- featureds -->
-		@if(count($today_food_list)>0)
+		@if(count($today_food_items)>0)
 			<div class="section featureds">
 				<div class="row">
 					<!-- featured-top -->
@@ -30,142 +37,8 @@
 				</div>
 					
 				<div class="row">
-					@foreach($today_food_list as $food)
-						<!-- featured -->
-						<div class="col-md-4 col-lg-3">
-							<!-- featured -->
-							<div class="featured">
-								<div class="featured-image">
-									<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-										@if(!empty($food->foodImages))
-											@foreach($food->foodImages as $key=>$food_image)
-												@if($key == 0)
-													<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
-												@endif
-											@endforeach
-										@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
-										@endif
-									</a>
-									<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-									<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
-										<div class="feature-over-person">
-										@if(!empty($food->image))
-											<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
-										@else
-											<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
-										@endif
-										</div>
-									</a>
-								</div>
-								
-								<!-- ad-info -->
-								<div class="ad-info">
-									<h3 class="item-price">&yen;{{$food->price}}</h3>
-									<h4 class="item-title">{{$food->item_name}}</h4>
-									<div class="item-cat">
-										<span>{{$food->category_name}}</span> 
-									</div>
-								</div><!-- ad-info -->
-								
-								<!-- ad-meta -->
-								<div class="ad-meta">
-									<div class="meta-content">
-										<span class="dated">{{$food->date}}</span>
-									</div>									
-									<!-- item-info-right -->
-									<!-- <div class="user-option pull-right">
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
-									</div> --><!-- item-info-right -->
-								</div><!-- ad-meta -->
-							</div><!-- featured -->
-						</div><!-- featured -->
-					@endforeach
-				</div><!-- row -->				
-			</div><!-- featureds -->
-		@endif
-		@if(count($tomorrow_food_list)>0)
-			<div class="section featureds">
-				<div class="row">
-					<!-- featured-top -->
-					<div class="col-sm-12">
-						<div class="featured-top">
-							<h4>{{ trans('app.Tomorrow') }}</h4>
-						</div>
-					</div><!-- featured-top -->
-				</div>
-					
-				<div class="row">
-					@foreach($tomorrow_food_list as $food)
-						<!-- featured -->
-						<div class="col-md-4 col-lg-3">
-							<!-- featured -->
-							<div class="featured">
-								<div class="featured-image">
-									<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-										@if(!empty($food->foodImages))
-											@foreach($food->foodImages as $key=>$food_image)
-												@if($key == 0)
-													<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
-												@endif
-											@endforeach
-										@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
-										@endif
-									</a>
-									<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-									<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
-										<div class="feature-over-person">
-										@if(!empty($food->image))
-											<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
-										@else
-											<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
-										@endif
-										</div>
-									</a>
-								</div>
-								
-								<!-- ad-info -->
-								<div class="ad-info">
-									<h3 class="item-price">&yen;{{$food->price}}</h3>
-									<h4 class="item-title">{{$food->item_name}}</h4>
-									<div class="item-cat">
-										<span>{{$food->category_name}}</span> 
-									</div>
-								</div><!-- ad-info -->
-								
-								<!-- ad-meta -->
-								<div class="ad-meta">
-									<div class="meta-content">
-										<span class="dated">{{$food->date}}</span>
-									</div>									
-									<!-- item-info-right -->
-									<!-- <div class="user-option pull-right">
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
-									</div> --><!-- item-info-right -->
-								</div><!-- ad-meta -->
-							</div><!-- featured -->
-						</div><!-- featured -->
-					@endforeach
-				</div><!-- row -->				
-			</div><!-- featureds -->
-		@endif
-		<!-- featureds -->
-		@if(count($day_after_tomorrow_food_list)>0)
-			<div class="section featureds">
-				<div class="row">
-					<!-- featured-top -->
-					<div class="col-sm-12">
-						<div class="featured-top">
-							<h4>{{ trans('app.Day After Tomorrow') }}</h4>
-						</div>
-					</div><!-- featured-top -->
-				</div>
-					
-				<div class="row">
-						@foreach($day_after_tomorrow_food_list as $food)
+					@foreach($today_food_items as $food)
+						@if($food->date == $date_today)
 							<!-- featured -->
 							<div class="col-md-4 col-lg-3">
 								<!-- featured -->
@@ -216,12 +89,152 @@
 									</div><!-- ad-meta -->
 								</div><!-- featured -->
 							</div><!-- featured -->
+						@endif
+					@endforeach
+				</div><!-- row -->				
+			</div><!-- featureds -->
+		@endif
+		@if(count($tomorrow_food_items)>0)
+			<div class="section featureds">
+				<div class="row">
+					<!-- featured-top -->
+					<div class="col-sm-12">
+						<div class="featured-top">
+							<h4>{{ trans('app.Tomorrow') }}</h4>
+						</div>
+					</div><!-- featured-top -->
+				</div>
+					
+				<div class="row">
+					@foreach($tomorrow_food_items as $food)
+						@if($food->date == $date_tomorrow)
+							<!-- featured -->
+							<div class="col-md-4 col-lg-3">
+								<!-- featured -->
+								<div class="featured">
+									<div class="featured-image">
+										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+											@if(!empty($food->foodImages))
+												@foreach($food->foodImages as $key=>$food_image)
+													@if($key == 0)
+														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+													@endif
+												@endforeach
+											@else
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+											@endif
+										</a>
+										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
+										<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
+											<div class="feature-over-person">
+											@if(!empty($food->image))
+												<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
+											@else
+												<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
+											@endif
+											</div>
+										</a>
+									</div>
+									
+									<!-- ad-info -->
+									<div class="ad-info">
+										<h3 class="item-price">&yen;{{$food->price}}</h3>
+										<h4 class="item-title">{{$food->item_name}}</h4>
+										<div class="item-cat">
+											<span>{{$food->category_name}}</span> 
+										</div>
+									</div><!-- ad-info -->
+									
+									<!-- ad-meta -->
+									<div class="ad-meta">
+										<div class="meta-content">
+											<span class="dated">{{$food->date}}</span>
+										</div>									
+										<!-- item-info-right -->
+										<!-- <div class="user-option pull-right">
+											<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+											<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+										</div> --><!-- item-info-right -->
+									</div><!-- ad-meta -->
+								</div><!-- featured -->
+							</div><!-- featured -->
+						@endif
+					@endforeach
+				</div><!-- row -->				
+			</div><!-- featureds -->
+		@endif
+		<!-- featureds -->
+		@if(count($day_after_tomorrow_food_items)>0)
+			<div class="section featureds">
+				<div class="row">
+					<!-- featured-top -->
+					<div class="col-sm-12">
+						<div class="featured-top">
+							<h4>{{ trans('app.Day After Tomorrow') }}</h4>
+						</div>
+					</div><!-- featured-top -->
+				</div>
+					
+				<div class="row">
+						@foreach($day_after_tomorrow_food_items as $food)
+							@if($food->date == $date_after_tomorrow)
+								<!-- featured -->
+								<div class="col-md-4 col-lg-3">
+									<!-- featured -->
+									<div class="featured">
+										<div class="featured-image">
+											<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+												@if(!empty($food->foodImages))
+													@foreach($food->foodImages as $key=>$food_image)
+														@if($key == 0)
+															<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+														@endif
+													@endforeach
+												@else
+														<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+												@endif
+											</a>
+											<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
+											<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
+												<div class="feature-over-person">
+												@if(!empty($food->image))
+													<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
+												@else
+													<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
+												@endif
+												</div>
+											</a>
+										</div>
+										
+										<!-- ad-info -->
+										<div class="ad-info">
+											<h3 class="item-price">&yen;{{$food->price}}</h3>
+											<h4 class="item-title">{{$food->item_name}}</h4>
+											<div class="item-cat">
+												<span>{{$food->category_name}}</span> 
+											</div>
+										</div><!-- ad-info -->
+										
+										<!-- ad-meta -->
+										<div class="ad-meta">
+											<div class="meta-content">
+												<span class="dated">{{$food->date}}</span>
+											</div>									
+											<!-- item-info-right -->
+											<!-- <div class="user-option pull-right">
+												<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+												<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+											</div> --><!-- item-info-right -->
+										</div><!-- ad-meta -->
+									</div><!-- featured -->
+								</div><!-- featured -->
+							@endif
 						@endforeach
 				</div><!-- row -->				
 			</div><!-- featureds -->
 		@endif
 		<!-- featureds -->
-		@if(count($next_day_of_tomorrow_food_list)>0)
+		@if(count($next_day_of_tomorrow_food_items)>0)
 			<div class="section featureds">
 				<div class="row">
 					<!-- featured-top -->
@@ -233,57 +246,59 @@
 				</div>
 					
 				<div class="row">
-					@foreach($next_day_of_tomorrow_food_list as $food)
-						<!-- featured -->
-						<div class="col-md-4 col-lg-3">
+					@foreach($next_day_of_tomorrow_food_items as $food)
+						@if($food->date == $date_next_day_of_tomorrow)
 							<!-- featured -->
-							<div class="featured">
-								<div class="featured-image">
-									<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-										@if(!empty($food->foodImages))
-											@foreach($food->foodImages as $key=>$food_image)
-												@if($key == 0)
-													<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
-												@endif
-											@endforeach
-										@else
-												<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
-										@endif
-									</a>
-									<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-									<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
-										<div class="feature-over-person">
-										@if(!empty($food->image))
-											<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
-										@else
-											<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
-										@endif
-										</div>
-									</a>
-								</div>
-								
-								<!-- ad-info -->
-								<div class="ad-info">
-									<h3 class="item-price">&yen;{{$food->price}}</h3>
-									<h4 class="item-title">{{$food->item_name}}</h4>
-									<div class="item-cat">
-										<span>{{$food->category_name}}</span> 
+							<div class="col-md-4 col-lg-3">
+								<!-- featured -->
+								<div class="featured">
+									<div class="featured-image">
+										<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+											@if(!empty($food->foodImages))
+												@foreach($food->foodImages as $key=>$food_image)
+													@if($key == 0)
+														<img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-respocive images-featured">
+													@endif
+												@endforeach
+											@else
+													<img src="{{ url('frontend/images/featured/food1.png') }}" alt="" class="img-respocive">
+											@endif
+										</a>
+										<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
+										<a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
+											<div class="feature-over-person">
+											@if(!empty($food->image))
+												<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-responsive feature-over-image">
+											@else
+												<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-responsive">
+											@endif
+											</div>
+										</a>
 									</div>
-								</div><!-- ad-info -->
-								
-								<!-- ad-meta -->
-								<div class="ad-meta">
-									<div class="meta-content">
-										<span class="dated">{{$food->date}}</span>
-									</div>									
-									<!-- item-info-right -->
-									<!-- <div class="user-option pull-right">
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-										<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
-									</div> --><!-- item-info-right -->
-								</div><!-- ad-meta -->
+									
+									<!-- ad-info -->
+									<div class="ad-info">
+										<h3 class="item-price">&yen;{{$food->price}}</h3>
+										<h4 class="item-title">{{$food->item_name}}</h4>
+										<div class="item-cat">
+											<span>{{$food->category_name}}</span> 
+										</div>
+									</div><!-- ad-info -->
+									
+									<!-- ad-meta -->
+									<div class="ad-meta">
+										<div class="meta-content">
+											<span class="dated">{{$food->date}}</span>
+										</div>									
+										<!-- item-info-right -->
+										<!-- <div class="user-option pull-right">
+											<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+											<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+										</div> --><!-- item-info-right -->
+									</div><!-- ad-meta -->
+								</div><!-- featured -->
 							</div><!-- featured -->
-						</div><!-- featured -->
+						@endif
 					@endforeach
 				</div><!-- row -->				
 			</div><!-- featureds -->

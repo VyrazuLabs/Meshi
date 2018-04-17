@@ -23,7 +23,11 @@ class FoodItem extends Model
 				            'shipping_fee',
 				            'price',
 				            'short_info',
-				            'deliverable_area'
+				            'deliverable_area',
+				            'start_publication_date',
+				            'start_publication_time',
+				            'end_publication_date',
+				            'end_publication_time'
     					);
 
     protected $dates = ['deleted_at'];

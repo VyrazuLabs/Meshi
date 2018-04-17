@@ -458,3 +458,6 @@ iframe{
 .food-creator-pricebtn{    
   float: right;
 }
+.bootstrap-datetimepicker-widget table td span{
+  background-color: transparent;
+}

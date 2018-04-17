@@ -71,6 +71,8 @@
     <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- timepicker -->
     <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+    <!-- bootstrap datetimepicker -->
+    <script src="{{ url('frontend/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{ url('bower_components/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
     <!-- Slimscroll -->

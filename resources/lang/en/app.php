@@ -176,6 +176,7 @@ return [
     'Deliverable Area' => 'Deliverable Area',
     'FOOD LIST' => 'FOOD LIST',
     'Edit Food' => 'Edit Food',
+    'Today' =>  'Today'
     
 
 

@@ -47,6 +47,18 @@ class FoodItemController extends Controller
 			$dates = date('Y-m-d', strtotime($date));
 		}
 
+		if(isset($input['start_publication_date'])) {
+	      $startDate = str_replace('/', '-', $input['start_publication_date']);
+	      $start_date = date('Y-m-d', strtotime($startDate));
+	      $start_time = date('h:i:s', strtotime($startDate));
+	    }
+
+	    if(isset($input['end_publication_date'])) {
+	      $endDate = str_replace('/', '-', $input['end_publication_date']);
+	      $end_date = date('Y-m-d', strtotime($endDate));
+	      $end_time = date('h:i:s', strtotime($endDate));
+	    }
+
 
         if(isset($input['food_item_id'])) {
 	    	if($timeslotValidator->fails()) {
@@ -72,7 +84,11 @@ class FoodItemController extends Controller
 			           					 'offered_by' => $input['offered_by'],
 			           					 // 'shipping_fee' => $input['shipping_fee'],
 			           					 'price' => ceil($input['price']),
-			           					 'short_info' => $input['short_info']
+			           					 'short_info' => $input['short_info'],
+			           					 'start_publication_date' => $start_date,
+			                             'start_publication_time' => $start_time,
+			                             'end_publication_date' => $end_date,
+			                             'end_publication_time' => $end_time,
 			          				  ]);
 
 		    		if ($request->hasFile('food_images')) {
@@ -141,7 +157,11 @@ class FoodItemController extends Controller
 								            'status' => $input['status'],
 		           					 		// 'shipping_fee' => $input['shipping_fee'],
 		           					 		'price' => ceil($input['price']),
-		           					 		'short_info' => $input['short_info']
+		           					 		'short_info' => $input['short_info'],
+		           					 		'start_publication_date' => $start_date,
+				                            'start_publication_time' => $start_time,
+				                            'end_publication_date' => $end_date,
+				                            'end_publication_time' => $end_time,
 							        	]);
 
 	    		$profile = ProfileInformation::where('user_id',$input['offered_by'])->first();
@@ -200,7 +220,10 @@ class FoodItemController extends Controller
                                       'category_id' => 'required',
                                       'date_of_availability' => 'required',
                                       'price' => 'required|numeric',
-                                      'time_of_availability' => 'required'
+                                      'time_of_availability' => 'required',
+                                      'start_publication_date' => 'required',
+                                      'end_publication_date' => 'required',
+
                                     ]);
   	}
 
@@ -213,6 +236,9 @@ class FoodItemController extends Controller
                                       'category_id' => 'required',
                                       'date_of_availability' => 'required',
                                       'price' => 'required|numeric',
+                                      'start_publication_date' => 'required',
+                                      'end_publication_date' => 'required',
+
                                     ]);
   	}
 
@@ -245,6 +271,11 @@ class FoodItemController extends Controller
     	if(!empty($food_items->time_of_availability)) {
 	    	$time_of_availability = unserialize($food_items->time_of_availability);
 	    	$time_of_availability = array_filter($time_of_availability); 
+	    }
+
+    	if(!empty($food_items->start_publication_date) && !empty($food_items->end_publication_date)) {
+		    $food_items->start_publication_date = $food_items->start_publication_date." ".$food_items->start_publication_time;
+	    	$food_items->end_publication_date = $food_items->end_publication_date." ".$food_items->end_publication_time;
 	    }
 
     	return view('food.create-food-item',['form_type' => 'edit','food_items'=>$food_items,'category_id'=>$category_id,'offered_by'=>$offered_by,'food_images'=>$food_images,'time_of_availability'=>$time_of_availability]);

@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap timepicker -->
     <link rel="stylesheet" type="text/css" href="{{ url('bower_components/bootstrap-timepicker/css/AdminLTE-bootstrap-timepicker.min.css') }}">
+    <!-- bootstrap datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="{{ url('frontend/css/bootstrap-datetimepicker.min.css') }}">
     <!-- icons -->
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="{{ url('frontend/css/style.css') }}">

@@ -121,6 +121,18 @@ class FoodController extends Controller
       $dates = date('Y-m-d', strtotime($date));
     }
 
+    if(isset($input['start_publication_date'])) {
+      $startDate = str_replace('/', '-', $input['start_publication_date']);
+      $start_date = date('Y-m-d', strtotime($startDate));
+      $start_time = date('h:i:s', strtotime($startDate));
+    }
+
+    if(isset($input['end_publication_date'])) {
+      $endDate = str_replace('/', '-', $input['end_publication_date']);
+      $end_date = date('Y-m-d', strtotime($endDate));
+      $end_time = date('h:i:s', strtotime($endDate));
+    }
+
     if(isset($input['food_item_id'])) {
       if($timeslotValidator->fails()) {
         Session::flash('error', trans('validation.time_slot_error'));
@@ -140,7 +152,11 @@ class FoodController extends Controller
                                'time_of_availability' => serialize($timeTable),
                                'category_id' => $input['category_id'],
                                'price' => ceil($input['price']),
-                               'deliverable_area' => $input['deliverable_area']
+                               'deliverable_area' => $input['deliverable_area'],
+                               'start_publication_date' => $start_date,
+                               'start_publication_time' => $start_time,
+                               'end_publication_date' => $end_date,
+                               'end_publication_time' => $end_time,
                               ]);
 
           $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
@@ -199,9 +215,11 @@ class FoodController extends Controller
         return redirect()->back()->withErrors($createItemValidator)->withInput();
       }
       else {
-        //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
-        $date = str_replace('/', '-', $input['date_of_availability']);
-        $dates = date('Y-m-d', strtotime($date));
+        // //CONVERTING INPUT DATE INTO DATABASE DATE FORMAT
+        // $date = str_replace('/', '-', $input['date_of_availability']);
+        // $dates = date('Y-m-d', strtotime($date));
+
+
 
         $food = FoodItem::create([  'food_item_id' => uniqid(),
                                     'item_name' => $input['item_name'],
@@ -212,7 +230,11 @@ class FoodController extends Controller
                                     'offered_by' => Auth::user()->user_id,
                                     'status' => 1,
                                     'price' => ceil($input['price']),
-                                    'deliverable_area' => $input['deliverable_area']
+                                    'deliverable_area' => $input['deliverable_area'],
+                                    'start_publication_date' => $start_date,
+                                    'start_publication_time' => $start_time,
+                                    'end_publication_date' => $end_date,
+                                    'end_publication_time' => $end_time,
                                 ]);
 
         $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
@@ -270,7 +292,10 @@ class FoodController extends Controller
                                     'category_id' => 'required',
                                     'date_of_availability' => 'required',
                                     'price' => 'required|numeric',
-                                    'time_of_availability' => 'required'
+                                    'time_of_availability' => 'required',
+                                    'start_publication_date' => 'required',
+                                    'end_publication_date' => 'required',
+
                                   ]);
   }
 
@@ -282,6 +307,8 @@ class FoodController extends Controller
                                     'category_id' => 'required',
                                     'date_of_availability' => 'required',
                                     'price' => 'required|numeric',
+                                    'start_publication_date' => 'required',
+                                    'end_publication_date' => 'required',
                                   ]);
   }
 
@@ -376,6 +403,12 @@ class FoodController extends Controller
       $time_of_availability = unserialize($food_items->time_of_availability);
       $time_of_availability = array_filter($time_of_availability); 
     }
+
+    if(!empty($food_items->start_publication_date) && !empty($food_items->end_publication_date)) {
+      $food_items->start_publication_date = $food_items->start_publication_date." ".$food_items->start_publication_time;
+      $food_items->end_publication_date = $food_items->end_publication_date." ".$food_items->end_publication_time;
+    }
+
 
     return view('frontend.food.create-food-item',['form_type' => 'edit','food_items'=>$food_items,'category_id'=>$category_id,'offered_by'=>$offered_by,'food_images'=>$food_images,'time_of_availability'=>$time_of_availability,'deliverable_area'=>$deliverable_area]);
   }
