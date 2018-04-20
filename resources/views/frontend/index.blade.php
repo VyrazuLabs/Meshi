@@ -277,7 +277,12 @@
                     </div><!-- row -->
                 </div><!-- featureds -->
         @endif
+            <div class="section featureds">
+                <img src="{{url('/frontend/images/sharemeshi_reviews.png')}}" alt="" class="">
+            </div>
         </div><!-- container -->
+
+
 
         <!-- gmap -->
         <div id="road_map"></div>
