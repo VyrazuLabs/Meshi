@@ -277,7 +277,13 @@
                     </div><!-- row -->
                 </div><!-- featureds -->
         @endif
+            <div class="section featureds">
+                <h3 style="text-align: center;">ご近所さんのおすそ分けを食べられた方の感想</h3>
+                <img src="{{url('/frontend/images/sharemeshi_reviews.png')}}" alt="" class="">
+            </div>
         </div><!-- container -->
+
+
 
         <!-- gmap -->
         <div id="road_map"></div>

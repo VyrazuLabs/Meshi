@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
 	<!-- Your Stylesheets, Scripts & Title
     ============================================= -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Theme Region">
-   	<meta name="description" content="">
+    <meta name="author" content="sharemeshi">
+   	<meta name="description" content="シェアメシは、空いた時間を使ってお料理を近所の方におすそ分けしたい方と、栄養価の高い家庭料理を求めている方をマッチングする、新しいフードシェアリングサービスです。">
 
     <title>@yield('title')</title>
   
