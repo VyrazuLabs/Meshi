@@ -363,12 +363,13 @@ class PaymentController extends Controller
             $creator = User::where('user_id', $food->offered_by)->first();
 
 	        // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
-	        $email = 'contact@sharemeshi.com'; //this email is for testing purpose
+	        $email = $creator->email; //this email is for testing purpose
             Mail::send('order.puchase-item-mail', [
                 'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'buyerProfile' => $buyerProfile,
                 'creator' => $creator, 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate
             ], function ($message) use ($email) {
                 $message->to($email)
+                    ->bcc(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'))
                     ->subject('【シェアメシ】新規のご注文のお知らせ');
             });
 
