@@ -461,3 +461,131 @@ iframe{
 .bootstrap-datetimepicker-widget table td span{
   background-color: transparent;
 }
+/* start customer order details */
+.customer-delivertime{   
+  margin-left: 16px;
+}
+.paid-status{    
+  border: 1px solid #f26522;    
+  color: #f26522;    
+  padding: 9px 29px;    
+  border-radius: 4px;    
+  display: inline-block;
+}
+.review-group{    
+  float: left;    
+  width: 100%;    
+  margin-top: 37px;
+}
+.customer-review-btn{    
+  padding: 9px 23px;    
+  color: #fff;    
+  margin-left: 12px;
+}
+.customer-review-btn:hover,.customer-review-btn:focus{    
+  color: #fff;
+}
+/* start customer order detail modal */
+body.modal-open{  
+  padding-right: 0px !important;
+}
+/* Hide all steps by default: */
+.tab {    
+  display: none;
+}
+.next-btn{    
+  position: absolute;    
+  top: 50%;    
+  right: -6%;    
+  border-radius: 50%;    
+  height: 60px;    
+  width: 60px;    
+  padding: 0;    
+  color: #fff;
+}
+.prev-btn{    
+  position: absolute;    
+  top: 50%;    
+  left: -6%;    
+  border-radius: 50%;    
+  height: 60px;    
+  width: 60px;    
+  padding: 0;    
+  color: #fff;
+  }
+.customer-review-body{    
+  padding: 43px 48px;
+}
+/* :not(:checked) is a filter, so that browsers that don’t support 
+:checked don’t    follow these rules. 
+Every browser that supports :checked also supports :not(), 
+so   it doesn’t make the test unnecessarily selective */
+/*start customer order details review rating */
+.rating:not(:checked) > input {    
+  position:absolute;    
+  top:-9999px;    
+  clip:rect(0,0,0,0);
+}
+.rating:not(:checked) > label {    
+  float:right;    
+  width:1em;    
+  padding:0 .1em;    
+  overflow:hidden;    
+  white-space:nowrap;    
+  cursor:pointer;    
+  font-size:200%;    
+  line-height:1.2;    
+  color:#ddd;
+}
+.rating:not(:checked) > label:before {    
+  content: '★ ';
+}
+.rating > input:checked ~ label {    
+  color: #f70;
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {    
+  color: #f26522;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked  label:hover  label,
+.rating > label:hover  input:checked  label {    
+  color: #f26522;
+}.rating > label:active {    
+  position:relative;    
+  top:2px;    
+  left:2px;
+}
+/*end customer order details review */
+.communication-submit-btn{  
+  padding: 10px 23px;  
+  font-size: 16px;  
+  color: #fff;
+}
+.communication-submit-btn:hover,
+.communication-submit-btn:focus{  
+  color: #fff;
+}
+.modal-stepbox{  
+  text-align:center;  
+  margin-top:40px;  
+  display:none;
+}
+.nextBtn:hover,
+.nextBtn:focus{  
+  color: #fff;
+}
+.nextBtn i{  
+  font-size: 37px;  
+  font-weight: 600;
+}
+.detail-price{  
+  text-align: right;
+}
+.reviewmodal-stepbtn{  
+  overflow:auto;
+}
+/* end customer order detail modal */
+/* end customer order details */

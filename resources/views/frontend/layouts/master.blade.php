@@ -10,7 +10,7 @@
    	<meta name="description" content="">
 
     <title>@yield('title')</title>
-  
+
     @include('frontend.layouts.head')
 
     @yield('add-meta')
@@ -35,6 +35,7 @@
     @include('frontend.layouts.header')
     @yield('content')
     @include('frontend.layouts.footer')
+    @include('frontend.layouts.modal')
 	<!-- JS -->
     <script src="{{ url('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
@@ -59,14 +60,14 @@
     <script src="{{ url('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('frontend/js/smoothscroll.min.js') }}"></script>
     <script src="{{ url('frontend/js/scrollup.min.js') }}"></script>
-    <script src="{{ url('frontend/js/price-range.js') }}"></script> 
-    <script src="{{ url('frontend/js/jquery.countdown.js') }}"></script>   
+    <script src="{{ url('frontend/js/price-range.js') }}"></script>
+    <script src="{{ url('frontend/js/jquery.countdown.js') }}"></script>
     <script src="{{ url('frontend/js/custom.js') }}"></script>
 	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
     <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
     <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
-    
+
     <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
     <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
@@ -86,7 +87,7 @@
     }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
-    
+
     <script type="text/javascript">
       @if( session('success') )
           new PNotify({

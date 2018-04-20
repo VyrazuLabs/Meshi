@@ -24,6 +24,7 @@
 								<li><a href="{{ url('/food/lists')}}">{{ trans('app.FOOD LIST') }} </a></li>
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
+								<li><a href="{{route('purchased_list',['user_id' => Auth::User()->user_id])}}">{{ trans('app.Purchased List') }}</a></li>
 							@endif
 							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
 
@@ -37,11 +38,11 @@
 				<div class="nav-right">
 					<!-- language-dropdown -->
 					<!-- <div class="dropdown language-dropdown">
-						<i class="fa fa-globe"></i> 						
+						<i class="fa fa-globe"></i>
 						<a data-toggle="dropdown" href="#"><span class="change-text">Japan</span> <i class="fa fa-angle-down"></i></a>
 						<ul class="dropdown-menu language-change">
 							<li><a href="#">Other Country</a></li>
-						</ul>								
+						</ul>
 					</div> --><!-- language-dropdown -->
 					<!-- <div class="cart-box-list">
 						<a href="{{route('view_cart')}}"><img src="{{ url('frontend/images/cart.png') }}" class="img-responsive cart-icon-img"><span class="badge cart-badges">3</span></a>

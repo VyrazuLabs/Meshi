@@ -18,13 +18,13 @@
 				@if(!empty($food_details))
 					<li><a href="{{route('food_details',['food_item_id' => $food_details->food_item_id])}}">{{ trans('app.Food Details') }}</a></li>
 
-			</ol><!-- breadcrumb -->						
+			</ol><!-- breadcrumb -->
 			<h2 class="title t-orange">{{ $food_details->category_name }}</h2>
 				@endif
 		</div>
-		
-		
-			<div class="section slider">					
+
+
+			<div class="section slider">
 				<div class="row">
 					@if(!empty($foodImages))
 						@php $size = sizeof($foodImages); @endphp
@@ -48,9 +48,9 @@
 													<div class="carousel-image">
 														<!-- image-wrapper -->
 														<img src="{{url('/uploads/food/'.$image)}}" alt="Featured Image" class="img-responsive carousel-details-imgs">
-															
+
 													</div>
-												</div><!-- item -->							
+												</div><!-- item -->
 											@endif
 										@endforeach
 									</div><!-- carousel-inner -->
@@ -63,7 +63,7 @@
 										<i class="fa fa-chevron-right"></i>
 									</a><!-- Controls -->
 								</div>
-							</div><!-- Controls -->	
+							</div><!-- Controls -->
 						@else
 							<!-- carousel -->
 							<div class="col-md-7">
@@ -91,7 +91,7 @@
 									<!-- <span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span> -->
 									<!-- <span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span> -->
 									<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
-									
+
 									{!! Form::open(array('id'=>"buy_now_form")) !!}
 			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
 			                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
@@ -181,12 +181,12 @@
 
 				            		{!! Form::close() !!}
 								</div>
-							</div><!-- slider-text -->	
+							</div><!-- slider-text -->
 					@endif
-					
+
 				</div>
 			</div>
-		
+
 
 		@if(!empty($food_details))
 			<div class="description-info">
@@ -216,7 +216,7 @@
 					<!-- description -->
 
 					<!-- description-short-info -->
-					<div class="col-md-4">					
+					<div class="col-md-4">
 						<div class="short-info detail-short-info">
 							<h4>{{ trans('app.Some Information') }}</h4>
 							<!-- social-icon -->
@@ -230,9 +230,9 @@
 						</div>
 					</div>
 				</div><!-- row -->
-			</div><!-- description-info -->	
+			</div><!-- description-info -->
 		@endif
-		
+
 		<div class="section cta text-center">
 			<div class="row">
 				<!-- single-cta -->
@@ -279,9 +279,9 @@
 </section><!-- main -->
 @endsection
 
-@section('add-js')	
+@section('add-js')
 <script type="text/javascript">
-	
+
 //ajax to save the food details in cart table
 $('.makeOrder').click(function() {
   	var form_data = new FormData($("#buy_now_form")[0]);
@@ -312,7 +312,7 @@ function order(form_data) {
 				var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
 	      		window.location.href = url;
 	        }
-	    	
+
 	    }
 	});
 }

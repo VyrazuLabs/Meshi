@@ -261,7 +261,7 @@ class FrontendController extends Controller
                 }
             }
         }
-
+        
         return view('frontend.index',['foodItems'=>$foodItems,'today_food_list'=>$today_food_list,'tomorrow_food_list'=>$tomorrow_food_list,'day_after_tomorrow_food_list'=>$day_after_tomorrow_food_list,'next_day_of_tomorrow_food_list'=>$next_day_of_tomorrow_food_list,'next_day_of_tomorrow'=>$next_day_of_tomorrow]);
     }
     public function privacy() {
