@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Models\Food\FoodItem;
 use App\Models\Order\Order;
+use App\Models\Review\Reviews;
 use Auth;
 
 class OrderController extends Controller
@@ -54,10 +55,16 @@ class OrderController extends Controller
                 if (!empty($foodItem)) {
                     $order->item_name = $foodItem->item_name;
                 }
+
+                $review = Reviews::where('order_id', $order->order_id)
+                    ->where('reviewed_by', Auth::User()->user_id)->first();
+                if (!empty($review)) {
+                    $order->review_status = 1;
+                } else {
+                    $order->review_status = 0;
+                }
             }
         }
-        // echo "<pre>";
-        // print_r($order);die;
         return view('order.purchase-list', ['orders' => $orders]);
     }
 }

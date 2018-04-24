@@ -70,7 +70,9 @@
 														Paid
 													</span>
 												@endif
-												<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn">Review</button>
+												@if($order->review_status != 1)
+													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
+												@endif
 											</div>
 										</div>
 									</div>
@@ -130,7 +132,7 @@
 	  // if you have reached the end of the form...
 	  if (currentTab >= x.length) {
 	    // ... the form gets submitted:
-	    document.getElementById("regForm").submit();
+	    document.getElementById("eaterReviewForm").submit();
 	    return false;
 	  }
 	  // Otherwise, display the correct tab:
@@ -142,12 +144,14 @@
 	  var x, y, i, valid = true;
 	  x = document.getElementsByClassName("tab");
 	  y = x[currentTab].getElementsByTagName("input");
+	  textarea = x[currentTab].getElementsByTagName("textarea");
 	  // A loop that checks every input field in the current tab:
 	  for (i = 0; i < y.length; i++) {
 	    // If a field is empty...
 	    if (y[i].value == "") {
 	      // add an "invalid" class to the field:
 	      y[i].className += " invalid";
+	      textarea[i].className += " error-hidden";
 	      // and set the current valid status to false
 	      valid = false;
 	    }
@@ -168,5 +172,13 @@
 	  //... and adds the "active" class on the current step:
 	  x[n].className += " active";
 	}
+
+
+	function reviewFood(orderId) {
+		var orderId = $(orderId).data('attr');
+		$('#orderID').val(orderId);
+	}
+
+
 </script>
 @endsection

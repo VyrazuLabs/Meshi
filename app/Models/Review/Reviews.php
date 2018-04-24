@@ -3,12 +3,9 @@
 namespace App\Models\Review;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Review extends Model
+class Reviews extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'reviews';
     public $fillable = array(
         'review_id',
@@ -22,7 +19,4 @@ class Review extends Model
         'communication_ratings',
         'communication_description',
     );
-
-    protected $dates = ['deleted_at'];
-
 }

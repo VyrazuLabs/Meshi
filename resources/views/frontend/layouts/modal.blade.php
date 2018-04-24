@@ -6,21 +6,30 @@
     <div class="modal-content">
       <div class="modal-body customer-review-body">
         <!-- <form id="regForm"> -->
-        {!! Form::open(array('url' => route('save_eater_review'),'id' => 'regForm')) !!}
+        {!! Form::open(array('id' => 'eaterReviewForm')) !!}
+
+          {!! Form::hidden('order_id', null,array('id'=>'orderID')) !!}
+
           <!-- One "tab" for each step in the form: -->
           <div class="tab">
             <div class="text-center">
               <h3 class="text-center t-black">Food Quality</h3>
+              {!! Form::hidden('quality_ratings', null,array('id'=>'qualityRatingId')) !!}
+
               <div class="rating float-none d-inline-block">
-                <input type="radio" id="star5" name="foodqualityrating" value="5" />
+                <input type="radio" id="star5"  value="5" onclick="return rateQuality(this);"  data-id="5"/>
                 <label for="star5" title="Excellent">5 stars</label>
-                <input type="radio" id="star4" name="foodqualityrating" value="4" />
+
+                <input type="radio" id="star4"  value="4" onclick="return rateQuality(this);"  data-id="4"/>
                 <label for="star4" title="Very good">4 stars</label>
-                <input type="radio" id="star3" name="foodqualityrating" value="3" />
+
+                <input type="radio" id="star3"   value="3" onclick="return rateQuality(this);"  data-id="3"/>
                 <label for="star3" title="Good">3 stars</label>
-                <input type="radio" id="star2" name="foodqualityrating" value="2" />
+
+                <input type="radio" id="star2"  value="2" onclick="return rateQuality(this);"  data-id="2"/>
                 <label for="star2" title="Bad">2 stars</label>
-                <input type="radio" id="star1" name="foodqualityrating" value="1" />
+
+                <input type="radio" id="star1"  value="1" onclick="return rateQuality(this);"  data-id="1"/>
                 <label for="star1" title="Very bad">1 star</label>
               </div>
             </div>
@@ -31,16 +40,18 @@
           <div class="tab">
             <div class="text-center">
               <h3 class="text-center t-black">Delivery</h3>
+              {!! Form::hidden('delivery_ratings', null,array('id'=>'deliveryRatingId')) !!}
+
               <div class="rating float-none d-inline-block">
-                <input type="radio" id="star10" name="delivery-rating" value="5" />
+                <input type="radio" id="star10" value="5" onclick="return rateDelivery(this);"  data-id="5"/>
                 <label for="star10" title="Excellent">5 stars</label>
-                <input type="radio" id="star9" name="delivery-rating" value="4" />
+                <input type="radio" id="star9" value="4" onclick="return rateDelivery(this);"  data-id="4"/>
                 <label for="star9" title="Very good">4 stars</label>
-                <input type="radio" id="star8" name="delivery-rating" value="3" />
+                <input type="radio" id="star8" value="3" onclick="return rateDelivery(this);"  data-id="3"/>
                 <label for="star8" title="Good">3 stars</label>
-                <input type="radio" id="star7" name="delivery-rating" value="2" />
+                <input type="radio" id="star7" value="2" onclick="return rateDelivery(this);"  data-id="5"/>
                 <label for="star7" title="Bad">2 stars</label>
-                <input type="radio" id="star6" name="delivery-rating" value="1" />
+                <input type="radio" id="star6" value="1" onclick="return rateDelivery(this);"  data-id="1"/>
                 <label for="star6" title="Very bad">1 star</label>
               </div>
             </div>
@@ -51,16 +62,18 @@
           <div class="tab">
             <div class="text-center">
               <h3 class="text-center t-black">Communication</h3>
+              {!! Form::hidden('communication_ratings', null,array('id'=>'communicationRatingId')) !!}
+
               <div class="rating float-none d-inline-block">
-                <input type="radio" id="star15" name="communication-rating" value="5" />
+                <input type="radio" id="star15" value="5" onclick="return rateCommunication(this);"  data-id="5"/>
                 <label for="star15" title="Excellent">5 stars</label>
-                <input type="radio" id="star14" name="communication-rating" value="4" />
+                <input type="radio" id="star14" value="4" onclick="return rateCommunication(this);"  data-id="4"/>
                 <label for="star14" title="Very good">4 stars</label>
-                <input type="radio" id="star13" name="communication-rating" value="3" />
+                <input type="radio" id="star13" value="3" onclick="return rateCommunication(this);"  data-id="3"/>
                 <label for="star13" title="Good">3 stars</label>
-                <input type="radio" id="star12" name="communication-rating" value="2" />
+                <input type="radio" id="star12" value="2" onclick="return rateCommunication(this);"  data-id="2"/>
                 <label for="star12" title="Bad">2 stars</label>
-                <input type="radio" id="star11" name="communication-rating" value="1" />
+                <input type="radio" id="star11" value="1" onclick="return rateCommunication(this);"  data-id="1"/>
                 <label for="star11" title="Very bad">1 star</label>
               </div>
             </div>
@@ -68,7 +81,7 @@
               <textarea class="form-control" rows="8" placeholder="Enter Your Description" name="communication_description"></textarea>
             </div>
             <div class="form-group text-center">
-              <button type="button" class="btn back-orange communication-submit-btn">submit</button>
+              <button type="button" class="btn back-orange communication-submit-btn store-reviews">submit</button>
             </div>
           </div>
           <div class="reviewmodal-stepbtn">

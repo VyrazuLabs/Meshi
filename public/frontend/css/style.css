@@ -589,3 +589,6 @@ so   it doesn’t make the test unnecessarily selective */
 }
 /* end customer order detail modal */
 /* end customer order details */
+.error-hidden{
+  border: 1px solid red;
+}

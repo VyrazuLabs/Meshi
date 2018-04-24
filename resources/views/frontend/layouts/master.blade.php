@@ -122,6 +122,41 @@
         });
       })
 
+      function rateQuality(qualityRating) {
+        var qualityRating = qualityRating.getAttribute("data-id");
+        $('#qualityRatingId').val(qualityRating);
+      }
+
+      function rateDelivery(deliveryRating) {
+        var deliveryRating = deliveryRating.getAttribute("data-id");
+        $('#deliveryRatingId').val(deliveryRating);
+      }
+
+      function rateCommunication(communicationRating) {
+        var communicationRating = communicationRating.getAttribute("data-id");
+        $('#communicationRatingId').val(communicationRating);
+      }
+
+
+      $('.store-reviews').click(function() {
+        var form_data = new FormData($("#eaterReviewForm")[0]);
+        saveEaterReviews(form_data);
+      });
+
+      function saveEaterReviews(form_data) {
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+          data: form_data,
+          type: 'POST',
+          url: "{{ url('/user/save-eater-review') }}",
+          contentType: false,
+          processData: false,
+          success: function(result) {
+            location.reload();
+          }
+        });
+      }
+
     </script>
     @yield('add-js')
 
