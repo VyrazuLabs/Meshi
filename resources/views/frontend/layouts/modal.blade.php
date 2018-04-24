@@ -68,7 +68,7 @@
               <textarea class="form-control" rows="8" placeholder="Enter Your Description" name="communication_description"></textarea>
             </div>
             <div class="form-group text-center">
-              <button type="submit" class="btn back-orange communication-submit-btn">submit</button>
+              <button type="button" class="btn back-orange communication-submit-btn">submit</button>
             </div>
           </div>
           <div class="reviewmodal-stepbtn">
