@@ -20,6 +20,9 @@ Route::group(['namespace' => 'Auth', 'middleware' => ['Language']], function () 
 
 });
 
+/**
+ * ROUTES FOR LANGUAGE RESOURCE
+ */
 Route::group(['namespace' => 'Language'], function () {
     Route::post('/language-chooser', 'LanguageController@changeLanguage');
     Route::get('/language/', [
@@ -31,7 +34,10 @@ Route::group(['namespace' => 'Language'], function () {
 
 Route::group(['middleware' => ['Language']], function () {
     Route::group(['namespace' => 'Frontend'], function () {
-        //ROUTES FOR CMS PAGES
+
+        /**
+         * ROUTES FOR CMS PAGES
+         */
         Route::get('/', array('uses' => 'FrontendController@index'));
         Route::get('/privacy-policy', array('uses' => 'FrontendController@privacy'))->name('privacy_policy');
         Route::get('/terms', array('uses' => 'FrontendController@terms'))->name('terms');
@@ -40,7 +46,9 @@ Route::group(['middleware' => ['Language']], function () {
         Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
         Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
 
-        //ROUTES FOR FOOD ITEM SECTION
+        /**
+         * ROUTES FOR FOOD ITEM SECTION
+         */
         Route::group(['prefix' => 'food'], function () {
             Route::group(['namespace' => 'Food'], function () {
                 Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
@@ -52,61 +60,91 @@ Route::group(['middleware' => ['Language']], function () {
                     Route::post('/save', 'FoodController@save')->name('save_food_item_user');
                 });
             });
-            //ROUTES FOR FOOD CATEGORY SECTION
+
+            /**
+             * ROUTES FOR FOOD CATEGORY SECTION
+             */
             Route::group(['namespace' => 'Category'], function () {
                 Route::get('/categories', array('uses' => 'CategoryController@category'))->name('food_categories');
                 Route::get('/all-categories', array('uses' => 'CategoryController@allCategory'))->name('food_all_categories');
             });
         });
     });
-    //ROUTES FOR FEEDBACK SECTION
+
+    /**
+     * ROUTES FOR FEEDBACK SECTION
+     */
     Route::group(['namespace' => 'Feedback'], function () {
         Route::post('/send-feedback', array('uses' => 'FeedbackController@sendFeedback'))->name('send_feedback');
     });
 
 });
 
-//ROUTES FOR USER SECTION
-Route::group(['prefix' => 'user', 'middleware' => ['Language']], function () {
-
-    Route::group(['namespace' => 'User'], function () {
-        Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
-
-        //ROUTES FOR AUTHENTICATED USERS
-        Route::group(['middleware' => 'UserAuth'], function () {
-            Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
-        });
-        // ROUTES FOR CART SECTION //
-        Route::group(['namespace' => 'Cart'], function () {
-            Route::get('/cart', 'CartController@viewCart')->name('view_cart');
-            Route::get('/empty-cart', 'CartController@emptyCart')->name('empty_cart');
-        });
-        Route::get('/register', 'RegistrationController@register');
-        Route::post('/register', 'RegistrationController@save')->name('registration');
-    });
-
-    // ROUTES FOR ORDER SECTION //
-    Route::group(['namespace' => 'Order'], function () {
-        Route::get('/order-details', 'OrderController@orderDetails')->name('order_details');
-        Route::get('/purchased-list/{user_id}', 'OrderController@purchasedList')->name('purchased_list');
-    });
-});
-
 /**
- * ROUTES FOR PAYPAL PAYMENT GATEWAY
+ * ROUTES FOR USER SECTION
  */
-Route::group(['prefix' => 'order', 'middleware' => ['Language']], function () {
+Route::group(['middleware' => ['Language']], function () {
 
-    Route::group(['namespace' => 'User'], function () {
-        Route::group(['namespace' => 'Cart'], function () {
-            Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
+    Route::group(['prefix' => 'user'], function () {
+
+        Route::group(['namespace' => 'User'], function () {
+
+            Route::get('/register', 'RegistrationController@register');
+            Route::post('/register', 'RegistrationController@save')->name('registration');
+            Route::get('/profile/{user_id}', 'ProfileController@profile')->name('profile_details');
+
+            //ROUTES FOR AUTHENTICATED USERS
+            Route::group(['middleware' => 'UserAuth'], function () {
+                Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
+            });
+
         });
+
+        Route::group(['middleware' => ['SignInRouteAccessUser']], function () {
+
+            /**
+             * ROUTES FOR ORDER SECTION
+             */
+            Route::group(['namespace' => 'Order'], function () {
+                Route::get('/order-details', 'OrderController@orderDetails')->name('order_details');
+                Route::get('/purchased-list', 'OrderController@purchasedList')->name('purchased_list');
+            });
+
+            /**
+             * ROUTES FOR CART SECTION
+             */
+            Route::group(['namespace' => 'Cart'], function () {
+                Route::get('/cart', 'CartController@viewCart')->name('view_cart');
+                Route::get('/empty-cart', 'CartController@emptyCart')->name('empty_cart');
+            });
+
+            /**
+             * ROUTES FOR REVIEW SECTION
+             */
+            Route::group(['namespace' => 'Review'], function () {
+                Route::post('/save-eater-review', 'ReviewController@eaterReview')->name('save_eater_review');
+
+            });
+
+        });
+
     });
 
-    Route::group(['namespace' => 'Order'], function () {
-        Route::group(['prefix' => 'payment'], function () {
-            Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
-            Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
+    /**
+     * ROUTES FOR PAYPAL PAYMENT GATEWAY
+     */
+    Route::group(['prefix' => 'order', 'middleware' => ['SignInRouteAccessUser']], function () {
+        Route::group(['namespace' => 'User'], function () {
+            Route::group(['namespace' => 'Cart'], function () {
+                Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
+            });
+        });
+
+        Route::group(['namespace' => 'Order'], function () {
+            Route::group(['prefix' => 'payment'], function () {
+                Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
+                Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
+            });
         });
     });
 });

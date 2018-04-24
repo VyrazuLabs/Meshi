@@ -24,7 +24,7 @@
 								<li><a href="{{ url('/food/lists')}}">{{ trans('app.FOOD LIST') }} </a></li>
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
-								<li><a href="{{route('purchased_list',['user_id' => Auth::User()->user_id])}}">{{ trans('app.Purchased List') }}</a></li>
+								<li><a href="{{route('purchased_list')}}">{{ trans('app.Purchased List') }}</a></li>
 							@endif
 							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
 
