@@ -110,3 +110,47 @@
   </div>
 </div>
 <!-- customer review modal end -->
+
+
+<!-- food creator review modal start -->
+<div class="modal fade" id="creatorreviewmodal" role="dialog">
+  <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-body customer-review-body">
+                {!! Form::open(array('url' => route('save_creator_review'),'id' => 'creatorReviewForm')) !!}
+
+                  {!! Form::hidden('order_id', null,array('id'=>'orderId')) !!}
+                  {!! Form::hidden('communication_ratings', null,array('id'=>'creatorCommunicationRatingId')) !!}
+
+
+                    <!-- One "tab" for each step in the form: -->
+                    <div class="">
+                      <div class="text-center">
+                        <h3 class="text-center t-black">Communication</h3>
+                        <div class="rating float-none d-inline-block">
+                            <input type="radio" id="star20" name="creatorcommunicationrating" value="5" onclick="return rateEaterCommunication(this);"  data-id="5"/>
+                            <label for="star20" title="Excellent">5 stars</label>
+                            <input type="radio" id="star19" name="creatorcommunicationrating" value="4" onclick="return rateEaterCommunication(this);"  data-id="4"/>
+                            <label for="star19" title="Very good">4 stars</label>
+                            <input type="radio" id="star18" name="creatorcommunicationrating" value="3" onclick="return rateEaterCommunication(this);"  data-id="3"/>
+                            <label for="star18" title="Good">3 stars</label>
+                            <input type="radio" id="star17" name="creatorcommunicationrating" value="2" onclick="return rateEaterCommunication(this);"  data-id="2"/>
+                            <label for="star17" title="Bad">2 stars</label>
+                            <input type="radio" id="star16" name="creatorcommunicationrating" value="1" onclick="return rateEaterCommunication(this);"  data-id="1"/>
+                            <label for="star16" title="Very bad">1 star</label>
+                        </div>
+                      </div>
+                      <div class="form-group md-forms">
+                        <textarea class="form-control communication_details" rows="8" placeholder="Enter Your Description" name="communication_description" ></textarea>
+                      </div>
+                      <div class="form-group text-center">
+                        <button type="button" class="btn back-orange communication-submit-btn creator-communication">submit</button>
+                      </div>
+                    </div>
+                {!! Form::close() !!}
+            </div>
+      </div>
+  </div>
+</div>
+<!-- food creator review modal end -->

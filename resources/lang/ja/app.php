@@ -168,5 +168,6 @@ return [
     'Edit Food' => '食べ物を編集する',
     'Today' => '今日',
     'Purchased List' => '購入したリスト',
+    'Order List' => 'オーダーリスト',
 
 ];

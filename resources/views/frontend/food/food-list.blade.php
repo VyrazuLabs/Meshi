@@ -12,13 +12,13 @@
 	<div class="col-lg-12 col-xs-12 p-0">
 		<div class="container">
 			<div class="breadcrumb-section">
-				<!-- breadcrumb -->
-				<ol class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li>Food Listings</li>
-				</ol><!-- breadcrumb -->						
-				<h2 class="title d-inline-block">Cart</h2>
-			</div>
+		        <!-- breadcrumb -->
+		        <ol class="breadcrumb ">
+		          <li><a href="{{ url('/')}}">{{ trans('app.HOME') }}</a></li>
+		          <li><a href="{{ url('/food/lists')}}">{{ trans('app.FOOD LIST') }}</a></li>
+		        </ol><!-- breadcrumb -->
+		        <h2 class="title">{{ trans('app.FOOD LIST') }}</h2>
+		      </div>
 			<div class="col-lg-12 col-xs-12 p-0">
 				<div class="section cart-section">
 				@if(!empty($foods))
@@ -58,5 +58,5 @@
 
 @endsection
 
-@section('add-js')	
+@section('add-js')
 @endsection

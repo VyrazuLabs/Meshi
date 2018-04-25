@@ -9,16 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::group(['namespace' => 'Auth', 'middleware' => ['Language']], function () {
-    Route::get('/sign-in', array('uses' => 'SigninController@signIn', 'middleware' => 'SignInRouteAccess'))->name('sign_in');
-    Route::post('/authentication', array('uses' => 'SigninController@authentication'))->name('authentication');
-    Route::get('sign-out', ['uses' => 'SigninController@signOut'])->name('user_sign_out');
-    Route::get('/forget-password', ['uses' => 'SigninController@forgetPassword'])->name('user_forget_password');
-    Route::post('/forget-password', ['uses' => 'SigninController@sendMail'])->name('user_send_mail');
-    Route::get('/password/changing/{id}/{email}', 'SigninController@changeForgetPassword');
-    Route::post('/password/changing', 'SigninController@updateForgetPassword');
-
-});
 
 /**
  * ROUTES FOR LANGUAGE RESOURCE
@@ -33,6 +23,20 @@ Route::group(['namespace' => 'Language'], function () {
 });
 
 Route::group(['middleware' => ['Language']], function () {
+
+    /**
+     * Common routes for creator and eater
+     */
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::get('/sign-in', array('uses' => 'SigninController@signIn', 'middleware' => 'SignInRouteAccess'))->name('sign_in');
+        Route::post('/authentication', array('uses' => 'SigninController@authentication'))->name('authentication');
+        Route::get('sign-out', ['uses' => 'SigninController@signOut'])->name('user_sign_out');
+        Route::get('/forget-password', ['uses' => 'SigninController@forgetPassword'])->name('user_forget_password');
+        Route::post('/forget-password', ['uses' => 'SigninController@sendMail'])->name('user_send_mail');
+        Route::get('/password/changing/{id}/{email}', 'SigninController@changeForgetPassword');
+        Route::post('/password/changing', 'SigninController@updateForgetPassword');
+    });
+
     Route::group(['namespace' => 'Frontend'], function () {
 
         /**
@@ -78,13 +82,9 @@ Route::group(['middleware' => ['Language']], function () {
         Route::post('/send-feedback', array('uses' => 'FeedbackController@sendFeedback'))->name('send_feedback');
     });
 
-});
-
-/**
- * ROUTES FOR USER SECTION
- */
-Route::group(['middleware' => ['Language']], function () {
-
+    /**
+     * ROUTES FOR USER SECTION
+     */
     Route::group(['prefix' => 'user'], function () {
 
         Route::group(['namespace' => 'User'], function () {
@@ -97,7 +97,6 @@ Route::group(['middleware' => ['Language']], function () {
             Route::group(['middleware' => 'UserAuth'], function () {
                 Route::get('/profile/edit/{user_id}', 'ProfileController@edit')->name('edit_profile_details');
             });
-
         });
 
         Route::group(['middleware' => ['SignInRouteAccessUser']], function () {
@@ -108,6 +107,7 @@ Route::group(['middleware' => ['Language']], function () {
             Route::group(['namespace' => 'Order'], function () {
                 Route::get('/order-details', 'OrderController@orderDetails')->name('order_details');
                 Route::get('/purchased-list', 'OrderController@purchasedList')->name('purchased_list');
+                Route::get('/order-list', 'OrderController@orderedList')->name('order_list');
             });
 
             /**
@@ -123,11 +123,10 @@ Route::group(['middleware' => ['Language']], function () {
              */
             Route::group(['namespace' => 'Review'], function () {
                 Route::post('/save-eater-review', 'ReviewController@eaterReview')->name('save_eater_review');
+                Route::post('/save-creator-review', 'ReviewController@creatorReview')->name('save_creator_review');
 
             });
-
         });
-
     });
 
     /**
@@ -147,4 +146,5 @@ Route::group(['middleware' => ['Language']], function () {
             });
         });
     });
+
 });

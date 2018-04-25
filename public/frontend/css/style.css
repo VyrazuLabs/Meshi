@@ -589,6 +589,28 @@ so   it doesn’t make the test unnecessarily selective */
 }
 /* end customer order detail modal */
 /* end customer order details */
-.error-hidden{
+.review-error{
   border: 1px solid red;
 }
+
+/* start food creator order detail */
+  .food-creator-nav-pills.nav-pills>li>a{  
+    text-transform: none;
+  }                          
+  .food-creator-nav-pills.nav-pills>li.active>a, 
+  .food-creator-nav-pills.nav-pills>li.active>a:focus, 
+  .food-creator-nav-pills.nav-pills>li.active>a:hover{  
+    color: #f26522;  
+    background-color: transparent;
+  }
+  .food-creator-card-box{    
+    box-shadow: 0 2px 36px 1px rgba(0,0,0,0.06), 0 2px 8px 0 rgba(0,0,0,.03);    
+    padding: 12px 0;
+  }
+  .cart-box:last-child{    
+    border-bottom: none;
+  }
+  .creator-review-btn:hover,
+  .creator-review-btn:focus{    
+    color: #fff;
+  }

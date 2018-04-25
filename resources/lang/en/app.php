@@ -178,5 +178,6 @@ return [
     'Edit Food' => 'Edit Food',
     'Today' => 'Today',
     'Purchased List' => 'Purchased List',
+    'Order List' => 'Order List',
 
 ];

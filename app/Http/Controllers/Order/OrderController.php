@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Models\Food\FoodItem;
 use App\Models\Order\Order;
+use App\Models\ProfileInformation;
+use App\Models\Review\CreatorReview;
 use App\Models\Review\Reviews;
+use App\Models\User;
 use Auth;
 
 class OrderController extends Controller
@@ -65,6 +68,52 @@ class OrderController extends Controller
                 }
             }
         }
-        return view('order.purchase-list', ['orders' => $orders]);
+        return view('frontend.order.purchase-list', ['orders' => $orders]);
+    }
+
+    public function orderedList()
+    {
+        $today = date("Y-m-d");
+        $previousOrders = [];
+        $upcomingOrders = [];
+
+        /* getting all the orders */
+        $orders = Order::where('order.status', 1)
+            ->join('food_item', 'order.food_item_id', '=', 'food_item.food_item_id')
+            ->where('food_item.offered_by', Auth::User()->user_id)
+            ->orderBy('order.date_of_delivery', 'DESC')
+            ->get();
+
+        if (!empty($orders)) {
+            foreach ($orders as $key => $order) {
+                $order->date = date('Y-m-d', strtotime($order->date_of_delivery));
+                $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
+                $order->address = $profileDetails->address;
+
+                $user = User::where('user_id', $order->ordered_by)->first();
+                $order->name = $user->name;
+
+                /* getting the food images */
+                if (!empty($orders->food_images)) {
+                    $images = $orders->food_images;
+                    $order->food_images = unserialize($images);
+                }
+
+                $creator_review = CreatorReview::where('order_id', $order->order_id)
+                    ->where('reviewed_by', Auth::User()->user_id)->first();
+                if (!empty($creator_review)) {
+                    $order->review_status = 1;
+                } else {
+                    $order->review_status = 0;
+                }
+
+                if ($order->date < $today) {
+                    $previousOrders[] = $order;
+                } else {
+                    $upcomingOrders[] = $order;
+                }
+            }
+        }
+        return view('frontend.order.order-list', ['upcomingOrders' => $upcomingOrders, 'previousOrders' => $previousOrders]);
     }
 }

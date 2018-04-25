@@ -157,6 +157,34 @@
         });
       }
 
+      function rateEaterCommunication(communicationRating) {
+        var communicationRating = communicationRating.getAttribute("data-id");
+        $('#creatorCommunicationRatingId').val(communicationRating);
+      }
+
+
+      $('.creator-communication').click(function() {
+        var creator_review_form_data = new FormData($("#creatorReviewForm")[0]);
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+          data: creator_review_form_data,
+          type: 'POST',
+          url: "{{ url('/user/save-creator-review') }}",
+          contentType: false,
+          processData: false,
+          success: function(result) {
+            var obj = $.parseJSON(result);
+            if(obj.success == 0) {
+              $('.communication_details').addClass('review-error');
+            }
+            else if(obj.success == 1) {
+              location.reload();
+            }
+          }
+        })
+      });
+
+
     </script>
     @yield('add-js')
 

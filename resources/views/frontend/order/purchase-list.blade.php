@@ -151,7 +151,7 @@
 	    if (y[i].value == "") {
 	      // add an "invalid" class to the field:
 	      y[i].className += " invalid";
-	      textarea[i].className += " error-hidden";
+	      textarea[i].className += " review-error";
 	      // and set the current valid status to false
 	      valid = false;
 	    }
