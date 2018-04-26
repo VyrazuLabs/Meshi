@@ -16,20 +16,20 @@
 			@if(Auth::user())
 				@if($user->user_id == Auth::User()->user_id)
 					<a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}"><button class="btn back-orange t-white edit-profile-btn float-right"><i class="fa fa-edit"></i> {{ trans('app.EDIT PROFILE') }}</button></a>
-					
+
 				@endif
 			@endif
 		</div>
-		<div class="category-info">	
-			<div class="col-sm-12 col-md-12 text-center profile-box p-0">				
+		<div class="category-info">
+			<div class="col-sm-12 col-md-12 text-center profile-box p-0">
 				<div class="recommended-ads">
 				@if(!empty($user->cover_image))
-					<?php $url = url('/uploads/cover/picture/'.$user->cover_image); ?>
-				@else 
-					<?php $url = url('/frontend/images/cover-image.jpg'); ?>
+					<?php $url = url('/uploads/cover/picture/' . $user->cover_image);?>
+				@else
+					<?php $url = url('/frontend/images/cover-image.jpg');?>
 				@endif
 					<div class="col-lg-12 col-xs-12 p-0 profilecover-imgs">
-						<div class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(<?php echo $url;?>);">
+						<div class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(<?php echo $url; ?>);">
 							<!-- <div class="col-md-9 profile-image-div text-center">
 								@if(!empty($user->image))
 									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 
-				
+
 
 					<!-- <div class="col-lg-12 col-12  profile-section profile-back"> -->
 						<!-- <div class="profile-image-div text-center"> -->
@@ -100,7 +100,7 @@
 							</div> -->
 							<div class="col-md-8 col-md-offset-2">
 								<p><strong>{{ trans('app.Deliverable Area') }} :</strong>
-									<span> 
+									<span>
 										{{$user->deliverable_area}}
 									</span>
 								</p>
@@ -122,6 +122,7 @@
 			<div class="col-sm-12 col-md-12 text-center profile-box section">
 				<h4 class="text-left t-black mt-0">{{ trans('app.Schedule') }}</h4>
 				<div class="row">
+					@php $currentDate = date("Y-m-d"); @endphp
 					@if(!empty($food_items))
 						@foreach($food_items as $food)
 							@if($food->category_status == 1)
@@ -130,7 +131,9 @@
 									<!-- featured -->
 									<div class="featured">
 										<div class="featured-image">
-											<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+											@if($food->end_publication_date >= $currentDate)
+												<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
+											@endif
 												@if(!empty($food->foodImages))
 													@foreach($food->foodImages as $key=>$food_image)
 														@if($key == 0)
@@ -143,28 +146,36 @@
 											</a>
 											<!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
 										</div>
-										
+
 										<!-- ad-info -->
 										<div class="ad-info">
 											<h3 class="item-price">&yen;{{$food->price}}</h3>
 											<h4 class="item-title">{{$food->item_name}}</h4>
 											<div class="item-cat">
-												<span>{{$food->category_name}}</span> 
+												<span>{{$food->category_name}}</span>
 											</div>
 										</div><!-- ad-info -->
-										
+
 										<!-- ad-meta -->
 										<div class="ad-meta">
 											<div class="meta-content">
-												<span class="dated">{{$food->date}}</span>
-											</div>									
+												@if($food->end_publication_date >= $currentDate)
+													<span class="dated">{{$food->date}}
+												@else
+													<span class="dated">Order Closed</span>
+												@endif
+											</div>
 											<!-- item-info-right -->
 											<!-- <div class="user-option pull-right">
 												<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
-												<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+												<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>
 											</div> --><!-- item-info-right -->
 										</div><!-- ad-meta -->
 									</div><!-- featured -->
+									@if($food->end_publication_date < $currentDate)
+									<div class="feature-overlay">
+									</div>
+									@endif
 								</div><!-- featured -->
 							@endif
 						@endforeach
@@ -224,5 +235,5 @@
 </section>
 @endsection
 
-@section('add-js')	
+@section('add-js')
 @endsection

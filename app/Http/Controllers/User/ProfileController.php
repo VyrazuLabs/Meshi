@@ -38,10 +38,10 @@ class ProfileController extends Controller
                 $user->video_link = $profile->video_link;
             }
 
-            /* get all the active food items created by the user */
+            /* get all the food items created by the user */
             $food_items = FoodItem::where('status', 1)
                 ->where('offered_by', $user_id)
-                ->orderBy('date_of_availability', 'ASC')
+                ->orderBy('date_of_availability', 'DESC')
                 ->get();
 
             if (!empty($food_items)) {
@@ -67,6 +67,7 @@ class ProfileController extends Controller
                         $images = $food->food_images;
                         $food->foodImages = unserialize($images);
                     }
+                    $food->endPublicationDate = $food->end_publication_date;
                 }
             }
 

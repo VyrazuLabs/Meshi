@@ -614,3 +614,13 @@ so   it doesn’t make the test unnecessarily selective */
   .creator-review-btn:focus{    
     color: #fff;
   }
+  .feature-overlay{
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-right: 15px;
+    cursor: not-allowed;
+  }
