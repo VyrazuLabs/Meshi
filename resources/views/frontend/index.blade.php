@@ -13,7 +13,7 @@
 
 
         <!-- <div class="container"> -->
-        <img src="{{url('/img/sharemeshi_catch.png')}}" alt="" class="">
+        <img src="{{url('/frontend/images/sharemeshi_catch.png')}}" alt="" class="">
         <!-- </div> -->
         <div class="container">
             <div class="row">
@@ -278,8 +278,12 @@
                 </div><!-- featureds -->
         @endif
             <div class="section featureds">
-                <h3 style="text-align: center;">シェアメシを利用された方のご感想</h3>
-                <img src="{{url('/frontend/images/sharemeshi_reviews.png')}}" alt="" class="">
+                <h3 style="text-align: center;">シェアメシを利用された方(メシイーターさん)のご感想</h3>
+                <img src="{{url('/frontend/images/sharemeshi_eater_reviews.png')}}" alt="" class="">
+            </div>
+            <div class="section featureds">
+                <h3 style="text-align: center;">シェアメシを提供された方(メシクリエーターさん)のご感想</h3>
+                <img src="{{url('/frontend/images/sharemeshi_creator_reviews.png')}}" alt="" class="">
             </div>
         </div><!-- container -->
 
