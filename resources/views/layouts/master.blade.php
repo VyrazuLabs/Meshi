@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
-  
+
     @include('layouts.head')
 
     @yield('add-meta')
@@ -23,7 +23,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-     
+
         </section>
 
         <!-- Main content -->
