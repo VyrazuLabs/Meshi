@@ -18,12 +18,12 @@
                 {{Form::hidden('user_id',null)}}
 
               	<div class="box-body">
-              		
+
 	                <div class="form-group form-custom-group">
 	                  	<label>Name <span>*</span></label>
-						{!! Form::text('name', null, 
+						{!! Form::text('name', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'placeholder'=>'Enter Full Name')) !!}
 						@if ($errors->has('name'))
 						  	<span class="help-block">
@@ -33,9 +33,9 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Nick Name <span>*</span></label>
-						{!! Form::text('nick_name', null, 
+						{!! Form::text('nick_name', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'placeholder'=>'Enter Nick Name')) !!}
 						@if ($errors->has('nick_name'))
 						  	<span class="help-block">
@@ -46,11 +46,11 @@
 	                <div class="form-group form-custom-group">
 	                  <label>Email <span>*</span></label>
 	                	@if($form_type == 'edit')
-	                    	{!! Form::text('email', null, 
+	                    	{!! Form::text('email', null,
 	                          		array('class'=>'form-control','readonly')) !!}
 	                    @else
-	                    	{!! Form::text('email', null, 
-	                          		array('class'=>'form-control', 
+	                    	{!! Form::text('email', null,
+	                          		array('class'=>'form-control',
 	                                'placeholder'=>'Enter Email')) !!}
 	                    @endif
 	                  @if ($errors->has('email'))
@@ -62,7 +62,7 @@
 	                <div class="form-group form-custom-group">
 	                  <label>Password <span>*</span></label>
 	                    {!! Form::password('password',
-			              						array( 'class'=>'form-control', 
+			              						array( 'class'=>'form-control',
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password'))
 	                    <span class="help-block">
@@ -73,7 +73,7 @@
 	                <div class="form-group form-custom-group">
 	                  <label>Password Confirmation <span>*</span></label>
 	                    {!! Form::password('password_confirmation',
-			              						array( 'class'=>'form-control', 
+			              						array( 'class'=>'form-control',
 			              								'placeholder'=>'Enter Password')) !!}
 	                  @if ($errors->has('password_confirmation'))
 	                    <span class="help-block">
@@ -96,29 +96,29 @@
 		                	@if($user->type == 2)
 			                	<div class="col-md-8 buyer">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'busy_with_working', null, ['class' => 'check']) }}
 			                			 Busy with working
-		                           	</label> 
+		                           	</label>
 		                           	<label>
 		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'live_alone', null, ['class' => 'check']) }}
 		                           		I got bored with convenience stores, medium meals, and other lunches because I live alone.
-		                            </label> 
+		                            </label>
 		                            <label>
 		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'few_restaurants', null, ['class' => 'check']) }}
 		                            	There are few restaurants around the office
-		                            </label> 
+		                            </label>
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_time', null, ['class' => 'check']) }}
 		                            	I am busy raising children and have no time to make rice
-		                            </label> 
-		                            <label> 
+		                            </label>
+		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'like_to_eat', null, ['class' => 'check']) }}
 		                            	I would like to eat a variety of nationalities and people's cooking.
-		                            </label> 
-		                            <label> 
+		                            </label>
+		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'no_reason', null, ['class' => 'check']) }}
 		                            	There is no big reason, but it seems interesting, so I would like to use it
-		                            </label> 
+		                            </label>
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
@@ -127,29 +127,29 @@
 		                	@elseif($user->type == 1)
 			                	<div class="col-md-8 seller">
 			                		<label>
-			                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }} 
+			                			{{ Form::checkbox('reason_for_registration_edit[]', 'help_someone', null, ['class' => 'check']) }}
 			                			 I would like to use someone's help through my cooking
-		                           	</label> 
+		                           	</label>
 		                           	<label>
 		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-		                           		 I want to earn rewards using free time  
-		                            </label> 
+		                           		 I want to earn rewards using free time
+		                            </label>
 		                            <label>
 		                           		{{ Form::checkbox('reason_for_registration_edit[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-		                            	I want to earn more rewards than bytes and parts  
-		                            </label> 
+		                            	I want to earn more rewards than bytes and parts
+		                            </label>
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'hobby', null, ['class' => 'check']) }}
 		                            	I would like to use dishes of my hobbies
-		                            </label> 
-		                            <label> 
+		                            </label>
+		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'cooking_class', null, ['class' => 'check']) }}
 		                            	I am opening a cooking class and I want to increase my students by increasing my name
-		                            </label> 
-		                            <label> 
+		                            </label>
+		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'SNS_followers', null, ['class' => 'check']) }}
 		                            	I would like to increase my boss name and increase my cook blog and SNS followers
-		                            </label> 
+		                            </label>
 		                            <label>
 		                            	{{ Form::checkbox('reason_for_registration_edit[]', 'other', null, ['class' => 'check']) }}
 		                            	Other
@@ -158,34 +158,34 @@
 		                    @endif
 		                </div>
 	                @endif
-		
+
 	                <div class="form-group form-custom-group create-reason" style="display: none;">
 	                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
 	                	<div class="col-md-8 buyer" style="display: none;">
 	                		<label>
-	                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }} 
+	                			{{ Form::checkbox('reason_for_registration[]', 'busy_with_working', null, ['class' => 'check']) }}
 	                			 Busy with working
-                           	</label> 
+                           	</label>
                            	<label>
                            		{{ Form::checkbox('reason_for_registration[]', 'live_alone', null, ['class' => 'check']) }}
                            		I got bored with convenience stores, medium meals, and other lunches because I live alone.
-                            </label> 
+                            </label>
                             <label>
                            		{{ Form::checkbox('reason_for_registration[]', 'few_restaurants', null, ['class' => 'check']) }}
                             	There are few restaurants around the office
-                            </label> 
+                            </label>
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'no_time', null, ['class' => 'check']) }}
                             	I am busy raising children and have no time to make rice
-                            </label> 
-                            <label> 
+                            </label>
+                            <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'like_to_eat', null, ['class' => 'check']) }}
                             	I would like to eat a variety of nationalities and people's cooking.
-                            </label> 
-                            <label> 
+                            </label>
+                            <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'no_reason', null, ['class' => 'check']) }}
                             	There is no big reason, but it seems interesting, so I would like to use it
-                            </label> 
+                            </label>
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
                             	Other
@@ -193,29 +193,29 @@
                        	</div>
 	                	<div class="col-md-8 seller" style="display: none;">
 	                		<label>
-	                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }} 
+	                			{{ Form::checkbox('reason_for_registration[]', 'help_someone', null, ['class' => 'check']) }}
 	                			 I would like to use someone's help through my cooking
-                           	</label> 
+                           	</label>
                            	<label>
                            		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_free_time', null, ['class' => 'check']) }}
-                           		 I want to earn rewards using free time  
-                            </label> 
+                           		 I want to earn rewards using free time
+                            </label>
                             <label>
                            		{{ Form::checkbox('reason_for_registration[]', 'earn_rewards_bytes_parts', null, ['class' => 'check']) }}
-                            	I want to earn more rewards than bytes and parts  
-                            </label> 
+                            	I want to earn more rewards than bytes and parts
+                            </label>
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'hobby', null, ['class' => 'check']) }}
                             	I would like to use dishes of my hobbies
-                            </label> 
-                            <label> 
+                            </label>
+                            <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'cooking_class', null, ['class' => 'check']) }}
                             	I am opening a cooking class and I want to increase my students by increasing my name
-                            </label> 
-                            <label> 
+                            </label>
+                            <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'SNS_followers', null, ['class' => 'check']) }}
                             	I would like to increase my boss name and increase my cook blog and SNS followers
-                            </label> 
+                            </label>
                             <label>
                             	{{ Form::checkbox('reason_for_registration[]', 'other', null, ['class' => 'check']) }}
                             	Other
@@ -224,8 +224,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Description<span>*</span></label>
-	                  	{!! Form::textarea('description', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('description', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Tell us something about the user','rows'=>'3')) !!}
 	                  	@if ($errors->has('description'))
 	                    	<span class="help-block">
@@ -244,8 +244,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label>Phone Number<span>*</span></label>
-	                  	{!! Form::text('phone_number', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::text('phone_number', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'09012345678',
 	                                'id' => 'phone')) !!}
 	                  @if ($errors->has('phone_number'))
@@ -256,8 +256,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Zipcode(7 digits)<span>*</span></label>
-	                  	{!! Form::text('zipcode', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::text('zipcode', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'104-0061')) !!}
 						@if ($errors->has('zipcode'))
 							<span class="help-block">
@@ -267,8 +267,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Prefectures<span>*</span></label>
-	                  	{!! Form::text('prefectures', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::text('prefectures', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Prefectures')) !!}
 						@if ($errors->has('prefectures'))
 							<span class="help-block">
@@ -278,8 +278,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Municipality<span>*</span></label>
-	                  	{!! Form::text('municipality', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::text('municipality', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Municipality')) !!}
 						@if ($errors->has('municipality'))
 							<span class="help-block">
@@ -289,7 +289,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label>Address<span>*</span></label>
-	                  	{!! Form::textarea('address', null, 
+	                  	{!! Form::textarea('address', null,
 	                          array('class'=>'form-control','id' => 'addressbox',
 	                                'placeholder'=>'Enter Address','rows'=>'2')) !!}
 						@if ($errors->has('address'))
@@ -310,9 +310,9 @@
 	                <div class="form-group form-custom-group">
 	                  	<label>Job<span>*</span></label>
 	                    {{ Form::select('profession', [
-	                    	'1' => 'Housewives(byte part and others,present)', 
-	                    	'2' => 'Housewives(byte,part other,currently none)', 
-	                    	'3' => 'Employee', 
+	                    	'1' => 'Housewives(byte part and others,present)',
+	                    	'2' => 'Housewives(byte,part other,currently none)',
+	                    	'3' => 'Employee',
 	                    	'4' => 'None'],
 	                    	null, ['placeholder' => '-- Please Select Profession --', 'class' => 'form-control col-md-7 col-xs-12']) }}
 						@if ($errors->has('profession'))
@@ -324,13 +324,13 @@
 	                @if(($form_type == 'edit') && $user->type == 1)
 	                <div class="form-group form-custom-group creator-video-link" >
 	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link', null, 
+	                  	{!! Form::textarea('video_link', null,
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                </div>
 	                <div class="form-group form-custom-group creator-introduction" >
 	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('user_introduction', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
 	                  	@if ($errors->has('user_introduction'))
 	                    	<span class="help-block">
@@ -340,8 +340,8 @@
 	                </div>
 	                <div class="form-group form-custom-group creator-profile-message" >
 	                  	<label>Profile Message<span>*</span></label>
-	                  	{!! Form::textarea('profile_message', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('profile_message', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
 	                  	@if ($errors->has('profile_message'))
 	                    	<span class="help-block">
@@ -351,7 +351,7 @@
 	                </div>
 	                <div class="form-group form-custom-group creator-deliverable-area" >
 	                  	<label>Deliverable Area</label>
-						{!! Form::text('deliverable_area', null, 
+						{!! Form::text('deliverable_area', null,
 					                          array('class'=>'form-control')) !!}
 						@if ($errors->has('deliverable_area'))
 						  	<span class="help-block error">
@@ -362,13 +362,13 @@
 	                @endif
 	                <div class="form-group form-custom-group creator-video-link" style="display: none;">
 	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link', null, 
+	                  	{!! Form::textarea('video_link', null,
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                </div>
 	                <div class="form-group form-custom-group creator-introduction" style="display: none;">
 	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('user_introduction', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
 	                  	@if ($errors->has('user_introduction'))
 	                    	<span class="help-block">
@@ -378,8 +378,8 @@
 	                </div>
 	                <div class="form-group form-custom-group creator-profile-message" style="display: none;">
 	                  	<label>Profile Message<span>*</span></label>
-	                  	{!! Form::textarea('profile_message', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('profile_message', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
 	                  	@if ($errors->has('profile_message'))
 	                    	<span class="help-block">
@@ -389,7 +389,7 @@
 	                </div>
 	                <div class="form-group form-custom-group creator-deliverable-area" style="display: none;">
 	                  	<label>Deliverable Area</label>
-						{!! Form::text('deliverable_area', null, 
+						{!! Form::text('deliverable_area', null,
 					                          array('class'=>'form-control')) !!}
 						@if ($errors->has('deliverable_area'))
 						  	<span class="help-block error">
@@ -406,7 +406,7 @@
 	                    </span>
 	                  @endif
 	                </div>
-      
+
               		<div class="form-group form-custom-group d-inline-block user-editcoverimg">
 	                  	<label> Image<span>*</span></label>
 	                  	@if( !empty($user->image) )
@@ -447,8 +447,8 @@
 	                  	@endif
 	                </div>
 	                @endif
-	              	
-	                
+
+
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
@@ -461,7 +461,7 @@
 
 @section('add-js')
 <script type="text/javascript">
-	
+
 	$('#phone').keypress(function (e) {
 	    var regex = new RegExp("^[0-9-]+$");
 	    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
@@ -477,7 +477,7 @@
 	  	var userType = $('#select-type').val();
 	  	$('.create-reason').show();
 	  	$('.edit-reason').hide();
-	  	$('.seller').children().children().prop('checked', false);	  	
+	  	$('.seller').children().children().prop('checked', false);
 		$('.buyer').children().children().prop('checked', false);
 
 	  	$('.edit-reason .buyer').remove();
@@ -506,13 +506,13 @@
 	  	}
 	}
 
-	$(document).ready(function(){		
-		initAutocomplete('addressbox');	
+	$(document).ready(function(){
+		initAutocomplete('addressbox');
 	})
-	function initAutocomplete(selector) {	  
-		var indexMoveFrom = new google.maps.places.Autocomplete(	      
-			(document.getElementById(selector)),	      
-			{types: ['geocode']});	
+	function initAutocomplete(selector) {
+		var indexMoveFrom = new google.maps.places.Autocomplete(
+			(document.getElementById(selector)),
+			{types: ['geocode']});
 	}
 </script>
 @endsection

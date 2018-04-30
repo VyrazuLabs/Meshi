@@ -614,3 +614,7 @@ so   it doesn’t make the test unnecessarily selective */
   .creator-review-btn:focus{    
     color: #fff;
   }
+  #closeCrop{
+    display: none;
+    cursor: pointer;
+  }

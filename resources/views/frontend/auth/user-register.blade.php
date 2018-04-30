@@ -5,7 +5,7 @@
 @endsection
 
 @section('add-meta')
-<link rel="stylesheet" type="text/css" href="{{url('/frontend/css/cropper.css')}}">
+    <link href="{{ url('bower_components/cropper/dist/cropper.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -415,7 +415,7 @@
 					                </div>
 				                @endif
 
-				                @if ( $form_type == 'create' )
+				                <!-- @if ( $form_type == 'create' )
 				                	<div class="form-group form-custom-group">
 				                @else
 				                	<div class="form-group form-custom-group profile-edit-field">
@@ -439,7 +439,7 @@
 				                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
 				                    	</span>
 				                  	@endif
-				                </div>
+				                </div> -->
 					            @if ( $form_type == 'edit' )
 					                @if(Auth::User()->type == 1 )
 						                <div class="form-group form-custom-group profile-edit-field">
@@ -456,8 +456,62 @@
 						                </div>
 					              	@endif
 					            @endif
-				                <!-- /.box-body -->
+
+
+					            @if ( $form_type == 'edit' )
+					             	<div class="form-group form-custom-group item form-group position-relatv">
+					            @else
+					            	<div class="form-group form-custom-group profile-edit-field item form-group position-relatv">
+					            @endif
+							            <label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
+										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。
+											シェアメシTOP画面の地図への表示の際には、位置情報は域内でランダムに表示され、住所が特定されることはございませんのでご安心ください。<br/>
+											※ 地図にご登録頂いた写真が表示されるまでには少し時間をいただいております。
+										</p>
+		                      			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
+				                       	<div class="" id="defaultUploadImage" style="">
+				                        	<div class="col-md-12 p-0">
+				                          		<img src="{{ url('images/upload_photo.png') }}" class="position-relatv defaultImage">
+				                          		<input type="file" id="uploadFile" name="" class="custom-file-input position-absolute custm-input" onchange="readURL(this);">
+				                        	</div>
+				                       	</div>
+				                       	@if ($errors->has('image'))
+					                    	<span class="help-block">
+					                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+					                    	</span>
+					                  	@endif
+		                       			<div class="" id="alreadyExistImage">
+		                          			<div class="col-md-12 preview-step1">
+		                            			<div class="img-preview" style="width: 100px;float: right;">
+		                            			@if($form_type == 'edit' && !empty($user->image))
+					                                <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" />
+					                                @endif
+		                            			</div>
+		                          			</div>
+		                          			<!-- <div class="col-md-6 col-md-offset-3"> -->
+
+		                            			<!-- <div class="format-buttons">
+		                              				<button type="button" id="uploadButton">
+			                              				@if($form_type == 'edit')
+			                              					Change Image
+			                              				@else
+			                              					Upload
+			                              				@endif
+		                              				</button>
+		                            			</div> -->
+		                          			<!-- </div> -->
+		                       			</div>
+				                       	<div class="testclass" id="cropWrapper">
+				                        	<div class="col-md-12">
+				                          		<div id="cropImage" style="">
+				                            		<img src="" alt="" style="" class="">
+				                          		</div>
+				                        	</div>
+				                       	</div>
+	                      			</div>
+	                      		{!! Form::hidden('image', null, [ 'id' => 'profile_img_data' ])!!}
 				            </div>
+				            <!-- /.box-body -->
 			                <div class="box-footer text-center">
 			                  <button type="submit" class="btn btn-booking">{{ trans('app.Submit') }}</button>
 			                </div>
@@ -473,7 +527,8 @@
 @endsection
 
 @section('add-js')
-<script src="{{url('frontend/js/cropper.js')}}"></script>
+<script src="{{ url('bower_components/cropper/dist/cropper.min.js') }}"></script>
+
 <script type="text/javascript">
 
 	$('#phone').keypress(function (e) {
@@ -548,7 +603,7 @@
 
 </script>
 
-<script>
+<!-- <script>
    window.addEventListener('DOMContentLoaded', function () {
       var avatar = document.getElementById('images_crop');
       var image = document.getElementById('image');
@@ -663,5 +718,159 @@
         }
       });
     });
+</script> -->
+
+<script type="text/javascript">
+
+	var img_src = $('#alreadyExistImage .preview-step1 .img-preview img').attr('src');
+    var field_name = 'profile_img_data';
+    var cropper_aspectRatio = 1/1;
+    var canvas_width = 220;
+    var canvas_height = 220;
+
+    //preview of the selected image
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+          	$('.testclass').append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn btn-success mrgnTop10" onclick="img_crop()">Crop</button></div>');
+              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;height:240px">';
+              $('#cropImage').html(_html);
+
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+          //hide default crop image
+          // $('#defaultUploadImage').hide();
+          // hide input type file
+          $('#uploadFile').hide();
+          //crop wrapper show
+          $('#cropWrapper').show();
+          //clears the existing image
+          $('.custm-input').val('');
+
+          //make the image cropable after 1 sec
+          setInterval(function() {
+            //crop function call
+            makeCropable();
+          }, 500);
+
+      }
+    }
+
+
+    //hide the close button
+    $('#closeCrop').hide();
+    //hide the default image
+    // $('#defaultUploadImage').hide();
+    //hide the crop div
+    $('#cropWrapper').hide();
+
+    //click on upload button
+    $('#uploadButton').on('click', function() {
+      $('#alreadyExistImage').hide();
+      $('#defaultUploadImage').show();
+      $('#closeCrop').show();
+      $('.defaultImage').show();
+    });
+    $('#uploadFile').on('click', function() {
+    	$('#closeCrop').show();
+    });
+
+    //click on close button
+    // $('#closeCrop').on('click', function() {
+    //   $(this).hide();
+    //   $('#defaultUploadImage').hide();
+    //   $('#cropImage').hide();
+    //   $('#alreadyExistImage').show();
+    // });
+
+
+
+    //make croppable function
+    var $image;
+    // for add employee step 2 page
+    function makeCropable() {
+      $image = $('#crop-wrapper');
+      var $download = $('#download');
+      var $dataX = $('#dataX');
+      var $dataY = $('#dataY');
+      var $dataHeight = $('#dataHeight');
+      var $dataWidth = $('#dataWidth');
+      var $dataRotate = $('#dataRotate');
+      var $dataScaleX = $('#dataScaleX');
+      var $dataScaleY = $('#dataScaleY');
+      var options = {
+            aspectRatio: cropper_aspectRatio,
+            preview: '.img-preview',
+            zoomable: true,
+            crop: function (e) {
+              $dataX.val(Math.round(e.x));
+              $dataY.val(Math.round(e.y));
+              $dataHeight.val(Math.round(e.height));
+              $dataWidth.val(Math.round(e.width));
+              $dataRotate.val(e.rotate);
+              $dataScaleX.val(e.scaleX);
+              $dataScaleY.val(e.scaleY);
+            }
+          };
+
+
+      // Tooltip
+      $('[data-toggle="tooltip"]').tooltip();
+
+      // Cropper
+      $image.cropper(options);
+    }
+
+    //function image crop
+    function img_crop() {
+      var _canvas = $image.cropper('getCroppedCanvas', {width: canvas_width, height: canvas_height});
+      $('#alreadyExistImage .preview-step1 .img-preview').html(_canvas);
+      $('.format-buttons').append('<div><button type="button" class="btn btn-success cancelCrop" onclick="cancel_crop()">Cancel</button></div>');
+      $('#cropImage').hide();
+      $('#alreadyExistImage').show();
+      $('.img-preview').css({
+        'width': '100%',
+        'height': '230px'
+      });
+      $('#uploadButton').hide();
+
+      //save the values in a field
+      $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
+    }
+
+
+    //function cancel crop
+    function cancel_crop() {
+      //clear the cropper
+      $(this).hide();
+      $('#crop-wrapper').cropper("clear");
+      $('#imgCrop').hide();
+      $('#closeCrop').hide();
+      $('.cancelCrop').hide();
+      $('#cropImage').show();
+      $('#alreadyExistImage').show();
+      $('#uploadFile').show();
+      $('#cropImage').html('');
+      $('.defaultImage').hide();
+      $('#uploadButton').show();
+      console.log('this is a text');
+
+      //$('#cropImage').html('');
+      // $('.postion-abs').show();
+      // $('.organization-logo').show();
+
+      var _html = '<div class="img-preview"><img src="'+img_src+'" id="profile-img" /></div>';
+      $('#alreadyExistImage .preview-step1').html(_html);
+      // $('#crop-container').hide();
+      // $('#uploadButton').show();
+      // // $('#profile-img-container').show();
+      // $('#cancelCrop').hide();
+      // $('#uploadFile').show();
+      // $('#closeCrop').hide();
+    }
 </script>
 @endsection

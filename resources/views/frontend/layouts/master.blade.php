@@ -23,20 +23,24 @@
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K3JV9SN');</script>
+        })(window,document,'script','dataLayer','GTM-K3JV9SN');
+    </script>
     <!-- End Google Tag Manager -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
+                      height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     @include('frontend.layouts.header')
     @yield('content')
     @include('frontend.layouts.footer')
     @include('frontend.layouts.modal')
-	<!-- JS -->
+	 <!-- JS -->
     <script src="{{ url('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
@@ -79,6 +83,7 @@
     <script src="{{ url('/js/sweetalert.min.js') }}"></script>
     <!-- PNOTIFY js -->
     <script type="text/javascript" src="{{ url('js/pnotify.custom.min.js') }}"></script>
+
     <!-- <script type="text/javascript">
 
     For language translate
