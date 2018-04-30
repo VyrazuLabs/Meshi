@@ -617,4 +617,7 @@ so   it doesn’t make the test unnecessarily selective */
   #closeCrop{
     display: none;
     cursor: pointer;
+    float: right;
+    margin-bottom: 15px;
+    margin-top: 0;
   }

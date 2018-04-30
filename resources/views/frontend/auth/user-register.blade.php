@@ -734,7 +734,7 @@
           var reader = new FileReader();
 
           reader.onload = function (e) {
-          	$('.testclass').append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn btn-success mrgnTop10" onclick="img_crop()">Crop</button></div>');
+          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn btn-success mrgnTop10" onclick="img_crop()">Crop</button></div>');
               var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;height:240px">';
               $('#cropImage').html(_html);
 
