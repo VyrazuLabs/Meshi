@@ -12,10 +12,16 @@
 	<section id="main" class="clearfix home-two">
 		<!-- <div class="container"> -->
 			<!-- gmap -->	
+        <img src="{{url('/frontend/images/sharemeshi_catch.png')}}" alt="" class="">
+        <!-- </div> -->
+        <div class="container">
+            <div class="row">
 			<div id="road_map"></div>	
 		<!-- </div> -->
 		<div class="container">
 		<div class="row">
+
+                <p style="font-size: 24px; text-align: center;margin-top: 30px;">シェアメシは、空いた時間を使ってお料理を提供したい方と、栄養価の高い家庭料理を求めている方を<br/>マッチングする、新しいフードシェアリングサービスです。</p>
 		</div><!-- row -->
 		<!-- featureds -->
 		@if(count($today_food_list)>0)
@@ -76,6 +82,8 @@
 									<!-- item-info-right -->
 									<!-- <div class="user-option pull-right">
 										<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+                                </div><!-- cta-icon -->
+                                <h4>{{ trans('app.Community') }}</h4>
 										<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
 									</div> --><!-- item-info-right -->
 								</div><!-- ad-meta -->
@@ -290,19 +298,21 @@
 		@endif
 				
 		<!-- cta -->
-		<div class="section cta text-center">
-			<div class="row">
+            <div class="section featureds">
+                <h3 style="text-align: center;">シェアメシを利用された方(メシイーターさん)のご感想</h3>
+                <img src="{{url('/frontend/images/sharemeshi_eater_reviews.png')}}" alt="" class="">
 				<!-- single-cta -->
-				<div class="col-sm-4">
-					<div class="single-cta">
+            </div>
+            <div class="section featureds">
 						<!-- cta-icon -->
-						<div class="cta-icon icon-secure">
-							<img src="{{ url('frontend/images/a1.png') }}" alt="Icon" class="img-responsive">
+                <h3 style="text-align: center;">シェアメシを提供された方(メシクリエーターさん)のご感想</h3>
+                <img src="{{url('/frontend/images/sharemeshi_creator_reviews.png')}}" alt="" class="">
 						</div><!-- cta-icon -->
 						<h4>{{ trans('app.Handmade Foods') }}</h4>
 						<p>{{ trans('app.Description of Handmade Foods') }}</p>
-					</div>
-				</div><!-- single-cta -->
+            </div>
+        </div><!-- container -->
+
 
 				<!-- single-cta -->
 				<div class="col-sm-4">
@@ -406,6 +416,7 @@
                     {latitude: 35.55389, longitude: 139.73061, icon: '' + url + '/mapicon/user1.png'},
                     {latitude: 35.55416, longitude: 139.71254, icon: '' + url + '/mapicon/user2.png'},
                     {latitude: 35.56604, longitude: 139.69665, icon: '' + url + '/mapicon/user3.png'},
+                    {latitude: 35.594912, longitude: 139.681057, icon: '' + url + '/mapicon/5ad1e502ad8f1.png'},
                     {latitude: 35.594912, longitude: 139.681057, icon: '' + url + '/mapicon/5ad1e502ad8f1.png'},
 					{latitude: 35.594912, longitude: 139.681057, icon: '' + url + '/mapicon/5ad1e502ad8f1.png'},
                     {latitude: 35.556392, longitude: 139.725880, icon: '' + url + '/mapicon/5ad1d3815d447.png'},

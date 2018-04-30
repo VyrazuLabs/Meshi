@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Http\Controllers\Controller;
 use App\Models\Food\FoodItem;
+use App\Models\ProfileInformation;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Validator;
 use App\Models\Order\Cart;
 use App\Models\Order\Order;
 use App\Models\Payment\Payments;
@@ -21,14 +24,16 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
 use URL;
+use Mail;
 
 class PaymentController extends Controller
 {
@@ -202,13 +207,14 @@ class PaymentController extends Controller
             $bookingDate = $order->date_of_order;
             $creator = User::where('user_id', $food->offered_by)->first();
 
-            // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
-            $email = 'contact@sharemeshi.com'; //this email is for testing purpose
-            Mail::send('frontend.order.puchase-item-mail', [
+	        // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
+	        $email = $creator->email; //this email is for testing purpose
+            Mail::send('order.puchase-item-mail', [
                 'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'buyerProfile' => $buyerProfile,
                 'creator' => $creator, 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate,
             ], function ($message) use ($email) {
                 $message->to($email)
+                    ->bcc(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'))
                     ->subject('【シェアメシ】新規のご注文のお知らせ');
             });
 
