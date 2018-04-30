@@ -324,38 +324,38 @@
 	                @if(($form_type == 'edit') && $user->type == 1)
 	                <div class="form-group form-custom-group creator-video-link" >
 	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link', null,
+	                  	{!! Form::textarea('video_link_edit', null,
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                </div>
 	                <div class="form-group form-custom-group creator-introduction" >
 	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction', null,
+	                  	{!! Form::textarea('user_introduction_edit', null,
 	                          array('class'=>'form-control',
 	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
-	                  	@if ($errors->has('user_introduction'))
+	                  	@if ($errors->has('user_introduction_edit'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('user_introduction_edit') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group creator-profile-message" >
 	                  	<label>Profile Message<span>*</span></label>
-	                  	{!! Form::textarea('profile_message', null,
+	                  	{!! Form::textarea('profile_message_edit', null,
 	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
-	                  	@if ($errors->has('profile_message'))
+	                  	@if ($errors->has('profile_message_edit'))
 	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('profile_message') }}</strong>
+	                      		<strong class="strong t-red">{{ $errors->first('profile_message_edit') }}</strong>
 	                    	</span>
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group creator-deliverable-area" >
 	                  	<label>Deliverable Area</label>
-						{!! Form::text('deliverable_area', null,
+						{!! Form::text('deliverable_area_edit', null,
 					                          array('class'=>'form-control')) !!}
-						@if ($errors->has('deliverable_area'))
+						@if ($errors->has('deliverable_area_edit'))
 						  	<span class="help-block error">
-						      <strong class="strong">{{ $errors->first('deliverable_area') }}</strong>
+						      <strong class="strong">{{ $errors->first('deliverable_area_edit') }}</strong>
 						  	</span>
 						@endif
 	                </div>

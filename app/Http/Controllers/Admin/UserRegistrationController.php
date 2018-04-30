@@ -113,10 +113,10 @@ class UserRegistrationController extends Controller
                     'gender' => $input['gender'],
                     'profession' => $input['profession'],
                     'reason_for_registration' => $reason,
-                    'user_introduction' => $input['user_introduction'],
-                    'profile_message' => $input['profile_message'],
-                    'video_link' => $input['video_link'],
-                    'deliverable_area' => $input['deliverable_area'],
+                    'user_introduction' => $input['user_introduction_edit'],
+                    'profile_message' => $input['profile_message_edit'],
+                    'video_link' => $input['video_link_edit'],
+                    'deliverable_area' => $input['deliverable_area_edit'],
                 ]);
 
                 /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
@@ -295,8 +295,8 @@ class UserRegistrationController extends Controller
             'gender' => 'required',
             'profession' => 'required',
             'reason_for_registration_edit' => 'required',
-            'user_introduction' => 'required',
-            'profile_message' => 'required',
+            'user_introduction_edit' => 'required',
+            'profile_message_edit' => 'required',
         ]);
     }
 
@@ -362,10 +362,10 @@ class UserRegistrationController extends Controller
             $user->gender = $profile->gender;
             $user->profession = $profile->profession;
             $user->image = $profile->image;
-            $user->user_introduction = $profile->user_introduction;
-            $user->profile_message = $profile->profile_message;
-            $user->video_link = $profile->video_link;
-            $user->deliverable_area = $profile->deliverable_area;
+            $user->user_introduction_edit = $profile->user_introduction;
+            $user->profile_message_edit = $profile->profile_message;
+            $user->video_link_edit = $profile->video_link;
+            $user->deliverable_area_edit = $profile->deliverable_area;
         }
 
         return view('admin.create-user', ['user' => $user, 'form_type' => 'edit']);
