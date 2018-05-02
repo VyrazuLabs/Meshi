@@ -5,7 +5,7 @@
 @endsection
 
 @section('add-meta')
-    <link href="{{ url('bower_components/cropper/dist/cropper.min.css') }}" rel="stylesheet">
+    <link href="{{ url('admin_panel/cropper/dist/cropper.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -527,7 +527,7 @@
 @endsection
 
 @section('add-js')
-<script src="{{ url('bower_components/cropper/dist/cropper.min.js') }}"></script>
+<script src="{{ url('admin_panel/cropper/dist/cropper.min.js') }}"></script>
 
 <script type="text/javascript">
 

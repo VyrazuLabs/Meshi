@@ -69,14 +69,14 @@
     <script src="{{ url('frontend/js/custom.js') }}"></script>
 	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
-    <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
+    <script src="{{ url('frontend/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('frontend/moment/moment-with-locales.js') }}"></script>
 
-    <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
-    <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- timepicker -->
-    <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+    <script src="{{ url('frontend/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
     <!-- bootstrap datetimepicker -->
     <script src="{{ url('frontend/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- sweetalert -->

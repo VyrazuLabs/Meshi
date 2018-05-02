@@ -45,41 +45,41 @@
     <!-- ./wrapper -->
 
     <!-- jQuery 3 -->
-    <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{ url('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('admin_panel/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Morris.js charts -->
-    <script src="{{ url('bower_components/raphael/raphael.min.js') }}"></script>
-    <script src="{{ url('bower_components/morris.js/morris.min.js') }}"></script>
+    <script src="{{ url('admin_panel/raphael/raphael.min.js') }}"></script>
+    <script src="{{ url('admin_panel/morris.js/morris.min.js') }}"></script>
     <!-- Sparkline -->
-    <script src="{{ url('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- jvectormap -->
-    <script src="{{ url('bower_components/jvectormap/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-    <script src="{{ url('bower_components/jvectormap/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <!-- jQuery Knob Chart -->
-    <script src="{{ url('bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jquery-knob/dist/jquery.knob.min.js') }}"></script>
     <!-- daterangepicker -->
-    <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
-    <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ url('admin_panel/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('admin_panel/moment/moment-with-locales.js') }}"></script>
+    <script src="{{ url('admin_panel/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
-    <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ url('admin_panel/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- timepicker -->
-    <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+    <script src="{{ url('admin_panel/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
     <!-- bootstrap datetimepicker -->
     <script src="{{ url('frontend/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="{{ url('bower_components/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script src="{{ url('admin_panel/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
     <!-- Slimscroll -->
-    <script src="{{ url('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url('admin_panel/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
-    <script src="{{ url('bower_components/fastclick/lib/fastclick.js') }}"></script>
+    <script src="{{ url('admin_panel/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ url('/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

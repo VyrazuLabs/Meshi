@@ -23,11 +23,11 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url('frontend/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ url('frontend/images/ico/apple-touch-icon-57-precomposed.png') }}">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="{{ url('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ url('frontend/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ url('frontend/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap timepicker -->
-    <link rel="stylesheet" type="text/css" href="{{ url('bower_components/bootstrap-timepicker/css/AdminLTE-bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('frontend/bootstrap-timepicker/css/AdminLTE-bootstrap-timepicker.min.css') }}">
     <!-- bootstrap datetimepicker -->
     <link rel="stylesheet" type="text/css" href="{{ url('frontend/css/bootstrap-datetimepicker.min.css') }}">
     <!-- icons -->
