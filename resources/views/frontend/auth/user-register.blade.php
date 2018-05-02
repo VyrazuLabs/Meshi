@@ -482,10 +482,10 @@
 					                  	@endif
 		                       			<div class="" id="alreadyExistImage">
 		                          			<div class="col-md-12 preview-step1">
-		                            			<div class="img-preview" style="width: 100px;float: right;">
-		                            			@if($form_type == 'edit' && !empty($user->image))
-					                                <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" />
-					                                @endif
+		                            			<div class="img-preview">
+		                          					@if($form_type == 'edit' && !empty($user->image))
+					                                	<img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" />
+		                            				@endif
 		                            			</div>
 		                          			</div>
 		                          			<!-- <div class="col-md-6 col-md-offset-3"> -->
@@ -725,8 +725,8 @@
 	var img_src = $('#alreadyExistImage .preview-step1 .img-preview img').attr('src');
     var field_name = 'profile_img_data';
     var cropper_aspectRatio = 1/1;
-    var canvas_width = 220;
-    var canvas_height = 220;
+    var canvas_width = 100;
+    var canvas_height = 200;
 
     //preview of the selected image
     function readURL(input) {
@@ -734,8 +734,8 @@
           var reader = new FileReader();
 
           reader.onload = function (e) {
-          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn btn-success mrgnTop10" onclick="img_crop()">Crop</button></div>');
-              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;height:240px">';
+          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
+              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
               $('#cropImage').html(_html);
 
           };
@@ -777,6 +777,7 @@
     });
     $('#uploadFile').on('click', function() {
     	$('#closeCrop').show();
+    	$('.preview-step1').hide();
     });
 
     //click on close button
@@ -833,11 +834,12 @@
       $('#cropImage').hide();
       $('#alreadyExistImage').show();
       $('.img-preview').css({
-        'width': '100%',
-        'height': '230px'
+        'width': '100px',
+        'height': '100px'
       });
       $('#uploadButton').hide();
-
+      $('.preview-step1').show();
+      $('#imgCrop').hide();
       //save the values in a field
       $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
     }
