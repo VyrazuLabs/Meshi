@@ -471,7 +471,6 @@
 		                      			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
 				                       	<div class="" id="defaultUploadImage" style="">
 				                        	<div class="col-md-12 p-0">
-				                          		<img src="{{ url('images/upload_photo.png') }}" class="position-relatv defaultImage">
 				                          		<input type="file" id="uploadFile" name="" class="custom-file-input position-absolute custm-input" onchange="readURL(this);">
 				                        	</div>
 				                       	</div>
@@ -509,7 +508,7 @@
 				                        	</div>
 				                       	</div>
 	                      			</div>
-	                      		{!! Form::hidden('image', null, [ 'id' => 'profile_img_data' ])!!}
+	                      		{!! Form::hidden('profile_image', null, [ 'id' => 'profile_img_data' ])!!}
 				            </div>
 				            <!-- /.box-body -->
 			                <div class="box-footer text-center">
@@ -773,7 +772,7 @@
       $('#alreadyExistImage').hide();
       $('#defaultUploadImage').show();
       $('#closeCrop').show();
-      $('.defaultImage').show();
+      // $('.defaultImage').show();
     });
     $('#uploadFile').on('click', function() {
     	$('#closeCrop').show();
@@ -839,7 +838,7 @@
       });
       $('#uploadButton').hide();
       $('.preview-step1').show();
-      $('#imgCrop').hide();
+      $('#imgCrop').remove();
       //save the values in a field
       $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
     }
@@ -850,14 +849,14 @@
       //clear the cropper
       $(this).hide();
       $('#crop-wrapper').cropper("clear");
-      $('#imgCrop').hide();
+      $('#imgCrop').remove();
       $('#closeCrop').hide();
       $('.cancelCrop').hide();
       $('#cropImage').show();
       $('#alreadyExistImage').show();
       $('#uploadFile').show();
       $('#cropImage').html('');
-      $('.defaultImage').hide();
+      // $('.defaultImage').hide();
       $('#uploadButton').show();
       console.log('this is a text');
 

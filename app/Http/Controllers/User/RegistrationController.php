@@ -21,6 +21,7 @@ class RegistrationController extends Controller
     public function save(Request $request)
     {
         $input = $request->input();
+
         $file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
@@ -130,9 +131,9 @@ class RegistrationController extends Controller
                 ]);
 
                 /****************crop image functionality starts****************/
-                if (isset($input['image']) && !empty($input['image'])) {
+                if (isset($input['profile_image']) && !empty($input['profile_image'])) {
                     //get the base64 value in a variable
-                    $data = $input['image'];
+                    $data = $input['profile_image'];
                     list($t, $data) = explode(';', $data);
                     list(, $data) = explode(',', $data);
                     $_img = base64_decode($data);
@@ -217,9 +218,9 @@ class RegistrationController extends Controller
                 // $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
 
                 /****************crop image functionality starts****************/
-                if (isset($input['image']) && !empty($input['image'])) {
+                if (isset($input['profile_image']) && !empty($input['profile_image'])) {
                     //get the base64 value in a variable
-                    $data = $input['image'];
+                    $data = $input['profile_image'];
                     list($t, $data) = explode(';', $data);
                     list(, $data) = explode(',', $data);
                     $_img = base64_decode($data);
@@ -315,7 +316,7 @@ class RegistrationController extends Controller
             'municipality' => 'required',
             'gender' => 'required',
             'profession' => 'required',
-            'image' => 'required',
+            'profile_image' => 'required',
             'reason_for_registration_edit' => 'required',
         ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
     }
@@ -352,7 +353,7 @@ class RegistrationController extends Controller
     protected function profileImageValidator($request)
     {
         return Validator::make($request, [
-            'image' => 'required|mimes:jpeg,png,jpg',
+            'profile_image' => 'required|mimes:jpeg,png,jpg',
         ]);
     }
 
