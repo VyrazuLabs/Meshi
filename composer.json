@@ -14,7 +14,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "paypal/rest-api-sdk-php": "*",
-        "sentry/sentry": "^1.8"
+        "sentry/sentry-laravel": "^0.8.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
