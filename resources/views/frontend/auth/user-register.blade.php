@@ -474,9 +474,9 @@
 				                          		<input type="file" id="uploadFile" name="" class="custom-file-input position-absolute custm-input" onchange="readURL(this);">
 				                        	</div>
 				                       	</div>
-				                       	@if ($errors->has('image'))
+				                       	@if ($errors->has('profile_image'))
 					                    	<span class="help-block">
-					                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
+					                      		<strong class="strong t-red">{{ $errors->first('profile_image') }}</strong>
 					                    	</span>
 					                  	@endif
 		                       			<div class="" id="alreadyExistImage">

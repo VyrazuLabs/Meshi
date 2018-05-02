@@ -5,6 +5,7 @@
 @endsection
 
 @section('add-meta')
+    <link href="{{ url('admin_panel/cropper/dist/cropper.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -322,43 +323,43 @@
 						@endif
 	                </div>
 	                @if(($form_type == 'edit') && $user->type == 1)
-	                <div class="form-group form-custom-group creator-video-link" >
-	                  <label>Video Link(Embed Code)</label>
-	                  	{!! Form::textarea('video_link_edit', null,
-	                          array('class'=>'form-control','rows'=>'3')) !!}
-	                </div>
-	                <div class="form-group form-custom-group creator-introduction" >
-	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction_edit', null,
-	                          array('class'=>'form-control',
-	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
-	                  	@if ($errors->has('user_introduction_edit'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('user_introduction_edit') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                <div class="form-group form-custom-group creator-profile-message" >
-	                  	<label>Profile Message<span>*</span></label>
-	                  	{!! Form::textarea('profile_message_edit', null,
-	                          array('class'=>'form-control',
-	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
-	                  	@if ($errors->has('profile_message_edit'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('profile_message_edit') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                <div class="form-group form-custom-group creator-deliverable-area" >
-	                  	<label>Deliverable Area</label>
-						{!! Form::text('deliverable_area_edit', null,
-					                          array('class'=>'form-control')) !!}
-						@if ($errors->has('deliverable_area_edit'))
-						  	<span class="help-block error">
-						      <strong class="strong">{{ $errors->first('deliverable_area_edit') }}</strong>
-						  	</span>
-						@endif
-	                </div>
+		                <div class="form-group form-custom-group creator-video-link" >
+		                  <label>Video Link(Embed Code)</label>
+		                  	{!! Form::textarea('video_link_edit', null,
+		                          array('class'=>'form-control','rows'=>'3')) !!}
+		                </div>
+		                <div class="form-group form-custom-group creator-introduction" >
+		                  	<label>User Introduction<span>*</span></label>
+		                  	{!! Form::textarea('user_introduction_edit', null,
+		                          array('class'=>'form-control',
+		                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
+		                  	@if ($errors->has('user_introduction_edit'))
+		                    	<span class="help-block">
+		                      		<strong class="strong t-red">{{ $errors->first('user_introduction_edit') }}</strong>
+		                    	</span>
+		                  	@endif
+		                </div>
+		                <div class="form-group form-custom-group creator-profile-message" >
+		                  	<label>Profile Message<span>*</span></label>
+		                  	{!! Form::textarea('profile_message_edit', null,
+		                          array('class'=>'form-control',
+		                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
+		                  	@if ($errors->has('profile_message_edit'))
+		                    	<span class="help-block">
+		                      		<strong class="strong t-red">{{ $errors->first('profile_message_edit') }}</strong>
+		                    	</span>
+		                  	@endif
+		                </div>
+		                <div class="form-group form-custom-group creator-deliverable-area" >
+		                  	<label>Deliverable Area</label>
+							{!! Form::text('deliverable_area_edit', null,
+						                          array('class'=>'form-control')) !!}
+							@if ($errors->has('deliverable_area_edit'))
+							  	<span class="help-block error">
+							      <strong class="strong">{{ $errors->first('deliverable_area_edit') }}</strong>
+							  	</span>
+							@endif
+		                </div>
 	                @endif
 	                <div class="form-group form-custom-group creator-video-link" style="display: none;">
 	                  <label>Video Link(Embed Code)</label>
@@ -407,52 +408,65 @@
 	                  @endif
 	                </div>
 
-              		<div class="form-group form-custom-group d-inline-block user-editcoverimg">
-	                  	<label> Image<span>*</span></label>
-	                  	@if( !empty($user->image) )
-		                    <img src="{{ url('/uploads/profile/picture/'.$user->image) }}" style="height: 100px;float: right;" />
-		                @endif
-	                  	{!! Form::file('image', array( 'class' => 'custom-file-input') ) !!}
-	                  	@if ($errors->has('image'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('image') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                @if($form_type == 'create')
-	                <div class="form-group form-custom-group creator-cover-image" style="display: none;">
-	                  	<label>Cover Image</label>
-	                  	@if( !empty($user->cover_image) )
-		                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
-		                @endif
-	                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
-	                  	@if ($errors->has('cover_image'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
-	                @endif
 	                @if(($form_type == 'edit') && $user->type == 1)
-	                <div class="form-group form-custom-group creator-cover-image d-inline-block user-editcoverimg">
-	                  	<label>Cover Image</label>
-	                  	@if( !empty($user->cover_image) )
-		                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
-		                @endif
-	                  	{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
-	                  	@if ($errors->has('cover_image'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
+	                	<div class="form-group form-custom-group creator-cover-image d-inline-block user-editcoverimg">
+					@else($form_type == 'create')
+	                	<div class="form-group form-custom-group creator-cover-image" style="display: none;">
 	                @endif
+		                  	<label>Cover Image</label>
+		                  	@if( !empty($user->cover_image) )
+			                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
+			                @endif
+	                  		{!! Form::file('cover_image', array( 'class' => 'custom-file-input') ) !!}
+		                  	@if ($errors->has('cover_image'))
+		                    	<span class="help-block">
+		                      		<strong class="strong t-red">{{ $errors->first('cover_image') }}</strong>
+		                    	</span>
+		                  	@endif
+	            		</div>
 
 
-	                <!-- /.box-body -->
-	            </div>
+
+	                @if ( $form_type == 'edit' )
+		             	<div class="form-group form-custom-group d-inline-block user-editcoverimg item form-group position-relatv">
+		            @else
+		            	<div class="form-group form-custom-group d-inline-block user-editcoverimg profile-edit-field item form-group position-relatv">
+		            @endif
+				            <label> Image<span>*</span></label>
+                  			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
+	                       	<div class="" id="defaultUploadImage" style="">
+	                        	<div class="col-md-12 p-0">
+	                          		<input type="file" id="uploadFile" name="" class="custom-file-input position-absolute custm-input" onchange="readURL(this);">
+	                        	</div>
+	                       	</div>
+	                       	@if ($errors->has('profile_image'))
+		                    	<span class="help-block">
+		                      		<strong class="strong t-red">{{ $errors->first('profile_image') }}</strong>
+		                    	</span>
+		                  	@endif
+                   			<div class="" id="alreadyExistImage">
+                      			<div class="col-md-12 preview-step1">
+                        			<div class="img-preview">
+                      					@if($form_type == 'edit' && !empty($user->image))
+		                                	<img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" style="height: 100px;float: right;"/>
+                        				@endif
+                        			</div>
+                      			</div>
+                   			</div>
+	                       	<div class="testclass" id="cropWrapper">
+	                        	<div class="col-md-12">
+	                          		<div id="cropImage" style="">
+	                            		<img src="" alt="" style="" class="">
+	                          		</div>
+	                        	</div>
+	                       	</div>
+              			</div>
+              			{!! Form::hidden('profile_image', null, [ 'id' => 'profile_img_data' ])!!}
+	            	</div>
+
+	            <!-- /.box-body -->
                 <div class="box-footer text-center">
-                  <button type="submit" class="btn btn-success btn-booking">Submit</button>
+                	<button type="submit" class="btn btn-success btn-booking">Submit</button>
                 </div>
             {!! Form::close() !!}
       	</div>
@@ -460,6 +474,8 @@
 @endsection
 
 @section('add-js')
+<script src="{{ url('admin_panel/cropper/dist/cropper.min.js') }}"></script>
+
 <script type="text/javascript">
 
 	$('#phone').keypress(function (e) {
@@ -514,5 +530,161 @@
 			(document.getElementById(selector)),
 			{types: ['geocode']});
 	}
+</script>
+
+<script type="text/javascript">
+
+	var img_src = $('#alreadyExistImage .preview-step1 .img-preview img').attr('src');
+    var field_name = 'profile_img_data';
+    var cropper_aspectRatio = 1/1;
+    var canvas_width = 100;
+    var canvas_height = 200;
+
+    //preview of the selected image
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
+              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
+              $('#cropImage').html(_html);
+
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+          //hide default crop image
+          // $('#defaultUploadImage').hide();
+          // hide input type file
+          $('#uploadFile').hide();
+          //crop wrapper show
+          $('#cropWrapper').show();
+          //clears the existing image
+          $('.custm-input').val('');
+
+          //make the image cropable after 1 sec
+          setInterval(function() {
+            //crop function call
+            makeCropable();
+          }, 500);
+
+      }
+    }
+
+
+    //hide the close button
+    $('#closeCrop').hide();
+    //hide the default image
+    // $('#defaultUploadImage').hide();
+    //hide the crop div
+    $('#cropWrapper').hide();
+
+    //click on upload button
+    $('#uploadButton').on('click', function() {
+      $('#alreadyExistImage').hide();
+      $('#defaultUploadImage').show();
+      $('#closeCrop').show();
+      // $('.defaultImage').show();
+    });
+    $('#uploadFile').on('click', function() {
+    	$('#closeCrop').show();
+    	$('.preview-step1').hide();
+    });
+
+    //click on close button
+    // $('#closeCrop').on('click', function() {
+    //   $(this).hide();
+    //   $('#defaultUploadImage').hide();
+    //   $('#cropImage').hide();
+    //   $('#alreadyExistImage').show();
+    // });
+
+
+
+    //make croppable function
+    var $image;
+    // for add employee step 2 page
+    function makeCropable() {
+      $image = $('#crop-wrapper');
+      var $download = $('#download');
+      var $dataX = $('#dataX');
+      var $dataY = $('#dataY');
+      var $dataHeight = $('#dataHeight');
+      var $dataWidth = $('#dataWidth');
+      var $dataRotate = $('#dataRotate');
+      var $dataScaleX = $('#dataScaleX');
+      var $dataScaleY = $('#dataScaleY');
+      var options = {
+            aspectRatio: cropper_aspectRatio,
+            preview: '.img-preview',
+            zoomable: true,
+            crop: function (e) {
+              $dataX.val(Math.round(e.x));
+              $dataY.val(Math.round(e.y));
+              $dataHeight.val(Math.round(e.height));
+              $dataWidth.val(Math.round(e.width));
+              $dataRotate.val(e.rotate);
+              $dataScaleX.val(e.scaleX);
+              $dataScaleY.val(e.scaleY);
+            }
+          };
+
+
+      // Tooltip
+      $('[data-toggle="tooltip"]').tooltip();
+
+      // Cropper
+      $image.cropper(options);
+    }
+
+    //function image crop
+    function img_crop() {
+      var _canvas = $image.cropper('getCroppedCanvas', {width: canvas_width, height: canvas_height});
+      $('#alreadyExistImage .preview-step1 .img-preview').html(_canvas);
+      $('.format-buttons').append('<div><button type="button" class="btn btn-success cancelCrop" onclick="cancel_crop()">Cancel</button></div>');
+      $('#cropImage').hide();
+      $('#alreadyExistImage').show();
+      $('.img-preview').css({
+        'width': '100px',
+        'height': '100px'
+      });
+      $('#uploadButton').hide();
+      $('.preview-step1').show();
+      $('#imgCrop').remove();
+      //save the values in a field
+      $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
+    }
+
+
+    //function cancel crop
+    function cancel_crop() {
+      //clear the cropper
+      $(this).hide();
+      $('#crop-wrapper').cropper("clear");
+      $('#imgCrop').remove();
+      $('#closeCrop').hide();
+      $('.cancelCrop').hide();
+      $('#cropImage').show();
+      $('#alreadyExistImage').show();
+      $('#uploadFile').show();
+      $('#cropImage').html('');
+      // $('.defaultImage').hide();
+      $('#uploadButton').show();
+      console.log('this is a text');
+
+      //$('#cropImage').html('');
+      // $('.postion-abs').show();
+      // $('.organization-logo').show();
+
+      var _html = '<div class="img-preview"><img src="'+img_src+'" id="profile-img" /></div>';
+      $('#alreadyExistImage .preview-step1').html(_html);
+      // $('#crop-container').hide();
+      // $('#uploadButton').show();
+      // // $('#profile-img-container').show();
+      // $('#cancelCrop').hide();
+      // $('#uploadFile').show();
+      // $('#closeCrop').hide();
+    }
 </script>
 @endsection

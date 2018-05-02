@@ -21,7 +21,6 @@ class RegistrationController extends Controller
     public function save(Request $request)
     {
         $input = $request->input();
-
         $file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
