@@ -614,3 +614,21 @@ so   it doesn’t make the test unnecessarily selective */
   .creator-review-btn:focus{    
     color: #fff;
   }
+  #closeCrop{
+    display: none;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 15px;
+    margin-top: 0;
+  }
+  #imgCrop{
+    float: right;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+  #profile-img{
+    width: 100px;
+  }
+  .preview-step1{
+    margin-bottom: 20px;
+  }

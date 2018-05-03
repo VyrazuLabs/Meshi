@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Food\FoodItem;
 use App\Models\Category\Category;
 use App\Models\ProfileInformation;
-use Auth;
-use DB;
 use App\Models\User;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -55,13 +52,11 @@ class FrontendController extends Controller
 
     //         // SELECT * FROM `food_item` WHERE '2018-04-15' = start_publication_date OR '2018-04-15' = end_publication_date OR ('2018-04-15' > start_publication_date AND '2018-04-15' < end_publication_date)
 
-    //         // date_of_availability = ".$tomorrow." AND 
-
+    //         // date_of_availability = ".$tomorrow." AND
 
     //         $today_food_items =  DB::select( DB::raw("SELECT * FROM `food_item` WHERE ".$today." = start_publication_date OR ".$today." = end_publication_date OR ('".$today."' > start_publication_date AND '".$today."' < end_publication_date)") );
 
     //         // echo"<pre>";print_r($today_food_items);die;
-
 
     //         $tomorrow_food_items =  DB::select( DB::raw("SELECT * FROM `food_item` WHERE ".$today." = start_publication_date OR ".$today." = end_publication_date OR ('".$today."' > start_publication_date AND '".$today."' < end_publication_date)") );
 
@@ -93,7 +88,7 @@ class FrontendController extends Controller
     //         //                                            ->get();
 
     //     // }
-        
+
     //     if(!empty($today_food_items)) {
     //         foreach ($today_food_items as $key => $food) {
     //             $category = Category::where('category_id',$food->category_id)->first();
@@ -116,10 +111,10 @@ class FrontendController extends Controller
     //         }
     //     }
 
-    // 	if(!empty($tomorrow_food_items)) {
-    // 		foreach ($tomorrow_food_items as $key => $food) {
-    // 			$category = Category::where('category_id',$food->category_id)->first();
-    // 			$food->category_name = $category->category_name;
+    //     if(!empty($tomorrow_food_items)) {
+    //         foreach ($tomorrow_food_items as $key => $food) {
+    //             $category = Category::where('category_id',$food->category_id)->first();
+    //             $food->category_name = $category->category_name;
     //             $food->price = $food->price;
     //             $food->date = date('Y-m-d', strtotime($food->date_of_availability));
     //             $food->time = date('h:i a', strtotime($food->time_of_availability));
@@ -135,8 +130,8 @@ class FrontendController extends Controller
     //                 $food->foodImages = unserialize($images);
 
     //             }
-    // 		}
-    // 	}
+    //         }
+    //     }
 
     //     /* food items available on day after tomorrow */
     //     if(!empty($day_after_tomorrow_food_items)) {
@@ -161,7 +156,6 @@ class FrontendController extends Controller
     //         }
     //     }
 
-
     //     /* food items available on the next day of day after tomorrow */
     //     if(!empty($next_day_of_tomorrow_food_items)) {
     //         foreach ($next_day_of_tomorrow_food_items as $key => $food) {
@@ -185,18 +179,18 @@ class FrontendController extends Controller
     //         }
     //     }
 
-    // 	return view('frontend.index',['tomorrow_food_items'=>$tomorrow_food_items,'day_after_tomorrow_food_items'=>$day_after_tomorrow_food_items,'next_day_of_tomorrow_food_items'=>$next_day_of_tomorrow_food_items,'next_day_of_tomorrow'=>$next_day_of_tomorrow,'today_food_items'=>$today_food_items]);
+    //     return view('frontend.index',['tomorrow_food_items'=>$tomorrow_food_items,'day_after_tomorrow_food_items'=>$day_after_tomorrow_food_items,'next_day_of_tomorrow_food_items'=>$next_day_of_tomorrow_food_items,'next_day_of_tomorrow'=>$next_day_of_tomorrow,'today_food_items'=>$today_food_items]);
     // }
 
-
-    public function index() {
+    public function index()
+    {
         $today = date("Y-m-d");
-        $tomorrow = date('Y-m-d',  strtotime($today . ' +1 day'));
-        $day_after_tomorrow = date('Y-m-d',  strtotime($today . ' +2 day'));
-        $next_day_of_tomorrow = date('Y-m-d',  strtotime($today . ' +3 day'));
+        $tomorrow = date('Y-m-d', strtotime($today . ' +1 day'));
+        $day_after_tomorrow = date('Y-m-d', strtotime($today . ' +2 day'));
+        $next_day_of_tomorrow = date('Y-m-d', strtotime($today . ' +3 day'));
 
-        $day_start_range = date('Y-m-d',  strtotime($today . ' -1 day'));
-        $day_end_range = date('Y-m-d',  strtotime($today . ' +1 day'));
+        $day_start_range = date('Y-m-d', strtotime($today . ' -1 day'));
+        $day_end_range = date('Y-m-d', strtotime($today . ' +1 day'));
 
         $today_food_list = [];
         $tomorrow_food_list = [];
@@ -204,16 +198,19 @@ class FrontendController extends Controller
         $next_day_of_tomorrow_food_list = [];
 
         /* available active food items according to publication period */
-        $foodItems =  DB::select( DB::raw("SELECT * FROM `food_item` WHERE status = '1' AND (".$today." = start_publication_date OR ".$today." = end_publication_date OR ('".$day_end_range."' > start_publication_date AND '".$day_start_range."' < end_publication_date))") );
-        
-        if(!empty($foodItems)) {
+        $foodItems = DB::select(DB::raw("SELECT * FROM `food_item` WHERE status = '1' AND (" . $today . " = start_publication_date OR " . $today . " = end_publication_date OR ('" . $day_end_range . "' > start_publication_date AND '" . $day_start_range . "' < end_publication_date))"));
+
+        /* getting the current time of japan */
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_time = date('H:i:s');
+
+        if (!empty($foodItems)) {
             foreach ($foodItems as $key => $food) {
                 $food->date = date('Y-m-d', strtotime($food->date_of_availability));
-                $category = Category::where('category_id',$food->category_id)->first();
-                if($category->status == 1) {
+                $category = Category::where('category_id', $food->category_id)->first();
+                if ($category->status == 1) {
                     $food->category_status = 1;
-                }
-                else {
+                } else {
                     $food->category_status = 0;
                 }
                 $food->category_name = $category->category_name;
@@ -221,69 +218,71 @@ class FrontendController extends Controller
                 $food->date = date('Y-m-d', strtotime($food->date_of_availability));
                 $food->time = date('h:i a', strtotime($food->time_of_availability));
 
-                $profile = ProfileInformation::where('user_id',$food->offered_by)->first();
-                if(!empty($profile->image)) {
+                $profile = ProfileInformation::where('user_id', $food->offered_by)->first();
+                if (!empty($profile->image)) {
                     $food->image = $profile->image;
                 }
 
-                $user = User::where('user_id',$food->offered_by)->first();
-                if($user->status == 1) {
+                $user = User::where('user_id', $food->offered_by)->first();
+                if ($user->status == 1) {
                     $food->user_status = 1;
-                }
-                else {
+                } else {
                     $food->user_status = 0;
                 }
 
-                if(!empty($food->food_images)) {
+                if (!empty($food->food_images)) {
                     //getting the food images
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
                 }
 
                 /* check if the delivery date is today and food creator is active and food category is active */
-                if($food->date == $today && $food->user_status == 1  && $food->category_status == 1) {
+                if ($food->date == $today && $food->user_status == 1 && $food->category_status == 1 && $jst_current_time >= $food->start_publication_time && $jst_current_time <= $food->end_publication_time) {
                     $today_food_list[] = $food;
                 }
 
                 /* check if the delivery date is tomorrow and food creator is active and food category is active */
-                if($food->date == $tomorrow && $food->user_status == 1  && $food->category_status == 1) {
+                if ($food->date == $tomorrow && $food->user_status == 1 && $food->category_status == 1 && $jst_current_time >= $food->start_publication_time) {
                     $tomorrow_food_list[] = $food;
                 }
 
                 /* check if the delivery date is day after tomorrow and food creator is active and food category is active */
-                if($food->date == $day_after_tomorrow && $food->user_status == 1 && $food->category_status == 1) {
+                if ($food->date == $day_after_tomorrow && $food->user_status == 1 && $food->category_status == 1 && $jst_current_time >= $food->start_publication_time) {
                     $day_after_tomorrow_food_list[] = $food;
                 }
 
                 /* check if the delivery date is 'next_day_of_tomorrow' and food creator is active and food category is active */
-                if($food->date == $next_day_of_tomorrow && $food->user_status == 1  && $food->category_status == 1) {
+                if ($food->date == $next_day_of_tomorrow && $food->user_status == 1 && $food->category_status == 1 && $jst_current_time >= $food->start_publication_time) {
                     $next_day_of_tomorrow_food_list[] = $food;
                 }
             }
         }
-        
-        return view('frontend.index',['foodItems'=>$foodItems,'today_food_list'=>$today_food_list,'tomorrow_food_list'=>$tomorrow_food_list,'day_after_tomorrow_food_list'=>$day_after_tomorrow_food_list,'next_day_of_tomorrow_food_list'=>$next_day_of_tomorrow_food_list,'next_day_of_tomorrow'=>$next_day_of_tomorrow]);
+
+        return view('frontend.index', ['foodItems' => $foodItems, 'today_food_list' => $today_food_list, 'tomorrow_food_list' => $tomorrow_food_list, 'day_after_tomorrow_food_list' => $day_after_tomorrow_food_list, 'next_day_of_tomorrow_food_list' => $next_day_of_tomorrow_food_list, 'next_day_of_tomorrow' => $next_day_of_tomorrow]);
     }
-    public function privacy() {
+    public function privacy()
+    {
         return view('frontend.privacy-policy');
     }
-    public function terms() {
+    public function terms()
+    {
         return view('frontend.Terms & conditions');
     }
-    public function faq() {
+    public function faq()
+    {
         return view('frontend.faq');
     }
-    public function cart() {
+    public function cart()
+    {
         return view('frontend.shopping-cart');
     }
-    public function aboutUs() {
+    public function aboutUs()
+    {
         return view('frontend.about-us');
     }
-    public function contactUs() {
+    public function contactUs()
+    {
         return view('frontend.contact-us');
     }
-    
-
-
 
 }

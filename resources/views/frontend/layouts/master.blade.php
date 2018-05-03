@@ -23,20 +23,24 @@
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K3JV9SN');</script>
+        })(window,document,'script','dataLayer','GTM-K3JV9SN');
+    </script>
     <!-- End Google Tag Manager -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
+                      height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     @include('frontend.layouts.header')
     @yield('content')
     @include('frontend.layouts.footer')
     @include('frontend.layouts.modal')
-	<!-- JS -->
+	 <!-- JS -->
     <script src="{{ url('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
@@ -65,20 +69,21 @@
     <script src="{{ url('frontend/js/custom.js') }}"></script>
 	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
-    <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
+    <script src="{{ url('frontend/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('frontend/moment/moment-with-locales.js') }}"></script>
 
-    <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
-    <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- timepicker -->
-    <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+    <script src="{{ url('frontend/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
     <!-- bootstrap datetimepicker -->
     <script src="{{ url('frontend/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- sweetalert -->
     <script src="{{ url('/js/sweetalert.min.js') }}"></script>
     <!-- PNOTIFY js -->
     <script type="text/javascript" src="{{ url('js/pnotify.custom.min.js') }}"></script>
+
     <!-- <script type="text/javascript">
 
     For language translate
