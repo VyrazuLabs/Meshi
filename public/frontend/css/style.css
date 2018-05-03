@@ -632,3 +632,18 @@ so   it doesn’t make the test unnecessarily selective */
   .preview-step1{
     margin-bottom: 20px;
   }
+  .pagination>li>span{  
+    color: #9a9a9a;  
+    font-size: 14px;  
+    font-weight: 700;  
+    background-color: #e7e8e9;  
+    margin: 3px;  
+    border: 1px solid #e2e3e3;  
+    border-radius: 5px;
+  }
+  .pagination>.active>span, 
+  .pagination>.active>span:focus, 
+  .pagination>.active>span:hover{    
+    background-color: #f26522;    
+    border-color: #f26522;
+  }

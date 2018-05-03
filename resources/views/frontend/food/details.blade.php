@@ -157,6 +157,8 @@
 														</select> -->
 													</div>
 												</div>
+												@php $current_date = date("Y-m-d"); @endphp
+												@if($food_details->date >= $current_date)
 												<div class="col-md-6">
 													@if(Auth::User())
 														@php
@@ -173,6 +175,7 @@
 													<!-- </a> -->
 
 												</div>
+												@endif
 											</div>
 											<div class="row">
 												<p>※前後5分程度の余裕を見てお待ちください</p>
