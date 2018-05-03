@@ -839,6 +839,7 @@
       $('#uploadButton').hide();
       $('.preview-step1').show();
       $('#imgCrop').remove();
+      $('#closeCrop').remove();
       //save the values in a field
       $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
     }
