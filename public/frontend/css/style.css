@@ -597,6 +597,76 @@ so   it doesn’t make the test unnecessarily selective */
   .cart-box:last-child{    
     border-bottom: none;
   }
+  .review-text-div{    
+    display: flex;    
+    justify-content: space-between;    
+    align-items: center;
+  }
+  .review-text{    
+    font-size: 17px;
+  }
+  .eater-review-box{    
+    margin-bottom: 20px;
+  }
+  .eater-info-img{    
+  margin: auto;    
+  align-items: center;    
+  border: 5px solid #f26522;    
+  border-radius: 50%;    
+  width: 7em;
+}
+.eater-info-body{    
+  display: flex;
+}
+.eater-info-img-div{    
+  width: 15em;
+}
+.eater-info-description-div{    
+  width: calc(100% - 6em);
+}
+.eater-info-text{    
+  font-size: 15px;    
+  margin-bottom: 16px;
+}
+.eater-info-text span{    
+  font-weight: 500;
+}
+.morecontent span {    
+  display: none;
+}
+.morelink:hover{
+  color: #ccc;
+}
+.morelink:focus{
+  color: #f26522;
+}
+.comment{
+  font-weight: 400 !important;
+}
+.morecontent span{
+  font-weight: 400 !important;
+}
+  .eater-review-group{    
+    margin-bottom: 25px;
+  }
+  .customer-review-body{    
+    padding: 43px 43px;
+  }
+  .parchesed-review-btn{
+    background-color: #f7f7f7;
+    border: 1px solid #a1a1a1;
+    color: #a1a1a1;
+  }
+  .parchesed-review-btn:hover,
+  .parchesed-review-btn:focus{
+    color: #000;
+    cursor: not-allowed;
+  }
+  .creator-review-btn{
+    min-width: 88px;
+    margin-left: 0;
+    padding: 6px 12px;
+  }
   .creator-review-btn:hover,
   .creator-review-btn:focus{    
     color: #fff;
