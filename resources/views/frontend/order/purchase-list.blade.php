@@ -69,7 +69,7 @@
 											</div>
 										</div>
 										<div class="cart-content-btn-div">
-											<h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
+
 											<div class="review-group text-center">
 
 												@if($order->review_status == 0)
