@@ -149,7 +149,7 @@
     </div>
   </div>
   <!-- image crop modal -->
-
+@if(!empty($order))
 <div class="modal fade" id="addinfomodal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -185,3 +185,4 @@
     </div>
   </div>
 </div>
+@endif
