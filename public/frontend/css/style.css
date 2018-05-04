@@ -659,7 +659,7 @@ so   it doesn’t make the test unnecessarily selective */
   }
   .parchesed-review-btn:hover,
   .parchesed-review-btn:focus{
-    color: #000;
+    color: #000 !important;
     cursor: not-allowed;
   }
   .creator-review-btn{
