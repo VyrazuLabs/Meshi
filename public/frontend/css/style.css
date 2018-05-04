@@ -647,3 +647,6 @@ so   it doesn’t make the test unnecessarily selective */
     background-color: #f26522;    
     border-color: #f26522;
   }
+  .purchased-pagination{
+    margin: 20px 0;
+  }

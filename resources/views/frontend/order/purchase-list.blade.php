@@ -81,10 +81,8 @@
 						@endforeach
 					@endif
 					<div class="col-lg-12 text-center cart-box p-0">
-						<div class="cart-item">
-							<ul class="pagination ">
-								{!! $orders->render() !!}
-							</ul>
+						<div class="purchased-pagination">
+							{!! $orders->render() !!}
 						</div>
 					</div>
 				</div>
