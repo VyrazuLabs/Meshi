@@ -181,5 +181,8 @@ return [
     'Order List' => 'Order List',
     'Available List' => 'Available List',
     'Closed Orders' => 'Closed Orders',
+    'Eater Info' => 'Eater Info',
+    'Gender' => 'Gender',
+    'Years' => 'Years',
 
 ];

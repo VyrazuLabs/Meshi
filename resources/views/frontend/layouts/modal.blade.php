@@ -90,39 +90,38 @@
   <div class="modal-dialog modal-md">
       <!-- Modal content-->
       <div class="modal-content">
-            <div class="modal-body customer-review-body">
-                {!! Form::open(array('url' => route('save_creator_review'),'id' => 'creatorReviewForm')) !!}
-
-                  {!! Form::hidden('order_id', null,array('id'=>'orderId')) !!}
-                  {!! Form::hidden('communication_ratings', null,array('id'=>'creatorCommunicationRatingId')) !!}
-
-
-                    <!-- One "tab" for each step in the form: -->
-                    <div class="">
-                      <div class="text-center">
-                        <h3 class="text-center t-black">Communication</h3>
-                        <div class="rating float-none d-inline-block">
-                            <input type="radio" id="star20" name="creatorcommunicationrating" value="5" onclick="return rateEaterCommunication(this);"  data-id="5"/>
-                            <label for="star20" title="Excellent">5 stars</label>
-                            <input type="radio" id="star19" name="creatorcommunicationrating" value="4" onclick="return rateEaterCommunication(this);"  data-id="4"/>
-                            <label for="star19" title="Very good">4 stars</label>
-                            <input type="radio" id="star18" name="creatorcommunicationrating" value="3" onclick="return rateEaterCommunication(this);"  data-id="3"/>
-                            <label for="star18" title="Good">3 stars</label>
-                            <input type="radio" id="star17" name="creatorcommunicationrating" value="2" onclick="return rateEaterCommunication(this);"  data-id="2"/>
-                            <label for="star17" title="Bad">2 stars</label>
-                            <input type="radio" id="star16" name="creatorcommunicationrating" value="1" onclick="return rateEaterCommunication(this);"  data-id="1"/>
-                            <label for="star16" title="Very bad">1 star</label>
-                        </div>
-                      </div>
-                      <div class="form-group md-forms">
-                        <textarea class="form-control communication_details" rows="8" placeholder="Enter Your Description" name="communication_description" ></textarea>
-                      </div>
-                      <div class="form-group text-center">
-                        <button type="button" class="btn back-orange communication-submit-btn creator-communication">submit</button>
-                      </div>
-                    </div>
-                {!! Form::close() !!}
+        <div class="modal-body customer-review-body">
+          {!! Form::open(array('url' => route('save_creator_review'),'id' => 'creatorReviewForm')) !!}
+            {!! Form::hidden('order_id', null,array('id'=>'orderId')) !!}
+            {!! Form::hidden('communication_ratings', null,array('id'=>'creatorCommunicationRatingId')) !!}
+            <!-- One "tab" for each step in the form: -->
+            <div class="col-lg-12 col-xs-12 eater-review-box d-inline-block p-0">
+              <div class="col-lg-12 col-xs-12 review-text-div p-0">
+                <div class="d-inline-block">
+                  <h3 class="text-center t-black m-0 review-text">Communication</h3>
+                </div>
+                <div class="mb-0 rating d-inline-block">
+                    <input type="radio" id="star20" name="creatorcommunicationrating" value="5" value="5" onclick="return rateEaterCommunication(this);"  data-id="5"/>
+                    <label for="star20" title="Excellent">5 stars</label>
+                    <input type="radio" id="star19" name="creatorcommunicationrating" value="4" value="5" onclick="return rateEaterCommunication(this);"  data-id="4"/>
+                    <label for="star19" title="Very good">4 stars</label>
+                    <input type="radio" id="star18" name="creatorcommunicationrating" value="3" value="5" onclick="return rateEaterCommunication(this);"  data-id="3"/>
+                    <label for="star18" title="Good">3 stars</label>
+                    <input type="radio" id="star17" name="creatorcommunicationrating" value="2" value="5" onclick="return rateEaterCommunication(this);"  data-id="2"/>
+                    <label for="star17" title="Bad">2 stars</label>
+                    <input type="radio" id="star16" name="creatorcommunicationrating" value="1" value="5" onclick="return rateEaterCommunication(this);"  data-id="1"/>
+                    <label for="star16" title="Very bad">1 star</label>
+                </div>
+              </div>
             </div>
+            <div class="form-group eater-review-group md-forms">
+              <textarea class="form-control communication_details" rows="8" placeholder="Enter Your Description" name="communication_description" ></textarea>
+            </div>
+            <div class="form-group text-center mb-0">
+              <button type="button" class="btn back-orange communication-submit-btn creator-communication">submit</button>
+            </div>
+          </form>
+        </div>
       </div>
   </div>
 </div>
@@ -150,3 +149,39 @@
     </div>
   </div>
   <!-- image crop modal -->
+
+<div class="modal fade" id="addinfomodal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">{{ trans('app.Eater Info') }}</h4>
+      </div>
+      <div class="modal-body eater-info-body">
+        <div class="eater-info-img-div">
+          @if(!empty($order->image))
+            <img src="{{url('/uploads/profile/picture/'.$order->image)}}" class="img-responsive eater-info-img">
+          @endif
+        </div>
+        <div class="eater-info-description-div">
+          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Name') }} :</span> {{ $order->name }}</p>
+          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Nickname') }} :</span> {{ $order->nick_name }}</p>
+          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Phone') }} :</span> {{ $order->phone_number }}</p>
+          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Gender') }} :</span> {{ $order->gender }}</p>
+          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Age') }} :</span> {{ $order->age }} {{ trans('app.Years') }}</p>
+
+          <p class="eater-info-text less-text">
+            <span class="mr-3">{{ trans('app.Introduction') }} :</span><span class="comment more">{{$order->description}}</span>
+          </p>
+
+         <!--  <p class="eater-info-text less-text" >
+            <span class="mr-3">{{ trans('app.Introduction') }} :</span>@php echo strip_tags(substr($order->description,0,50)); @endphp
+          </p>
+          <p class="eater-info-text more-text" style="display: none;" >
+            <span class="mr-3">{{ trans('app.Introduction') }} :</span>{{$order->description}}
+          </p>
+          <button type="button" class="load-more-details">Load More...</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

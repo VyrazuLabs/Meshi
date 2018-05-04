@@ -171,5 +171,8 @@ return [
     'Order List' => 'オーダーリスト',
     'Available List' => '利用可能なリスト',
     'Closed Orders' => 'クローズドオーダー',
+    'Eater Info' => '食べる 情報',
+    'Gender' => '性別',
+    'Years' => '年',
 
 ];

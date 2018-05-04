@@ -707,3 +707,9 @@ so   it doesn’t make the test unnecessarily selective */
   .purchased-pagination{
     margin: 20px 0;
   }
+  .cart-content-details{
+    width: 54em;
+  }
+.cart-content-btn-div{
+    width: calc(100% - 61em);
+}

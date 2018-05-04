@@ -92,26 +92,41 @@ class OrderController extends Controller
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
                 $order->date = date('Y-m-d', strtotime($order->date_of_delivery));
-                $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
-                $order->address = $profileDetails->address;
-
-                $user = User::where('user_id', $order->ordered_by)->first();
-                $order->name = $user->name;
-
                 /* getting the food images */
-                if (!empty($orders->food_images)) {
-                    $images = $orders->food_images;
-                    $order->food_images = unserialize($images);
+                if (!empty($order->food_images)) {
+                    $order->foodImages = unserialize($order->food_images);
                 }
 
+                /* getting the profile information of the buyer */
+                $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
+                if (!empty($profileDetails)) {
+                    $order->address = $profileDetails->address;
+                    $order->phone_number = $profileDetails->phone_number;
+                    $order->gender = $profileDetails->gender;
+                    $order->age = $profileDetails->age;
+                    $order->description = $profileDetails->description;
+                    if (!empty($profileDetails->image)) {
+                        $order->image = $profileDetails->image;
+                    }
+                }
+
+                /* getting the account details of the buyer */
+                $user = User::where('user_id', $order->ordered_by)->first();
+                if (!empty($user)) {
+                    $order->name = $user->name;
+                    $order->nick_name = $user->nick_name;
+                }
+
+                /* check for reviews */
                 $creator_review = CreatorReview::where('order_id', $order->order_id)
                     ->where('reviewed_by', Auth::User()->user_id)->first();
                 if (!empty($creator_review)) {
-                    $order->review_status = 1;
+                    $order->review_status = 1; //alraedy reviewed
                 } else {
-                    $order->review_status = 0;
+                    $order->review_status = 0; //not yet reviewed
                 }
 
+                /* make different array for upcoming and previous orders */
                 if ($order->date < $today) {
                     $previousOrders[] = $order;
                 } else {
