@@ -493,26 +493,6 @@ body.modal-open{
 .tab {    
   display: none;
 }
-.next-btn{    
-  position: absolute;    
-  top: 50%;    
-  right: -6%;    
-  border-radius: 50%;    
-  height: 60px;    
-  width: 60px;    
-  padding: 0;    
-  color: #fff;
-}
-.prev-btn{    
-  position: absolute;    
-  top: 50%;    
-  left: -6%;    
-  border-radius: 50%;    
-  height: 60px;    
-  width: 60px;    
-  padding: 0;    
-  color: #fff;
-  }
 .customer-review-body{    
   padding: 43px 48px;
 }
@@ -527,18 +507,25 @@ so   it doesn’t make the test unnecessarily selective */
   clip:rect(0,0,0,0);
 }
 .rating:not(:checked) > label {    
-  float:right;    
-  width:1em;    
-  padding:0 .1em;    
-  overflow:hidden;    
-  white-space:nowrap;    
-  cursor:pointer;    
-  font-size:200%;    
-  line-height:1.2;    
-  color:#ddd;
+  float: right;    
+  width: 1em;    
+  padding: 0 0.08em;    
+  overflow: hidden;    
+  white-space: nowrap;    
+  cursor: pointer;    
+  font-size: 23px;    
+  /* line-height: 1.2; */    
+  color: #ddd;    
+  margin-right: 9px;
 }
 .rating:not(:checked) > label:before {    
-  content: '★ ';
+  content: "\f006";    
+  font-family: FontAwesome;
+}
+.rating > input:checked ~ label:before{    
+  content: "\f005";    
+  font-family: FontAwesome;     
+  color: #f70;
 }
 .rating > input:checked ~ label {    
   color: #f70;
