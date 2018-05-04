@@ -37,8 +37,8 @@
                   <div class="col-lg-12 cart-box p-0">
                     <div class="cart-item">
                       <div class="item-image-box cart-image-box">
-                        @if(!empty($order->food_image))
-                          @foreach($order->food_image as $key=>$food_image)
+                        @if(!empty($order->foodImages))
+                          @foreach($order->foodImages as $key=>$food_image)
                             @if($key == 0)
                               <img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-responsive cart-img">
                             @else
@@ -58,6 +58,9 @@
                         </div>
                         <div class="cart-content-btn-div">
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
+                          <div class="review-group text-center">
+                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#addinfomodal">Eater Info</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -71,8 +74,8 @@
                   <div class="col-lg-12 cart-box p-0">
                     <div class="cart-item">
                       <div class="item-image-box cart-image-box">
-                        @if(!empty($order->food_image))
-                          @foreach($order->food_image as $key=>$food_image)
+                        @if(!empty($order->foodImages))
+                          @foreach($order->foodImages as $key=>$food_image)
                             @if($key == 0)
                               <img src="{{url('/uploads/food/'.$food_image)}}" alt="" class="img-responsive cart-img">
                             @else
@@ -93,11 +96,16 @@
                         </div>
                         <div class="cart-content-btn-div">
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
-                          @if($order->review_status == 0)
+
                           <div class="review-group text-center">
+                          @if($order->review_status == 0)
                             <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
-                          </div>
+                          @else
+                            <button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">Reviewed</button>
+
                           @endif
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -119,5 +127,40 @@
     var orderId = $(orderId).data('attr');
     $('#orderId').val(orderId);
   }
+
+    $(document).ready(function() {
+        var showChar = 100;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        $('.more').each(function() {
+          var content = $(this).html();
+
+          if(content.length > showChar) {
+
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar-1, content.length - showChar);
+
+            var html = c + '<span class="moreelipses">'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
+
+
+            $(this).html(html);
+          }
+
+        });
+
+        $(".morelink").click(function(){
+          if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+          } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+          }
+          $(this).parent().prev().toggle();
+          $(this).prev().toggle();
+          return false;
+        });
+      });
 </script>
 @endsection

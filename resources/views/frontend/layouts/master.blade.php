@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-	<!-- Your Stylesheets, Scripts & Title
+  <!-- Your Stylesheets, Scripts & Title
     ============================================= -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,11 +40,11 @@
     @yield('content')
     @include('frontend.layouts.footer')
     @include('frontend.layouts.modal')
-	 <!-- JS -->
+  <!-- JS -->
     <script src="{{ url('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
-	  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
     @php
       $langName =[];
       if(Session::has('lang_name')) {
@@ -58,8 +58,8 @@
     @else
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=ja"></script>
     @endif
-	  <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
-	  <script src="{{ url('frontend/js/goMap.js') }}"></script>
+    <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
+    <script src="{{ url('frontend/js/goMap.js') }}"></script>
 
     <script src="{{ url('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('frontend/js/smoothscroll.min.js') }}"></script>
@@ -67,7 +67,7 @@
     <script src="{{ url('frontend/js/price-range.js') }}"></script>
     <script src="{{ url('frontend/js/jquery.countdown.js') }}"></script>
     <script src="{{ url('frontend/js/custom.js') }}"></script>
-	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
+     <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
     <script src="{{ url('frontend/moment/min/moment.min.js') }}"></script>
     <script src="{{ url('frontend/moment/moment-with-locales.js') }}"></script>
@@ -127,6 +127,11 @@
         });
       })
 
+      /**
+       * [give reviews as eater]
+       * @param  {[type]} qualityRating [description]
+       * @return {[type]}               [description]
+       */
       function rateQuality(qualityRating) {
         var qualityRating = qualityRating.getAttribute("data-id");
         $('#qualityRatingId').val(qualityRating);
@@ -142,13 +147,8 @@
         $('#communicationRatingId').val(communicationRating);
       }
 
-
       $('.store-reviews').click(function() {
         var form_data = new FormData($("#eaterReviewForm")[0]);
-        saveEaterReviews(form_data);
-      });
-
-      function saveEaterReviews(form_data) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
           data: form_data,
@@ -157,16 +157,39 @@
           contentType: false,
           processData: false,
           success: function(result) {
-            location.reload();
+            var obj = $.parseJSON(result);
+            if(obj.success == 0 ) {
+              if(obj.error.quality_ratings || obj.error.delivery_ratings || obj.error.communication_ratings ){
+                new PNotify({
+                  title: 'Error',
+                  text: 'Ratings fields are required',
+                  type: 'error',
+                  buttons: {
+                    sticker: false
+                  }
+                });
+              }
+              if(obj.error.review_description) {
+                $('.eater_reviews').addClass('review-error');
+              }
+            }
+            else if(obj.success == 1) {
+              location.reload();
+            }
           }
-        });
-      }
+        })
+      });
 
+
+      /**
+       * [give reviews as creator]
+       * @param  {[type]} communicationRating [description]
+       * @return {[type]}                     [description]
+       */
       function rateEaterCommunication(communicationRating) {
         var communicationRating = communicationRating.getAttribute("data-id");
         $('#creatorCommunicationRatingId').val(communicationRating);
       }
-
 
       $('.creator-communication').click(function() {
         var creator_review_form_data = new FormData($("#creatorReviewForm")[0]);
@@ -179,8 +202,20 @@
           processData: false,
           success: function(result) {
             var obj = $.parseJSON(result);
-            if(obj.success == 0) {
-              $('.communication_details').addClass('review-error');
+            if(obj.success == 0 ) {
+              if(obj.error.communication_ratings){
+                new PNotify({
+                  title: 'Error',
+                  text: 'Rating field is required',
+                  type: 'error',
+                  buttons: {
+                    sticker: false
+                  }
+                });
+              }
+              if(obj.error.communication_description) {
+                $('.communication_details').addClass('review-error');
+              }
             }
             else if(obj.success == 1) {
               location.reload();
@@ -188,6 +223,8 @@
           }
         })
       });
+
+
 
 
     </script>

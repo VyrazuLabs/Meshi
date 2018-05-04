@@ -113,9 +113,11 @@ Route::group(['middleware' => ['Language']], function () {
             /**
              * ROUTES FOR CART SECTION
              */
-            Route::group(['namespace' => 'Cart'], function () {
-                Route::get('/cart', 'CartController@viewCart')->name('view_cart');
-                Route::get('/empty-cart', 'CartController@emptyCart')->name('empty_cart');
+            Route::group(['namespace' => 'User'], function () {
+                Route::group(['namespace' => 'Cart'], function () {
+                    Route::get('/cart', 'CartController@viewCart')->name('view_cart');
+                    Route::get('/empty-cart', 'CartController@emptyCart')->name('empty_cart');
+                });
             });
 
             /**

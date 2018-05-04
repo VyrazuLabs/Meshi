@@ -179,5 +179,8 @@ return [
     'Today' => 'Today',
     'Purchased List' => 'Purchased List',
     'Order List' => 'Order List',
+    'Eater Info' => 'Eater Info',
+    'Gender' => 'Gender',
+    'Years' => 'Years',
 
 ];
