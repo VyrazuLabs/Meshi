@@ -7,7 +7,7 @@ use App\Models\Food\FoodItem;
 use App\Models\Order\Order;
 use App\Models\ProfileInformation;
 use App\Models\Review\CreatorReview;
-use App\Models\Review\Reviews;
+use App\Models\Review\EaterReview;
 use App\Models\User;
 use Auth;
 
@@ -39,6 +39,7 @@ class OrderController extends Controller
         //getting all the orders
         $orders = Order::where('status', 1)
             ->where('ordered_by', Auth::User()->user_id)
+            ->orderBy('date_of_delivery', 'DESC')
             ->paginate(3);
 
         if (!empty($orders)) {
@@ -57,9 +58,13 @@ class OrderController extends Controller
 
                 if (!empty($foodItem)) {
                     $order->item_name = $foodItem->item_name;
+
+                    $user = User::where('user_id', $foodItem->offered_by)->first();
+                    $order->nick_name = $user->nick_name;
+                    $order->offered_by = $foodItem->offered_by;
                 }
 
-                $review = Reviews::where('order_id', $order->order_id)
+                $review = EaterReview::where('order_id', $order->order_id)
                     ->where('reviewed_by', Auth::User()->user_id)->first();
                 if (!empty($review)) {
                     $order->review_status = 1;
