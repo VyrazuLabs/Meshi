@@ -16,7 +16,7 @@
         <img src="{{url('/frontend/images/sharemeshi_catch.png')}}" alt="" class="">
         <!-- </div> -->
         <div class="container">
-            <div class="row">
+            <div class="">
 
                 <p style="font-size: 24px; text-align: center;margin-top: 30px;">シェアメシは、空いた時間を使ってお料理を提供したい方と、栄養価の高い家庭料理を求めている方を<br/>マッチングする、新しいフードシェアリングサービスです。</p>
 
@@ -118,10 +118,15 @@
                                     <!-- ad-meta -->
                                     <div class="ad-meta">
                                         <div class="meta-content">
-                                        @php $current_date = date("Y-m-d"); @endphp
+                                        @php
+                                            $current_date = date("Y-m-d");
+                                            $tomorrow = date('Y-m-d', strtotime($current_date . ' +1 day'));
+                                        @endphp
 
                                         @if($food->date == $current_date)
                                             <span class="dated">{{ trans('app.Today') }}</span>
+                                        @elseif($food->date == $tomorrow)
+                                            <span class="dated">{{ trans('app.Tomorrow') }}</span>
                                         @else
                                             <span class="dated">{{$food->date}}</span>
                                         @endif
