@@ -15,36 +15,33 @@
           <table id="order_listing" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Sl. No.</th>
               <th>Order No.</th>
-              <th>Name</th>
-              <th>Total Price</th>
               <th>Date Of Order</th>
-              <th>Time Of Order</th>
+              <th>Delivery Time</th>
+              <th>Creator Name</th>
+              <th>Food Name</th>
+              <th>Price</th>
               <th>Status</th>
             </tr>
             </thead>
             <tbody>
-            @php $i=1;  @endphp
-            @foreach($orders as $order)
-            
-              <tr>
-                <td>{{$i++}}</td>
-                <td>{{$order->order_number}}</td>
-                <td>{{$order->user_name}}</td>
-                <td>{{$order->total_price}}</td>
-                <td>{{$order->date_of_order}}</td>
-                <td>{{$order->total_price}}</td>
-                <td>
-                  @if($order->status == 1)
-                    Paid
-                  @else()
-                    --
-                  @endif
-                </td>
-              </tr>
-            @endforeach
-            
+              @foreach($orders as $order)
+                <tr>
+                  <td>{{$order->order_number}}</td>
+                  <td>{{$order->created_at}}</td>
+                  <td>{{$order->time}}</td>
+                  <td><a href="{{route('profile_details',['user_id' => $order->offered_by])}}">{{$order->creator_name}}</a></td>
+                  <td><a href="{{route('food_details',['food_item_id' => $order->food_item_id])}}">{{$order->item_name}}</a></td>
+                  <td>{{$order->total_price}}</td>
+                  <td>
+                    @if($order->status == 1)
+                      Paid
+                    @else()
+                      --
+                    @endif
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -60,4 +57,3 @@
     });
   </script>
 @endsection
-

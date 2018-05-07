@@ -70,14 +70,20 @@ class FrontendController extends Controller
             }
         }
 
-        $closed_food_items = FoodItem::where('date_of_availability', '<', $jst_current_date)
+        $closed_foods = FoodItem::where('date_of_availability', '<=', $jst_current_date)
             ->where('status', 1)
-            ->orderBy('date_of_availability', 'ASC')
-            ->take(8)
+            ->orderBy('date_of_availability', 'DESC')
             ->get();
-        if (!empty($closed_food_items)) {
-            foreach ($closed_food_items as $key => $food) {
+        if (!empty($closed_foods)) {
+            $i = 1;
+            foreach ($closed_foods as $key => $food) {
+                /* convert publication daterange in timestamps */
+                $dateBegin = strtotime($food->start_publication_date . ' ' . $food->start_publication_time);
+                $dateEnd = strtotime($food->end_publication_date . ' ' . $food->end_publication_time);
+
                 $food->date = date('Y-m-d', strtotime($food->date_of_availability));
+                // $food->dateBegin = $dateBegin;
+                // $food->dateEnd = $dateEnd;
                 $user = User::where('user_id', $food->offered_by)->first();
                 if ($user->status == 1) {
                     $food->user_status = 1;
@@ -105,8 +111,18 @@ class FrontendController extends Controller
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
                 }
+
+                /* make an array of closed foods */
+                if ($jst_current_date_time > $dateEnd) {
+                    if ($i <= 8) {
+                        $closed_food_items[] = $food;
+                    }
+                    $i++;
+                }
             }
         }
+        // echo "<pre>";
+        // print_r($closed_food_items);die;
 
         return view('frontend.index', ['foodItems' => $foodItems, 'available_foods' => $available_foods, 'closed_food_items' => $closed_food_items]);
     }
