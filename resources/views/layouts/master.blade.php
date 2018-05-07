@@ -84,6 +84,8 @@
     <script src="{{ url('/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ url('/js/dashboard.js') }}"></script>
+    <!-- datatable -->
+    <script src="{{ url('admin_panel/datatable/js/datatables.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ url('/js/demo.js') }}"></script>
     @php

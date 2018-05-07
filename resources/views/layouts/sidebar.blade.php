@@ -14,7 +14,7 @@
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
-      
+
       <li><a href="{{ route('admin_dashboard') }}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
 
       <li class="treeview">
@@ -50,7 +50,7 @@
           <li><a href="{{ route('list_food_item')}}"><i class="fa fa-list"></i><span>Food Item List</span></a></li>
         </ul>
       </li>
-      <li class="treeview">
+     <!--  <li class="treeview">
         <a href="#">
           <i class="fa fa-user"></i>
           <span>Review</span>
@@ -60,7 +60,7 @@
           <li><a href="{{ route('create_review') }}"><i class="fa fa-plus-square-o"></i><span>Give Review</span></a></li>
           <li><a href="{{ route('list_review')}}"><i class="fa fa-list"></i><span>Review List</span></a></li>
         </ul>
-      </li>
+      </li> -->
       <li class="treeview">
         <a href="#">
           <i class="fa fa-user"></i>
