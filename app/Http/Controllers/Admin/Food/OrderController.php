@@ -20,6 +20,11 @@ class OrderController extends Controller
             $food_item = FoodItem::where('food_item_id', $order->food_item_id)->first();
             if (!empty($food_item)) {
                 $order->item_name = $food_item->item_name;
+                $order->offered_by = $food_item->offered_by;
+                $creator = User::where('user_id', $food_item->offered_by)->first();
+                if (!empty($creator)) {
+                    $order->creator_name = $creator->name;
+                }
             }
 
         }
