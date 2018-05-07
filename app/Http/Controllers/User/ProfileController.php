@@ -14,6 +14,11 @@ class ProfileController extends Controller
 {
     public function profile($user_id = null)
     {
+        /* getting the current time of japan */
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_date_time = strtotime(date("Y-m-d H:i:s"));
+        $jst_current_date = date("Y-m-d");
+
         /* getting the user associated with the user id*/
         $user = User::where('user_id', $user_id)->first();
         if (!empty($user)) {
@@ -41,11 +46,16 @@ class ProfileController extends Controller
             /* get all the active food items created by the user */
             $food_items = FoodItem::where('status', 1)
                 ->where('offered_by', $user_id)
-                ->orderBy('date_of_availability', 'ASC')
+                ->orderBy('date_of_availability', 'DESC')
                 ->get();
 
             if (!empty($food_items)) {
                 foreach ($food_items as $key => $food) {
+
+                    /* convert publication daterange in timestamps */
+                    $dateBegin = strtotime($food->start_publication_date . ' ' . $food->start_publication_time);
+                    $dateEnd = strtotime($food->end_publication_date . ' ' . $food->end_publication_time);
+
                     $category = Category::where('category_id', $food->category_id)->first();
                     if ($category->status == 1) {
                         $food->category_status = 1;
@@ -66,6 +76,13 @@ class ProfileController extends Controller
                         //getting the food images
                         $images = $food->food_images;
                         $food->foodImages = unserialize($images);
+                    }
+
+                    /* add flag if order is closed */
+                    if ($jst_current_date_time > $dateEnd) {
+                        $food->closed_order = 1;
+                    } else {
+                        $food->closed_order = 0;
                     }
                 }
             }
