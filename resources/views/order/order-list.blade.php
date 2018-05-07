@@ -28,7 +28,7 @@
               @foreach($orders as $order)
                 <tr>
                   <td>{{$order->order_number}}</td>
-                  <td>{{$order->created_at}}</td>
+                  <td>{{ date('y-m-d', strtotime($order->created_at)) }}</td>
                   <td>{{$order->time}}</td>
                   <td><a href="{{route('profile_details',['user_id' => $order->offered_by])}}">{{$order->creator_name}}</a></td>
                   <td><a href="{{route('food_details',['food_item_id' => $order->food_item_id])}}">{{$order->item_name}}</a></td>

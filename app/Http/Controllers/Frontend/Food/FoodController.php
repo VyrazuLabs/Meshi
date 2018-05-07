@@ -18,6 +18,11 @@ class FoodController extends Controller
     /* view of food details page */
     public function details($food_item_id = null)
     {
+        /* getting the current time of japan */
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_date_time = strtotime(date("Y-m-d H:i:s"));
+        $jst_current_date = date("Y-m-d");
+
         $food_details = FoodItem::where('food_item_id', $food_item_id)->first();
         $foodImages = [];
 
@@ -79,6 +84,15 @@ class FoodController extends Controller
             // foreach ($foodCosting as $key => $costing) {
             //     $cost = $key+$cost;
             // }
+
+            /* add flag if order is closed */
+            /* convert publication daterange in timestamps */
+            $dateEnd = strtotime($food_details->end_publication_date . ' ' . $food_details->end_publication_time);
+            if ($jst_current_date_time > $dateEnd) {
+                $food_details->closed_order = 1; //order has been closed
+            } else {
+                $food_details->closed_order = 0;
+            }
         } else {
             return back();
         }

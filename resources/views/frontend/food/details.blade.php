@@ -157,8 +157,8 @@
 														</select> -->
 													</div>
 												</div>
-												@php $current_date = date("Y-m-d"); @endphp
-												@if($food_details->date >= $current_date)
+
+												@if($food_details->closed_order == 0)
 												<div class="col-md-6">
 													@if(Auth::User())
 														@php
@@ -166,11 +166,11 @@
 														$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
 														$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
 														@endphp
-														@if((Auth::User()->user_id) != $food_details->offered_by && $isShow)
+														@if((Auth::User()->user_id) != $food_details->offered_by )
 															<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
 														@endif
 													@else
-														<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" href="{{route('sign_in')}}">{{ trans('app.Buy Now') }}</a>
+														<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
 													@endif
 													<!-- </a> -->
 
