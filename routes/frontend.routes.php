@@ -108,6 +108,8 @@ Route::group(['middleware' => ['Language']], function () {
                 Route::get('/order-details', 'OrderController@orderDetails')->name('order_details');
                 Route::get('/purchased-list', 'OrderController@purchasedList')->name('purchased_list');
                 Route::get('/order-list', 'OrderController@orderedList')->name('order_list');
+                Route::post('/show-eater-information', 'OrderController@viewEaterInformation');
+
             });
 
             /**
@@ -126,7 +128,8 @@ Route::group(['middleware' => ['Language']], function () {
             Route::group(['namespace' => 'Review'], function () {
                 Route::post('/save-eater-review', 'ReviewController@eaterReview')->name('save_eater_review');
                 Route::post('/save-creator-review', 'ReviewController@creatorReview')->name('save_creator_review');
-
+                Route::post('/show-creator-review', 'ReviewController@viewCreatorReview');
+                Route::post('/show-eater-review', 'ReviewController@viewEaterReview');
             });
         });
     });

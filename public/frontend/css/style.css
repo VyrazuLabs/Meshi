@@ -325,11 +325,12 @@ iframe{
   flex-flow: row wrap;
 }
 .cart-content{ 
- display: flex;  
- justify-content: space-between;  
- flex-wrap: wrap;  
- width: calc(100% - 120px);  
- padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: calc(100% - 120px);
+  padding-left: 20px;
+  align-items: flex-end;
 }
 .cart-img{  
   height: 100%; 
@@ -708,10 +709,10 @@ so   it doesn’t make the test unnecessarily selective */
     margin: 20px 0;
   }
   .cart-content-details{
-    width: 54em;
+    width: 45em;
   }
   .cart-content-btn-div{
-    width: calc(100% - 61em);
+    width: calc(100% - 50em);
   }
   .feature-overlay{
     background-color: rgba(255, 255, 255, 0.6);
@@ -722,4 +723,21 @@ so   it doesn’t make the test unnecessarily selective */
     right: 0;
     margin-right: 15px;
     cursor: not-allowed;
+  }
+  .food-creator-review-text{  
+    margin-right: 12px;  
+    font-weight: 500;
+  }
+  .foodcreator-review-modal-body{  
+    padding: 2.0em 2.14em;
+  }
+  .foodcreator-review-title{  
+    margin-bottom: 5px;  
+    font-weight: 500;
+  }
+  #FoodCreatorReviewModal .modal-content{  
+    border-radius: 12px;
+  }
+  .review-content-btn-div{
+    width: calc(100% - 62em);
   }

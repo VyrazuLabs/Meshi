@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Order\Order;
 use App\Models\Review\CreatorReview;
 use App\Models\Review\EaterReview;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Validator;
 
 class ReviewController extends Controller
@@ -123,6 +125,38 @@ class ReviewController extends Controller
             'communication_ratings' => 'required',
             'review_description' => 'required',
         ]);
+    }
+
+    public function viewCreatorReview(Request $request)
+    {
+        $input = Input::all();
+        $creator_review = [];
+        $creatorReview = CreatorReview::where('order_id', $input['order_id'])->first();
+
+        if (!empty($creatorReview)) {
+            $creator_review['review'] = $creatorReview->communication_description;
+
+            $user = User::where('user_id', $creatorReview->reviewed_by)->first();
+            if (!empty($user)) {
+                $creator_review['name'] = $user->name;
+            }
+        }
+        echo json_encode($creator_review);
+    }
+
+    public function viewEaterReview(Request $request)
+    {
+        $input = Input::all();
+        $eater_review = [];
+        $eaterReview = EaterReview::where('order_id', $input['order_id'])->first();
+        if (!empty($eaterReview)) {
+            $eater_review['review'] = $eaterReview->review_description;
+            $user = User::where('user_id', $eaterReview->reviewed_by)->first();
+            if (!empty($user)) {
+                $eater_review['name'] = $user->name;
+            }
+        }
+        echo json_encode($eater_review);
     }
 
 }

@@ -149,7 +149,7 @@
     </div>
   </div>
   <!-- image crop modal -->
-@if(!empty($order))
+
 <div class="modal fade" id="addinfomodal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -157,32 +157,46 @@
         <h4 class="modal-title text-center">{{ trans('app.Eater Info') }}</h4>
       </div>
       <div class="modal-body eater-info-body">
-        <div class="eater-info-img-div">
-          @if(!empty($order->image))
-            <img src="{{url('/uploads/profile/picture/'.$order->image)}}" class="img-responsive eater-info-img">
-          @endif
+        <div class="eater-info-img-div" id="buyer-image">
         </div>
         <div class="eater-info-description-div">
-          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Name') }} :</span> {{ $order->name }}</p>
-          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Nickname') }} :</span> {{ $order->nick_name }}</p>
-          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Phone') }} :</span> {{ $order->phone_number }}</p>
-          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Gender') }} :</span> {{ $order->gender }}</p>
-          <p class="eater-info-text"><span class="mr-3">{{ trans('app.Age') }} :</span> {{ $order->age }} {{ trans('app.Years') }}</p>
+          <p class="eater-info-text">{{ trans('app.Name') }} : <span class="mr-3" id="buyer-name"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Nickname') }} :<span class="mr-3" id="buyer-nick-name"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Phone') }} :<span class="mr-3" id="buyer-phone"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Gender') }} :<span class="mr-3" id="buyer-gender"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Age') }} :<span class="mr-3" id="buyer-age"></span> </p>
 
           <p class="eater-info-text less-text">
-            <span class="mr-3">{{ trans('app.Introduction') }} :</span><span class="comment more">{{$order->description}}</span>
+            <span class="mr-3">{{ trans('app.Introduction') }} :</span><span class="comment more" id="buyer-introduction"></span>
           </p>
-
-         <!--  <p class="eater-info-text less-text" >
-            <span class="mr-3">{{ trans('app.Introduction') }} :</span>@php echo strip_tags(substr($order->description,0,50)); @endphp
-          </p>
-          <p class="eater-info-text more-text" style="display: none;" >
-            <span class="mr-3">{{ trans('app.Introduction') }} :</span>{{$order->description}}
-          </p>
-          <button type="button" class="load-more-details">Load More...</button> -->
         </div>
       </div>
     </div>
   </div>
 </div>
-@endif
+
+<!-- creator review modal -->
+<div class="modal fade" id="FoodCreatorReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body foodcreator-review-modal-body">
+        <p class="t-orange foodcreator-review-title" id="creator-name"></p>
+        <p class="mb-0" id="creator-review-description">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- creator review modal -->
+<!--  eater review modal -->
+<div class="modal fade" id="FoodEaterReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body foodcreator-review-modal-body">
+        <p class="t-orange foodcreator-review-title" id="eater-name"></p>
+        <p class="mb-0" id="eater-review-description"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  eater review modal -->
