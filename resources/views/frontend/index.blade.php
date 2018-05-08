@@ -11,7 +11,7 @@
     <!-- world-gmap -->
     <section id="main" class="clearfix home-two">
         <!-- <div class="container"> -->
-        <img src="{{url('/frontend/images/sharemeshi_catch.png')}}" alt="" class="">
+        <img src="{{url('/frontend/images/sharemeshi_catch.png')}}" alt="" class="" style="width: 100%;">
         <!-- </div> -->
         <div class="container">
             <div class="">
