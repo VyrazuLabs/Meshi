@@ -30,9 +30,9 @@
 
 	                <div class="form-group form-custom-group">
 	                  	<label>Name <span>*</span></label>
-						{!! Form::text('item_name', null, 
+						{!! Form::text('item_name', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'placeholder'=>'Enter Food Item Name')) !!}
 						@if ($errors->has('item_name'))
 						  	<span class="help-block error">
@@ -42,8 +42,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Description<span>*</span></label>
-	                  	{!! Form::textarea('food_description', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('food_description', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Food Description','rows'=>'4')) !!}
 	                  	@if ($errors->has('food_description'))
 	                    	<span class="help-block error">
@@ -53,8 +53,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Short Info</label>
-	                  	{!! Form::textarea('short_info', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('short_info', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Short Information','rows'=>'3')) !!}
 	                  	@if ($errors->has('short_info'))
 	                    	<span class="help-block error">
@@ -80,7 +80,7 @@
 		                        @foreach( $food_images as $images )
 		                          <li  class="gallery-images" style="float: left; list-style: none; margin: 6px;">
 		                          <a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}">X</a>
-		                          
+
 		                          <img src="{{ url('/uploads/food/'.$images) }}" style="width: 62px; height: 42px;margin-top: 6px;" />
 		                          </li>
 		                        @endforeach
@@ -153,12 +153,12 @@
 	                	@endif
 	              	</div>
               		<div class="clearfix"></div>
-	                
+
 	                <!-- <div class="form-group form-custom-group">
 	                  	<label>Shipping Fee</label>
-						{!! Form::text('shipping_fee', null, 
+						{!! Form::text('shipping_fee', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'placeholder'=>'Enter Shipping Charge')) !!}
 						@if ($errors->has('shipping_fee'))
 						  	<span class="help-block error">
@@ -168,9 +168,9 @@
 	                </div> -->
 	                <div class="form-group form-custom-group">
 	                  	<label>Price <span>*</span></label>
-						{!! Form::text('price', null, 
+						{!! Form::text('price', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'id' => 'foodPrice',
 						          'placeholder'=>'Enter Base Amount')) !!}
 						@if ($errors->has('price'))
@@ -184,7 +184,7 @@
                   			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
                       			<label>Start Publication Date<span>*</span></label>
                       			<!-- <input type="text" class="form-control food-item-date" name=""> -->
-                      			{!! Form::text('start_publication_date', null, 
+                      			{!! Form::text('start_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
                     		</div>
@@ -193,7 +193,7 @@
 		                      <label>End Publication Date<span>*</span></label>
 		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
 		                      <!-- <input type="text" class="form-control food-item-date"> -->
-		                      {!! Form::text('end_publication_date', null, 
+		                      {!! Form::text('end_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
 		                    </div>
@@ -213,7 +213,7 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                
+
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
@@ -226,7 +226,7 @@
 
 @section('add-js')
 <script type="text/javascript">
-	
+
 	//Date picker
   	$('#datePicker').datepicker({
     	format: 'yyyy-mm-dd',
@@ -245,7 +245,7 @@
     return false;
   });
 
-	
+
 
 
 	// append time slots starts here
@@ -291,7 +291,7 @@
 	    $('.food-item-date').datetimepicker({
 	        // format: 'L'
 	        // AutoClose: false
-	        format: 'YYYY-MM-DD HH:mm:ss',
+	        format: 'YYYY-MM-DD HH:mm',
 	        locale: 'ja'
 	    });
 	});

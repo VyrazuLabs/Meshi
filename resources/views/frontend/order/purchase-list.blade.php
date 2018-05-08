@@ -68,13 +68,15 @@
 												</p>
 											</div>
 										</div>
-										<div class="cart-content-btn-div">
+										<div class="cart-content-btn-div ">
 
 											<div class="review-group text-center">
-
-												@if($order->review_status == 0)
+											@if($order->creator_review)
+												<a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodCreatorReviewModal" data-attr="{{ $order->order_id }}" onclick="showCreatorReview(this)">See Creator's Review</a>
+											@endif
+												@if($order->review_status == 0 && $order->closed_order == 1)
 													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
-												@else
+												@elseif($order->review_status == 1)
 													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">Reviewed</button>
 												@endif
 											</div>
@@ -101,7 +103,8 @@
 
 @section('add-js')
 <script type="text/javascript">
-	var currentTab = 0; // Current tab is set to be the first tab (0)
+
+var currentTab = 0; // Current tab is set to be the first tab (0)
 	showTab(currentTab); // Display the crurrent tab
 
 	function showTab(n) {
@@ -177,11 +180,32 @@
 	  x[n].className += " active";
 	}
 
-
 	function reviewFood(orderId) {
 		var orderId = $(orderId).data('attr');
 		$('#orderID').val(orderId);
 	}
+
+	/* for showing creator review */
+	function showCreatorReview(orderId) {
+		var orderId = $(orderId).data('attr');
+		$.ajax({
+          	headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            data: JSON.stringify({order_id : orderId}),
+            type: 'POST',
+            url: "{{ url('/user/show-creator-review') }}",
+            contentType: "application/json",
+            processData: false,
+          	success:function(data) {
+            	data = jQuery.parseJSON(data);
+	            $('#creator-review-description').html(data['review']);
+        		$('#creator-name').html(data['name']);
+
+        	}
+      	});
+	}
+
+
+
 
 
 </script>

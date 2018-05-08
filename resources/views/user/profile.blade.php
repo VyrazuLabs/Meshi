@@ -150,7 +150,8 @@
 										<!-- ad-info -->
 										<div class="ad-info">
 											<h3 class="item-price">&yen;{{$food->price}}</h3>
-											<h4 class="item-title">@php echo strip_tags(substr($food->item_name,0,20)); @endphp</h4>
+											<h4 class="item-title">@php mb_substr($food->item_name,5,1); @endphp</h4>
+
 											<div class="item-cat">
 												<span>{{$food->category_name}}</span>
 											</div>

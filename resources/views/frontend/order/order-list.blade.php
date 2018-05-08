@@ -56,10 +56,10 @@
                           <h5><span><strong class="t-black">Date Of Delivery: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">Shipping Address: </strong>  {{$order->address}}</span></h5>
                           <h5><strong class="t-black">Ordered By:</strong> {{$order->name}}</h5>
                         </div>
-                        <div class="cart-content-btn-div">
+                        <div class="cart-content-btn-div review-content-btn-div">
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
                           <div class="review-group text-center">
-                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#addinfomodal">Eater Info</button>
+                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#addinfomodal" data-attr="{{ $order->ordered_by }}" onclick="viewEaterInformation(this)">Eater Info</button>
                           </div>
                         </div>
                       </div>
@@ -98,6 +98,9 @@
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
 
                           <div class="review-group text-center">
+                            @if($order->eater_review)
+                              <a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodEaterReviewModal" data-attr="{{ $order->order_id }}" onclick="showEaterReview(this)">See Eater's Review</a>
+                            @endif
                           @if($order->review_status == 0)
                             <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
                           @else
@@ -128,7 +131,7 @@
     $('#orderId').val(orderId);
   }
 
-    $(document).ready(function() {
+    // $(document).ready(function() {
         var showChar = 100;
         var ellipsestext = "...";
         var moretext = "more";
@@ -161,6 +164,80 @@
           $(this).prev().toggle();
           return false;
         });
-      });
+      // });
+
+  /* for showing eater review */
+  function showEaterReview(orderId) {
+    var orderId = $(orderId).data('attr');
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+      data: JSON.stringify({order_id : orderId}),
+      type: 'POST',
+      url: "{{ url('/user/show-eater-review') }}",
+      contentType: "application/json",
+      processData: false,
+      success:function(data) {
+        data = jQuery.parseJSON(data);
+        $('#eater-review-description').html(data['review']);
+        $('#eater-name').html(data['name']);
+      }
+    });
+  }
+
+  /* for showing eater information */
+  function viewEaterInformation(orderedBy) {
+    var orderedBy = $(orderedBy).data('attr');
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+      data: JSON.stringify({ordered_by : orderedBy}),
+      type: 'POST',
+      url: "{{ url('/user/show-eater-information') }}",
+      contentType: "application/json",
+      processData: false,
+      success:function(data) {
+        data = jQuery.parseJSON(data);
+        var url = '{{ url("/uploads/profile/picture") }}';
+        $('#buyer-name').html(data['name']);
+        $('#buyer-nick-name').html(data['nick_name']);
+        $('#buyer-phone').html(data['phone_number']);
+        $('#buyer-gender').html(data['gender']);
+        $('#buyer-age').html(data['age']);
+        $('#buyer-introduction').html(data['description']);
+        $('#buyer-image').html('<img src="'+ url + '/' + data['image'] + '" class="img-responsive eater-info-img">' );
+
+        /* eater info more and less text */
+        var showChar = 100;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        $('.more').each(function() {
+          var content = $(this).html();
+          if(content.length > showChar) {
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar-1, content.length - showChar);
+
+            var html = c + '<span class="moreelipses">'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
+
+
+            $(this).html(html);
+          }
+
+        });
+
+        $(".morelink").click(function(){
+          if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+          } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+          }
+          $(this).parent().prev().toggle();
+          $(this).prev().toggle();
+          return false;
+        });
+      }
+    });
+  }
 </script>
 @endsection
