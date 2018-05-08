@@ -104,9 +104,9 @@ class FoodController extends Controller
     {
         $deliverable_area = '';
 
-        /* getting all the active categories in ascending order */
+        /* getting all the active categories in descending order */
         $category_id = Category::where('status', 1)
-            ->orderBy('id', 'ASC')
+            ->orderBy('id', 'desc')
             ->pluck('category_name', 'category_id');
 
         /* get all list of active creators */
@@ -399,7 +399,7 @@ class FoodController extends Controller
 
         /* get all the active categories in ascending order */
         $category_id = Category::where('status', 1)
-            ->orderBy('id', 'ASC')
+            ->orderBy('id', 'desc')
             ->pluck('category_name', 'category_id');
 
         /* get all the active creators */

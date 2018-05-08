@@ -373,7 +373,7 @@
 	    $('.food-item-date').datetimepicker({
 	        // format: 'L'
 	        // AutoClose: false
-	        format: 'YYYY-MM-DD HH:mm:ss',
+	        format: 'YYYY-MM-DD HH:mm',
 	        locale: 'ja'
 
 	    });
