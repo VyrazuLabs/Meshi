@@ -11,11 +11,11 @@ class OrderController extends Controller
 {
     public function lists()
     {
-        $orders = Order::get();
+        $orders = Order::orderBy('date_of_delivery', 'DESC')->get();
         foreach ($orders as $key => $order) {
             $user = User::where('user_id', $order->ordered_by)->first();
             if (!empty($user)) {
-                $order->user_name = $user->name;
+                $order->eater_name = $user->name;
             }
             $food_item = FoodItem::where('food_item_id', $order->food_item_id)->first();
             if (!empty($food_item)) {

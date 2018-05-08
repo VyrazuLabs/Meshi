@@ -17,7 +17,7 @@ class FoodItemController extends Controller
     /* view of food item creation form */
     public function create()
     {
-        $category_id = Category::where('status', 1)->pluck('category_name', 'category_id');
+        $category_id = Category::where('status', 1)->orderBy('id', 'desc')->pluck('category_name', 'category_id');
         $offered_by = User::where('type', 1)->pluck('name', 'user_id');
         return view('food.create-food-item', ['form_type' => 'create', 'category_id' => $category_id, 'offered_by' => $offered_by]);
     }
@@ -245,7 +245,7 @@ class FoodItemController extends Controller
     {
         $food_images = '';
         $time_of_availability = '';
-        $category_id = Category::where('status', 1)->pluck('category_name', 'category_id');
+        $category_id = Category::where('status', 1)->orderBy('id', 'desc')->pluck('category_name', 'category_id');
         $offered_by = User::where('type', 1)->pluck('name', 'user_id');
         $food_items = FoodItem::where('food_item_id', $food_item_id)->first();
 
