@@ -465,6 +465,7 @@ iframe{
 /* start customer order details */
 .customer-delivertime{   
   margin-left: 16px;
+  line-height: 19px;
 }
 .paid-status{    
   border: 1px solid #f26522;    
@@ -610,12 +611,12 @@ so   it doesn’t make the test unnecessarily selective */
     margin-bottom: 20px;
   }
   .eater-info-img{    
-  margin: auto;    
-  align-items: center;    
-  border: 5px solid #f26522;    
-  border-radius: 50%;    
-  width: 7em;
-}
+    margin: auto;    
+    align-items: center;    
+    border: 5px solid #f26522;    
+    border-radius: 50%;    
+    width: 7em;
+  }
 .eater-info-body{    
   display: flex;
 }
@@ -712,7 +713,7 @@ so   it doesn’t make the test unnecessarily selective */
     width: 45em;
   }
   .cart-content-btn-div{
-    width: calc(100% - 50em);
+    /*width: calc(100% - 50em);*/
   }
   .feature-overlay{
     background-color: rgba(255, 255, 255, 0.4);

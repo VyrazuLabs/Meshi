@@ -127,6 +127,9 @@
           }
         });
       @endif
+
+
+
     </script>
     @yield('add-js')
   </body>

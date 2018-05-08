@@ -38,6 +38,9 @@ class OrderController extends Controller
      */
     public function purchasedList()
     {
+        /* getting the current time of japan */
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_date_time = strtotime(date("Y-m-d H:i:s"));
 
         //getting all the orders
         $orders = Order::where('status', 1)
@@ -47,6 +50,10 @@ class OrderController extends Controller
 
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
+
+                /* convert publication daterange in timestamps */
+                $dateEnd = strtotime($order->date_of_delivery . ' ' . $order->time);
+
                 $order->date = date('Y-m-d', strtotime($order->date_of_delivery));
                 $order->time = date('h:i a', strtotime($order->time));
 
@@ -68,13 +75,20 @@ class OrderController extends Controller
                 $review = EaterReview::where('order_id', $order->order_id)
                     ->where('reviewed_by', Auth::User()->user_id)->first();
                 if (!empty($review)) {
-                    $order->review_status = 1;
+                    $order->review_status = 1; // already reviewed
                 } else {
-                    $order->review_status = 0;
+                    $order->review_status = 0; // not yet reviewed
                 }
                 $creatorReview = CreatorReview::where('order_id', $order->order_id)->first();
                 if (!empty($creatorReview)) {
                     $order->creator_review = $creatorReview->communication_description;
+                }
+
+                /* set closed_order flag true if order is closed */
+                if ($jst_current_date_time > $dateEnd) {
+                    $order->closed_order = 1; //order is closed
+                } else {
+                    $order->closed_order = 0; //available
                 }
             }
         }
@@ -108,6 +122,12 @@ class OrderController extends Controller
                 if (!empty($user)) {
                     $order->name = $user->name;
                     $order->nick_name = $user->nick_name;
+                }
+
+                /* getting the profile information of the buyer */
+                $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
+                if (!empty($profileDetails)) {
+                    $order->address = $profileDetails->address;
                 }
 
                 /* check for reviews */

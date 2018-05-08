@@ -166,8 +166,8 @@
           <p class="eater-info-text">{{ trans('app.Gender') }} :<span class="mr-3" id="buyer-gender"></span> </p>
           <p class="eater-info-text">{{ trans('app.Age') }} :<span class="mr-3" id="buyer-age"></span> </p>
 
-          <p class="eater-info-text less-text">
-            <span class="mr-3">{{ trans('app.Introduction') }} :</span><span class="comment more" id="buyer-introduction"></span>
+          <p class="eater-info-text less-text">{{ trans('app.Introduction') }} :
+            <span class="mr-3"></span><span class="comment more" id="buyer-introduction"></span>
           </p>
         </div>
       </div>
