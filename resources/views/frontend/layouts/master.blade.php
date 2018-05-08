@@ -224,8 +224,16 @@
         })
       });
 
-
-
+      /* highlight active menu */
+      $(document).ready(function() {
+        // get current URL path and assign 'active' class
+        var pathname = window.location;
+        var homeUrl = '{{ url("/") }}/';
+        if(pathname != homeUrl) {
+          $(".nav").find(".active").removeClass("active");
+          $('.nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+        }
+      });
 
     </script>
     @yield('add-js')
