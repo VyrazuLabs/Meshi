@@ -129,7 +129,7 @@
 								<!-- featured -->
 								<div class="col-md-4 col-lg-3">
 									<!-- featured -->
-									<div class="featured">
+									<div class="featured profile-featured">
 										<div class="featured-image">
 											@if($food->end_publication_date >= $currentDate)
 												<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
@@ -150,8 +150,13 @@
 										<!-- ad-info -->
 										<div class="ad-info">
 											<h3 class="item-price">&yen;{{$food->price}}</h3>
-											<h4 class="item-title">{{$food->item_name}}</h4>
-
+											<h4 class="item-title" title="@php echo $food->item_name; @endphp">
+											@if(strlen($food->item_name) > 30)
+												@php echo substr($food->item_name,0,30) @endphp ...
+											@else
+												{{$food->item_name}}
+											@endif
+											</h4>
 											<div class="item-cat">
 												<span>{{$food->category_name}}</span>
 											</div>
