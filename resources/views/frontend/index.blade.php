@@ -214,7 +214,7 @@
 
 
         <!-- gmap -->
-        <div id="road_map"></div>
+        <! -- <div id="road_map"></div> -->
     </section><!-- world-gmap -->
 @endsection
 
