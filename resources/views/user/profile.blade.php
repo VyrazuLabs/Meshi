@@ -150,7 +150,7 @@
 										<!-- ad-info -->
 										<div class="ad-info">
 											<h3 class="item-price">&yen;{{$food->price}}</h3>
-											<h4 class="item-title">@php mb_substr($food->item_name,5,1); @endphp</h4>
+											<h4 class="item-title">{{$food->item_name}}</h4>
 
 											<div class="item-cat">
 												<span>{{$food->category_name}}</span>

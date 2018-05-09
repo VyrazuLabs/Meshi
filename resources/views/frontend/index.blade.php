@@ -91,7 +91,7 @@
                                             @endif
                                         </a>
                                         <!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-                                        <a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
+                                        <a href="{{route('profile_details',['user_id' => $food->offered_by])}}" class="featured-over-person-link">
                                             <div class="feature-over-person">
                                                 @if(!empty($food->image))
                                                     <img src="{{url('/uploads/profile/picture/'.$food->image)}}"
@@ -150,7 +150,7 @@
                     <div class="row">
                     @foreach($closed_food_items as $food)
                         <!-- featured -->
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-4 col-lg-3" style="display: flex;">
                                 <!-- featured -->
                                 <div class="featured">
                                     <div class="featured-image">
@@ -168,7 +168,7 @@
                                             @endif
                                         </a>
                                         <!-- <a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a> -->
-                                        <a href="{{route('profile_details',['user_id' => $food->offered_by])}}">
+                                        <a href="{{route('profile_details',['user_id' => $food->offered_by])}}" class="featured-over-person-link">
                                             <div class="feature-over-person">
                                                 @if(!empty($food->image))
                                                     <img src="{{url('/uploads/profile/picture/'.$food->image)}}"
@@ -192,6 +192,8 @@
 
 
                                 </div><!-- featured -->
+                                <div class="feature-overlay feature-overlay-over-image">
+                                </div>
                             </div><!-- featured -->
                         @endforeach
                     </div><!-- row -->
