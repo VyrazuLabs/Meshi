@@ -777,3 +777,13 @@ so   it doesn’t make the test unnecessarily selective */
   .profile-deliverable-area{
       padding: 26px 0;
   }
+  .details-sold-out-btn{
+    background-color: #f7f7f7 !important;
+    border: 1px solid #a1a1a1 !important;
+    color: #a1a1a1 !important;
+  }
+  .details-sold-out-btn:hover,
+  .details-sold-out-btn:focus{
+    color: #000 !important;
+    cursor: not-allowed;
+  }

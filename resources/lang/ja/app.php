@@ -174,5 +174,6 @@ return [
     'Eater Info' => '食べる 情報',
     'Gender' => '性別',
     'Years' => '年',
+    'Sold Out' => '完売',
 
 ];
