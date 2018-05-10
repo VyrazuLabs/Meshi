@@ -231,7 +231,7 @@
 					</div>
 					<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
 						<p class="text-left">
-							{{$user->profile_message}}
+							@php echo nl2br($user->profile_message); @endphp
 						</p>
 					</div>
 				</div>
