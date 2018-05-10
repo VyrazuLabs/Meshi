@@ -774,3 +774,6 @@ so   it doesn’t make the test unnecessarily selective */
   .featured-overlay{
     opacity: 0.4;
   }
+  .profile-deliverable-area{
+      padding: 26px 0;
+  }

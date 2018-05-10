@@ -99,7 +99,7 @@
 								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
 							</div> -->
 							<div class="col-md-8 col-md-offset-2">
-								<p><strong>{{ trans('app.Deliverable Area') }} :</strong>
+								<p class="mb-0 profile-deliverable-area"><strong>{{ trans('app.Deliverable Area') }} :</strong>
 									<span>
 										{{$user->deliverable_area}}
 									</span>
