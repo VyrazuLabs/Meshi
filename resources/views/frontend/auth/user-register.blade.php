@@ -423,10 +423,7 @@
 				                	<div class="form-group form-custom-group profile-edit-field">
 				                @endif
 				                  	<label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
-									<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。
-										シェアメシTOP画面の地図への表示の際には、位置情報は域内でランダムに表示され、住所が特定されることはございませんのでご安心ください。<br/>
-										※ 地図にご登録頂いた写真が表示されるまでには少し時間をいただいております。
-									</p>
+									<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。</p>
 									@if ( $form_type == 'edit' )
 										@if( !empty($user->image) )
 											<div class="" style="width: 100px;float: right;">
@@ -466,10 +463,7 @@
 					            	<div class="form-group form-custom-group profile-edit-field item form-group position-relatv">
 					            @endif
 							            <label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
-										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。
-											シェアメシTOP画面の地図への表示の際には、位置情報は域内でランダムに表示され、住所が特定されることはございませんのでご安心ください。<br/>
-											※ 地図にご登録頂いた写真が表示されるまでには少し時間をいただいております。
-										</p>
+										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。</p>
 		                      			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
 				                       	<div class="" id="defaultUploadImage" style="">
 				                        	<div class="col-md-12 p-0">
