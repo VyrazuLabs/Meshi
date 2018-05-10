@@ -191,11 +191,11 @@
                                     <div class="ad-info">
                                         <h3 class="item-price">&yen;{{$food->price}}</h3>
                                         <h4 class="item-title" title="@php echo $food->item_name; @endphp">
-                                        @if(strlen($food->item_name) > 30)
-                                            @php echo substr($food->item_name,0,30) @endphp ...
-                                        @else
-                                            {{$food->item_name}}
-                                        @endif
+                                            @if(mb_strlen($food->item_name) > 50)
+                                                @php echo mb_substr($food->item_name, 0, 50, "UTF-8") @endphp ...
+                                            @else
+                                                {{ $food->item_name }}
+                                            @endif
                                         </h4>
                                         <div class="item-cat">
                                             <span>{{$food->category_name}}</span>
