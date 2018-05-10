@@ -45,33 +45,39 @@
 										<div class="cart-content-details">
 											<h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
 											<h4 class="t-orange">Price ¥{{$order->total_price}}</h4>
-											<p>
-												<span>
+											<div class="d-inline-block">
+												<p>
 													<strong class="t-black">Order Date:
 													</strong> {{$order->date}}
-												</span>
-												<span class="customer-delivertime">
+												</p>
+												<p>
+													<strong class="t-black">Status:</strong>
+													@if($order->status == 1)
+														Paid
+													@endif
+												</p>
+											</div>
+											<div class="d-inline-block">
+												<p class="customer-delivertime">
 													<strong class="t-black">Delivery Time:
 													</strong> {{$order->time}}
-												</span>
-											</p>
-											<h5>
-												<strong class="t-black">Status:</strong>
-												@if($order->status == 1)
-													Paid
-												@endif
-											</h5>
+												</p>
+												<p class="customer-delivertime">
+													<strong class="t-black">Nickname:</strong>
+													<a href="{{route('profile_details',['user_id' => $order->offered_by])}}">{{$order->nick_name}}</a>
+												</p>
+											</div>
 										</div>
-										<div class="cart-content-btn-div">
-											<h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
+										<div class="cart-content-btn-div ">
+
 											<div class="review-group text-center">
-												@if($order->status == 1)
-													<span class="paid-status">
-														Paid
-													</span>
-												@endif
-												@if($order->review_status != 1)
-													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
+											@if($order->creator_review)
+												<a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodCreatorReviewModal" data-attr="{{ $order->order_id }}" onclick="showCreatorReview(this)">See Creator's Review</a>
+											@endif
+												@if($order->review_status == 0 && $order->closed_order == 1)
+													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
+												@elseif($order->review_status == 1)
+													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">Reviewed</button>
 												@endif
 											</div>
 										</div>
@@ -97,7 +103,8 @@
 
 @section('add-js')
 <script type="text/javascript">
-	var currentTab = 0; // Current tab is set to be the first tab (0)
+
+var currentTab = 0; // Current tab is set to be the first tab (0)
 	showTab(currentTab); // Display the crurrent tab
 
 	function showTab(n) {
@@ -173,11 +180,32 @@
 	  x[n].className += " active";
 	}
 
-
 	function reviewFood(orderId) {
 		var orderId = $(orderId).data('attr');
 		$('#orderID').val(orderId);
 	}
+
+	/* for showing creator review */
+	function showCreatorReview(orderId) {
+		var orderId = $(orderId).data('attr');
+		$.ajax({
+          	headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            data: JSON.stringify({order_id : orderId}),
+            type: 'POST',
+            url: "{{ url('/user/show-creator-review') }}",
+            contentType: "application/json",
+            processData: false,
+          	success:function(data) {
+            	data = jQuery.parseJSON(data);
+	            $('#creator-review-description').html(data['review']);
+        		$('#creator-name').html(data['name']);
+
+        	}
+      	});
+	}
+
+
+
 
 
 </script>

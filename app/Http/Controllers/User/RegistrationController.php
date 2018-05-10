@@ -27,6 +27,8 @@ class RegistrationController extends Controller
         $profileImageValidator = $this->profileImageValidator($file);
         $coverImageValidator = $this->coverImageValidator($file);
 
+        $document = '';
+
         if (isset($input['deliverable_area'])) {
             $deliverableArea = $input['deliverable_area'];
         } else {
@@ -127,33 +129,52 @@ class RegistrationController extends Controller
                     'deliverable_area' => $deliverableArea,
                 ]);
 
-                /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
-                if (!empty($file['image'])) {
-                    $profileImageValidator = $this->profileImageValidator($file);
-                    if ($profileImageValidator->fails()) {
-                        $errors = $profileImageValidator->errors();
+                /****************crop image functionality starts****************/
+                if (isset($input['profile_image']) && !empty($input['profile_image'])) {
+                    //get the base64 value in a variable
+                    $data = $input['profile_image'];
+                    list($t, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
+                    $_img = base64_decode($data);
 
-                        //WHEN PROFILE PICTURE IS MISSING
-                        if ($errors->first('image')) {
-                            if (!empty($profile->image)) {
-                                $input['image'] = $profile->image;
-                            }
-                        } else {
-                            $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
-                            $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
-                        }
-                        //CHECK VALIDATION AGAIN
-                        $profileImageValidator = $this->profileImageValidator($input);
-                        if ($profileImageValidator->fails()) {
-                            return redirect()->back();
-                        }
-                    } else {
-                        $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
-                        $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
-                    }
-                    $profile->update(
-                        array('image' => $profile_image));
+                    $profile_image = 'user_picture' . time() . ".jpeg";
+                    file_put_contents(public_path() . '/uploads/profile/picture/' . $profile_image, $_img);
                 }
+                if (!empty($profile_image)) {
+                    if (!empty($profile->image) && file_exists(public_path() . '/uploads/profile/picture/' . "/" . $profile->image)) {
+                        unlink(public_path() . '/uploads/profile/picture/' . "/" . $profile->image);
+                    }
+                    $profile->update(["image" => $profile_image]);
+                }
+                /****************crop image functionality ends*********************/
+
+                /***** CHECK VALIDATION FOR PROFILE PICTURE *****/
+                // if (!empty($file['image'])) {
+                //     $profileImageValidator = $this->profileImageValidator($file);
+                //     if ($profileImageValidator->fails()) {
+                //         $errors = $profileImageValidator->errors();
+
+                //         //WHEN PROFILE PICTURE IS MISSING
+                //         if ($errors->first('image')) {
+                //             if (!empty($profile->image)) {
+                //                 $input['image'] = $profile->image;
+                //             }
+                //         } else {
+                //             $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
+                //             $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
+                //         }
+                //         //CHECK VALIDATION AGAIN
+                //         $profileImageValidator = $this->profileImageValidator($input);
+                //         if ($profileImageValidator->fails()) {
+                //             return redirect()->back();
+                //         }
+                //     } else {
+                //         $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
+                //         $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
+                //     }
+                //     $profile->update(
+                //         array('image' => $profile_image));
+                // }
 
                 /***** CHECK VALIDATION FOR COVER PICTURE *****/
                 if (!empty($file['cover_image'])) {
@@ -186,14 +207,27 @@ class RegistrationController extends Controller
                 return back();
             }
         } else {
-            if ($validator->fails() || $profileImageValidator->fails()) {
-                $validator->messages()->merge($profileImageValidator->messages());
+            if ($validator->fails()) {
+                // $validator->messages()->merge($profileImageValidator->messages());
                 Session::flash('error', trans('validation.form_error'));
                 return redirect()->back()->withErrors($validator)->withInput();
             } else {
 
-                $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
-                $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
+                // $profile_image = 'user_picture' . time() . "." . $file['image']->getClientOriginalExtension();
+                // $file['image']->move(public_path() . '/uploads/profile/picture/', $profile_image);
+
+                /****************crop image functionality starts****************/
+                if (isset($input['profile_image']) && !empty($input['profile_image'])) {
+                    //get the base64 value in a variable
+                    $data = $input['profile_image'];
+                    list($t, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
+                    $_img = base64_decode($data);
+
+                    $profile_image = 'user_picture' . time() . ".jpeg";
+                    file_put_contents(public_path() . '/uploads/profile/picture/' . $profile_image, $_img);
+                }
+                /****************crop image functionality ends****************/
 
                 /* Create lat long from given address */
                 $address = stripslashes($input['address']); //Address
@@ -252,10 +286,8 @@ class RegistrationController extends Controller
                     'video_link' => $input['video_link'],
                     'city' => $city_name,
                     'deliverable_area' => $deliverableArea,
-
                 ]);
                 Session::flash('success', "User registered successfully");
-
                 if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
                     return redirect('/');
                 }
@@ -283,6 +315,7 @@ class RegistrationController extends Controller
             'municipality' => 'required',
             'gender' => 'required',
             'profession' => 'required',
+            'profile_image' => 'required',
             'reason_for_registration_edit' => 'required',
         ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
     }
@@ -319,7 +352,7 @@ class RegistrationController extends Controller
     protected function profileImageValidator($request)
     {
         return Validator::make($request, [
-            'image' => 'required|mimes:jpeg,png,jpg',
+            'profile_image' => 'required|mimes:jpeg,png,jpg',
         ]);
     }
 

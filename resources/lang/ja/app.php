@@ -169,5 +169,14 @@ return [
     'Today' => '今日',
     'Purchased List' => '購入したリスト',
     'Order List' => 'オーダーリスト',
+    'Available List' => '利用可能なリスト',
+    'Closed Orders' => 'クローズドオーダー',
+    'Eater Info' => '食べる 情報',
+    'Gender' => '性別',
+    'Years' => '年',
+    'Sold Out' => '完売',
+    'male' => '男性',
+    'female' => '女性',
+    'other' => 'その他',
 
 ];

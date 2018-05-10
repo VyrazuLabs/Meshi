@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-	<!-- Your Stylesheets, Scripts & Title
+  <!-- Your Stylesheets, Scripts & Title
     ============================================= -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,24 +23,28 @@
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K3JV9SN');</script>
+        })(window,document,'script','dataLayer','GTM-K3JV9SN');
+    </script>
     <!-- End Google Tag Manager -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3JV9SN"
+                      height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     @include('frontend.layouts.header')
     @yield('content')
     @include('frontend.layouts.footer')
     @include('frontend.layouts.modal')
-	<!-- JS -->
+  <!-- JS -->
     <script src="{{ url('frontend/js/jquery.min.js') }}"></script>
     <script src="{{ url('frontend/js/modernizr.min.js') }}"></script>
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
-	  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
     @php
       $langName =[];
       if(Session::has('lang_name')) {
@@ -54,8 +58,8 @@
     @else
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38&libraries=places&language=ja"></script>
     @endif
-	  <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
-	  <script src="{{ url('frontend/js/goMap.js') }}"></script>
+    <script src="{{ url('frontend/js/gmaps.min.js') }}"></script>
+    <script src="{{ url('frontend/js/goMap.js') }}"></script>
 
     <script src="{{ url('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('frontend/js/smoothscroll.min.js') }}"></script>
@@ -63,22 +67,23 @@
     <script src="{{ url('frontend/js/price-range.js') }}"></script>
     <script src="{{ url('frontend/js/jquery.countdown.js') }}"></script>
     <script src="{{ url('frontend/js/custom.js') }}"></script>
-	   <script src="{{ url('frontend/js/switcher.js') }}"></script>
+     <script src="{{ url('frontend/js/switcher.js') }}"></script>
     <!-- daterangepicker -->
-    <script src="{{ url('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ url('bower_components/moment/moment-with-locales.js') }}"></script>
+    <script src="{{ url('frontend/moment/min/moment.min.js') }}"></script>
+    <script src="{{ url('frontend/moment/moment-with-locales.js') }}"></script>
 
-    <script src="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- datepicker -->
-    <script src="{{ url('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ url('frontend/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- timepicker -->
-    <script src="{{ url('bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+    <script src="{{ url('frontend/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
     <!-- bootstrap datetimepicker -->
     <script src="{{ url('frontend/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- sweetalert -->
     <script src="{{ url('/js/sweetalert.min.js') }}"></script>
     <!-- PNOTIFY js -->
     <script type="text/javascript" src="{{ url('js/pnotify.custom.min.js') }}"></script>
+
     <!-- <script type="text/javascript">
 
     For language translate
@@ -122,6 +127,11 @@
         });
       })
 
+      /**
+       * [give reviews as eater]
+       * @param  {[type]} qualityRating [description]
+       * @return {[type]}               [description]
+       */
       function rateQuality(qualityRating) {
         var qualityRating = qualityRating.getAttribute("data-id");
         $('#qualityRatingId').val(qualityRating);
@@ -137,13 +147,8 @@
         $('#communicationRatingId').val(communicationRating);
       }
 
-
       $('.store-reviews').click(function() {
         var form_data = new FormData($("#eaterReviewForm")[0]);
-        saveEaterReviews(form_data);
-      });
-
-      function saveEaterReviews(form_data) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
           data: form_data,
@@ -152,16 +157,39 @@
           contentType: false,
           processData: false,
           success: function(result) {
-            location.reload();
+            var obj = $.parseJSON(result);
+            if(obj.success == 0 ) {
+              if(obj.error.quality_ratings || obj.error.delivery_ratings || obj.error.communication_ratings ){
+                new PNotify({
+                  title: 'Error',
+                  text: 'Ratings fields are required',
+                  type: 'error',
+                  buttons: {
+                    sticker: false
+                  }
+                });
+              }
+              if(obj.error.review_description) {
+                $('.eater_reviews').addClass('review-error');
+              }
+            }
+            else if(obj.success == 1) {
+              location.reload();
+            }
           }
-        });
-      }
+        })
+      });
 
+
+      /**
+       * [give reviews as creator]
+       * @param  {[type]} communicationRating [description]
+       * @return {[type]}                     [description]
+       */
       function rateEaterCommunication(communicationRating) {
         var communicationRating = communicationRating.getAttribute("data-id");
         $('#creatorCommunicationRatingId').val(communicationRating);
       }
-
 
       $('.creator-communication').click(function() {
         var creator_review_form_data = new FormData($("#creatorReviewForm")[0]);
@@ -174,8 +202,20 @@
           processData: false,
           success: function(result) {
             var obj = $.parseJSON(result);
-            if(obj.success == 0) {
-              $('.communication_details').addClass('review-error');
+            if(obj.success == 0 ) {
+              if(obj.error.communication_ratings){
+                new PNotify({
+                  title: 'Error',
+                  text: 'Rating field is required',
+                  type: 'error',
+                  buttons: {
+                    sticker: false
+                  }
+                });
+              }
+              if(obj.error.communication_description) {
+                $('.communication_details').addClass('review-error');
+              }
             }
             else if(obj.success == 1) {
               location.reload();
@@ -184,6 +224,16 @@
         })
       });
 
+      /* highlight active menu */
+      $(document).ready(function() {
+        // get current URL path and assign 'active' class
+        var pathname = window.location;
+        var homeUrl = '{{ url("/") }}/';
+        if(pathname != homeUrl) {
+          $(".nav").find(".active").removeClass("active");
+          $('.nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+        }
+      });
 
     </script>
     @yield('add-js')

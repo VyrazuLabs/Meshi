@@ -12,7 +12,7 @@
 	<section id="" class="clearfix user-page">
 		<div class="container">
 			<div class="row text-center">
-				<!-- user-login -->			
+				<!-- user-login -->
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card">
 					@if($form_type == 'edit')
@@ -21,15 +21,15 @@
 						<h2>{{ trans('app.Food Register') }}</h2>
 					@endif
 						<!-- form -->
-						
+
 						{!! Form::open(array('url' => route('save_food_item_user'),'files' => true)) !!}
 		            	@if(!empty($food_items))
 		                	{{ Form::model($food_items) }}
 		              	@endif
 		                {{Form::hidden('food_item_id',null)}}
 
-		                @php 
-                			$selectPlaceholder = trans('app.Please Select'); 
+		                @php
+                			$selectPlaceholder = trans('app.Please Select');
                 		@endphp
               	<div class="box-body">
 	                <div class="form-group form-custom-group">
@@ -44,7 +44,7 @@
 
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.FoodName') }}<span>*</span></label>
-						{!! Form::text('item_name', null, 
+						{!! Form::text('item_name', null,
 						    array(
 						          'class'=>'form-control')) !!}
 						@if ($errors->has('item_name'))
@@ -55,7 +55,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.FoodDescription') }}<span>*</span></label>
-	                  	{!! Form::textarea('food_description', null, 
+	                  	{!! Form::textarea('food_description', null,
 	                          array('class'=>'form-control','rows'=>'4')) !!}
 	                  	@if ($errors->has('food_description'))
 	                    	<span class="help-block">
@@ -65,7 +65,7 @@
 	                </div>
 	               <!--  <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Short Info') }}<span>*</span></label>
-	                  	{!! Form::textarea('short_info', null, 
+	                  	{!! Form::textarea('short_info', null,
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                  	@if ($errors->has('short_info'))
 	                    	<span class="help-block">
@@ -82,7 +82,7 @@
 		                        @foreach( $food_images as $images )
 		                          <li  class="gallery-images" style="float: left; list-style: none; margin: 6px;">
 		                          <a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}">X</a>
-		                          
+
 		                          <img src="{{ url('/uploads/food/'.$images) }}" style="width: 62px; height: 42px;margin-top: 6px;" />
 		                          </li>
 		                        @endforeach
@@ -107,7 +107,7 @@
 		            </div>
 		            <div class="form-group form-custom-group deliverable-area">
                   		<label>{{ trans('app.Deliverable Area') }}</label>
-                  		{!! Form::text('deliverable_area', $deliverable_area, 
+                  		{!! Form::text('deliverable_area', $deliverable_area,
                           array('class'=>'form-control')) !!}
                 	</div>
 		            <div class="col-sm-12 col-md-12 col-xs-12 p-0 input_fields_wrap">
@@ -154,10 +154,10 @@
 	                	@endif
 	              	</div>
               		<div class="clearfix"></div>
-	                
+
 	          <!--       <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Shipping Fee') }}</label>
-						{!! Form::text('shipping_fee', null, 
+						{!! Form::text('shipping_fee', null,
 						    array(
 						          'class'=>'form-control')) !!}
 						@if ($errors->has('shipping_fee'))
@@ -168,9 +168,9 @@
 	                </div> -->
 	                <div class="form-group form-custom-group">
 	                  	<label>{{ trans('app.Price') }} <span>*</span></label>
-						{!! Form::text('price', null, 
+						{!! Form::text('price', null,
 						    array(
-						          'class'=>'form-control', 
+						          'class'=>'form-control',
 						          'id' => 'priceId')) !!}
 						@if ($errors->has('price'))
 						  	<span class="help-block">
@@ -184,7 +184,7 @@
                   			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
                       			<label>Start Publication Date<span>*</span></label>
                       			<!-- <input type="text" class="form-control food-item-date" name=""> -->
-                      			{!! Form::text('start_publication_date', null, 
+                      			{!! Form::text('start_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
                     		</div>
@@ -193,7 +193,7 @@
 		                      <label>End Publication Date<span>*</span></label>
 		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
 		                      <!-- <input type="text" class="form-control food-item-date"> -->
-		                      {!! Form::text('end_publication_date', null, 
+		                      {!! Form::text('end_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
 		                    </div>
@@ -218,7 +218,7 @@
 	                    		<div class="add-tag">
 			                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pl-0 create-tax-name" >
 			                       	 	<label>Tax Name</label>
-			                        	{!! Form::text('tax[0][tax_name][]', null, 
+			                        	{!! Form::text('tax[0][tax_name][]', null,
 							    						array('class'=>'form-control')) !!}
 			                      	</div>
 			                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 p-0" >
@@ -241,7 +241,7 @@
 	                  		<div class="add-tag">
 	                    		<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 pl-0 create-tax-name" >
 		                       	 	<label>Tax Name</label>
-		                        	{!! Form::text('tax[0][tax_name][]', null, 
+		                        	{!! Form::text('tax[0][tax_name][]', null,
 						    						array('class'=>'form-control',)) !!}
 			                    </div>
 		                      	<div class="form-group form-custom-group col-sm-12 col-md-4 col-xs-12 p-0" >
@@ -268,15 +268,15 @@
             {!! Form::close() !!}
 					</div>
 					<!-- <a href="#" class="btn-primary">Create a New Account</a> -->
-				</div><!-- user-login -->			
-			</div><!-- row -->	
+				</div><!-- user-login -->
+			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- signin-page -->
 @endsection
 
-@section('add-js')	
+@section('add-js')
 <script type="text/javascript">
-	
+
 	//Date picker
   	$('#datePicker').datepicker({
     	format: 'yyyy-mm-dd',
@@ -295,7 +295,7 @@
     	return false;
   	});
 
-	
+
 
 
 	// append time slots starts here
@@ -373,7 +373,7 @@
 	    $('.food-item-date').datetimepicker({
 	        // format: 'L'
 	        // AutoClose: false
-	        format: 'YYYY-MM-DD HH:mm:ss',
+	        format: 'YYYY-MM-DD HH:mm',
 	        locale: 'ja'
 
 	    });

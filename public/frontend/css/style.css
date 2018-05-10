@@ -7,6 +7,9 @@
 .m-auto{
   margin: auto;
 }
+.m-0{
+  margin: 0!important;
+}
 .t-black{
 	color: #000;
 }
@@ -17,7 +20,7 @@
   color: #fff;
 }
 .p-0{
-	padding: 0;
+  padding: 0 !important;
 }
 .pr-0{
   padding-right: 0;
@@ -44,9 +47,14 @@
   background-color: #f26522;
 }
 .feature-over-person{
-    position: absolute;
+    /*position: absolute;
     top: -8%;
-    left: -5%;
+    left: -5%;*/
+}
+.featured-over-person-link{
+  position: absolute;
+  top: -15px;
+  left: -15px;
 }
 .feature-over-person img{
 	border-radius: 50%;
@@ -90,10 +98,7 @@
     font-size: 39px;
     font-weight: 400;
 }
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-}
+
 .rating > span {
   display: inline-block;
   position: relative;
@@ -325,11 +330,12 @@ iframe{
   flex-flow: row wrap;
 }
 .cart-content{ 
- display: flex;  
- justify-content: space-between;  
- flex-wrap: wrap;  
- width: calc(100% - 120px);  
- padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: calc(100% - 120px);
+  padding-left: 20px;
+  align-items: flex-end;
 }
 .cart-img{  
   height: 100%; 
@@ -464,6 +470,7 @@ iframe{
 /* start customer order details */
 .customer-delivertime{   
   margin-left: 16px;
+  line-height: 19px;
 }
 .paid-status{    
   border: 1px solid #f26522;    
@@ -493,26 +500,6 @@ body.modal-open{
 .tab {    
   display: none;
 }
-.next-btn{    
-  position: absolute;    
-  top: 50%;    
-  right: -6%;    
-  border-radius: 50%;    
-  height: 60px;    
-  width: 60px;    
-  padding: 0;    
-  color: #fff;
-}
-.prev-btn{    
-  position: absolute;    
-  top: 50%;    
-  left: -6%;    
-  border-radius: 50%;    
-  height: 60px;    
-  width: 60px;    
-  padding: 0;    
-  color: #fff;
-  }
 .customer-review-body{    
   padding: 43px 48px;
 }
@@ -527,18 +514,25 @@ so   it doesn’t make the test unnecessarily selective */
   clip:rect(0,0,0,0);
 }
 .rating:not(:checked) > label {    
-  float:right;    
-  width:1em;    
-  padding:0 .1em;    
-  overflow:hidden;    
-  white-space:nowrap;    
-  cursor:pointer;    
-  font-size:200%;    
-  line-height:1.2;    
-  color:#ddd;
+  float: right;    
+  width: 1em;    
+  padding: 0 0.08em;    
+  overflow: hidden;    
+  white-space: nowrap;    
+  cursor: pointer;    
+  font-size: 23px;    
+  /* line-height: 1.2; */    
+  color: #ddd;    
+  margin-right: 9px;
 }
 .rating:not(:checked) > label:before {    
-  content: '★ ';
+  content: "\f006";    
+  font-family: FontAwesome;
+}
+.rating > input:checked ~ label:before{    
+  content: "\f005";    
+  font-family: FontAwesome;     
+  color: #f70;
 }
 .rating > input:checked ~ label {    
   color: #f70;
@@ -610,7 +604,189 @@ so   it doesn’t make the test unnecessarily selective */
   .cart-box:last-child{    
     border-bottom: none;
   }
+  .review-text-div{    
+    display: flex;    
+    justify-content: space-between;    
+    align-items: center;
+  }
+  .review-text{    
+    font-size: 17px;
+  }
+  .eater-review-box{    
+    margin-bottom: 20px;
+  }
+  .eater-info-img{    
+    margin: auto;    
+    align-items: center;    
+    border: 5px solid #f26522;    
+    border-radius: 50%;    
+    width: 7em;
+  }
+.eater-info-body{    
+  display: flex;
+}
+.eater-info-img-div{    
+  width: 15em;
+}
+.eater-info-description-div{    
+  width: calc(100% - 6em);
+}
+.eater-info-text{    
+  font-size: 15px;    
+  margin-bottom: 16px;
+}
+.eater-info-text span{    
+  font-weight: 500;
+}
+.morecontent span {    
+  display: none;
+}
+.morelink:hover{
+  color: #ccc;
+}
+.morelink:focus{
+  color: #f26522;
+}
+.comment{
+  font-weight: 400 !important;
+}
+.morecontent span{
+  font-weight: 400 !important;
+}
+  .eater-review-group{    
+    margin-bottom: 25px;
+  }
+  .customer-review-body{    
+    padding: 43px 43px;
+  }
+  .parchesed-review-btn{
+    background-color: #f7f7f7;
+    border: 1px solid #a1a1a1;
+    color: #a1a1a1;
+  }
+  .parchesed-review-btn:hover,
+  .parchesed-review-btn:focus{
+    color: #000 !important;
+    cursor: not-allowed;
+  }
+  .creator-review-btn{
+    min-width: 88px;
+    margin-left: 0;
+    padding: 6px 12px;
+  }
   .creator-review-btn:hover,
   .creator-review-btn:focus{    
     color: #fff;
+  }
+  #closeCrop{
+    display: none;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 15px;
+    margin-top: 0;
+  }
+  #imgCrop{
+    float: right;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+  #profile-img{
+    width: 100px;
+  }
+  .preview-step1{
+    margin-bottom: 20px;
+  }
+  .pagination>li>span{  
+    color: #9a9a9a;  
+    font-size: 14px;  
+    font-weight: 700;  
+    background-color: #e7e8e9;  
+    margin: 3px;  
+    border: 1px solid #e2e3e3;  
+    border-radius: 5px;
+  }
+  .pagination>.active>span, 
+  .pagination>.active>span:focus, 
+  .pagination>.active>span:hover{    
+    background-color: #f26522;    
+    border-color: #f26522;
+  }
+  .purchased-pagination{
+    margin: 20px 0;
+  }
+  .cart-content-details{
+    width: 45em;
+  }
+  .cart-content-btn-div{
+    /*width: calc(100% - 50em);*/
+  }
+  .food-creator-review-text{  
+    margin-right: 12px;  
+    font-weight: 500;
+  }
+  .foodcreator-review-modal-body{  
+    padding: 2.0em 2.14em;
+  }
+  .foodcreator-review-title{  
+    margin-bottom: 5px;  
+    font-weight: 500;
+  }
+  #FoodCreatorReviewModal .modal-content{  
+    border-radius: 12px;
+  }
+  .review-content-btn-div{
+    width: calc(100% - 62em);
+  }
+  .feature-overlay-over-image{
+    top: -16px;
+  }
+  .ad-info .item-title.text-wrappings::before{  
+    content: '...';  
+    position: absolute;  
+    right: 22px;  
+    bottom: 0;
+  }
+  .ad-info .item-title.text-wrappings{  
+    overflow: hidden;  
+    position: relative;  
+    line-height: 1.2em;  
+    max-height: 3.6em;  
+    text-align: center;  
+    margin-right: -1em;  
+    padding-right: 0;
+  }
+  .ad-info .item-title.text-wrappings::after{  
+    content: '';  
+    position: absolute;  
+    right: 0;  
+    width: 1em;  
+    height: 1em;  
+    margin-top: 0.2em;
+  }
+  .profile-featured {
+    position: relative;
+    height: 371px;
+    max-height: 371px;
+  }
+  .profile-featured .ad-meta{
+    position: absolute;
+  }
+  .featured-overlay{
+    opacity: 0.4;
+  }
+  .profile-deliverable-area{
+      padding: 26px 0;
+  }
+  .details-sold-out-btn{
+    background-color: #f7f7f7 !important;
+    border: 1px solid #a1a1a1 !important;
+    color: #a1a1a1 !important;
+  }
+  .details-sold-out-btn:hover,
+  .details-sold-out-btn:focus{
+    color: #000 !important;
+    cursor: not-allowed;
+  }
+  .profile-review-heading{
+    margin-bottom: 1.2em;
   }
