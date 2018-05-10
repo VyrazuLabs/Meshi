@@ -8,6 +8,7 @@ use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
 use App\Models\User;
 use Auth;
+use Session;
 
 class ProfileController extends Controller
 {
@@ -93,7 +94,16 @@ class ProfileController extends Controller
                 ->get();
 
             /* array of age range */
-            $ageRangeArray = array("10's" => "10", "20's" => "20", "Thirties" => "30", "Forties" => "40", "Fifties" => "50", "60's" => "60", "70's" => "70", "60's" => "60", "80's" => "80");
+            $langName = [];
+            if (Session::has('lang_name')) {
+                $langName = Session::get('lang_name');
+            }
+
+            if ($langName == 'en') {
+                $ageRangeArray = array("10's" => "10", "20's" => "20", "Thirties" => "30", "Forties" => "40", "Fifties" => "50", "60's" => "60", "70's" => "70", "60's" => "60", "80's" => "80");
+            } else {
+                $ageRangeArray = array("10代" => "10", "20代" => "20", "30代" => "30", "フォーティズ" => "40", "五十代" => "50", "60年代" => "60", "70年代" => "70", "80年代" => "80");
+            }
 
             foreach ($eater_reviews as $key => $review) {
                 $eater = User::where('user_id', $review->reviewed_by)->first();

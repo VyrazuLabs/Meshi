@@ -185,5 +185,8 @@ return [
     'Gender' => 'Gender',
     'Years' => 'Years',
     'Sold Out' => 'Sold Out',
+    'male' => 'male',
+    'female' => 'female',
+    'other' => 'other',
 
 ];

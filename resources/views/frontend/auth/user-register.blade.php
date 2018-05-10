@@ -51,6 +51,9 @@
 			                	$profession_other = trans('app.profession_other');
 			                	$type_messiator = trans('app.type_messiator');
 			                	$type_mesh_creator = trans('app.type_mesh_creator');
+			                	$gender_male = trans('app.male');
+			                	$gender_female = trans('app.female');
+			                	$gender_other = trans('app.other');
 			                @endphp
 			              	<div class="box-body">
 
@@ -260,7 +263,6 @@
 			                       	</div>
 				                </div>
 
-
 				                <input type="hidden" id="creatorDescriptionID" value="・自己紹介
 はじめまして、大田区西馬込に住む主婦です趣味の料理をいかして、地域の方と仲良くなりたいと思い、シェアメシに登録しました^ ^
 ・得意な料理
@@ -365,7 +367,7 @@
 				                </div>
 				                <div class="form-group form-custom-group">
 				                  	<label>{{ trans('app.sex') }}<span>*</span></label>
-				                    {{ Form::select('gender', ['male' => $male_sex, 'female' => $female_sex, 'other' => $other_sex], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12']) }}
+				                    {{ Form::select('gender', [$gender_female => $male_sex, $gender_female => $female_sex, $gender_other => $other_sex], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12']) }}
 									@if ($errors->has('gender'))
 										<span class="help-block">
 										  <strong class="strong t-red">{{ $errors->first('gender') }}</strong>

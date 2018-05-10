@@ -201,7 +201,7 @@
 								</div>
 							</div>
 							<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
-								<p class="mb-0 text-left t-black">Age: {{$review-> age}}, {{$review-> gender}}</p>
+								<p class="mb-0 text-left t-black">{{ trans('app.Age') }}: {{$review-> age}}, {{$review-> gender}}</p>
 							</div>
 							<p class="text-left">
 								{{$review->review_description}}
