@@ -55,7 +55,7 @@
 
 
 								<p class="profile-title profile-head-title">
-									<span style="font-size: 14px;">{{ trans('app.Nickname') }} :</span>{{$user->nick_name}}</p>
+									<span style="font-size: 14px;">{{ trans('app.Nickname') }} : </span>{{$user->nick_name}}</p>
 							</div>
 						<!-- </div> -->
 						{{--<div class="col-md-4 profile-timeline">--}}
@@ -192,24 +192,20 @@
 			@endif
 			@if(count($reviews)>0)
 				<div class="col-lg-12 col-xs-12 text-center profile-box section">
-					<h4 class="text-left t-black mt-0">{{ trans('app.Review') }}</h4>
+					<h4 class="text-left t-black mt-0 profile-review-heading">{{ trans('app.Review') }}</h4>
 					@foreach($reviews as $review)
 						<div class="col-lg-12 col-xs-12 p-0 review-main-div">
-						<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 p-0">
-							<div class="review-img-div float-left">
-								@if(!empty($review->reviewed_by_image))
-									<img src="{{url('/uploads/profile/picture/'.$review->reviewed_by_image)}}" class="img-responsive">
-								@else
-									<img src="{{ url('frontend/images/Food-creator-sm1.png') }}" class="img-circle review-image">
-								@endif
+							<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 p-0">
+								<div class="t-orange review-img-div float-left">
+									{{$review->eater_name}}
+								</div>
 							</div>
-						</div>
-						<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
-							<p class="mb-0 text-left t-black">{{$review->age}},{{$review->gender}}</p>
+							<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
+								<p class="mb-0 text-left t-black">Age: {{$review-> age}}, {{$review-> gender}}</p>
+							</div>
 							<p class="text-left">
-								{{$review->review}}
+								{{$review->review_description}}
 							</p>
-						</div>
 						</div>
 					@endforeach
 				</div>

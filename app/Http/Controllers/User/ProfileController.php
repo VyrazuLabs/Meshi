@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
 use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
-use App\Models\Review\Review;
 use App\Models\User;
 use Auth;
 
@@ -87,23 +86,29 @@ class ProfileController extends Controller
                 }
             }
 
-            /* get the reviews of the user */
-            $reviews = Review::where('user_id', $user_id)->get();
-            foreach ($reviews as $key => $review) {
-                $profile = ProfileInformation::where('user_id', $review->reviewed_by)->first();
-                if (!empty($profile->image)) {
-                    $review->reviewed_by_image = $profile->image;
-                }
-                $user_profile = ProfileInformation::where('user_id', $user_id)->first();
-                if (!empty($user_profile)) {
-                    $review->age = $user_profile->age;
-                    $review->gender = $user_profile->gender;
+            /* get the reviews of the eater for that food item */
+            $eater_reviews = FoodItem::where('food_item.offered_by', $user_id)
+                ->join('eater_review', 'food_item.food_item_id', '=', 'eater_review.food_item_id')
+                ->orderBy('eater_review.id', 'DESC')
+                ->get();
+
+            /* array of age range */
+            $ageRangeArray = array("10's" => "10", "20's" => "20", "Thirties" => "30", "Forties" => "40", "Fifties" => "50", "60's" => "60", "70's" => "70", "60's" => "60", "80's" => "80");
+
+            foreach ($eater_reviews as $key => $review) {
+                $eater = User::where('user_id', $review->reviewed_by)->first();
+                $user_profile = ProfileInformation::where('user_id', $review->reviewed_by)->first();
+                if (!empty($user_profile) && !empty($eater)) {
+                    $get_age = array_search($user_profile->age, $ageRangeArray);
+                    $review->age = $get_age;
+                    $review->gender = ucfirst($user_profile->gender);
+                    $review->eater_name = $eater->nick_name;
                 }
             }
         } else {
             return back();
         }
-        return view('user.profile', ['user' => $user, 'food_items' => $food_items, 'reviews' => $reviews]);
+        return view('user.profile', ['user' => $user, 'food_items' => $food_items, 'reviews' => $eater_reviews]);
     }
 
     /* get the view of user profile updation form */

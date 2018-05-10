@@ -787,3 +787,6 @@ so   it doesn’t make the test unnecessarily selective */
     color: #000 !important;
     cursor: not-allowed;
   }
+  .profile-review-heading{
+    margin-bottom: 1.2em;
+  }
