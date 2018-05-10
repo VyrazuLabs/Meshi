@@ -158,7 +158,7 @@
                         <!-- featured -->
                             <div class="col-md-4 col-lg-3" style="display: flex;">
                                 <!-- featured -->
-                                <div class="featured">
+                                <div class="featured featured-overlay">
                                     <div class="featured-image">
                                         <a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
                                             @if(!empty($food->foodImages))
@@ -198,8 +198,7 @@
 
 
                                 </div><!-- featured -->
-                                <div class="feature-overlay feature-overlay-over-image">
-                                </div>
+
                             </div><!-- featured -->
                         @endforeach
                     </div><!-- row -->

@@ -129,11 +129,15 @@
 								<!-- featured -->
 								<div class="col-md-4 col-lg-3">
 									<!-- featured -->
-									<div class="featured profile-featured">
+									@if($food->closed_order == 1)
+										<div class="featured profile-featured featured-overlay">
+									@else
+										<div class="featured profile-featured">
+									@endif
+
 										<div class="featured-image">
-											@if($food->end_publication_date >= $currentDate)
 												<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-											@endif
+
 												@if(!empty($food->foodImages))
 													@foreach($food->foodImages as $key=>$food_image)
 														@if($key == 0)
@@ -178,10 +182,7 @@
 											</div> --><!-- item-info-right -->
 										</div><!-- ad-meta -->
 									</div><!-- featured -->
-									@if($food->closed_order == 1)
-									<div class="feature-overlay">
-									</div>
-									@endif
+
 								</div><!-- featured -->
 							@endif
 						@endforeach

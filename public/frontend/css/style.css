@@ -720,16 +720,6 @@ so   it doesn’t make the test unnecessarily selective */
   .cart-content-btn-div{
     /*width: calc(100% - 50em);*/
   }
-  .feature-overlay{
-    background-color: rgba(255, 255, 255, 0.4);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-right: 15px;
-    cursor: not-allowed;
-  }
   .food-creator-review-text{  
     margin-right: 12px;  
     font-weight: 500;
@@ -780,4 +770,7 @@ so   it doesn’t make the test unnecessarily selective */
   }
   .profile-featured .ad-meta{
     position: absolute;
+  }
+  .featured-overlay{
+    opacity: 0.4;
   }
