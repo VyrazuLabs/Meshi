@@ -367,7 +367,7 @@
 				                </div>
 				                <div class="form-group form-custom-group">
 				                  	<label>{{ trans('app.sex') }}<span>*</span></label>
-				                    {{ Form::select('gender', [$gender_male => $male_sex, $gender_female => $female_sex, $gender_other => $other_sex], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12']) }}
+				                    {{ Form::select('gender', ['male' => $male_sex, 'female' => $female_sex, 'other' => $other_sex], null, ['placeholder' => $selectPlaceholder, 'class' => 'form-control col-md-7 col-xs-12']) }}
 									@if ($errors->has('gender'))
 										<span class="help-block">
 										  <strong class="strong t-red">{{ $errors->first('gender') }}</strong>
