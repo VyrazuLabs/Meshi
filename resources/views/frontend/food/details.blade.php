@@ -83,15 +83,7 @@
 							<!-- slider-text -->
 							<div class="col-md-5">
 								<div class="slider-text">
-									<!-- <h2>¥{{$food_details->price}}</h2> -->
 									<h2>{{$food_details->item_name}}</h2>
-									<!-- <h3 class="title">{{$food_details->item_name}}</h3> -->
-									<!-- <p><span>{{ trans('app.Offered by') }}: <a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}"> {{$food_details->made_by}}</a></span> -->
-									<!-- <span> Ad ID:<a href="#" class="time"> 251716763</a></span></p> -->
-									<!-- <span class="icon"><i class="fa fa-clock-o"></i><a href="#">{{$food_details->date}}</a></span> -->
-									<!-- <span class="icon"><i class="fa fa-map-marker"></i><a href="#">{{$food_details->municipality}}</a></span> -->
-									<!-- <span class="icon"><i class="fa fa-user online"></i><a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">{{$food_details->made_by}}<strong>(online)</strong></a></span> -->
-
 									{!! Form::open(array('id'=>"buy_now_form")) !!}
 			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
 			                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
@@ -100,16 +92,6 @@
 										<div class="short-info details-info">
 											<h4>{{ trans('app.Price') }}</h4>
 											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right"><strong>¥ {{$food_details->price}}</strong></span></p>
-											<!-- <p class="detail-price-list"><strong>{{ trans('app.Tax') }}: </strong>
-												@foreach($foodCosting as $key => $costing)
-												<span class="float-right"> {{$costing}}: ¥{{$key}}</span></br>
-												@endforeach
-											</p> -->
-											<!-- <p class="detail-price-list"><strong>{{ trans('app.Shipping Fee') }}: </strong><span class="float-right">
-												@if(!empty($food_details->shipping_fee))
-													¥ {{$food_details->shipping_fee}}
-												@endif
-											</span></p> -->
 											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ {{$commission}}</strong>
 											</span></p>
 											<div class="price-line"></div>
@@ -124,7 +106,7 @@
 										<!-- contact-with -->
 
 										<div class="contact-with">
-											<div class="row">
+											<div class="">
 												<div class="col-md-6 p-0">
 													<div class="form-group">
 														<select id="select-deliverable-time" onchange="checkForValue(this)" class="form-control" name="slot">
@@ -147,19 +129,10 @@
 																@endforeach
 															@endif
 														</select>
-														<!-- <select onchange="checkForValue(this)" class="form-control" name="slot">
-															<option value="">{{ trans('app.Select Your Time') }}</option>
-															@if(!empty($time_of_availability))
-																@foreach($time_of_availability as $key => $slot)
-																	<option value="{{$key}}-{{$slot}}">{{$key}}-{{$slot}}</option>
-																@endforeach
-															@endif
-														</select> -->
 													</div>
 												</div>
-
-												@if($food_details->closed_order == 0)
 												<div class="col-md-6">
+												@if($food_details->closed_order == 0)
 													@if(Auth::User())
 														@php
 														$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
@@ -172,12 +145,12 @@
 													@else
 														<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
 													@endif
-													<!-- </a> -->
-
-												</div>
+												@else
+													<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
 												@endif
+												</div>
 											</div>
-											<div class="row">
+											<div class="">
 												<p>※前後5分程度の余裕を見てお待ちください</p>
 											</div>
 										</div><!-- contact-with -->

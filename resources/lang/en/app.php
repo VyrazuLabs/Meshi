@@ -184,5 +184,6 @@ return [
     'Eater Info' => 'Eater Info',
     'Gender' => 'Gender',
     'Years' => 'Years',
+    'Sold Out' => 'Sold Out',
 
 ];

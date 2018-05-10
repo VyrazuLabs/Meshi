@@ -99,7 +99,7 @@
 								<p><strong>Phone No. :</strong><span> {{$user->phone_number}}</span></p>
 							</div> -->
 							<div class="col-md-8 col-md-offset-2">
-								<p><strong>{{ trans('app.Deliverable Area') }} :</strong>
+								<p class="mb-0 profile-deliverable-area"><strong>{{ trans('app.Deliverable Area') }} :</strong>
 									<span>
 										{{$user->deliverable_area}}
 									</span>
@@ -129,11 +129,15 @@
 								<!-- featured -->
 								<div class="col-md-4 col-lg-3">
 									<!-- featured -->
-									<div class="featured profile-featured">
+									@if($food->closed_order == 1)
+										<div class="featured profile-featured featured-overlay">
+									@else
+										<div class="featured profile-featured">
+									@endif
+
 										<div class="featured-image">
-											@if($food->end_publication_date >= $currentDate)
 												<a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
-											@endif
+
 												@if(!empty($food->foodImages))
 													@foreach($food->foodImages as $key=>$food_image)
 														@if($key == 0)
@@ -178,10 +182,7 @@
 											</div> --><!-- item-info-right -->
 										</div><!-- ad-meta -->
 									</div><!-- featured -->
-									@if($food->closed_order == 1)
-									<div class="feature-overlay">
-									</div>
-									@endif
+
 								</div><!-- featured -->
 							@endif
 						@endforeach
@@ -230,7 +231,7 @@
 					</div>
 					<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
 						<p class="text-left">
-							{{$user->profile_message}}
+							@php echo nl2br($user->profile_message); @endphp
 						</p>
 					</div>
 				</div>
