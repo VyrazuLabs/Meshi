@@ -112,8 +112,12 @@
 			@if(!empty($user->video_link))
 				<div class="col-sm-12 col-md-12 text-center profile-box section">
 					<h4 class="text-left t-black mt-0">{{ trans('app.Share Video') }}</h4>
-					<div class="embed-responsive embed-responsive-16by9">
-						<?php echo $user->video_link ?>
+					<div class="row">
+						<div class="col-md-offset-3 col-md-6">
+							<div class="embed-responsive embed-responsive-16by9">
+								<?php echo $user->video_link ?>
+							</div>
+						</div>
 					</div>
 					<!-- < ! width="100%" height="480" src="https://www.youtube.com/embed/KGBxpefNqvw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 				</div>
@@ -172,7 +176,7 @@
 												@if($food->closed_order == 1)
 													<span class="dated">Order Closed</span>
 												@else
-													<span class="dated">{{$food->date}}
+													<span class="dated">{{$food->date}}</span>
 												@endif
 											</div>
 											<!-- item-info-right -->
