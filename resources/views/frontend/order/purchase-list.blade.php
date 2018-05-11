@@ -44,14 +44,14 @@
 									<div class="cart-content">
 										<div class="cart-content-details">
 											<h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
-											<h4 class="t-orange">Price ¥{{$order->total_price}}</h4>
+											<h4 class="t-orange">{{ trans('app.Price') }} ¥{{$order->total_price}}</h4>
 											<div class="d-inline-block">
 												<p>
-													<strong class="t-black">Order Date:
+													<strong class="t-black">{{ trans('app.Date of Delivery') }}:
 													</strong> {{$order->date}}
 												</p>
 												<p>
-													<strong class="t-black">Status:</strong>
+													<strong class="t-black">{{ trans('app.Payment Status') }}:</strong>
 													@if($order->status == 1)
 														Paid
 													@endif
@@ -59,11 +59,11 @@
 											</div>
 											<div class="d-inline-block">
 												<p class="customer-delivertime">
-													<strong class="t-black">Delivery Time:
+													<strong class="t-black">{{ trans('app.Time of Delivery') }}:
 													</strong> {{$order->time}}
 												</p>
 												<p class="customer-delivertime">
-													<strong class="t-black">Nickname:</strong>
+													<strong class="t-black">{{ trans('app.Nickname') }}:</strong>
 													<a href="{{route('profile_details',['user_id' => $order->offered_by])}}">{{$order->nick_name}}</a>
 												</p>
 											</div>
@@ -72,12 +72,12 @@
 
 											<div class="review-group text-center">
 											@if($order->creator_review)
-												<a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodCreatorReviewModal" data-attr="{{ $order->order_id }}" onclick="showCreatorReview(this)">See Creator's Review</a>
+												<a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodCreatorReviewModal" data-attr="{{ $order->order_id }}" onclick="showCreatorReview(this)">{{ trans('app.See Creator\'s Review') }}</a>
 											@endif
 												@if($order->review_status == 0 && $order->closed_order == 1)
-													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
+													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Make Review') }}</button>
 												@elseif($order->review_status == 1)
-													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">Reviewed</button>
+													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
 												@endif
 											</div>
 										</div>

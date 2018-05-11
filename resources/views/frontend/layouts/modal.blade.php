@@ -15,7 +15,7 @@
                   <!-- food quality rating -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">Food Quality</h3>
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Food Quality') }}</h3>
                       {!! Form::hidden('quality_ratings', null,array('id'=>'qualityRatingId')) !!}
                     </div>
                     <div class="mb-0 rating d-inline-block">
@@ -34,7 +34,7 @@
                   <!-- food delivery rating -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">Delivery</h3>
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Delivery') }}</h3>
                       {!! Form::hidden('delivery_ratings', null,array('id'=>'deliveryRatingId')) !!}
                     </div>
                     <div class="mb-0 rating d-inline-block">
@@ -53,7 +53,7 @@
                   <!-- food communication ratings -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">Communication</h3>
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Communication') }}</h3>
                       {!! Form::hidden('communication_ratings', null,array('id'=>'communicationRatingId')) !!}
                     </div>
                     <div class="mb-0 rating d-inline-block">
@@ -71,10 +71,10 @@
                   </div>
                 </div>
                 <div class="form-group eater-review-group">
-                  <textarea class="form-control eater_reviews" rows="8" placeholder="Enter Your Description" name="review_description"></textarea>
+                  <textarea class="form-control eater_reviews" rows="8" placeholder="{{ trans('app.Enter Your Review Description For Creator') }}" name="review_description"></textarea>
                 </div>
                 <div class="form-group text-center mb-0">
-                  <button type="button" class="btn back-orange communication-submit-btn store-reviews">submit</button>
+                  <button type="button" class="btn back-orange communication-submit-btn store-reviews">{{ trans('app.Submit') }}</button>
                 </div>
               </div>
           {!! Form::close() !!}
@@ -98,7 +98,7 @@
             <div class="col-lg-12 col-xs-12 eater-review-box d-inline-block p-0">
               <div class="col-lg-12 col-xs-12 review-text-div p-0">
                 <div class="d-inline-block">
-                  <h3 class="text-center t-black m-0 review-text">Communication</h3>
+                  <h3 class="text-center t-black m-0 review-text">{{ trans('app.Review of Communication') }}</h3>
                 </div>
                 <div class="mb-0 rating d-inline-block">
                     <input type="radio" id="star20" name="creatorcommunicationrating" value="5" value="5" onclick="return rateEaterCommunication(this);"  data-id="5"/>
@@ -115,10 +115,10 @@
               </div>
             </div>
             <div class="form-group eater-review-group md-forms">
-              <textarea class="form-control communication_details" rows="8" placeholder="Enter Your Description" name="communication_description" ></textarea>
+              <textarea class="form-control communication_details" rows="8" placeholder="{{ trans('app.Enter Your Review Description For Eater') }}" name="communication_description" ></textarea>
             </div>
             <div class="form-group text-center mb-0">
-              <button type="button" class="btn back-orange communication-submit-btn creator-communication">submit</button>
+              <button type="button" class="btn back-orange communication-submit-btn creator-communication">{{ trans('app.Submit') }}</button>
             </div>
           </form>
         </div>

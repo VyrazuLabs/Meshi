@@ -25,9 +25,9 @@
         <div class="section cart-section">
           <div class="text-center boxes-card food-creator-card-box">
             <ul class="nav nav-pills food-creator-nav-pills d-inline-block">
-              <li class="active"><a data-toggle="pill" href="#upcoming_orders">Upcoming Orders</a></li>
+              <li class="active"><a data-toggle="pill" href="#upcoming_orders">{{ trans('app.Upcoming Orders') }}</a></li>
               <li><a data-toggle="pill" href="#">|</a></li>
-              <li><a data-toggle="pill" href="#previous_orders">Previous Orders</a></li>
+              <li><a data-toggle="pill" href="#previous_orders">{{ trans('app.Previous Orders') }}</a></li>
             </ul>
           </div>
           <div class="tab-content">
@@ -52,14 +52,14 @@
                       <div class="cart-content">
                         <div class="cart-content-details">
                           <h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
-                          <h5 class="t-orange"><strong>Order Number</strong> - {{$order->order_number}}</h5>
-                          <h5><span><strong class="t-black">Date Of Delivery: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">Shipping Address: </strong>  {{$order->address}}</span></h5>
-                          <h5><strong class="t-black">Ordered By:</strong> {{$order->name}}</h5>
+                          <h5 class="t-orange"><strong>{{ trans('app.Order Number') }}</strong> - {{$order->order_number}}</h5>
+                          <h5><span><strong class="t-black">{{ trans('app.Date of Delivery') }}: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">{{ trans('app.Shipping Address') }}: </strong>  {{$order->address}}</span></h5>
+                          <h5><strong class="t-black">{{ trans('app.Ordered By') }}:</strong> {{$order->name}}</h5>
                         </div>
-                        <div class="cart-content-btn-div review-content-btn-div">
+                        <div class="cart-content-btn-div ">
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
                           <div class="review-group text-center">
-                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#addinfomodal" data-attr="{{ $order->ordered_by }}" onclick="viewEaterInformation(this)">Eater Info</button>
+                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#addinfomodal" data-attr="{{ $order->ordered_by }}" onclick="viewEaterInformation(this)">{{ trans('app.Eater Info') }}</button>
                           </div>
                         </div>
                       </div>
@@ -90,21 +90,21 @@
                       <div class="cart-content">
                         <div class="cart-content-details">
                           <h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
-                          <h5 class="t-orange"><strong>Order Number</strong> - {{$order->order_number}}</h5>
-                          <h5><span><strong class="t-black">Date Of Delivery: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">Shipping Address: </strong>  {{$order->address}}</span></h5>
-                          <h5><strong class="t-black">Ordered By:</strong> {{$order->name}}</h5>
+                          <h5 class="t-orange"><strong>{{ trans('app.Order Number') }}</strong> - {{$order->order_number}}</h5>
+                          <h5><span><strong class="t-black">{{ trans('app.Date of Delivery') }}: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">{{ trans('app.Shipping Address') }}: </strong>  {{$order->address}}</span></h5>
+                          <h5><strong class="t-black">{{ trans('app.Ordered By') }}:</strong> {{$order->name}}</h5>
                         </div>
                         <div class="cart-content-btn-div">
                           <h3 class="t-orange mt-0 detail-price">¥{{$order->total_price}}</h3>
 
                           <div class="review-group text-center">
                             @if($order->eater_review)
-                              <a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodEaterReviewModal" data-attr="{{ $order->order_id }}" onclick="showEaterReview(this)">See Eater's Review</a>
+                              <a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodEaterReviewModal" data-attr="{{ $order->order_id }}" onclick="showEaterReview(this)">{{ trans('app.See Eater\'s Review') }}</a>
                             @endif
                           @if($order->review_status == 0)
-                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">Review</button>
+                            <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Make Review') }}</button>
                           @else
-                            <button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">Reviewed</button>
+                            <button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
 
                           @endif
                           </div>

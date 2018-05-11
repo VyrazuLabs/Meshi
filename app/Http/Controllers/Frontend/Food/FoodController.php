@@ -366,7 +366,7 @@ class FoodController extends Controller
     {
         $foods = FoodItem::where('offered_by', Auth::User()->user_id)
             ->where('status', 1)
-            ->orderBy('date_of_availability', 'ASC')
+            ->orderBy('date_of_availability', 'DESC')
             ->paginate(5);
 
         foreach ($foods as $key => $food) {
