@@ -167,7 +167,7 @@ return [
     'Message' => 'メッセージ',
     'Deliverable Area' => 'お届け可能エリア',
     'FOOD LIST' => '登録したお料理一覧',
-    'Edit Food' => '食べ物を編集する',
+    'Edit Food' => 'お料理の編集',
     'Today' => '今日',
     'Purchased List' => '購入したリスト',
     'Order List' => '注文履歴',
@@ -196,5 +196,6 @@ return [
     'Review of Food Quality' => 'お料理の内容について',
     'Review of Delivery' => 'お届けについて',
     'Review of Communication' => 'コミュニケーションについて',
-    'Payment Status' => 'お支払状況'
+    'Payment Status' => 'お支払状況',
+    'nickname\'s' => ':nicknameさんの',
 ];

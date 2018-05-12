@@ -111,7 +111,7 @@ class OrderController extends Controller
 
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
-                $order->date = date('Y-m-d', strtotime($order->date_of_delivery));
+                $order->date = date('Y-m-d', strtotime($order->date_of_delivery. ' '. $order->time));
                 /* getting the food images */
                 if (!empty($order->food_images)) {
                     $order->foodImages = unserialize($order->food_images);
