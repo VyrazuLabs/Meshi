@@ -10,6 +10,7 @@ use App\Models\Review\CreatorReview;
 use App\Models\Review\EaterReview;
 use App\Models\User;
 use Auth;
+use DataTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -172,8 +173,8 @@ class OrderController extends Controller
         if (!empty($profileDetails)) {
             $eater_info['address'] = $profileDetails->address;
             $eater_info['phone_number'] = $profileDetails->phone_number;
-            $eater_info['gender'] = $profileDetails->gender;
-            $eater_info['age'] = $profileDetails->age;
+            $eater_info['gender'] = DataTranslation::getTranslated()['genders'][$profileDetails->gender];
+            $eater_info['age'] = DataTranslation::getTranslated()['ages'][$profileDetails->age];
             $eater_info['description'] = $profileDetails->description;
             if (!empty($profileDetails->image)) {
                 $eater_info['image'] = $profileDetails->image;

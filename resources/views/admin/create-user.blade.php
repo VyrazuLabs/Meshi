@@ -328,19 +328,8 @@
 		                  	{!! Form::textarea('video_link_edit', null,
 		                          array('class'=>'form-control','rows'=>'3')) !!}
 		                </div>
-		                <div class="form-group form-custom-group creator-introduction" >
-		                  	<label>User Introduction<span>*</span></label>
-		                  	{!! Form::textarea('user_introduction_edit', null,
-		                          array('class'=>'form-control',
-		                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
-		                  	@if ($errors->has('user_introduction_edit'))
-		                    	<span class="help-block">
-		                      		<strong class="strong t-red">{{ $errors->first('user_introduction_edit') }}</strong>
-		                    	</span>
-		                  	@endif
-		                </div>
 		                <div class="form-group form-custom-group creator-profile-message" >
-		                  	<label>Profile Message<span>*</span></label>
+		                  	<label>Profile Message</label>
 		                  	{!! Form::textarea('profile_message_edit', null,
 		                          array('class'=>'form-control',
 		                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
@@ -366,19 +355,9 @@
 	                  	{!! Form::textarea('video_link', null,
 	                          array('class'=>'form-control','rows'=>'3')) !!}
 	                </div>
-	                <div class="form-group form-custom-group creator-introduction" style="display: none;">
-	                  	<label>User Introduction<span>*</span></label>
-	                  	{!! Form::textarea('user_introduction', null,
-	                          array('class'=>'form-control',
-	                                'placeholder'=>'User Introduction','rows'=>'4')) !!}
-	                  	@if ($errors->has('user_introduction'))
-	                    	<span class="help-block">
-	                      		<strong class="strong t-red">{{ $errors->first('user_introduction') }}</strong>
-	                    	</span>
-	                  	@endif
-	                </div>
+
 	                <div class="form-group form-custom-group creator-profile-message" style="display: none;">
-	                  	<label>Profile Message<span>*</span></label>
+	                  	<label>Profile Message</label>
 	                  	{!! Form::textarea('profile_message', null,
 	                          array('class'=>'form-control',
 	                                'placeholder'=>'Enter Message From ShareMeshi','rows'=>'4')) !!}
@@ -506,7 +485,6 @@
 	    	$('.creator-cover-image').show();
 	    	$('.creator-deliverable-area').show();
 	    	$('.creator-video-link').show();
-	    	$('.creator-introduction').show();
 	    	$('.creator-profile-message').show();
 	  	}
 	  	if(userType == 2) {
@@ -516,7 +494,6 @@
 	    	$('.creator-cover-image').hide();
 	    	$('.creator-deliverable-area').hide();
 	    	$('.creator-video-link').hide();
-	    	$('.creator-introduction').hide();
 	    	$('.creator-profile-message').hide();
 
 	  	}

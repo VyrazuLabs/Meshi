@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food\FoodItem;
-use App\Models\Food\FoodItemCosting;
 use App\Models\Order\Order;
 use App\Models\Payment\Payments;
 use App\Models\ProfileInformation;
-use App\Models\Review\Review;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -40,6 +38,7 @@ class UserRegistrationController extends Controller
         if (isset($input['user_id'])) {
             /* check validation for user updation */
             if ($userUpdateValidator->fails()) {
+                // print_r($userUpdateValidator->errors());die;
                 Session::flash('error', trans('validation.form_error'));
                 return redirect()->back()->withErrors($userUpdateValidator)->withInput();
             } else {
@@ -91,6 +90,24 @@ class UserRegistrationController extends Controller
                     $profile->update(['phone_number' => $input['phone_number']]);
                 }
 
+                if (isset($input['profile_message_edit'])) {
+                    $profile_message = $input['profile_message_edit'];
+                } else {
+                    $profile_message = null;
+                }
+
+                if (isset($input['video_link_edit'])) {
+                    $video_link = $input['video_link_edit'];
+                } else {
+                    $video_link = null;
+                }
+
+                if (isset($input['deliverable_area_edit'])) {
+                    $deliverable_area = $input['deliverable_area_edit'];
+                } else {
+                    $deliverable_area = null;
+                }
+
                 $user->update(['name' => $input['name'],
                     'type' => $input['type'],
                     'nick_name' => $input['nick_name'],
@@ -110,10 +127,9 @@ class UserRegistrationController extends Controller
                     'gender' => $input['gender'],
                     'profession' => $input['profession'],
                     'reason_for_registration' => $reason,
-                    'user_introduction' => $input['user_introduction_edit'],
-                    'profile_message' => $input['profile_message_edit'],
-                    'video_link' => $input['video_link_edit'],
-                    'deliverable_area' => $input['deliverable_area_edit'],
+                    'profile_message' => $profile_message,
+                    'video_link' => $video_link,
+                    'deliverable_area' => $deliverable_area,
                 ]);
 
                 /****************crop image functionality starts****************/
@@ -209,6 +225,24 @@ class UserRegistrationController extends Controller
                     $reason = implode(',', $modified_array);
                 }
 
+                if (isset($input['profile_message'])) {
+                    $profile_message = $input['profile_message'];
+                } else {
+                    $profile_message = null;
+                }
+
+                if (isset($input['video_link'])) {
+                    $video_link = $input['video_link'];
+                } else {
+                    $video_link = null;
+                }
+
+                if (isset($input['deliverable_area'])) {
+                    $deliverable_area = $input['deliverable_area'];
+                } else {
+                    $deliverable_area = null;
+                }
+
                 $user = User::create(['user_id' => uniqid(),
                     'name' => $input['name'],
                     'email' => $input['email'],
@@ -234,10 +268,9 @@ class UserRegistrationController extends Controller
                     'profession' => $input['profession'],
                     'reason_for_registration' => $reason,
                     'total_dishes' => 0,
-                    'user_introduction' => $input['user_introduction'],
-                    'profile_message' => $input['profile_message'],
-                    'video_link' => $input['video_link'],
-                    'deliverable_area' => $input['deliverable_area'],
+                    'profile_message' => $profile_message,
+                    'video_link' => $video_link,
+                    'deliverable_area' => $deliverable_area,
                 ]);
 
                 if (!empty($file['cover_image'])) {
@@ -294,8 +327,6 @@ class UserRegistrationController extends Controller
             'gender' => 'required',
             'profession' => 'required',
             'reason_for_registration_edit' => 'required',
-            'user_introduction_edit' => 'required',
-            'profile_message_edit' => 'required',
         ]);
     }
 
@@ -361,7 +392,6 @@ class UserRegistrationController extends Controller
             $user->gender = $profile->gender;
             $user->profession = $profile->profession;
             $user->image = $profile->image;
-            $user->user_introduction_edit = $profile->user_introduction;
             $user->profile_message_edit = $profile->profile_message;
             $user->video_link_edit = $profile->video_link;
             $user->deliverable_area_edit = $profile->deliverable_area;
@@ -376,26 +406,19 @@ class UserRegistrationController extends Controller
         $user = User::where('user_id', $user_id)->first();
         if (!empty($user)) {
             $profile = ProfileInformation::where('user_id', $user_id)->first();
-            $foodItem = FoodItem::where('offered_by', $user_id)->first();
-            $review = Review::where('user_id', $user_id)->first();
-            $reviewedBy = Review::where('reviewed_by', $user_id)->first();
-            $order = Order::where('ordered_by', $user_id)->first();
+            $foodItems = FoodItem::where('offered_by', $user_id)->get();
+            $orders = Order::where('ordered_by', $user_id)->get();
 
             /* delete user */
             if (!empty($user)) {
                 $user->delete();
             }
 
-            /* check for all food items created by teh user */
-            if (!empty($foodItem)) {
-                $foodItemCosting = FoodItemCosting::where('food_item_id', $foodItem->food_item_id)->first();
-
-                /* delete all food items costings related with the food items */
-                if (!empty($foodItemCosting)) {
-                    $foodItemCosting->delete();
+            /* delete all food items created by the user */
+            if (!empty($foodItems)) {
+                foreach ($foodItems as $key => $food) {
+                    $food->delete();
                 }
-                /* delete all food items created by the user */
-                $foodItem->delete();
             }
 
             /* delete profile details of the user */
@@ -403,25 +426,17 @@ class UserRegistrationController extends Controller
                 $profile->delete();
             }
 
-            /* delete reviews of the user */
-            if (!empty($review)) {
-                $review->delete();
-            }
-
-            /* delete all the reviews given by the user */
-            if (!empty($reviewedBy)) {
-                $reviewedBy->delete();
-            }
-
             /* check for orders i.e. ordered by the user */
-            if (!empty($order)) {
-                $payment = Payments::where('order_id', $order->order_id)->first();
-                /* delete payment details of the user */
-                if (!empty($payment)) {
-                    $payment->delete();
+            if (!empty($orders)) {
+                foreach ($orders as $key => $order) {
+                    $payment = Payments::where('order_id', $order->order_id)->first();
+                    /* delete payment details of the user */
+                    if (!empty($payment)) {
+                        $payment->delete();
+                    }
+                    /* delete order details of the user */
+                    $order->delete();
                 }
-                /* delete order details of the user */
-                $order->delete();
             }
 
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Review;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order\Order;
+use App\Models\ProfileInformation;
 use App\Models\Review\CreatorReview;
 use App\Models\Review\EaterReview;
 use App\Models\User;
@@ -140,6 +141,13 @@ class ReviewController extends Controller
             if (!empty($user)) {
                 $creator_review['name'] = $user->name;
             }
+            /* getting the profile information of the creator */
+            $profileDetails = ProfileInformation::where('user_id', $creatorReview->reviewed_by)->first();
+            if (!empty($profileDetails)) {
+                if (!empty($profileDetails->image)) {
+                    $creator_review['image'] = $profileDetails->image;
+                }
+            }
         }
         echo json_encode($creator_review);
     }
@@ -154,6 +162,13 @@ class ReviewController extends Controller
             $user = User::where('user_id', $eaterReview->reviewed_by)->first();
             if (!empty($user)) {
                 $eater_review['name'] = $user->name;
+            }
+            /* getting the profile information of the creator */
+            $profileDetails = ProfileInformation::where('user_id', $eaterReview->reviewed_by)->first();
+            if (!empty($profileDetails)) {
+                if (!empty($profileDetails->image)) {
+                    $eater_review['image'] = $profileDetails->image;
+                }
             }
         }
         echo json_encode($eater_review);

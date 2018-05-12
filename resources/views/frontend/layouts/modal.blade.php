@@ -148,7 +148,7 @@
       </div>
     </div>
   </div>
-  <!-- image crop modal -->
+<!-- image crop modal -->
 
 <div class="modal fade" id="addinfomodal" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -161,10 +161,10 @@
         </div>
         <div class="eater-info-description-div">
           <p class="eater-info-text">{{ trans('app.Name') }} : <span class="mr-3" id="buyer-name"></span> </p>
-          <p class="eater-info-text">{{ trans('app.Nickname') }} :<span class="mr-3" id="buyer-nick-name"></span> </p>
-          <p class="eater-info-text">{{ trans('app.Phone') }} :<span class="mr-3" id="buyer-phone"></span> </p>
-          <p class="eater-info-text">{{ trans('app.Gender') }} :<span class="mr-3" id="buyer-gender"></span> </p>
-          <p class="eater-info-text">{{ trans('app.Age') }} :<span class="mr-3" id="buyer-age"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Nickname') }} : <span class="mr-3" id="buyer-nick-name"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Phone') }} : <span class="mr-3" id="buyer-phone"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Gender') }} : <span class="mr-3" id="buyer-gender"></span> </p>
+          <p class="eater-info-text">{{ trans('app.Age') }} : <span class="mr-3" id="buyer-age"></span> </p>
 
           <p class="eater-info-text less-text">{{ trans('app.Introduction') }} :
             <span class="mr-3"></span><span class="comment more" id="buyer-introduction"></span>
