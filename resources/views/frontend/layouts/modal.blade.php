@@ -180,9 +180,14 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body foodcreator-review-modal-body">
-        <p class="t-orange foodcreator-review-title" id="creator-name"></p>
-        <p class="mb-0" id="creator-review-description">
-        </p>
+      <div class="see-eater-review-box">
+          <div class="see-eater-review-box-image" id="creatorImage">
+          </div>
+          <div class="see-eater-review-box-description">
+            <p class="t-orange foodcreator-review-title" id="creator-name"></p>
+            <p class="mb-0" id="creator-review-description"></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -193,8 +198,14 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body foodcreator-review-modal-body">
-        <p class="t-orange foodcreator-review-title" id="eater-name"></p>
-        <p class="mb-0" id="eater-review-description"></p>
+        <div class="see-eater-review-box">
+          <div class="see-eater-review-box-image" id="eaterImage">
+          </div>
+          <div class="see-eater-review-box-description">
+            <p class="t-orange foodcreator-review-title" id="eater-name"></p>
+            <p class="mb-0" id="eater-review-description"></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

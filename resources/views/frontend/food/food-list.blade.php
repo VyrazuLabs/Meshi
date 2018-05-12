@@ -34,7 +34,7 @@
 									<div class="col-lg-3 col-md-3 col-xs-12 p-0 food-creator-pricebtn">
 										<h3 class="t-orange text-right mt-0">Price ¥{{$food->price}}</h3>
 										<div class="food-creator-btn-group float-right">
-											<a href="{{route('delete_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn">Remove</a>
+											<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">Remove</a>
 											<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">Edit</a>
 										</div>
 									</div>
@@ -74,4 +74,42 @@
 @endsection
 
 @section('add-js')
+@php
+  $langName =[];
+  if(Session::has('lang_name')) {
+    $langName = Session::get('lang_name');
+  }
+@endphp
+@if($langName == 'en')
+	<script type="text/javascript">
+		var msg = 'Are you sure to delete it?';
+	</script>
+@elseif($langName == 'ja')
+	<script type="text/javascript">
+		var msg = '削除してもよろしいですか？';
+	</script>
+@endif
+
+<script type="text/javascript">
+    function deleteFood(foodItemId) {
+    	var warningMsg = confirm(msg);
+        if(warningMsg == true) {
+	    	var foodItemId = $(foodItemId).data('attr');
+		    $.ajax({
+		      headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+		      data: JSON.stringify({food_item_id : foodItemId}),
+		      type: 'POST',
+		      url: "{{ url('/food/delete') }}",
+		      contentType: "application/json",
+		      processData: false,
+		      success:function(data) {
+	            location.reload();
+		      }
+		    });
+		}
+		else {
+			location.reload();
+		}
+	}
+</script>
 @endsection

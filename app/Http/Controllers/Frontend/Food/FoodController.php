@@ -10,6 +10,7 @@ use App\Models\ProfileInformation;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Session;
 use Validator;
 
@@ -380,14 +381,13 @@ class FoodController extends Controller
     }
 
     /* delete food items */
-    public function delete($food_item_id = null)
+    public function delete(Request $request)
     {
-        $foodItem = FoodItem::where('food_item_id', $food_item_id)->first();
+        $input = Input::all();
+        $foodItem = FoodItem::where('food_item_id', $input['food_item_id'])->first();
         if (!empty($foodItem)) {
             $foodItem->delete();
         }
-        Session::flash('success', "Deleted successfully");
-        return back();
     }
 
     /* view of food item updation form */

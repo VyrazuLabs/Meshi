@@ -8,7 +8,6 @@ use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
 use App\Models\User;
 use Auth;
-use Session;
 
 class ProfileController extends Controller
 {
@@ -18,29 +17,31 @@ class ProfileController extends Controller
         $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
         $jst_current_date_time = strtotime(date("Y-m-d H:i:s"));
         $jst_current_date = date("Y-m-d");
+        $user = [];
 
         /* getting the user associated with the user id*/
         $user = User::where('user_id', $user_id)->first();
         if (!empty($user)) {
             /* getting teh profile information of teh user */
             $profile = ProfileInformation::where('user_id', $user_id)->first();
-            if (!empty($profile->image)) {
-                $user->image = $profile->image;
-            }
-            if (!empty($profile->cover_image)) {
-                $user->cover_image = $profile->cover_image;
-            }
-            if (!empty($profile->deliverable_area)) {
-                $user->deliverable_area = $profile->deliverable_area;
-            }
-            $user->description = $profile->description;
-            $user->total_dishes = $profile->total_dishes;
-            $user->phone_number = $profile->phone_number;
-            $user->address = $profile->address;
-            $user->user_introduction = $profile->user_introduction;
-            $user->profile_message = $profile->profile_message;
-            if (!empty($profile->video_link)) {
-                $user->video_link = $profile->video_link;
+            if (!empty($profile)) {
+                if (!empty($profile->image)) {
+                    $user->image = $profile->image;
+                }
+                if (!empty($profile->cover_image)) {
+                    $user->cover_image = $profile->cover_image;
+                }
+                if (!empty($profile->deliverable_area)) {
+                    $user->deliverable_area = $profile->deliverable_area;
+                }
+                $user->description = $profile->description;
+                $user->total_dishes = $profile->total_dishes;
+                $user->phone_number = $profile->phone_number;
+                $user->address = $profile->address;
+                $user->profile_message = $profile->profile_message;
+                if (!empty($profile->video_link)) {
+                    $user->video_link = $profile->video_link;
+                }
             }
 
             /* get all the active food items created by the user */
@@ -93,13 +94,15 @@ class ProfileController extends Controller
                 ->orderBy('eater_review.id', 'DESC')
                 ->get();
 
-            foreach ($eater_reviews as $key => $review) {
-                $eater = User::where('user_id', $review->reviewed_by)->first();
-                $user_profile = ProfileInformation::where('user_id', $review->reviewed_by)->first();
-                if (!empty($user_profile) && !empty($eater)) {
-                    $review->age = $user_profile->age;
-                    $review->gender = $user_profile->gender;
-                    $review->eater_name = $eater->nick_name;
+            if (!empty($eater_reviews)) {
+                foreach ($eater_reviews as $key => $review) {
+                    $eater = User::where('user_id', $review->reviewed_by)->first();
+                    $user_profile = ProfileInformation::where('user_id', $review->reviewed_by)->first();
+                    if (!empty($user_profile) && !empty($eater)) {
+                        $review->age = $user_profile->age;
+                        $review->gender = $user_profile->gender;
+                        $review->eater_name = $eater->nick_name;
+                    }
                 }
             }
         } else {

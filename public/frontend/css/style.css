@@ -790,3 +790,18 @@ so   it doesn’t make the test unnecessarily selective */
   .profile-review-heading{
     margin-bottom: 1.2em;
   }
+  .see-eater-review-box{  
+    display: flex;
+  }
+  .see-eater-review-box-image{  
+    width: 15em;
+  }
+  .see-eater-review-box-description{  
+    width: calc(100% - 6em);
+  }
+  .see-eater-review-box-pic{  
+    margin: auto;  
+    align-items: center;  
+    border: 5px solid #f26522;  
+    border-radius: 50%;  width: 8em;
+  }
