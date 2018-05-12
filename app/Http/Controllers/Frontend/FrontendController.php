@@ -126,26 +126,32 @@ class FrontendController extends Controller
 
         return view('frontend.index', ['foodItems' => $foodItems, 'available_foods' => $available_foods, 'closed_food_items' => $closed_food_items]);
     }
+
     public function privacy()
     {
         return view('frontend.privacy-policy');
     }
+
     public function terms()
     {
         return view('frontend.Terms & conditions');
     }
+
     public function faq()
     {
         return view('frontend.faq');
     }
+
     public function cart()
     {
         return view('frontend.shopping-cart');
     }
+
     public function aboutUs()
     {
         return view('frontend.about-us');
     }
+
     public function contactUs()
     {
         return view('frontend.contact-us');

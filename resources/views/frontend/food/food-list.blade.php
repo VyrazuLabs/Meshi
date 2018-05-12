@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-  {{ trans('app.sharemeshi') }}
+  {{ trans('app.FOOD LIST') }} | {{ trans('app.sharemeshi') }}
 @endsection
 
 @section('add-meta')

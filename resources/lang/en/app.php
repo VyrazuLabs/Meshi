@@ -205,5 +205,6 @@ return [
     'Review of Food Quality' => 'Food Quality',
     'Review of Delivery' => 'Delivery',
     'Review of Communication' => 'Communication',
-    'Payment Status' => 'Payment Status'
+    'Payment Status' => 'Payment Status',
+    'nickname\'s' => ':nickname\'s',
 ];
