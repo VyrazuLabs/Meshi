@@ -85,17 +85,17 @@
 								<div class="slider-text">
 									<h2>{{$food_details->item_name}}</h2>
 									{!! Form::open(array('id'=>"buy_now_form")) !!}
-			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id))}}
-			                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
+			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id),['id' => 'foodItemID'])}}
+			                        	{{Form::hidden('amount',Crypt::encrypt($cost),['id' => 'amountID'])}}
 
 										<!-- price -->
 										<div class="short-info details-info">
 											<h4>{{ trans('app.Price') }}</h4>
-											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right"><strong>¥ {{$food_details->price}}</strong></span></p>
-											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ {{$commission}}</strong>
+											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right" ><strong>¥ <span id="new-price">{{$food_details->price}}</span></strong></span></p>
+											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ <span id="new-commission">{{$commission}}</span></strong>
 											</span></p>
 											<div class="price-line"></div>
-											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ {{$cost}}</strong></span></p>
+											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ <span id="new-cost">{{$cost}}</span></strong></span></p>
 											<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
 											<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 										</div>
@@ -145,10 +145,10 @@
 													</div>
 													<div class="form-group col-md-8  col-lg-8 col-sm-8 col-xs-8 form-control-select-p">
 													@php $i = $food_details->quantity; @endphp
-														<select class="form-control form-control-select-b" name="quantity">
+														<select class="form-control form-control-select-b" name="quantity" onchange="calculatePricing(this);">
 															@php
 																for ($i = 1; $i <= $food_details->quantity; $i++) {
-																	echo "<option>$i</option>";
+																	echo "<option value=$i>$i</option>";
 																}
 															@endphp
 														</select>
@@ -304,6 +304,30 @@
     @endif
 <script type="text/javascript">
 
+function calculatePricing(attr){
+    var quantityNumber = $(attr).val();
+    var itemID = $('#foodItemID').val();
+
+    $.ajax({
+	    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+	    data: JSON.stringify({quantity : quantityNumber,fooditem_id : itemID}),
+	    type: 'POST',
+	    url: "{{ url('order/calculate-pricing') }}",
+	     contentType: "application/json",
+        processData: false,
+	    success: function(result) {
+          result = $.parseJSON(result);
+	    	$('#new-commission').text(result.commission);
+	    	$('#new-cost').text(result.total_cost);
+	    	$('#new-price').text(result.price);
+	    	$('#amountID').val(result.encrypted_cost);
+
+
+	    }
+	});
+
+}
+
 //ajax to save the food details in cart table
 $('.makeOrder').click(function() {
   	var form_data = new FormData($("#buy_now_form")[0]);
@@ -354,6 +378,7 @@ function checkForValue(param) {
 		$('#buy_now_btn_bfr_login').attr('href', '#');
 	}
 }
+
 
 
 </script>

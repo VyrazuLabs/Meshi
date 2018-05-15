@@ -141,6 +141,7 @@ Route::group(['middleware' => ['Language']], function () {
         Route::group(['namespace' => 'User'], function () {
             Route::group(['namespace' => 'Cart'], function () {
                 Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
+                Route::post('/calculate-pricing', 'CartController@calculatePricing');
             });
         });
 

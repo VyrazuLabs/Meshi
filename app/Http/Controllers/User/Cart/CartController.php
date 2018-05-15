@@ -84,4 +84,27 @@ class CartController extends Controller
         return view('cart.empty-cart');
     }
 
+    public function calculatePricing()
+    {
+        $input = Input::all();
+        $pricing_arr = [];
+
+        /** calculate total price with tax and shipping fee */
+        //decrypt price and food_item_id here
+        $food_item_id = Crypt::decrypt($input['fooditem_id']);
+
+        $foodItem = FoodItem::where('food_item_id', $food_item_id)->first();
+        if (!empty($foodItem)) {
+            $totalFoodItemPrice = $foodItem->price * $input['quantity'];
+            $percentage = 5;
+            $commission = ceil($totalFoodItemPrice * ($percentage / 100));
+            $pricing_arr['price'] = $totalFoodItemPrice;
+            $pricing_arr['commission'] = $commission;
+            $pricing_arr['total_cost'] = $commission + $totalFoodItemPrice;
+            $pricing_arr['encrypted_cost'] = Crypt::encrypt($pricing_arr['total_cost']);
+        }
+        echo json_encode($pricing_arr);
+
+    }
+
 }
