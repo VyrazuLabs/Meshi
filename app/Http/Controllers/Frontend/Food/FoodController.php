@@ -61,7 +61,7 @@ class FoodController extends Controller
             }
 
             /* getting the deliverable area of the food item */
-            if (!empty($profile->deliverable_area)) {
+            if (empty($food_details->deliverable_area)) {
                 $food_details->deliverable_area = $profile->deliverable_area;
             }
 

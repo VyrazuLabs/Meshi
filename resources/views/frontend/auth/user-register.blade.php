@@ -423,7 +423,7 @@
 				                	<div class="form-group form-custom-group profile-edit-field">
 				                @endif
 				                  	<label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
-									<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。</p>
+									<p>クリエーターさんとイーターさんのお互いの安心のためプロフィール画像にはアイコンなどではなく、できるだけ顔写真を登録して下さい。 </p>
 									@if ( $form_type == 'edit' )
 										@if( !empty($user->image) )
 											<div class="" style="width: 100px;float: right;">
@@ -463,7 +463,7 @@
 					            	<div class="form-group form-custom-group profile-edit-field item form-group position-relatv">
 					            @endif
 							            <label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
-										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。</p>
+										<p>クリエーターさんとイーターさんのお互いの安心のためプロフィール画像にはアイコンなどではなく、できるだけ顔写真を登録して下さい。</p>
 		                      			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
 				                       	<div class="" id="defaultUploadImage" style="">
 				                        	<div class="col-md-12 p-0">
