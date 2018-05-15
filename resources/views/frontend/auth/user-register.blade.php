@@ -502,7 +502,7 @@
 		                            			</div> -->
 		                          			<!-- </div> -->
 		                       			</div>
-				                       	<div class="testclass" id="cropWrapper">
+				                       	<div class="user-crop-image" id="cropWrapper">
 				                        	<div class="col-md-12">
 				                          		<div id="cropImage" style="">
 				                            		<img src="" alt="" style="" class="">
@@ -735,7 +735,7 @@
           var reader = new FileReader();
 
           reader.onload = function (e) {
-          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
+          	$('.user-crop-image').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
               var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
               $('#cropImage').html(_html);
 

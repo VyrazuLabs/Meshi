@@ -812,6 +812,7 @@ so   it doesn’t make the test unnecessarily selective */
     border-radius: 5px;
     padding-left: 0;
     padding-bottom: 0;
+    padding-right: 0;
     height: 44px;
   }
   .form-control-select-p{
