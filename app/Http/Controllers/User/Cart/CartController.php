@@ -101,6 +101,7 @@ class CartController extends Controller
             $pricing_arr['price'] = $totalFoodItemPrice;
             $pricing_arr['commission'] = $commission;
             $pricing_arr['total_cost'] = $commission + $totalFoodItemPrice;
+            $pricing_arr['encrypted_cost'] = Crypt::encrypt($pricing_arr['total_cost']);
         }
         echo json_encode($pricing_arr);
 

@@ -86,7 +86,7 @@
 									<h2>{{$food_details->item_name}}</h2>
 									{!! Form::open(array('id'=>"buy_now_form")) !!}
 			                        	{{Form::hidden('food_item_id',Crypt::encrypt($food_details->food_item_id),['id' => 'foodItemID'])}}
-			                        	{{Form::hidden('amount',Crypt::encrypt($cost))}}
+			                        	{{Form::hidden('amount',Crypt::encrypt($cost),['id' => 'amountID'])}}
 
 										<!-- price -->
 										<div class="short-info details-info">
@@ -307,6 +307,7 @@
 function calculatePricing(attr){
     var quantityNumber = $(attr).val();
     var itemID = $('#foodItemID').val();
+
     $.ajax({
 	    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
 	    data: JSON.stringify({quantity : quantityNumber,fooditem_id : itemID}),
@@ -319,6 +320,7 @@ function calculatePricing(attr){
 	    	$('#new-commission').text(result.commission);
 	    	$('#new-cost').text(result.total_cost);
 	    	$('#new-price').text(result.price);
+	    	$('#amountID').val(result.encrypted_cost);
 
 
 	    }
