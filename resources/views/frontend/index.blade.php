@@ -158,7 +158,7 @@
                         <!-- featured -->
                             <div class="col-md-4 col-lg-3" style="display: flex;">
                                 <!-- featured -->
-                                <div class="featured featured-overlay">
+                                <div class="featured">
                                     <div class="featured-image">
                                         <a href="{{route('food_details',['food_item_id' => $food->food_item_id])}}">
                                             @if(!empty($food->foodImages))
@@ -191,8 +191,8 @@
                                     <div class="ad-info">
                                         <h3 class="item-price">&yen;{{$food->price}}</h3>
                                         <h4 class="item-title" title="@php echo $food->item_name; @endphp">
-                                            @if(mb_strlen($food->item_name) > 50)
-                                                @php echo mb_substr($food->item_name, 0, 50, "UTF-8") @endphp ...
+                                            @if(mb_strlen($food->item_name) > 21)
+                                                @php echo mb_substr($food->item_name, 0, 21, "UTF-8") @endphp ...
                                             @else
                                                 {{ $food->item_name }}
                                             @endif

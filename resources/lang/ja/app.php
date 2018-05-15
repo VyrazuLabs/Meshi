@@ -176,7 +176,7 @@ return [
     'Eater Info' => 'メシイーターさんについて',
     'Gender' => '性別',
     'Years' => '年',
-    'Sold Out' => '完売',
+    'Sold Out' => '終了',
     'male' => '男性',
     'female' => '女性',
     'other' => 'その他',
