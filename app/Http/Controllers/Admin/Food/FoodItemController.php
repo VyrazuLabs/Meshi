@@ -87,6 +87,8 @@ class FoodItemController extends Controller
                         'start_publication_time' => $start_time,
                         'end_publication_date' => $end_date,
                         'end_publication_time' => $end_time,
+                        'quantity' => $input['quantity'],
+
                     ]);
 
                     if ($request->hasFile('food_images')) {
@@ -154,6 +156,8 @@ class FoodItemController extends Controller
                     'start_publication_time' => $start_time,
                     'end_publication_date' => $end_date,
                     'end_publication_time' => $end_time,
+                    'quantity' => $input['quantity'],
+
                 ]);
 
                 $profile = ProfileInformation::where('user_id', $input['offered_by'])->first();
@@ -212,11 +216,11 @@ class FoodItemController extends Controller
             'time_of_availability' => 'required',
             'start_publication_date' => 'required',
             'end_publication_date' => 'required',
-
+            'quantity' => 'required',
         ]);
     }
 
-    //VALIDATOR FOR CREATE FOOD ITEM
+    //VALIDATOR FOR EDIT FOOD ITEM
     protected function updateItemValidator($request)
     {
         return Validator::make($request, [
@@ -228,7 +232,7 @@ class FoodItemController extends Controller
             'price' => 'required|numeric',
             'start_publication_date' => 'required',
             'end_publication_date' => 'required',
-
+            'quantity' => 'required',
         ]);
     }
 

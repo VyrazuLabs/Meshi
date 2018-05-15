@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Models\Food\FoodItem;
 use App\Models\Order\Cart;
 use Auth;
 use Crypt;
@@ -26,16 +27,26 @@ class CartController extends Controller
         if ($cartValidator->fails()) {
             $cart = [
                 "success" => 0,
-                "error" => 1,
-                "msg" => $cartValidator->errors(),
+                "validation_error" => 1,
             ];
         } else {
-            $cart = Cart::create(['food_item_id' => $food_item_id,
-                'cart_id' => uniqid(),
-                'price' => $price,
-                'time' => $input['slot'],
-                'booked_by' => Auth::User()->user_id,
-            ]);
+            $foodItem = FoodItem::where('food_item_id', $food_item_id)->first();
+            $foodStock = $foodItem->quantity;
+            if ($input['quantity'] <= $foodStock) {
+                $cart = Cart::create(['food_item_id' => $food_item_id,
+                    'cart_id' => uniqid(),
+                    'price' => $price,
+                    'time' => $input['slot'],
+                    'quantity' => $input['quantity'],
+                    'booked_by' => Auth::User()->user_id,
+                ]);
+            } else {
+                $cart = [
+                    "success" => 0,
+                    "quantity_error" => 1,
+                ];
+            }
+
         }
         echo json_encode($cart);
     }
@@ -49,6 +60,7 @@ class CartController extends Controller
     {
         return Validator::make($request, [
             'slot' => 'required',
+            'quantity' => 'required',
             'food_item_id' => 'required',
             'amount' => 'required',
         ]);

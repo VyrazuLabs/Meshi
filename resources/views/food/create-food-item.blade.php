@@ -179,6 +179,19 @@
 						  	</span>
 						@endif
 	                </div>
+	                <div class="form-group form-custom-group">
+	                  	<label>Quantity <span>*</span></label>
+						{!! Form::text('quantity', null,
+						    array(
+						          'class'=>'form-control',
+						          'id' => 'quantityId',
+						          'placeholder'=>'Enter Quantity')) !!}
+						@if ($errors->has('quantity'))
+						  	<span class="help-block error">
+						      <strong class="strong">{{ $errors->first('quantity') }}</strong>
+						  	</span>
+						@endif
+	                </div>
 	                <div class="col-lg-12 col-xs-12 p-0 float-left">
                   		<div class="start-time-id float-left">
                   			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
@@ -235,17 +248,26 @@
 
 
   	//FOOD PRICE FIELD SHOULD BE NUMERIC
-  $('#foodPrice').keypress(function (e) {
-    var regex = new RegExp("^[0-9-]+$");
-    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-    if (regex.test(str)) {
-      return true;
-    }
-    e.preventDefault();
-    return false;
-  });
+	$('#foodPrice').keypress(function (e) {
+	    var regex = new RegExp("^[0-9-]+$");
+	    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	    if (regex.test(str)) {
+	      return true;
+	    }
+	    e.preventDefault();
+	    return false;
+	});
 
-
+  	//QUANTITY SHOULD BE NUMERIC
+  	$('#quantityId').keypress(function (e) {
+    	var regex = new RegExp("^[0-9-]+$");
+    	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    	if (regex.test(str)) {
+      		return true;
+    	}
+    	e.preventDefault();
+    	return false;
+  	});
 
 
 	// append time slots starts here
@@ -263,10 +285,9 @@
 	        x++; //text box increment
 
 	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross" onclick="closetimeslot(this)" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timestart"><label>Start Time <span>*</span></label><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timeend"><div class="ad-mre-btn pull-right"></div><label>End Time <span>*</span></label><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
-	        // $('.blink-cursor').focus();
+
 	        $('.timepickerid').timepicker({
 		      showMeridian: false,
-		      // defaultTime: false
 		    });
 	      }
 	    });
@@ -274,10 +295,10 @@
 	      e.preventDefault(); $(this).parent('div').remove(); x--;
 	    });
 	});
+
 	//Time picker
   	$('.timepickerid').timepicker({
       showMeridian: false,
-      // defaultTime: false
     });
     $('.time-cross').click(function(){
     	closetimeslot(this);
@@ -289,8 +310,6 @@
 
     $(function () {
 	    $('.food-item-date').datetimepicker({
-	        // format: 'L'
-	        // AutoClose: false
 	        format: 'YYYY-MM-DD HH:mm',
 	        locale: 'ja'
 	    });

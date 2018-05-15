@@ -103,11 +103,15 @@
 										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Deliverable Area') }}:</span><span style="font-size: 18px;"><a href="#"> {{$food_details->deliverable_area}}</a></span></p>
 
 										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#" id="delivery-date"> {{$food_details->date}}</a></span></p>
+
+										@if($food_details->quantity>0)
+											<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Stock') }}:</span><span style="font-size: 18px;"><a href="#" id="delivery-date"> {{$food_details->quantity}}</a></span></p>
+										@endif
 										<!-- contact-with -->
 
 										<div class="contact-with">
 											<div class="">
-												<div class="col-md-6 p-0">
+												<div class="col-md-7 select-your-time-pl-0 pl-0">
 													<div class="form-group">
 														<select id="select-deliverable-time" onchange="checkForValue(this)" class="form-control" name="slot">
 															<option value="">{{ trans('app.Select Your Time') }}</option>
@@ -124,33 +128,58 @@
 																			$start = date( 'H:i', $i);
 																			$end = date( 'H:i', $i + $duration)
 																		@endphp
-																		<option value="{{$start}}">{{$start}}</option>
+
+																		@if (!in_array($start, $placedOrderTiming))
+																			<option value="{{$start}}">{{$start}}</option>
+																		@endif
 																	@endfor
 																@endforeach
 															@endif
 														</select>
 													</div>
 												</div>
-												<div class="col-md-6">
-												@if($food_details->closed_order == 0)
-													@if(Auth::User())
-														@php
-														$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
-														$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
-														$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
-														@endphp
-														@if((Auth::User()->user_id) != $food_details->offered_by )
-															<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+												@if($food_details->quantity>0)
+												<div class="col-md-5 form-control-all-b">
+													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 form-control-label">
+													<p>Qty:</p>
+													</div>
+													<div class="form-group col-md-8  col-lg-8 col-sm-8 col-xs-8 form-control-select-p">
+													@php $i = $food_details->quantity; @endphp
+														<select class="form-control form-control-select-b" name="quantity">
+															@php
+																for ($i = 1; $i <= $food_details->quantity; $i++) {
+																	echo "<option>$i</option>";
+																}
+															@endphp
+														</select>
+													</div>
+												</div>
+												@endif
+												<div class="col-md-12 p-0">
+												@if($food_details->quantity > 0)
+													@if($food_details->closed_order == 0)
+														@if(Auth::User())
+															@php
+															$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
+															$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
+															$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
+															@endphp
+															@if((Auth::User()->user_id) != $food_details->offered_by )
+																<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+															@endif
+														@else
+															<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
 														@endif
 													@else
-														<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
+														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
 													@endif
 												@else
-													<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
+													<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Out Of Stock') }}</button>
 												@endif
+
 												</div>
 											</div>
-											<div class="">
+											<div class="col-md-12 p-0">
 												<p>※前後5分程度の余裕を見てお待ちください</p>
 											</div>
 										</div><!-- contact-with -->
@@ -256,6 +285,23 @@
 @endsection
 
 @section('add-js')
+	@php
+    	$langName =[];
+      	if(Session::has('lang_name')) {
+        	$langName = Session::get('lang_name');
+      	}
+    @endphp
+    @if($langName == 'en')
+    	<script type="text/javascript">
+    		var quantityErrorMsg = 'Invalid order quantity';
+    		var valdationErrorMsg = 'Something went wrong. please try again';
+    	</script>
+    @else
+    	<script type="text/javascript">
+    		var quantityErrorMsg = '無効 注文数';
+    		var valdationErrorMsg = '何かが間違っていた。もう一度お試しください';
+    	</script>
+    @endif
 <script type="text/javascript">
 
 //ajax to save the food details in cart table
@@ -274,21 +320,24 @@ function order(form_data) {
 	    processData: false,
 	    success: function(result) {
 	        result = $.parseJSON(result);
-
-	    	if(result.error == 1) {
+	    	if(result.quantity_error == 1) {
+	    		if(result.msg = 'exceed limit') {
+	    			new PNotify({
+		              	text: quantityErrorMsg,
+			            type: 'error',
+		            });
+	    		}
+	    	}
+	    	else if(result.validation_error == 1) {
 	            new PNotify({
-	              	text: 'Please select time',
+	              	text: valdationErrorMsg,
 		            type: 'error',
-		            delay: 2500,
-		            history: false,
-		            sticker: true
 	            });
 	        }
 	        else {
 				var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
 	      		window.location.href = url;
 	        }
-
 	    }
 	});
 }

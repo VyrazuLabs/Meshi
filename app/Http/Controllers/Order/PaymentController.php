@@ -179,8 +179,12 @@ class PaymentController extends Controller
                     'date_of_delivery' => $food->date_of_availability,
                     'total_price' => $amount,
                     'time' => $cart->time,
+                    'quantity' => $cart->quantity,
                     'status' => 1, //paid
                 ]);
+
+                $available_stock = $food->quantity - $cart->quantity;
+                $food->update(['quantity' => $available_stock]);
 
                 Payments::create(['order_id' => $order->order_id,
                     'amount' => $order->total_price,

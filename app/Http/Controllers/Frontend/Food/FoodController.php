@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
 use App\Models\Food\FoodItem;
 use App\Models\Food\FoodItemCosting;
+use App\Models\Order\Order;
 use App\Models\ProfileInformation;
 use App\Models\User;
 use Auth;
@@ -93,10 +94,17 @@ class FoodController extends Controller
             } else {
                 $food_details->closed_order = 0;
             }
+
+            /* chcek for order timing */
+            $previousOrders = Order::where('food_item_id', $food_item_id);
+            $placedOrderTiming = [];
+            if (!empty($previousOrders)) {
+                $placedOrderTiming = $previousOrders->pluck('time')->toArray();
+            }
         } else {
             return back();
         }
-        return view('frontend.food.details', ['food_details' => $food_details, 'foodImages' => $foodImages, 'foodCosting' => $foodCosting, 'cost' => $cost, 'time_of_availability' => $time_of_availability, 'commission' => $commission]);
+        return view('frontend.food.details', ['food_details' => $food_details, 'foodImages' => $foodImages, 'foodCosting' => $foodCosting, 'cost' => $cost, 'time_of_availability' => $time_of_availability, 'commission' => $commission, 'placedOrderTiming' => $placedOrderTiming]);
     }
 
     // view of food creation form
@@ -186,6 +194,7 @@ class FoodController extends Controller
                         'start_publication_time' => $start_time,
                         'end_publication_date' => $end_date,
                         'end_publication_time' => $end_time,
+                        'quantity' => $input['quantity'],
                     ]);
 
                     /* updating food images */
@@ -252,6 +261,8 @@ class FoodController extends Controller
                     'start_publication_time' => $start_time,
                     'end_publication_date' => $end_date,
                     'end_publication_time' => $end_time,
+                    'quantity' => $input['quantity'],
+
                 ]);
 
                 $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
@@ -311,6 +322,7 @@ class FoodController extends Controller
             'time_of_availability' => 'required',
             'start_publication_date' => 'required',
             'end_publication_date' => 'required',
+            'quantity' => 'required',
 
         ]);
     }
@@ -326,6 +338,8 @@ class FoodController extends Controller
             'price' => 'required|numeric',
             'start_publication_date' => 'required',
             'end_publication_date' => 'required',
+            'quantity' => 'required',
+
         ]);
     }
 
@@ -334,20 +348,6 @@ class FoodController extends Controller
     {
         return Validator::make($request, [
             'time_of_availability' => 'required',
-        ]);
-    }
-
-    //VALIDATOR FOR CREATE FOOD ITEM
-    protected function validator($request)
-    {
-        return Validator::make($request, [
-            'item_name' => 'required',
-            'food_description' => 'required',
-            'category_id' => 'required',
-            'time_of_availability' => 'required',
-            'date_of_availability' => 'required',
-            'price' => 'required|numeric',
-            // 'short_info' => 'required',
         ]);
     }
 

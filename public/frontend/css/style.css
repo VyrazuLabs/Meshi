@@ -790,3 +790,31 @@ so   it doesn’t make the test unnecessarily selective */
   .profile-review-heading{
     margin-bottom: 1.2em;
   }
+  .qty_header{
+    padding-right: 0;
+    text-align: center;
+  }
+  .form-control-select-b{
+    border: 1px solid #fff !important;
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    height: 40px;
+  }
+  .form-control-label p{
+    margin-top: 11px;
+  }
+  .form-control-label{
+    border-right: 1px solid #e3e3e3;
+  }
+  .form-control-all-b{
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    padding-left: 0;
+    padding-bottom: 0;
+    height: 44px;
+  }
+  .form-control-select-p{
+    padding: 0; 
+  }
+

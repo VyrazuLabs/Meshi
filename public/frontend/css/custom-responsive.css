@@ -24,3 +24,8 @@
 		padding: 43px 6px;	
 	}
 }
+@media (max-width: 1000px ){
+    .select-your-time-pl-0{
+    	padding: 0;
+    }
+}

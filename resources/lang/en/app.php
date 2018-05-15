@@ -188,5 +188,9 @@ return [
     'male' => 'male',
     'female' => 'female',
     'other' => 'other',
+    'Quantity' => 'Quantity',
+    'QTY' => 'QTY',
+    'Stock' => 'Stock',
+    'Out Of Stock' => 'Out Of Stock',
 
 ];

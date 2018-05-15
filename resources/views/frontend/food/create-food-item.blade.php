@@ -179,6 +179,19 @@
 						@endif
 	                </div>
 
+	                <div class="form-group form-custom-group">
+	                  	<label>{{ trans('app.Quantity') }} <span>*</span></label>
+						{!! Form::text('quantity', null,
+						    array(
+						          'class'=>'form-control',
+						          'id' => 'quantityId')) !!}
+						@if ($errors->has('quantity'))
+						  	<span class="help-block">
+						      <strong class="strong t-red">{{ $errors->first('quantity') }}</strong>
+						  	</span>
+						@endif
+	                </div>
+
 	                <div class="col-lg-12 col-xs-12 p-0 float-left">
                   		<div class="start-time-id float-left">
                   			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
@@ -286,6 +299,17 @@
 
   	//FOOD PRICE FIELD SHOULD BE NUMERIC
   	$('#priceId').keypress(function (e) {
+    	var regex = new RegExp("^[0-9-]+$");
+    	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    	if (regex.test(str)) {
+      		return true;
+    	}
+    	e.preventDefault();
+    	return false;
+  	});
+
+  	//QUANTITY SHOULD BE NUMERIC
+  	$('#quantityId').keypress(function (e) {
     	var regex = new RegExp("^[0-9-]+$");
     	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
     	if (regex.test(str)) {

@@ -178,5 +178,9 @@ return [
     'male' => '男性',
     'female' => '女性',
     'other' => 'その他',
+    'Quantity' => '注文数',
+    'QTY' => '注文数',
+    'Stock' => '株式',
+    'Out Of Stock' => '在庫切れ',
 
 ];
