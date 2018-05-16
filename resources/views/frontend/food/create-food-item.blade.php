@@ -195,7 +195,7 @@
 	                <div class="col-lg-12 col-xs-12 p-0 float-left">
                   		<div class="start-time-id float-left">
                   			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
-                      			<label>Start Publication Date<span>*</span></label>
+                      			<label>{{ trans('app.Start Publication Date') }}<span>*</span></label>
                       			<!-- <input type="text" class="form-control food-item-date" name=""> -->
                       			{!! Form::text('start_publication_date', null,
 						    array(
@@ -203,7 +203,7 @@
                     		</div>
 		                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 		                      <div class="ad-mre-btn pull-right"></div>
-		                      <label>End Publication Date<span>*</span></label>
+		                      <label>{{ trans('app.End Publication Date') }}<span>*</span></label>
 		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
 		                      <!-- <input type="text" class="form-control food-item-date"> -->
 		                      {!! Form::text('end_publication_date', null,

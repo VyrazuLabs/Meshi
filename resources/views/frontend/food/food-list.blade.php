@@ -27,15 +27,15 @@
 								<div class="cart-item">
 									<div class="col-lg-9 col-md-9 col-xs-12 p-0">
 										<h3 class="t-black cart-item-title">{{$food->item_name}}</h3>
-										<h5><span><strong class="t-orange">Category:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> Date:</strong> {{$food->date}}</span></h5>
-										<h5 class="t-black"><strong>Description</strong></h5>
+										<h5><span><strong class="t-orange">{{ trans('app.Category') }}:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> {{ trans('app.Date') }}:</strong> {{$food->date}}</span></h5>
+										<h5 class="t-black"><strong>{{ trans('app.Description') }}</strong></h5>
 										<p class="mb-0">{{$food->food_description}}</p>
 									</div>
 									<div class="col-lg-3 col-md-3 col-xs-12 p-0 food-creator-pricebtn">
-										<h3 class="t-orange text-right mt-0">Price ¥{{$food->price}}</h3>
+										<h3 class="t-orange text-right mt-0">{{ trans('app.Price') }} ¥{{$food->price}}</h3>
 										<div class="food-creator-btn-group float-right">
-											<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">Remove</a>
-											<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">Edit</a>
+											<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">{{ trans('app.Remove') }}</a>
+											<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">{{ trans('app.Edit') }}</a>
 										</div>
 									</div>
 								</div>

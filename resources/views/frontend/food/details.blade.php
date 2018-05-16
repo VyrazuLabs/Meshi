@@ -141,7 +141,7 @@
 												@if($food_details->quantity>0)
 												<div class="col-md-5 form-control-all-b">
 													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 form-control-label">
-													<p>Qty:</p>
+													<p>{{ trans('app.QTY') }}:</p>
 													</div>
 													<div class="form-group col-md-8  col-lg-8 col-sm-8 col-xs-8 form-control-select-p">
 													@php $i = $food_details->quantity; @endphp

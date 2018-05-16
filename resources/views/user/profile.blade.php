@@ -174,7 +174,7 @@
 										<div class="ad-meta">
 											<div class="meta-content">
 												@if($food->closed_order == 1)
-													<span class="dated">Order Closed</span>
+													<span class="dated">{{ trans('app.Order Closed') }}</span>
 												@else
 													<span class="dated">{{$food->date}}</span>
 												@endif
