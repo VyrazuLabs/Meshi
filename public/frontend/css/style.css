@@ -240,9 +240,10 @@ iframe{
   padding-right: 15px;
  }
  .profile-images {    
-  height: 200px;    
-  width: 200px;    
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+   height: 200px;  
+   width: 200px;  
+   box-shadow: 0 2px 11px 0 rgba(0,0,0,.16), 0 2px 8px 4px rgba(0,0,0,.12);  
+   border: 11px solid #fff;
 }
 .profile-title-description {    
   color: #fff;    
@@ -275,6 +276,7 @@ iframe{
 .profilecover-imgs{    
   position: relative;    
   margin-bottom: 1em;
+  height: 34em;
 }
 .signin-btn{
   margin-bottom: 15px;

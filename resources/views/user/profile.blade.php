@@ -30,13 +30,13 @@
 				@endif
 					<div class="col-lg-12 col-xs-12 p-0 profilecover-imgs">
 						<div class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(<?php echo $url; ?>);">
-							<!-- <div class="col-md-9 profile-image-div text-center">
+							<div class="col-md-9 profile-image-div text-center">
 								@if(!empty($user->image))
 									<img src="{{url('/uploads/profile/picture/'.$user->image)}}" class="img-circle profile-images">
 								@else
 									<img src="{{url('/uploads/profile/picture/'.$food->image)}}" class="img-circle">
 								@endif
-							</div> -->
+							</div>
 						</div>
 					</div>
 

@@ -106,10 +106,8 @@
                               <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Review') }}</button>
                             @else
                               <button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
-
                             @endif
                             </div>
-
                           </div>
                         </div>
                       </div>
@@ -127,9 +125,9 @@
               <div class="empty-cart-img">
                 <img src="{{url('/frontend/images/empty-food-list.jpg')}}" class="img-responsive m-auto">
               </div>
-              <p class="t-orange empty-cart-text">Oops your Order list is empty</p>
+              <p class="t-orange empty-cart-text">{{ trans('app.Oops your Order list is empty') }}</p>
               <div class="col-lg-12 col-xs-12 p-0 text-center cart-order-btn-div">
-                <a href="{{ url('/')}}" class="btn back-orange cart-order-btn">Continue Shopping</a>
+                <a href="{{ url('/')}}" class="btn back-orange cart-order-btn">{{ trans('app.Continue Shopping') }}</a>
               </div>
             </div>
           </div>
@@ -154,18 +152,12 @@
         var lesstext = "less";
         $('.more').each(function() {
           var content = $(this).html();
-
           if(content.length > showChar) {
-
             var c = content.substr(0, showChar);
             var h = content.substr(showChar-1, content.length - showChar);
-
             var html = c + '<span class="moreelipses">'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
-
-
             $(this).html(html);
           }
-
         });
 
         $(".morelink").click(function(){
@@ -234,15 +226,10 @@
           if(content.length > showChar) {
             var c = content.substr(0, showChar);
             var h = content.substr(showChar-1, content.length - showChar);
-
             var html = c + '<span class="moreelipses">'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
-
-
             $(this).html(html);
           }
-
         });
-
         $(".morelink").click(function(){
           if($(this).hasClass("less")) {
             $(this).removeClass("less");

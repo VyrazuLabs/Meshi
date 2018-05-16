@@ -216,5 +216,16 @@ return [
     'See Eater Review' => 'See Eater Review',
     'Reviewed' => 'Reviewed',
     'Review' => 'Review',
+    'Delivery Time' => 'Delivery Time',
+    'Continue Shopping' => 'Continue Shopping',
+    'Oops your purchased list is empty' => 'Oops your purchased list is empty',
+    'Oops your Order list is empty' => 'Oops your Order list is empty',
+    'Oops your food list is empty' => 'Oops your food list is empty',
+    'Status' => 'Status',
+    'Order Date' => 'Order Date',
+    'Paid' => 'Paid',
+    'Communication' => 'Communication',
+    'Write a review description' => 'Write a review description',
+    'Food Quality' => 'Food Quality',
 
 ];

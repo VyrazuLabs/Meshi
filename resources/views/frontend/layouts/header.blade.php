@@ -15,7 +15,7 @@
 				</div>
 				<!-- /navbar-header -->
 				<div class="navbar-left">
-					<div class="collapse navbar-collapse" id="navbar-collapse">
+					<div class="collapse navbar-collapse pr-0" id="navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
 							@if(Auth::user() && Auth::user()->type == 1)
@@ -41,7 +41,7 @@
 				</div>
 
 				<!-- nav-right -->
-				<div class="nav-right">
+				<div class="navbar-right navbar-rightside-list">
 					<!-- language-dropdown -->
 					<!-- <div class="dropdown language-dropdown">
 						<i class="fa fa-globe"></i>
@@ -66,19 +66,22 @@
 							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
 							<li><a href="{{ url('/user/register') }}"> {{ trans('app.Sign Up here') }} </a></li>
 						@endif
+						<li>
+							<div class="language-box ">
+								@php
+									$choose_type = trans('app.Select Language');
+									$japanese = trans('app.Japanese');
+									$langName =[];
+									if(Session::has('lang_name')) {
+										$langName = Session::get('lang_name');
+									}
+								@endphp
+								{{ Form::select('language', ['ja' => $japanese,'en' => 'English'], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
+							</div>
+						</li>
 					</ul><!-- sign-in -->
 
-					<div class="language-box ">
-						@php
-							$choose_type = trans('app.Select Language');
-							$japanese = trans('app.Japanese');
-							$langName =[];
-							if(Session::has('lang_name')) {
-								$langName = Session::get('lang_name');
-							}
-						@endphp
-						{{ Form::select('language', ['ja' => $japanese,'en' => 'English'], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
-					</div>
+
 				</div>
 				<!-- nav-right -->
 			</div><!-- container -->

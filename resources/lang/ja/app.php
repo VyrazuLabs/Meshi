@@ -206,5 +206,17 @@ return [
     'See Eater Review' => 'イーターレビューを見る',
     'Reviewed' => '審査',
     'Review' => 'レビュー',
+    'Delivery Time' => '納期',
+    'Continue Shopping' => 'ショッピングを続ける',
+    'Oops your purchased list is empty' => 'あなたの購入したリストは空です',
+    'Oops your Order list is empty' => 'ご注文リストが空です',
+    'Oops your food list is empty' => 'あなたの食べ物のリストは空です',
+    'Status' => '状態',
+    'Order Date' => '注文日',
+    'Paid' => '有料',
+    'Communication' => 'コミュニケーション',
+    'Write a review description' => 'レビューを書く',
+    'Food Quality' => '食品の品質',
+    'Delivery' => '配達',
 
 ];
