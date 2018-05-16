@@ -27,7 +27,7 @@
             <tbody>
             @php $i=1;  @endphp
             @foreach($users as $user)
-            
+
               <tr>
                 <td>{{$i++}}</td>
                 <td>{{$user->name}}</td>
@@ -53,7 +53,7 @@
                 </td>
               </tr>
             @endforeach
-            
+
             </tbody>
           </table>
         </div>
@@ -65,8 +65,9 @@
 @section('add-js')
 <script type="text/javascript">
     $(function () {
-      $("#user_listing").DataTable();
+      $("#user_listing").DataTable({
+        stateSave: true
+      });
     });
   </script>
 @endsection
-
