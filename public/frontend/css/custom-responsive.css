@@ -34,3 +34,8 @@
     	margin-top: 60px;
     }
 }
+@media (max-width: 767px ){	
+	.navbar-rightside-list{		
+		text-align: right;	
+	}
+}
