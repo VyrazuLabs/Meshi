@@ -74,6 +74,7 @@ class FrontendController extends Controller
             ->where('status', 1)
             ->orderBy('date_of_availability', 'DESC')
             ->get();
+
         if (!empty($closed_foods)) {
             $i = 1;
             foreach ($closed_foods as $key => $food) {
@@ -85,6 +86,7 @@ class FrontendController extends Controller
                 // $food->dateBegin = $dateBegin;
                 // $food->dateEnd = $dateEnd;
                 $user = User::where('user_id', $food->offered_by)->first();
+
                 if ($user->status == 1) {
                     $food->user_status = 1;
                 } else {

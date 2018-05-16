@@ -192,5 +192,12 @@ return [
     'QTY' => 'QTY',
     'Stock' => 'Stock',
     'Out Of Stock' => 'Out Of Stock',
+    'Sun' => 'Sun',
+    'Mon' => 'Mon',
+    'Tue' => 'Tue',
+    'Wed' => 'Wed',
+    'Thu' => 'Thu',
+    'Fri' => 'Fri',
+    'Sat' => 'Sat',
 
 ];

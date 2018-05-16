@@ -20,10 +20,9 @@
 				</ol><!-- breadcrumb -->
 				<h2 class="title">{{ trans('app.Purchased List') }}</h2>
 			</div>
-
+			@if(count($orders)>0)
 			<div class="col-lg-12 col-xs-12 p-0">
 				<div class="section cart-section boxes-card">
-					@if(!empty($orders))
 						@foreach($orders as $order)
 							<div class="col-lg-12 cart-box p-0">
 								<div class="cart-item">
@@ -85,7 +84,6 @@
 								</div>
 							</div>
 						@endforeach
-					@endif
 					<div class="col-lg-12 text-center cart-box p-0">
 						<div class="cart-item">
 							<ul class="pagination ">
@@ -95,6 +93,23 @@
 					</div>
 				</div>
 			</div>
+			@else
+			<div class="col-lg-12 col-xs-12 text-center p-0">
+					<div class="section boxes-card">
+						<div class="col-md-6 float-none d-inline-block">
+							<div class="empty-cart-img">
+								<img src="{{url('/frontend/images/empty-food-list.jpg')}}" class="img-responsive m-auto">
+							</div>
+							<p class="t-orange empty-cart-text">Oops your purchased list is empty</p>
+
+							<div class="col-lg-12 col-xs-12 p-0 text-center cart-order-btn-div">
+								<a href="{{ url('/')}}" class="btn back-orange cart-order-btn">Continue Shopping</a>
+							</div>
+						</div>
+					</div>
+			</div>
+			@endif
+
 		</div>
 	</div>
 </section>
@@ -199,7 +214,8 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
             	data = jQuery.parseJSON(data);
 	            $('#creator-review-description').html(data['review']);
         		$('#creator-name').html(data['name']);
-
+        		var url = '{{ url("/uploads/profile/picture") }}';
+        		$('#creatorImage').html('<img src="'+ url + '/' + data['image'] + '" class="img-responsive see-eater-review-box-pic">' );
         	}
       	});
 	}

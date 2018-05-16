@@ -213,7 +213,7 @@
 							<div class="col-md-9">
 								<div class="">
 									<h4>{{ trans('app.FoodDescription') }}</h4>
-									<p>{{$food_details->food_description}}</p>
+									<p>@php echo nl2br($food_details->food_description); @endphp</p>
 								</div>
 							</div>
 						</div>

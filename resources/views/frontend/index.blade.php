@@ -125,12 +125,15 @@
                                         @php
                                             $current_date = date("Y-m-d");
                                             $tomorrow = date('Y-m-d', strtotime($current_date . ' +1 day'));
+                                            $currentDay = WeekDaysName::days()['currentDay'];
+                                            $tomorrowDay = WeekDaysName::days()['tomorrowDay'];
                                         @endphp
-
                                         @if($food->date == $current_date)
-                                            <span class="dated">{{ trans('app.Today') }}</span>
+                                            <span class="dated">{{ trans('app.Today') }}
+                                            ({{$current_date}} {{$currentDay}} )</span>
                                         @elseif($food->date == $tomorrow)
-                                            <span class="dated">{{ trans('app.Tomorrow') }}</span>
+                                            <span class="dated">{{ trans('app.Tomorrow') }}
+                                            ({{$tomorrow}} {{$tomorrowDay}})</span>
                                         @else
                                             <span class="dated">{{$food->date}}</span>
                                         @endif
