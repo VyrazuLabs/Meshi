@@ -91,11 +91,11 @@
 										<!-- price -->
 										<div class="short-info details-info">
 											<h4>{{ trans('app.Price') }}</h4>
-											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right" ><strong>¥ <span id="new-price">{{$food_details->price}}</span></strong></span></p>
-											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ <span id="new-commission">{{$commission}}</span></strong>
+											<p class="detail-price-list"><strong>{{ trans('app.Price') }}: </strong><span class="float-right" ><strong>¥ <span id="new-price" class="t-black">{{$food_details->price}}</span></strong></span></p>
+											<p class="detail-price-list"><strong>{{ trans('app.Commission') }}: </strong><span class="float-right"><strong>¥ <span id="new-commission" class="t-black">{{$commission}}</span></strong>
 											</span></p>
 											<div class="price-line"></div>
-											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ <span id="new-cost">{{$cost}}</span></strong></span></p>
+											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ <span id="new-cost" class="t-black">{{$cost}}</span></strong></span></p>
 											<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
 											<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 										</div>
@@ -139,20 +139,16 @@
 													</div>
 												</div>
 												@if($food_details->quantity>0)
-												<div class="col-md-5 form-control-all-b">
-													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 form-control-label">
-													<p>{{ trans('app.QTY') }}:</p>
-													</div>
-													<div class="form-group col-md-8  col-lg-8 col-sm-8 col-xs-8 form-control-select-p">
-													@php $i = $food_details->quantity; @endphp
-														<select class="form-control form-control-select-b" name="quantity" onchange="calculatePricing(this);">
+												<div class="input-group form-group">
+												  <span class="input-group-addon" id="basic-addon1">{{ trans('app.QTY') }}:</span>
+												  @php $i = $food_details->quantity; @endphp
+														<select class="form-control" name="quantity" onchange="calculatePricing(this);">
 															@php
 																for ($i = 1; $i <= $food_details->quantity; $i++) {
 																	echo "<option value=$i>$i</option>";
 																}
 															@endphp
 														</select>
-													</div>
 												</div>
 												@endif
 												<div class="col-md-12 p-0">
