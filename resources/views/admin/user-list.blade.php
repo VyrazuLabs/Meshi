@@ -12,7 +12,7 @@
     <div class="box box-custom-main">
       <div class="box-body">
         <div class="table-responsive table-responsive-custom">
-          <table id="user_listing" class="table table-bordered table-hover">
+          <table id="user_listing" class="table table-bordered table-hover" data-order='[[ 1, "asc" ]]' data-page-length='100'>
             <thead>
             <tr>
               <th>Sl. No.</th>
