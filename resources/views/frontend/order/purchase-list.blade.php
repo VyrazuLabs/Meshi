@@ -74,7 +74,7 @@
 												<a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodCreatorReviewModal" data-attr="{{ $order->order_id }}" onclick="showCreatorReview(this)">{{ trans('app.See Creator Review') }}</a>
 											@endif
 												@if($order->review_status == 0 && $order->closed_order == 1)
-													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Review') }}</button>
+													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Make Review') }}</button>
 												@elseif($order->review_status == 1)
 													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
 												@endif

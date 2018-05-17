@@ -15,7 +15,7 @@
                   <!-- food quality rating -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">{{ trans('app.Food Quality')
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Food Quality')
                       }}</h3>
                       {!! Form::hidden('quality_ratings', null,array('id'=>'qualityRatingId')) !!}
                     </div>
@@ -35,7 +35,7 @@
                   <!-- food delivery rating -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">{{ trans('app.Delivery') }}</h3>
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Delivery') }}</h3>
                       {!! Form::hidden('delivery_ratings', null,array('id'=>'deliveryRatingId')) !!}
                     </div>
                     <div class="mb-0 rating d-inline-block">
@@ -54,7 +54,7 @@
                   <!-- food communication ratings -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
                     <div class="d-inline-block">
-                      <h3 class="m-0 t-black review-text">{{ trans('app.Communication') }}</h3>
+                      <h3 class="m-0 t-black review-text">{{ trans('app.Review of Communication') }}</h3>
                       {!! Form::hidden('communication_ratings', null,array('id'=>'communicationRatingId')) !!}
                     </div>
                     <div class="mb-0 rating d-inline-block">
@@ -72,13 +72,13 @@
                   </div>
                 </div>
                 @php
-                  $eaterReviewPlaceholder = trans('app.Write a review description');
+                  $eaterReviewPlaceholder = trans('app.Enter Your Review Description For Creator');
                 @endphp
                 <div class="form-group eater-review-group">
                   <textarea class="form-control eater_reviews" rows="8" placeholder="{{$eaterReviewPlaceholder}}" name="review_description"></textarea>
                 </div>
                 <div class="form-group text-center mb-0">
-                  <button type="button" class="btn back-orange communication-submit-btn store-reviews">{{ trans('app.Submit') }}</button>
+                  <button type="button" class="btn back-orange communication-submit-btn store-reviews">{{ trans('app.Submit Review') }}</button>
                 </div>
               </div>
           {!! Form::close() !!}
@@ -119,7 +119,7 @@
               </div>
             </div>
             @php
-              $eaterReviewPlaceholder = trans('app.Write a review description');
+              $eaterReviewPlaceholder = trans('app.Enter Your Review Description For Eater');
             @endphp
             <div class="form-group eater-review-group md-forms">
               <textarea class="form-control communication_details" rows="8" placeholder="{{$eaterReviewPlaceholder}}" name="communication_description" ></textarea>

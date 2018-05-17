@@ -55,7 +55,6 @@ return [
     'Introduction' => 'Introduction',
     'Message From' => 'Message From sharemeshi',
     'Some Information' => 'Some Information',
-    'Delivery' => 'Delivery',
     'On schedule time' => 'On schedule time',
     'More foods by' => ' More foods by',
     '100% Fresh' => '100% Fresh',
@@ -215,7 +214,7 @@ return [
     'See Creator Review' => 'See Creator Review',
     'See Eater Review' => 'See Eater Review',
     'Reviewed' => 'Reviewed',
-    'Review' => 'Review',
+    'Make Review' => 'Review',
     'Delivery Time' => 'Delivery Time',
     'Continue Shopping' => 'Continue Shopping',
     'Oops your purchased list is empty' => 'Oops your purchased list is empty',
@@ -226,6 +225,11 @@ return [
     'Paid' => 'Paid',
     'Communication' => 'Communication',
     'Write a review description' => 'Write a review description',
-    'Food Quality' => 'Food Quality',
-
+    'Review of Food Quality' => 'Food Quality',
+    'Review of Delivery' => 'Delivery',
+    'Review of Communication' => 'Communication',
+    'Enter Your Review Description For Eater' => '評価の内容について記載してください。この内容はメシイーターさんに公開される情報になります',
+    'Enter Your Review Description For Creator' => '評価の内容について記載してください。この内容はメシクリエーターさんに公開される情報になります',
+    'Submit Review' => 'Submit',
+    'crop' => 'Image Crop'
 ];
