@@ -458,7 +458,7 @@
 					                    	</span>
 					                  	@endif
 		                       			<div class="" id="alreadyExistImage">
-		                          			<div class="col-md-12 preview-step1">
+		                          			<div class="col-md-12 p-0 preview-step1">
 		                            			<div class="img-preview">
 		                          					@if($form_type == 'edit' && !empty($user->image))
 					                                	<img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" />
@@ -479,7 +479,7 @@
 		                          			<!-- </div> -->
 		                       			</div>
 				                       	<div class="user-crop-image" id="cropWrapper">
-				                        	<div class="col-md-12">
+				                        	<div class="col-md-12 p-0">
 				                          		<div id="cropImage" style="">
 				                            		<img src="" alt="" style="" class="">
 				                          		</div>
@@ -588,7 +588,7 @@
 	          var reader = new FileReader();
 
 	          reader.onload = function (e) {
-	          	$('.user-crop-image').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">'+translatedData+'</button></div>');
+	          	$('.user-crop-image').prev().append('<div class="col-md-12 p-0 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">'+translatedData+'</button></div>');
 	              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
 	              $('#cropImage').html(_html);
 

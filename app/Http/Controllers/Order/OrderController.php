@@ -47,7 +47,7 @@ class OrderController extends Controller
         $orders = Order::where('status', 1)
             ->where('ordered_by', Auth::User()->user_id)
             ->orderBy('date_of_delivery', 'DESC')
-            ->paginate(3);
+            ->paginate(20);
 
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
