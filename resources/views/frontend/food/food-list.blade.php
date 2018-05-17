@@ -37,7 +37,12 @@
 									<div class="col-lg-3 col-md-3 col-xs-12 p-0 food-creator-pricebtn">
 										<h3 class="t-orange text-right mt-0">{{ trans('app.Price') }} ¥{{$food->price}}</h3>
 										<div class="food-creator-btn-group float-right">
+										@php
+                                            $current_date = date("Y-m-d");
+                                        @endphp
+                                        @if($food->date >= $current_date)
 											<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">{{ trans('app.Remove') }}</a>
+										@endif
 											<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">{{ trans('app.Edit') }}</a>
 										</div>
 									</div>
