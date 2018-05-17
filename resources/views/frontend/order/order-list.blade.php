@@ -103,7 +103,7 @@
                                 <a href="#" class="food-creator-review-text" data-toggle="modal" data-target="#FoodEaterReviewModal" data-attr="{{ $order->order_id }}" onclick="showEaterReview(this)">{{ trans('app.See Eater Review') }}</a>
                               @endif
                             @if($order->review_status == 0)
-                              <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Review') }}</button>
+                              <button type="button" class="btn text-right back-orange t-white creator-review-btn" data-toggle="modal" data-target="#creatorreviewmodal" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Make Review') }}</button>
                             @else
                               <button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
                             @endif

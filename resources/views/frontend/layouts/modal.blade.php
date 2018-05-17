@@ -125,7 +125,7 @@
               <textarea class="form-control communication_details" rows="8" placeholder="{{$eaterReviewPlaceholder}}" name="communication_description" ></textarea>
             </div>
             <div class="form-group text-center mb-0">
-              <button type="button" class="btn back-orange communication-submit-btn creator-communication">{{ trans('app.Submit') }}</button>
+              <button type="button" class="btn back-orange communication-submit-btn creator-communication">{{ trans('app.Submit Review') }}</button>
             </div>
           </form>
         </div>

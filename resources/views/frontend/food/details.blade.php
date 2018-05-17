@@ -104,9 +104,6 @@
 
 										<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Date of Delivery') }}:</span><span style="font-size: 18px;"><a href="#" id="delivery-date"> {{$food_details->date}}</a></span></p>
 
-										@if($food_details->quantity>0)
-											<p class="icon detail-price-list"><span class="detail-date">{{ trans('app.Stock') }}:</span><span style="font-size: 18px;"><a href="#" id="delivery-date"> {{$food_details->quantity}}</a></span></p>
-										@endif
 										<!-- contact-with -->
 
 										<div class="contact-with">
@@ -140,7 +137,7 @@
 												</div>
 												@if($food_details->quantity>0)
 												<div class="input-group form-group">
-												  <span class="input-group-addon" id="basic-addon1">{{ trans('app.QTY') }}:</span>
+												  <span class="input-group-addon" id="basic-addon1">{{ trans('app.QTY') }}</span>
 												  @php $i = $food_details->quantity; @endphp
 														<select class="form-control" name="quantity" onchange="calculatePricing(this);">
 															@php
