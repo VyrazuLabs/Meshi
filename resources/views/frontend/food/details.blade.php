@@ -26,6 +26,10 @@
 
 			<div class="section slider">
 				<div class="row">
+				@php
+					$invalid_qty_msg = TranslatedResources::translatedData()['invalid_qty_msg'];
+					$order_validation_msg = TranslatedResources::translatedData()['order_validation_msg'];
+				@endphp
 					@if(!empty($foodImages))
 						@php $size = sizeof($foodImages); @endphp
 						@if($size > 1)
@@ -278,98 +282,84 @@
 @endsection
 
 @section('add-js')
-	@php
-    	$langName =[];
-      	if(Session::has('lang_name')) {
-        	$langName = Session::get('lang_name');
-      	}
-    @endphp
-    @if($langName == 'en')
-    	<script type="text/javascript">
-    		var quantityErrorMsg = 'Invalid order quantity';
-    		var valdationErrorMsg = 'Something went wrong. please try again';
-    	</script>
-    @else
-    	<script type="text/javascript">
-    		var quantityErrorMsg = '無効 注文数';
-    		var valdationErrorMsg = '何かが間違っていた。もう一度お試しください';
-    	</script>
-    @endif
+
 <script type="text/javascript">
+	var quantityErrorMsg = '{{$invalid_qty_msg}}';
+	var valdationErrorMsg = '{{$order_validation_msg}}';
 
-function calculatePricing(attr){
-    var quantityNumber = $(attr).val();
-    var itemID = $('#foodItemID').val();
+	function calculatePricing(attr){
+	    var quantityNumber = $(attr).val();
+	    var itemID = $('#foodItemID').val();
 
-    $.ajax({
-	    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-	    data: JSON.stringify({quantity : quantityNumber,fooditem_id : itemID}),
-	    type: 'POST',
-	    url: "{{ url('order/calculate-pricing') }}",
-	     contentType: "application/json",
-        processData: false,
-	    success: function(result) {
-          result = $.parseJSON(result);
-	    	$('#new-commission').text(result.commission);
-	    	$('#new-cost').text(result.total_cost);
-	    	$('#new-price').text(result.price);
-	    	$('#amountID').val(result.encrypted_cost);
+	    $.ajax({
+		    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+		    data: JSON.stringify({quantity : quantityNumber,fooditem_id : itemID}),
+		    type: 'POST',
+		    url: "{{ url('order/calculate-pricing') }}",
+		     contentType: "application/json",
+	        processData: false,
+		    success: function(result) {
+	          result = $.parseJSON(result);
+		    	$('#new-commission').text(result.commission);
+		    	$('#new-cost').text(result.total_cost);
+		    	$('#new-price').text(result.price);
+		    	$('#amountID').val(result.encrypted_cost);
 
 
-	    }
+		    }
+		});
+
+	}
+
+	//ajax to save the food details in cart table
+	$('.makeOrder').click(function() {
+	  	var form_data = new FormData($("#buy_now_form")[0]);
+	  	order(form_data);
 	});
 
-}
-
-//ajax to save the food details in cart table
-$('.makeOrder').click(function() {
-  	var form_data = new FormData($("#buy_now_form")[0]);
-  	order(form_data);
-});
-
-function order(form_data) {
-	$.ajax({
-	    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-	    data: form_data,
-	    type: 'POST',
-	    url: "{{ url('order/add-to-cart') }}",
-	    contentType: false,
-	    processData: false,
-	    success: function(result) {
-	        result = $.parseJSON(result);
-	    	if(result.quantity_error == 1) {
-	    		if(result.msg = 'exceed limit') {
-	    			new PNotify({
-		              	text: quantityErrorMsg,
+	function order(form_data) {
+		$.ajax({
+		    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+		    data: form_data,
+		    type: 'POST',
+		    url: "{{ url('order/add-to-cart') }}",
+		    contentType: false,
+		    processData: false,
+		    success: function(result) {
+		        result = $.parseJSON(result);
+		    	if(result.quantity_error == 1) {
+		    		if(result.msg = 'exceed limit') {
+		    			new PNotify({
+			              	text: quantityErrorMsg,
+				            type: 'error',
+			            });
+		    		}
+		    	}
+		    	else if(result.validation_error == 1) {
+		            new PNotify({
+		              	text: valdationErrorMsg,
 			            type: 'error',
 		            });
-	    		}
-	    	}
-	    	else if(result.validation_error == 1) {
-	            new PNotify({
-	              	text: valdationErrorMsg,
-		            type: 'error',
-	            });
-	        }
-	        else {
-				var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
-	      		window.location.href = url;
-	        }
-	    }
-	});
-}
-function checkForValue(param) {
-	var value = $(param).val();
-	if(value != '') {
-		$('#buy_now_btn').prop('disabled', false);
-		$('#buy_now_btn_bfr_login').attr('disabled', false);
-		$('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
+		        }
+		        else {
+					var url = '{{ url("/order/payment/make-paypal-payment") }}'+ '/' +result.cart_id;
+		      		window.location.href = url;
+		        }
+		    }
+		});
 	}
-	else {
-		$('#buy_now_btn').prop('disabled', true);
-		$('#buy_now_btn_bfr_login').attr('disabled', true);
-		$('#buy_now_btn_bfr_login').attr('href', '#');
-	}
+	function checkForValue(param) {
+		var value = $(param).val();
+		if(value != '') {
+			$('#buy_now_btn').prop('disabled', false);
+			$('#buy_now_btn_bfr_login').attr('disabled', false);
+			$('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
+		}
+		else {
+			$('#buy_now_btn').prop('disabled', true);
+			$('#buy_now_btn_bfr_login').attr('disabled', true);
+			$('#buy_now_btn_bfr_login').attr('href', '#');
+		}
 }
 
 

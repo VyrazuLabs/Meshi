@@ -231,5 +231,7 @@ return [
     'Enter Your Review Description For Eater' => '評価の内容について記載してください。この内容はメシイーターさんに公開される情報になります',
     'Enter Your Review Description For Creator' => '評価の内容について記載してください。この内容はメシクリエーターさんに公開される情報になります',
     'Submit Review' => 'Submit',
-    'crop' => 'Image Crop'
+    'crop' => 'Image Crop',
+    'Video Link(Embed Code)' => 'Video Link(Embed Code)',
+    'Cover Image' => 'Cover Image',
 ];

@@ -8,6 +8,9 @@
 @endsection
 
 @section('content')
+@php
+	$delete_warning_msg = TranslatedResources::translatedData()['delete_warning_msg'];
+@endphp
 <section id="" class="clearfix category-page cart-pages">
 	<div class="col-lg-12 col-xs-12 p-0">
 		<div class="container">
@@ -73,23 +76,8 @@
 @endsection
 
 @section('add-js')
-@php
-  $langName =[];
-  if(Session::has('lang_name')) {
-    $langName = Session::get('lang_name');
-  }
-@endphp
-@if($langName == 'en')
-	<script type="text/javascript">
-		var msg = 'Are you sure to delete it?';
-	</script>
-@elseif($langName == 'ja')
-	<script type="text/javascript">
-		var msg = '削除してもよろしいですか？';
-	</script>
-@endif
-
 <script type="text/javascript">
+	var msg = '{{$delete_warning_msg}}';
     function deleteFood(foodItemId) {
     	var warningMsg = confirm(msg);
         if(warningMsg == true) {

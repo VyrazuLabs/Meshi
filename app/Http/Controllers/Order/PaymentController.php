@@ -28,6 +28,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
+use TranslatedResources;
 use URL;
 
 class PaymentController extends Controller
@@ -141,7 +142,8 @@ class PaymentController extends Controller
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             // \Session::put('error','Payment failed');
             // return Redirect::route('addmoney.paywithpaypal');
-            Session::flash('error', 'Payment failed');
+            $payment_failed_msg = TranslatedResources::translatedData()['payment_failed_msg'];
+            Session::flash('error', $payment_failed_msg);
             return redirect('food/details/' . $foodItemId);
 
         }
@@ -193,9 +195,10 @@ class PaymentController extends Controller
 
                 $cart->delete();
             }
+            $payment_success_msg = TranslatedResources::translatedData()['payment_success_msg'];
 
             \Session::put('success', 'Payment success');
-            Session::flash('success', 'Payment success');
+            Session::flash('success', $payment_success_msg);
 
             //****** CODE FOR MAIL SENDING ******//
             $buyerUserId = Auth::User()->user_id;
@@ -229,7 +232,8 @@ class PaymentController extends Controller
 
             return redirect('/');
         }
-        Session::flash('error', 'Payment failed');
+        $payment_failed_msg = TranslatedResources::translatedData()['payment_failed_msg'];
+        Session::flash('error', $payment_failed_msg);
         return redirect('food/details/' . $foodItemId);
     }
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
+use TranslatedResources;
 use Validator;
 
 class CategoryController extends Controller
@@ -42,7 +43,8 @@ class CategoryController extends Controller
                     'description' => $input['description'],
                     'status' => $input['status'],
                 ]);
-                Session::flash('success', "Updated successfully.");
+                $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
+                Session::flash('success', $updation_success_msg);
                 return back();
             }
             /* create catgory */
@@ -54,7 +56,8 @@ class CategoryController extends Controller
                     'status' => $input['status'],
                     'created_by' => Auth::User()->user_id,
                 ]);
-                Session::flash('success', "Created successfully.");
+                $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
+                Session::flash('success', $creation_success_msg);
                 return back();
             }
         }

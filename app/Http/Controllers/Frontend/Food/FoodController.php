@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Session;
+use TranslatedResources;
 use Validator;
 
 class FoodController extends Controller
@@ -213,7 +214,8 @@ class FoodController extends Controller
                         );
 
                         if ($foodImageValidator->fails()) {
-                            Session::flash('error', "Image should be in jpg,jpeg or png format.");
+                            $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                            Session::flash('error', $image_validation_error);
                             return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
                         } else {
                             foreach ($files as $file) {
@@ -238,7 +240,8 @@ class FoodController extends Controller
                             $food_item->update(['food_images' => serialize($total_images)]);
                         }
                     }
-                    Session::flash('success', "Updated successfully.");
+                    $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
+                    Session::flash('success', $updation_success_msg);
                     return back();
                 }
             }
@@ -290,7 +293,8 @@ class FoodController extends Controller
                         ]
                     );
                     if ($foodImageValidator->fails()) {
-                        Session::flash('error', "Image should be in jpg,jpeg or png format.");
+                        $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                        Session::flash('error', $image_validation_error);
                         return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
                     } else {
                         foreach ($files as $file) {
@@ -304,7 +308,8 @@ class FoodController extends Controller
                         $food->update(['food_images' => serialize($food_images)]);
                     }
                 }
-                Session::flash('success', "Created successfully.");
+                $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
+                Session::flash('success', $creation_success_msg);
                 return back();
             }
         }

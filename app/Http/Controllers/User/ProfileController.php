@@ -8,7 +8,6 @@ use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
 use App\Models\User;
 use Auth;
-use Session;
 
 class ProfileController extends Controller
 {

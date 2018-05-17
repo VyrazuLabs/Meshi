@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
+use TranslatedResources;
 use Validator;
 
 class RegistrationController extends Controller
@@ -80,7 +81,8 @@ class RegistrationController extends Controller
                 if (!empty($input['password'])) {
                     $passwordValidator = $this->passwordValidator($input);
                     if ($passwordValidator->fails()) {
-                        Session::flash('error', "Please enter a valid password.");
+                        $password_validation_error = TranslatedResources::translatedData()['password_validation_error'];
+                        Session::flash('error', $password_validation_error);
                         return redirect()->back()->withErrors($passwordValidator)->withInput();
                     } else {
                         $user->update(['password' => bcrypt($input['password'])]);
@@ -91,7 +93,8 @@ class RegistrationController extends Controller
                 if ($profile->phone_number != $input['phone_number']) {
                     $phone_number_validator = $this->phone_number_validator($input);
                     if ($phone_number_validator->fails()) {
-                        Session::flash('error', "Please enter a valid phone number.");
+                        $phone_validation_error = TranslatedResources::translatedData()['phone_validation_error'];
+                        Session::flash('error', $phone_validation_error);
                         return redirect()->back()->withErrors($phone_number_validator)->withInput();
                     } else {
                         $profile->update(['phone_number' => $input['phone_number']]);
@@ -203,7 +206,8 @@ class RegistrationController extends Controller
                     $profile->update(
                         array('cover_image' => $cover_image));
                 }
-                Session::flash('success', "User updated successfully");
+                $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
+                Session::flash('success', $updation_success_msg);
                 return back();
             }
         } else {
@@ -287,7 +291,8 @@ class RegistrationController extends Controller
                     'city' => $city_name,
                     'deliverable_area' => $deliverableArea,
                 ]);
-                Session::flash('success', "User registered successfully");
+                $successful_registration = TranslatedResources::translatedData()['successful_registration'];
+                Session::flash('success', $successful_registration);
                 if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
                     return redirect('/');
                 }

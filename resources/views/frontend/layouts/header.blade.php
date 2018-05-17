@@ -71,10 +71,7 @@
 								@php
 									$choose_type = trans('app.Select Language');
 									$japanese = trans('app.Japanese');
-									$langName =[];
-									if(Session::has('lang_name')) {
-										$langName = Session::get('lang_name');
-									}
+									$langName = TranslatedResources::translatedData()['lang_name'];
 								@endphp
 								{{ Form::select('language', ['ja' => $japanese,'en' => 'English'], $langName, ['class' => 'head-choose language-select', 'id'=>'languageSwitcher']) }}
 							</div>

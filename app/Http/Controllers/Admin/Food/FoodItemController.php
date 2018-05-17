@@ -10,6 +10,7 @@ use App\Models\ProfileInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Session;
+use TranslatedResources;
 use Validator;
 
 class FoodItemController extends Controller
@@ -105,7 +106,8 @@ class FoodItemController extends Controller
                         );
 
                         if ($foodImageValidator->fails()) {
-                            Session::flash('error', "Image should be in jpg,jpeg or png format.");
+                            $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                            Session::flash('error', $image_validation_error);
                             return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
                         } else {
                             foreach ($files as $file) {
@@ -130,7 +132,8 @@ class FoodItemController extends Controller
                             $food_item->update(['food_images' => serialize($total_images)]);
                         }
                     }
-                    Session::flash('success', "Updated successfully.");
+                    $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
+                    Session::flash('success', $updation_success_msg);
                     return back();
                 }
             }
@@ -183,7 +186,8 @@ class FoodItemController extends Controller
                     );
 
                     if ($foodImageValidator->fails()) {
-                        Session::flash('error', "Image should be in jpg,jpeg or png format.");
+                        $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                        Session::flash('error', $image_validation_error);
                         return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
                     } else {
                         foreach ($files as $file) {
@@ -197,7 +201,8 @@ class FoodItemController extends Controller
                         $food->update(['food_images' => serialize($food_images)]);
                     }
                 }
-                Session::flash('success', "Created successfully.");
+                $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
+                Session::flash('success', $creation_success_msg);
                 return back();
             }
         }
@@ -323,7 +328,8 @@ class FoodItemController extends Controller
 
             //AFTER DELETION UPDATE REMAINING IMAGES
             $new_food_images = $food_item->update(['food_images' => serialize($imgArray)]);
-            Session::flash('success', "Food image deleted.");
+            $deletion_success_msg = TranslatedResources::translatedData()['deletion_success_msg'];
+            Session::flash('success', $deletion_success_msg);
         }
         return redirect()->back();
     }
@@ -352,7 +358,8 @@ class FoodItemController extends Controller
                     'tax_amount' => $input['tax_amount'],
                     'tax_percentage' => $input['tax_percentage'],
                 ]);
-                Session::flash('success', "Updated successfully.");
+                $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
+                Session::flash('success', $updation_success_msg);
                 return back();
             } else {
                 /* create food costings */
@@ -362,7 +369,8 @@ class FoodItemController extends Controller
                     'tax_amount' => $input['tax_amount'],
                     'tax_percentage' => $input['tax_percentage'],
                 ]);
-                Session::flash('success', "Created successfully.");
+                $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
+                Session::flash('success', $creation_success_msg);
                 return back();
             }
         }

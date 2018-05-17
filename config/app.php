@@ -234,6 +234,7 @@ return [
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'WeekDaysName' => App\Helpers\WeekDaysNameTranslation::class,
         'DataTranslation' => App\Helpers\UserDetailsTranslation::class,
+        'TranslatedResources' => App\Helpers\ResourseTranslation::class,
     ],
 
 ];

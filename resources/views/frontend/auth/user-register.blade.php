@@ -17,6 +17,9 @@
 				<!-- user-login -->
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card signin-box">
+						@php
+	      					$crop_button = TranslatedResources::translatedData()['crop_button'];
+	    				@endphp
 						@if ($form_type == 'edit')
 							<h2>{{ trans('app.Profile Edit') }}</h2>
 						@else
@@ -404,14 +407,14 @@
 				                @endif
 				                @if($form_type == 'create')
 					                <div class="form-group form-custom-group food-video-link" style="display: none;">
-					                  <label>Video Link(Embed Code)</label>
+					                  <label>{{ trans('app.Video Link(Embed Code)') }}</label>
 					                  	{!! Form::textarea('video_link', null,
 					                          array('class'=>'form-control','rows'=>'5')) !!}
 					                </div>
 				                @endif
 				                @if(!empty($user->video_link) && $form_type == 'edit' && Auth::User()->type == 1)
 					                <div class="form-group form-custom-group food-video-link">
-					                  <label>Video Link(Embed Code)</label>
+					                  <label>{{ trans('app.Video Link(Embed Code)') }}</label>
 					                  	{!! Form::textarea('video_link', null,
 					                          array('class'=>'form-control','rows'=>'5')) !!}
 					                </div>
@@ -419,7 +422,7 @@
 					            @if ( $form_type == 'edit' )
 					                @if(Auth::User()->type == 1 )
 						                <div class="form-group form-custom-group profile-edit-field">
-						                  	<label>Cover Image<span>*</span></label>
+						                  	<label>{{ trans('app.Cover Image') }}<span>*</span></label>
 						                  	@if( !empty($user->cover_image) )
 							                    <img src="{{ url('/uploads/cover/picture/'.$user->cover_image) }}" style="height: 100px;width: 100px;float: right;" />
 							                @endif
@@ -501,232 +504,224 @@
 @endsection
 
 @section('add-js')
-<script src="{{ url('admin_panel/cropper/dist/cropper.min.js') }}"></script>
 
-<script type="text/javascript">
+	<script src="{{ url('admin_panel/cropper/dist/cropper.min.js') }}"></script>
+	<script type="text/javascript">
+	    var translatedData = '{{$crop_button}}';
 
-	$('#phone').keypress(function (e) {
-	    var regex = new RegExp("^[0-9-]+$");
-	    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-	    if (regex.test(str)) {
-	      return true;
-	    }
-	    e.preventDefault();
-	    return false;
-	});
+		/* code for numeric phone number */
+		$('#phone').keypress(function (e) {
+		    var regex = new RegExp("^[0-9-]+$");
+		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		    if (regex.test(str)) {
+		      return true;
+		    }
+		    e.preventDefault();
+		    return false;
+		});
 
+		/* calling a function onchange of user type option */
+		function types() {
+		  	var userType = $('#select-type').val();
+			var creatorPlaceholder = $('#creatorDescriptionID').val();
+			var eaterPlaceholder = $('#eaterDescriptionID').val();
 
-	//calling a function onchange of user type option
-	function types() {
-	  	var userType = $('#select-type').val();
-		var creatorPlaceholder = $('#creatorDescriptionID').val();
-		var eaterPlaceholder = $('#eaterDescriptionID').val();
+		  	$('.create-reason').show();
+		  	$('.edit-reason').hide();
+			$('.seller').children().children().prop('checked', false);
+			$('.buyer').children().children().prop('checked', false);
+		  	$('.edit-reason .buyer').remove();
+		  	$('.edit-reason .seller').remove();
 
-	  	$('.create-reason').show();
-	  	$('.edit-reason').hide();
-		$('.seller').children().children().prop('checked', false);
-		$('.buyer').children().children().prop('checked', false);
-	  	$('.edit-reason .buyer').remove();
-	  	$('.edit-reason .seller').remove();
-
-	  	if(userType == 1) {
-	  		$('.seller').show();
-	    	$('.buyer').hide();
-	    	$('.food-video-link').show();
-	    	$('.deliverable-area').show();
-	    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
-	    	$('#typeCreator').show();
-	    	$('#typeEater').hide();
-    		$('#descriptionID').prop('placeholder',creatorPlaceholder);
-
-	  	}
-	  	if(userType == 2) {
-	    	$('.buyer').show();
-	  		$('.seller').hide();
-	    	$('.food-video-link').hide();
-	    	$('.deliverable-area').hide();
-	    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
-	    	$('#typeCreator').hide();
-	    	$('#typeEater').show();
-    		$('#descriptionID').prop('placeholder',eaterPlaceholder);
-
-	  	}
-
-	}
-	$(document).ready(function(){
-		initAutocomplete('addressbox');
-
-		if ($('.help-block').length > 0) {
-            types();
+		  	if(userType == 1) {
+		  		$('.seller').show();
+		    	$('.buyer').hide();
+		    	$('.food-video-link').show();
+		    	$('.deliverable-area').show();
+		    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
+		    	$('#typeCreator').show();
+		    	$('#typeEater').hide();
+	    		$('#descriptionID').prop('placeholder',creatorPlaceholder);
+		  	}
+		  	if(userType == 2) {
+		    	$('.buyer').show();
+		  		$('.seller').hide();
+		    	$('.food-video-link').hide();
+		    	$('.deliverable-area').hide();
+		    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
+		    	$('#typeCreator').hide();
+		    	$('#typeEater').show();
+	    		$('#descriptionID').prop('placeholder',eaterPlaceholder);
+		  	}
 		}
-	});
-	function initAutocomplete(selector) {
-		var indexMoveFrom = new google.maps.places.Autocomplete(
-			(document.getElementById(selector)),
-			{types: ['geocode']});
-	}
+
+		/* adding google autocomplete for address field */
+		$(document).ready(function(){
+			initAutocomplete('addressbox');
+			if ($('.help-block').length > 0) {
+	            types();
+			}
+		});
+		function initAutocomplete(selector) {
+			var indexMoveFrom = new google.maps.places.Autocomplete(
+				(document.getElementById(selector)),
+				{types: ['geocode']});
+		}
 
 
-	// code for tool tip
-	$(document).ready(function(){
-  		$('[data-toggle="tooltip"]').tooltip();
-	});
-</script>
-
-<script type="text/javascript">
-
-	var img_src = $('#alreadyExistImage .preview-step1 .img-preview img').attr('src');
-    var field_name = 'profile_img_data';
-    var cropper_aspectRatio = 1/1;
-    var canvas_width = 100;
-    var canvas_height = 200;
-
-    //preview of the selected image
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-          	$('.user-crop-image').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
-              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
-              $('#cropImage').html(_html);
-
-          };
-
-          reader.readAsDataURL(input.files[0]);
-
-          //hide default crop image
-          // $('#defaultUploadImage').hide();
-          // hide input type file
-          $('#uploadFile').hide();
-          //crop wrapper show
-          $('#cropWrapper').show();
-          //clears the existing image
-          $('.custm-input').val('');
-
-          //make the image cropable after 1 sec
-          setInterval(function() {
-            //crop function call
-            makeCropable();
-          }, 500);
-
-      }
-    }
+		/* code for tool tip */
+		$(document).ready(function(){
+	  		$('[data-toggle="tooltip"]').tooltip();
+		});
 
 
-    //hide the close button
-    $('#closeCrop').hide();
-    //hide the default image
-    // $('#defaultUploadImage').hide();
-    //hide the crop div
-    $('#cropWrapper').hide();
+		/* CODE FOR CROP IMAGE FUNCTIONALITY */
+		var img_src = $('#alreadyExistImage .preview-step1 .img-preview img').attr('src');
+	    var field_name = 'profile_img_data';
+	    var cropper_aspectRatio = 1/1;
+	    var canvas_width = 100;
+	    var canvas_height = 200;
 
-    //click on upload button
-    $('#uploadButton').on('click', function() {
-      $('#alreadyExistImage').hide();
-      $('#defaultUploadImage').show();
-      $('#closeCrop').show();
-      // $('.defaultImage').show();
-    });
-    $('#uploadFile').on('click', function() {
-    	$('#closeCrop').show();
-    	$('.preview-step1').hide();
-    });
+	    //preview of the selected image
+	    function readURL(input) {
+	      if (input.files && input.files[0]) {
+	          var reader = new FileReader();
 
-    //click on close button
-    // $('#closeCrop').on('click', function() {
-    //   $(this).hide();
-    //   $('#defaultUploadImage').hide();
-    //   $('#cropImage').hide();
-    //   $('#alreadyExistImage').show();
-    // });
+	          reader.onload = function (e) {
+	          	$('.user-crop-image').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">'+translatedData+'</button></div>');
+	              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
+	              $('#cropImage').html(_html);
+
+	          };
+
+	          reader.readAsDataURL(input.files[0]);
+
+	          //hide default crop image
+	          // $('#defaultUploadImage').hide();
+	          // hide input type file
+	          $('#uploadFile').hide();
+	          //crop wrapper show
+	          $('#cropWrapper').show();
+	          //clears the existing image
+	          $('.custm-input').val('');
+
+	          //make the image cropable after 1 sec
+	          setInterval(function() {
+	            //crop function call
+	            makeCropable();
+	          }, 500);
+
+	      }
+	    }
+
+	    //hide the close button
+	    $('#closeCrop').hide();
+	    //hide the default image
+	    // $('#defaultUploadImage').hide();
+	    //hide the crop div
+	    $('#cropWrapper').hide();
+
+	    //click on upload button
+	    $('#uploadButton').on('click', function() {
+	      	$('#alreadyExistImage').hide();
+	      	$('#defaultUploadImage').show();
+	      	$('#closeCrop').show();
+	      	// $('.defaultImage').show();
+	    });
+	    $('#uploadFile').on('click', function() {
+	    	$('#closeCrop').show();
+	    	$('.preview-step1').hide();
+	    });
+
+	    //click on close button
+	    // $('#closeCrop').on('click', function() {
+	    //   $(this).hide();
+	    //   $('#defaultUploadImage').hide();
+	    //   $('#cropImage').hide();
+	    //   $('#alreadyExistImage').show();
+	    // });
+
+	    //make croppable function
+	    var $image;
+	    // for add employee step 2 page
+	    function makeCropable() {
+			$image = $('#crop-wrapper');
+			var $download = $('#download');
+			var $dataX = $('#dataX');
+			var $dataY = $('#dataY');
+			var $dataHeight = $('#dataHeight');
+			var $dataWidth = $('#dataWidth');
+			var $dataRotate = $('#dataRotate');
+			var $dataScaleX = $('#dataScaleX');
+			var $dataScaleY = $('#dataScaleY');
+			var options = {
+	            aspectRatio: cropper_aspectRatio,
+	            preview: '.img-preview',
+	            zoomable: true,
+	            crop: function (e) {
+	              	$dataX.val(Math.round(e.x));
+					$dataY.val(Math.round(e.y));
+					$dataHeight.val(Math.round(e.height));
+					$dataWidth.val(Math.round(e.width));
+					$dataRotate.val(e.rotate);
+					$dataScaleX.val(e.scaleX);
+	              	$dataScaleY.val(e.scaleY);
+	            }
+	        };
+	      // Tooltip
+	      $('[data-toggle="tooltip"]').tooltip();
+
+	      // Cropper
+	      $image.cropper(options);
+	    }
+
+	    //function image crop
+	    function img_crop() {
+	      	var _canvas = $image.cropper('getCroppedCanvas', {width: canvas_width, height: canvas_height});
+	      	$('#alreadyExistImage .preview-step1 .img-preview').html(_canvas);
+	      	$('.format-buttons').append('<div><button type="button" class="btn btn-success cancelCrop" onclick="cancel_crop()">Cancel</button></div>');
+	      	$('#cropImage').hide();
+	      	$('#alreadyExistImage').show();
+	      	$('.img-preview').css({
+	        	'width': '100px',
+	        	'height': '100px'
+	      	});
+	      	$('#uploadButton').hide();
+	      	$('.preview-step1').show();
+	      	$('#imgCrop').remove();
+	      	$('#closeCrop').remove();
+	      	//save the values in a field
+	      	$('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
+	    }
 
 
+	    //function cancel crop
+	    function cancel_crop() {
+	      	//clear the cropper
+	      	$(this).hide();
+	      	$('#crop-wrapper').cropper("clear");
+	      	$('#imgCrop').remove();
+	      	$('#closeCrop').hide();
+	      	$('.cancelCrop').hide();
+	      	$('#cropImage').show();
+	      	$('#alreadyExistImage').show();
+	      	$('#uploadFile').show();
+	      	$('#cropImage').html('');
+	      	// $('.defaultImage').hide();
+	      	$('#uploadButton').show();
 
-    //make croppable function
-    var $image;
-    // for add employee step 2 page
-    function makeCropable() {
-      $image = $('#crop-wrapper');
-      var $download = $('#download');
-      var $dataX = $('#dataX');
-      var $dataY = $('#dataY');
-      var $dataHeight = $('#dataHeight');
-      var $dataWidth = $('#dataWidth');
-      var $dataRotate = $('#dataRotate');
-      var $dataScaleX = $('#dataScaleX');
-      var $dataScaleY = $('#dataScaleY');
-      var options = {
-            aspectRatio: cropper_aspectRatio,
-            preview: '.img-preview',
-            zoomable: true,
-            crop: function (e) {
-              $dataX.val(Math.round(e.x));
-              $dataY.val(Math.round(e.y));
-              $dataHeight.val(Math.round(e.height));
-              $dataWidth.val(Math.round(e.width));
-              $dataRotate.val(e.rotate);
-              $dataScaleX.val(e.scaleX);
-              $dataScaleY.val(e.scaleY);
-            }
-          };
+	      	//$('#cropImage').html('');
+	      	// $('.postion-abs').show();
+	      	// $('.organization-logo').show();
 
-
-      // Tooltip
-      $('[data-toggle="tooltip"]').tooltip();
-
-      // Cropper
-      $image.cropper(options);
-    }
-
-    //function image crop
-    function img_crop() {
-      var _canvas = $image.cropper('getCroppedCanvas', {width: canvas_width, height: canvas_height});
-      $('#alreadyExistImage .preview-step1 .img-preview').html(_canvas);
-      $('.format-buttons').append('<div><button type="button" class="btn btn-success cancelCrop" onclick="cancel_crop()">Cancel</button></div>');
-      $('#cropImage').hide();
-      $('#alreadyExistImage').show();
-      $('.img-preview').css({
-        'width': '100px',
-        'height': '100px'
-      });
-      $('#uploadButton').hide();
-      $('.preview-step1').show();
-      $('#imgCrop').remove();
-      $('#closeCrop').remove();
-      //save the values in a field
-      $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
-    }
-
-
-    //function cancel crop
-    function cancel_crop() {
-      //clear the cropper
-      $(this).hide();
-      $('#crop-wrapper').cropper("clear");
-      $('#imgCrop').remove();
-      $('#closeCrop').hide();
-      $('.cancelCrop').hide();
-      $('#cropImage').show();
-      $('#alreadyExistImage').show();
-      $('#uploadFile').show();
-      $('#cropImage').html('');
-      // $('.defaultImage').hide();
-      $('#uploadButton').show();
-      console.log('this is a text');
-
-      //$('#cropImage').html('');
-      // $('.postion-abs').show();
-      // $('.organization-logo').show();
-
-      var _html = '<div class="img-preview"><img src="'+img_src+'" id="profile-img" /></div>';
-      $('#alreadyExistImage .preview-step1').html(_html);
-      // $('#crop-container').hide();
-      // $('#uploadButton').show();
-      // // $('#profile-img-container').show();
-      // $('#cancelCrop').hide();
-      // $('#uploadFile').show();
-      // $('#closeCrop').hide();
-    }
-</script>
+	      	var _html = '<div class="img-preview"><img src="'+img_src+'" id="profile-img" /></div>';
+	      	$('#alreadyExistImage .preview-step1').html(_html);
+	      	// $('#crop-container').hide();
+	      	// $('#uploadButton').show();
+	      	// // $('#profile-img-container').show();
+	      	// $('#cancelCrop').hide();
+	      	// $('#uploadFile').show();
+	      	// $('#closeCrop').hide();
+	    }
+	</script>
 @endsection
