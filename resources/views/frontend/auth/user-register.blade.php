@@ -440,9 +440,8 @@
 					            	<div class="form-group form-custom-group profile-edit-field item form-group position-relatv">
 					            @endif
 							            <label> {{ trans('app.Upload Image') }}<span>*</span></label><br/>
-										<p>プロフィール画像には、アイコンなどではなく、顔写真を登録して下さい。
-											シェアメシTOP画面の地図への表示の際には、位置情報は域内でランダムに表示され、住所が特定されることはございませんのでご安心ください。<br/>
-											※ 地図にご登録頂いた写真が表示されるまでには少し時間をいただいております。
+										<p>クリエーターさんとイーターさんのお互いの安心のため、プロフィール画像にはアイコンなどではなくできるだけ顔写真を登録して下さい。<br />
+											プロフィール画像はクリエーターさん、イーターさんのご注文成立時にお互いに見ることができます。
 										</p>
 		                      			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
 				                       	<div class="" id="defaultUploadImage" style="">
