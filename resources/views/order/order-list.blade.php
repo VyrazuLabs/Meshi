@@ -12,7 +12,7 @@
     <div class="box box-custom-main">
       <div class="box-body">
         <div class="table-responsive table-responsive-custom">
-          <table id="order_listing" class="table table-bordered table-hover">
+          <table id="order_listing" class="table table-bordered table-hover" data-page-length='100'>
             <thead>
             <tr>
               <th>Order No.</th>
@@ -56,7 +56,7 @@
   <script type="text/javascript">
     $(function () {
       $("#order_listing").DataTable({
-        "ordering": false
+        "stateSave": true
       });
     });
   </script>

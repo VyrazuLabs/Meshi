@@ -12,10 +12,10 @@
     <div class="box box-custom-main">
       <div class="box-body">
         <div class="table-responsive table-responsive-custom">
-          <table id="feedback_listing" class="table table-bordered table-hover">
+          <table id="feedback_listing" class="table table-bordered table-hover" data-order='[[ 1, "asc" ]]' data-page-length='100'>
             <thead>
             <tr>
-              <th>Sl. No.</th>
+              <th>Sl.No.</th>
               <th>Name</th>
               <th>Email</th>
               <th>View</th>
@@ -41,9 +41,10 @@
 
 @section('add-js')
 <script type="text/javascript">
-    $(function () {
-      $("#feedback_listing").DataTable();
+  $(function () {
+    $("#feedback_listing").DataTable({
+      stateSave: true
     });
-  </script>
+  });
+</script>
 @endsection
-

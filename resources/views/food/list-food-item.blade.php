@@ -12,7 +12,7 @@
     <div class="box box-custom-main">
       <div class="box-body">
         <div class="table-responsive table-responsive-custom">
-          <table id="category_listing" class="table table-bordered table-hover">
+          <table id="food_listing" class="table table-bordered table-hover" data-order='[[ 1, "asc" ]]' data-page-length='100'>
             <thead>
             <tr>
               <th>Sl. No.</th>
@@ -57,8 +57,9 @@
 @section('add-js')
   <script type="text/javascript">
     $(function () {
-      $("#category_listing").DataTable();
+      $("#food_listing").DataTable({
+        stateSave: true
+      });
     });
   </script>
 @endsection
-

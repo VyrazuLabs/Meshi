@@ -64,10 +64,10 @@
 
 @section('add-js')
 <script type="text/javascript">
-    $(function () {
-      $("#user_listing").DataTable({
-        stateSave: true
-      });
+  $(function () {
+    $("#user_listing").DataTable({
+      stateSave: true
     });
-  </script>
+  });
+</script>
 @endsection
