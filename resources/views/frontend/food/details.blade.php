@@ -296,16 +296,14 @@
 		    data: JSON.stringify({quantity : quantityNumber,fooditem_id : itemID}),
 		    type: 'POST',
 		    url: "{{ url('order/calculate-pricing') }}",
-		     contentType: "application/json",
+		    contentType: "application/json",
 	        processData: false,
 		    success: function(result) {
-	          result = $.parseJSON(result);
+	          	result = $.parseJSON(result);
 		    	$('#new-commission').text(result.commission);
 		    	$('#new-cost').text(result.total_cost);
 		    	$('#new-price').text(result.price);
 		    	$('#amountID').val(result.encrypted_cost);
-
-
 		    }
 		});
 

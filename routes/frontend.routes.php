@@ -137,18 +137,21 @@ Route::group(['middleware' => ['Language']], function () {
     /**
      * ROUTES FOR PAYPAL PAYMENT GATEWAY
      */
-    Route::group(['prefix' => 'order', 'middleware' => ['SignInRouteAccessUser']], function () {
-        Route::group(['namespace' => 'User'], function () {
-            Route::group(['namespace' => 'Cart'], function () {
-                Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
-                Route::post('/calculate-pricing', 'CartController@calculatePricing');
-            });
-        });
+    Route::group(['prefix' => 'order'], function () {
+        Route::post('/calculate-pricing', 'User\Cart\CartController@calculatePricing');
 
-        Route::group(['namespace' => 'Order'], function () {
-            Route::group(['prefix' => 'payment'], function () {
-                Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
-                Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
+        Route::group(['prefix' => 'order', 'middleware' => ['SignInRouteAccessUser']], function () {
+            Route::group(['namespace' => 'User'], function () {
+                Route::group(['namespace' => 'Cart'], function () {
+                    Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
+                });
+            });
+
+            Route::group(['namespace' => 'Order'], function () {
+                Route::group(['prefix' => 'payment'], function () {
+                    Route::get('/make-paypal-payment/{food_item_id}', 'PaymentController@postPaymentWithpaypal')->name('make_paypal_payment');
+                    Route::get('/paypal-status', 'PaymentController@getPaymentStatus')->name('paypal_status');
+                });
             });
         });
     });

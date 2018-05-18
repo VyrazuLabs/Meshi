@@ -14,12 +14,12 @@
                 <div class="eater-review-box d-inline-block">
                   <!-- food quality rating -->
                   <div class="col-lg-12 col-xs-12 review-text-div p-0">
-                    <div class="d-inline-block">
+                    <div class="d-inline-block creator-reviews-text">
                       <h3 class="m-0 t-black review-text">{{ trans('app.Review of Food Quality')
                       }}</h3>
                       {!! Form::hidden('quality_ratings', null,array('id'=>'qualityRatingId')) !!}
                     </div>
-                    <div class="mb-0 rating d-inline-block">
+                    <div class="mb-0 rating food-rating d-inline-block">
                         <input type="radio" id="star5" name="foodqualityrating" value="5" onclick="return rateQuality(this);"  data-id="5"/>
                         <label for="star5" title="Excellent"><span class="sr-only">5 stars</span></label>
                         <input type="radio" id="star4" name="foodqualityrating" value="4" onclick="return rateQuality(this);"  data-id="4"/>
@@ -38,7 +38,7 @@
                       <h3 class="m-0 t-black review-text">{{ trans('app.Review of Delivery') }}</h3>
                       {!! Form::hidden('delivery_ratings', null,array('id'=>'deliveryRatingId')) !!}
                     </div>
-                    <div class="mb-0 rating d-inline-block">
+                    <div class="mb-0 rating food-rating d-inline-block">
                         <input type="radio" id="star10" name="fooddeliveryrating" value="5" onclick="return rateDelivery(this);"  data-id="5"/>
                         <label for="star10" title="Excellent"><span class="sr-only">5 stars</span></label>
                         <input type="radio" id="star9" name="fooddeliveryrating" value="4" onclick="return rateDelivery(this);"  data-id="4"/>
@@ -57,7 +57,7 @@
                       <h3 class="m-0 t-black review-text">{{ trans('app.Review of Communication') }}</h3>
                       {!! Form::hidden('communication_ratings', null,array('id'=>'communicationRatingId')) !!}
                     </div>
-                    <div class="mb-0 rating d-inline-block">
+                    <div class="mb-0 rating food-rating d-inline-block">
                         <input type="radio" id="star15" name="foodcommunicationrating" value="5" onclick="return rateCommunication(this);"  data-id="5"/>
                         <label for="star15" title="Excellent"><span class="sr-only">5 stars</span></label>
                         <input type="radio" id="star14" name="foodcommunicationrating" value="4" onclick="return rateCommunication(this);"  data-id="4"/>

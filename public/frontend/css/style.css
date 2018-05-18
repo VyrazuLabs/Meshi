@@ -485,6 +485,9 @@ iframe{
   float: left;    
   width: 100%;    
   margin-top: 37px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 .customer-review-btn{    
   padding: 9px 23px;    
@@ -628,7 +631,6 @@ so   it doesn’t make the test unnecessarily selective */
   }
 .eater-info-body{    
   display: flex;
-  align-items: center;
 }
 .eater-info-img-div{    
   width: 15em;
@@ -721,10 +723,11 @@ so   it doesn’t make the test unnecessarily selective */
     margin: 20px 0;
   }
   .cart-content-details{
-    width: 45em;
+    width: calc(100% - 280px);
   }
   .cart-content-btn-div{
-    /*width: calc(100% - 50em);*/
+    width: 280px;
+    max-width: 100%;
   }
   .food-creator-review-text{  
     margin-right: 12px;  
@@ -741,7 +744,7 @@ so   it doesn’t make the test unnecessarily selective */
     border-radius: 12px;
   }
   .review-content-btn-div{
-    width: calc(100% - 62em);
+    /*width: calc(100% - 62em);*/
   }
   .feature-overlay-over-image{
     top: -16px;
@@ -845,4 +848,23 @@ so   it doesn’t make the test unnecessarily selective */
   }
 .crop-btn-box{
   padding-bottom: 14px !important; 
+}
+/* creator review modal */
+.creator-reviews-text{  
+  max-width: calc(100% - 12em);
+}
+.food-rating{    
+  text-align: center;    
+  display: flex;    
+  justify-content: center;
+  direction: rtl;
+}
+/* order list */
+.order-list-review-group{    
+  display: flex;    
+  flex-wrap: wrap;    
+  justify-content: flex-end;
+}
+.order-list-cart-content-btn-div{    
+  /*width: 100%;*/
 }

@@ -1,4 +1,4 @@
-@media screen and (max-width: 576px) {    
+@media screen and (max-width: 575px) {    
 	.cart-content{		
 		width: 100%;		
 		padding-left: 0px;	
@@ -12,6 +12,12 @@
 	}	
 	.cart-content-btn-div{		
 		width: 100%;	
+	}
+	.review-group{		
+		justify-content: center;	
+	}	
+	.order-list-detail-price{		
+		text-align: center;	
 	}
 }
 @media (min-width: 768px){	
@@ -37,5 +43,35 @@
 @media (max-width: 767px ){	
 	.navbar-rightside-list{		
 		text-align: right;	
+	}
+	.creator-reviews-text{		
+		max-width: 100%;	
+	}	
+	.rating{		
+		width: 100%;	
+	}	
+	.review-text-div{		
+		display: block;	
+	}
+	.order-list-cart-content-btn-div{
+
+	}
+}
+@media screen and (min-width: 576px) and (max-width: 991px){    
+	.review-group{    	
+		/*display: block;    */
+		justify-content: flex-start;
+	}    
+	.review-group{    	
+		margin-top: 7px;    
+	}	
+	.cart-content-details{	    
+		border-bottom: 1px solid #ccc;	    
+		margin-bottom: 22px;	    
+		padding-bottom: 20px;	
+		width: 100%;
+	}
+	.order-list-detail-price{
+		text-align: left;
 	}
 }
