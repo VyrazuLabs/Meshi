@@ -27,11 +27,11 @@
             <div class="text-center boxes-card food-creator-card-box">
               <ul class="nav nav-pills food-creator-nav-pills d-inline-block">
                 <li class="active"><a data-toggle="pill" href="#upcoming_orders">{{ trans('app.Upcoming Orders') }}</a></li>
-                <li><a data-toggle="pill" href="#">|</a></li>
+                <li><a href="#">|</a></li>
                 <li><a data-toggle="pill" href="#previous_orders">{{ trans('app.Previous Orders') }}</a></li>
               </ul>
             </div>
-            <div class="tab-content">
+            <div class="tab-content nav-tabs">
               <div id="upcoming_orders" class="tab-pane fade in active">
                 @if(!empty($upcomingOrders))
                   @foreach($upcomingOrders as $order)
@@ -68,6 +68,11 @@
                     </div>
                   @endforeach
                 @endif
+                <div class="col-lg-12 text-center cart-box p-0">
+                    <ul class="pagination ">
+                      {!! $upcomingOrders->render() !!}
+                    </ul>
+                </div>
               </div>
               <div id="previous_orders" class="tab-pane fade">
                 @if(!empty($previousOrders))
@@ -114,6 +119,11 @@
                     </div>
                   @endforeach
                 @endif
+                <div class="col-lg-12 text-center cart-box p-0">
+                    <ul class="pagination ">
+                      {!! $previousOrders->render() !!}
+                    </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -245,5 +255,13 @@
       }
     });
   }
+  /* for setting active nav tab on pagination for */
+  $(document).ready(function(){
+     var hrefTabId = window.location.href.split('?').pop().split('=')[0];
+     activeTab(hrefTabId);
+  });
+  function activeTab(tab) {
+    $('.nav-pills a[href="#' + tab + '"]').tab('show');
+  };
 </script>
 @endsection

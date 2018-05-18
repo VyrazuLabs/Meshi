@@ -100,57 +100,114 @@ class OrderController extends Controller
     public function orderedList()
     {
         $today = date("Y-m-d");
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_date_time = strtotime(date("Y-m-d H:i:s"));
+        $jst_current_date = date("Y-m-d");
+
         $previousOrders = [];
         $upcomingOrders = [];
 
         /* getting all the orders */
-        $orders = Order::where('order.status', 1)
+        $upcomingOrders = Order::where('order.status', 1)
             ->join('food_item', 'order.food_item_id', '=', 'food_item.food_item_id')
             ->where('food_item.offered_by', Auth::User()->user_id)
+            ->where('order.date_of_delivery', '>=', $jst_current_date)
             ->orderBy('order.date_of_delivery', 'DESC')
-            ->get();
+            ->paginate(20, ['*'], 'upcoming_orders');
 
-        if (!empty($orders)) {
-            foreach ($orders as $key => $order) {
-                $order->date = date('Y-m-d', strtotime($order->date_of_delivery));
+        if (!empty($upcomingOrders)) {
+            foreach ($upcomingOrders as $key => $order) {
+                $upcomingOrders[$key]->date = date('Y-m-d', strtotime($order->date_of_delivery));
                 /* getting the food images */
                 if (!empty($order->food_images)) {
-                    $order->foodImages = unserialize($order->food_images);
+                    $upcomingOrders[$key]->foodImages = unserialize($order->food_images);
                 }
 
                 /* getting the account details of the buyer */
                 $user = User::where('user_id', $order->ordered_by)->first();
                 if (!empty($user)) {
-                    $order->name = $user->name;
-                    $order->nick_name = $user->nick_name;
+                    $upcomingOrders[$key]->name = $user->name;
+                    $upcomingOrders[$key]->nick_name = $user->nick_name;
                 }
 
                 /* getting the profile information of the buyer */
                 $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
                 if (!empty($profileDetails)) {
-                    $order->address = $profileDetails->address;
+                    $upcomingOrders[$key]->address = $profileDetails->address;
                 }
 
                 /* check for reviews */
                 $creator_review = CreatorReview::where('order_id', $order->order_id)
                     ->where('reviewed_by', Auth::User()->user_id)->first();
                 if (!empty($creator_review)) {
-                    $order->review_status = 1; //alraedy reviewed
+                    $upcomingOrders[$key]->review_status = 1; //alraedy reviewed
                 } else {
-                    $order->review_status = 0; //not yet reviewed
+                    $upcomingOrders[$key]->review_status = 0; //not yet reviewed
                 }
 
                 $eaterReview = EaterReview::where('order_id', $order->order_id)->first();
                 if (!empty($eaterReview)) {
-                    $order->eater_review = $eaterReview->review_description;
+                    $upcomingOrders[$key]->eater_review = $eaterReview->review_description;
                 }
 
-                /* make different array for upcoming and previous orders */
-                if ($order->date < $today) {
-                    $previousOrders[] = $order;
-                } else {
-                    $upcomingOrders[] = $order;
+                // /* make different array for upcoming and previous orders */
+                // if ($order->date < $today) {
+                //     $previousOrders[] = $order;
+                // } else {
+                //     $upcomingOrders[] = $order;
+                // }
+            }
+        }
+
+        /* getting all the orders */
+        $previousOrders = Order::where('order.status', 1)
+            ->join('food_item', 'order.food_item_id', '=', 'food_item.food_item_id')
+            ->where('food_item.offered_by', Auth::User()->user_id)
+            ->where('order.date_of_delivery', '<', $jst_current_date)
+            ->orderBy('order.date_of_delivery', 'DESC')
+            ->paginate(20, ['*'], 'previous_orders');
+
+        if (!empty($previousOrders)) {
+            foreach ($previousOrders as $key => $order) {
+                $previousOrders[$key]->date = date('Y-m-d', strtotime($order->date_of_delivery));
+                /* getting the food images */
+                if (!empty($order->food_images)) {
+                    $previousOrders[$key]->foodImages = unserialize($order->food_images);
                 }
+
+                /* getting the account details of the buyer */
+                $user = User::where('user_id', $order->ordered_by)->first();
+                if (!empty($user)) {
+                    $previousOrders[$key]->name = $user->name;
+                    $previousOrders[$key]->nick_name = $user->nick_name;
+                }
+
+                /* getting the profile information of the buyer */
+                $profileDetails = ProfileInformation::where('user_id', $order->ordered_by)->first();
+                if (!empty($profileDetails)) {
+                    $previousOrders[$key]->address = $profileDetails->address;
+                }
+
+                /* check for reviews */
+                $creator_review = CreatorReview::where('order_id', $order->order_id)
+                    ->where('reviewed_by', Auth::User()->user_id)->first();
+                if (!empty($creator_review)) {
+                    $previousOrders[$key]->review_status = 1; //alraedy reviewed
+                } else {
+                    $previousOrders[$key]->review_status = 0; //not yet reviewed
+                }
+
+                $eaterReview = EaterReview::where('order_id', $order->order_id)->first();
+                if (!empty($eaterReview)) {
+                    $previousOrders[$key]->eater_review = $eaterReview->review_description;
+                }
+
+                // /* make different array for upcoming and previous orders */
+                // if ($order->date < $today) {
+                //     $previousOrders[] = $order;
+                // } else {
+                //     $upcomingOrders[] = $order;
+                // }
             }
         }
         return view('frontend.order.order-list', ['upcomingOrders' => $upcomingOrders, 'previousOrders' => $previousOrders]);
