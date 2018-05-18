@@ -490,7 +490,7 @@
 				            </div>
 				            <!-- /.box-body -->
 			                <div class="box-footer text-center">
-			                  <button type="submit" class="btn btn-booking">{{ trans('app.Submit') }}</button>
+			                  <button type="submit" id="user_register_btn" class="btn btn-block btn-booking">{{ trans('app.Submit') }}</button>
 			                </div>
             			{!! Form::close() !!}
 					</div>
@@ -588,7 +588,7 @@
 	          var reader = new FileReader();
 
 	          reader.onload = function (e) {
-	          	$('.user-crop-image').prev().append('<div class="col-md-12 p-0 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">'+translatedData+'</button></div>');
+	          	$('.user-crop-image').parent().append('<div class="col-md-12 p-0 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">'+translatedData+'</button></div>');
 	              var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
 	              $('#cropImage').html(_html);
 
@@ -631,6 +631,8 @@
 	    $('#uploadFile').on('click', function() {
 	    	$('#closeCrop').show();
 	    	$('.preview-step1').hide();
+			$('#user_register_btn').attr('disabled', true);
+
 	    });
 
 	    //click on close button
@@ -690,6 +692,9 @@
 	      	$('.preview-step1').show();
 	      	$('#imgCrop').remove();
 	      	$('#closeCrop').remove();
+			$('#user_register_btn').attr('disabled', false);
+
+
 	      	//save the values in a field
 	      	$('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
 	    }
