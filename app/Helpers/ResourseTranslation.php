@@ -33,7 +33,7 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['successful_registration'] = 'User registered successfully';
             $data['sent_feedback'] = 'Sent Successfully';
         } else {
-            $data['crop_button'] = '画像切り取り';
+            $data['crop_button'] = '画像を切り取る';
             $data['invalid_qty_msg'] = '注文数が無効です';
             $data['order_validation_msg'] = 'エラーが発生しました。もう一度お試しください';
             $data['delete_warning_msg'] = '削除してもよろしいですか？';
