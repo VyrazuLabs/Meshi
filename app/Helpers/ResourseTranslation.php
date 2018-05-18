@@ -33,21 +33,21 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['successful_registration'] = 'User registered successfully';
             $data['sent_feedback'] = 'Sent Successfully';
         } else {
-            $data['crop_button'] = '作物';
-            $data['invalid_qty_msg'] = '無効 注文数';
-            $data['order_validation_msg'] = '何かが間違っていた。もう一度お試しください';
+            $data['crop_button'] = '画像切り取り';
+            $data['invalid_qty_msg'] = '注文数が無効です';
+            $data['order_validation_msg'] = 'エラーが発生しました。もう一度お試しください';
             $data['delete_warning_msg'] = '削除してもよろしいですか？';
             $data['lang_name'] = 'ja';
-            $data['payment_success_msg'] = '支払いの成功';
-            $data['payment_failed_msg'] = '支払いに失敗しました';
+            $data['payment_success_msg'] = '支払いが成功しました';
+            $data['payment_failed_msg'] = '支払いに失敗しました。もう一度お試しください';
             $data['image_validation_error'] = '画像はjpg、jpegまたはpng形式である必要があります';
-            $data['updation_success_msg'] = '更新成功';
-            $data['creation_success_msg'] = '正常に作成されました。';
-            $data['deletion_success_msg'] = '正常に削除されました。';
+            $data['updation_success_msg'] = '正常に更新されました';
+            $data['creation_success_msg'] = '正常に登録されました';
+            $data['deletion_success_msg'] = '正常に削除されました';
             $data['password_validation_error'] = '有効なパスワードを入力して下さい';
             $data['phone_validation_error'] = '有効な電話番号を入力して下さい';
             $data['successful_registration'] = 'ユーザーが登録されました';
-            $data['sent_feedback'] = '成功裏に送信されました';
+            $data['sent_feedback'] = '正常に送信されました';
 
         }
         return $data;
