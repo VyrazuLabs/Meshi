@@ -30,8 +30,8 @@
 								<div class="cart-item">
 									<div class="col-lg-9 col-md-9 col-xs-12 p-0">
 										<h3 class="t-black cart-item-title">{{$food->item_name}}</h3>
-										<h5><span><strong class="t-orange">{{ trans('app.Category') }}:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> {{ trans('app.Date') }}:</strong> {{$food->date}}</span></h5>
-										<h5 class="t-black"><strong>{{ trans('app.Description') }}</strong></h5>
+										<h5><span><strong class="t-orange">{{ trans('app.Category') }}:</strong> {{$food->category_name}} </span><span class="food-listing-date"><strong class="t-black"> {{ trans('app.Date of Delivery') }}:</strong> {{$food->date}}</span></h5>
+										<h5 class="t-black"><strong>{{ trans('app.FoodDescription') }}</strong></h5>
 										<p class="mb-0">{{$food->food_description}}</p>
 									</div>
 									<div class="col-lg-3 col-md-3 col-xs-12 p-0 food-creator-pricebtn">
