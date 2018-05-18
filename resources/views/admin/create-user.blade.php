@@ -84,14 +84,14 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> User Type<span>*</span></label>
-	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Messiator (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
+	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Meshi eater (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
 	                  @if ($errors->has('type'))
 	                    <span class="help-block">
 	                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
 	                    </span>
 	                  @endif
 	                </div>
-	                @if($form_type == 'edit')
+	                <!-- @if($form_type == 'edit')
 		                <div class="form-group form-custom-group reason edit-reason">
 		                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
 		                	@if($user->type == 2)
@@ -158,9 +158,9 @@
 		                       	</div>
 		                    @endif
 		                </div>
-	                @endif
+	                @endif -->
 
-	                <div class="form-group form-custom-group create-reason" style="display: none;">
+	                <!-- <div class="form-group form-custom-group create-reason" style="display: none;">
 	                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font></font></label>
 	                	<div class="col-md-8 buyer" style="display: none;">
 	                		<label>
@@ -222,7 +222,7 @@
                             	Other
                             </label>
                        	</div>
-	                </div>
+	                </div> -->
 	                <div class="form-group form-custom-group">
 	                  	<label>Description<span>*</span></label>
 	                  	{!! Form::textarea('description', null,
@@ -632,6 +632,7 @@
       //save the values in a field
       $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
     }
+
 
 
     //function cancel crop

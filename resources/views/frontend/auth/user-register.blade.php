@@ -128,13 +128,13 @@
 					                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
 					                    </span>
 				                  	@endif
-				                  @if ($errors->has('reason_for_registration_edit'))
+				                  <!-- @if ($errors->has('reason_for_registration_edit'))
 				                    <span class="help-block">
 				                      <strong class="strong t-red">{{ $errors->first('reason_for_registration_edit') }}</strong>
 				                    </span>
-				                  @endif
+				                  @endif -->
 				                </div>
-				                @if($form_type == 'edit')
+				                <!-- @if($form_type == 'edit')
 					                <div class="form-group form-custom-group reason edit-reason">
 					                	<label for="reason2" class="col-md-4 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('app.Reason why you want to use share map (multiple selections possible)') }}</font></font></label>
 					                	@if($user->type == 2)
@@ -264,7 +264,7 @@
 			                            	{{ trans('app.Other') }}
 			                            </label>
 			                       	</div>
-				                </div>
+				                </div> -->
 
 				                <input type="hidden" id="creatorDescriptionID" value="・自己紹介
 はじめまして、大田区西馬込に住む主婦です趣味の料理をいかして、地域の方と仲良くなりたいと思い、シェアメシに登録しました^ ^
@@ -538,7 +538,7 @@
 		    	$('.buyer').hide();
 		    	$('.food-video-link').show();
 		    	$('.deliverable-area').show();
-		    	$('.seller').children().children().attr('name','reason_for_registration_edit[]');
+		    	// $('.seller').children().children().attr('name','reason_for_registration_edit[]');
 		    	$('#typeCreator').show();
 		    	$('#typeEater').hide();
 	    		$('#descriptionID').prop('placeholder',creatorPlaceholder);
@@ -548,7 +548,7 @@
 		  		$('.seller').hide();
 		    	$('.food-video-link').hide();
 		    	$('.deliverable-area').hide();
-		    	$('.buyer').children().children().attr('name','reason_for_registration_edit[]');
+		    	// $('.buyer').children().children().attr('name','reason_for_registration_edit[]');
 		    	$('#typeCreator').hide();
 		    	$('#typeEater').show();
 	    		$('#descriptionID').prop('placeholder',eaterPlaceholder);

@@ -81,7 +81,7 @@ return [
     'Profession' => 'Profession',
     'Job' => 'Job',
     'Upload Image' => 'Upload Image',
-    'type_messiator' => 'Messiator (who wants to eat home cooking)',
+    'type_messiator' => 'Meshi eater (who wants to eat home cooking)',
     'type_mesh_creator' => 'Mesh creator (those who want to offer home cooking)',
     'Reason why you want to use share map (multiple selections possible)' => 'Reason why you want to use share map (multiple selections possible)',
     'Busy with working' => 'Busy with working',

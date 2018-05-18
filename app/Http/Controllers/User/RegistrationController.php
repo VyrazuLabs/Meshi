@@ -71,11 +71,11 @@ class RegistrationController extends Controller
                 }
 
                 /******** update reason for registering ********/
-                $reason = '';
-                if (!empty($input['reason_for_registration_edit'])) {
-                    $modified_array = array_unique($input['reason_for_registration_edit']);
-                    $reason = implode(',', $modified_array);
-                }
+                // $reason = '';
+                // if (!empty($input['reason_for_registration_edit'])) {
+                //     $modified_array = array_unique($input['reason_for_registration_edit']);
+                //     $reason = implode(',', $modified_array);
+                // }
 
                 /******** CODES FOR PASSWORD UPDATION STARTS HERE *********/
                 if (!empty($input['password'])) {
@@ -126,7 +126,7 @@ class RegistrationController extends Controller
                     'municipality' => $input['municipality'],
                     'gender' => $input['gender'],
                     'profession' => $input['profession'],
-                    'reason_for_registration' => $reason,
+                    // 'reason_for_registration' => $reason,
                     'video_link' => $videoLink,
                     'city' => $city_name,
                     'deliverable_area' => $deliverableArea,
@@ -256,11 +256,11 @@ class RegistrationController extends Controller
                     $longitude = $geo['results'][0]['geometry']['location']['lng'];
                 }
 
-                $reason = '';
-                if (!empty($input['reason_for_registration_edit'])) {
-                    $modified_array = array_unique($input['reason_for_registration_edit']);
-                    $reason = implode(',', $modified_array);
-                }
+                // $reason = '';
+                // if (!empty($input['reason_for_registration_edit'])) {
+                //     $modified_array = array_unique($input['reason_for_registration_edit']);
+                //     $reason = implode(',', $modified_array);
+                // }
                 // $reason = substr($reason, 0, -1);
 
                 $user = User::create(['user_id' => uniqid(),
@@ -285,7 +285,7 @@ class RegistrationController extends Controller
                     'municipality' => $input['municipality'],
                     'gender' => $input['gender'],
                     'profession' => $input['profession'],
-                    'reason_for_registration' => $reason,
+                    // 'reason_for_registration' => $reason,
                     'total_dishes' => 0,
                     'video_link' => $input['video_link'],
                     'city' => $city_name,
@@ -321,8 +321,9 @@ class RegistrationController extends Controller
             'gender' => 'required',
             'profession' => 'required',
             'profile_image' => 'required',
-            'reason_for_registration_edit' => 'required',
-        ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
+            // 'reason_for_registration_edit' => 'required',
+        ]);
+        // ->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
     }
 
     protected function userUpdateValidator($request)
@@ -340,9 +341,9 @@ class RegistrationController extends Controller
             'municipality' => 'required',
             'gender' => 'required',
             'profession' => 'required',
-            'reason_for_registration_edit' => 'required',
-
-        ])->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
+            // 'reason_for_registration_edit' => 'required',
+        ]);
+        // ->setAttributeNames(['reason_for_registration_edit' => 'reason_for_registration']);
     }
 
     protected function passwordValidator($request)
