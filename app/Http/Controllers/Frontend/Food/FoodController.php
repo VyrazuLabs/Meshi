@@ -370,17 +370,20 @@ class FoodController extends Controller
     /* list of food items created by the logged in user */
     public function lists()
     {
+        $foods = [];
         $foods = FoodItem::where('offered_by', Auth::User()->user_id)
             ->where('status', 1)
             ->orderBy('date_of_availability', 'DESC')
             ->paginate(5);
 
-        foreach ($foods as $key => $food) {
-            $category = Category::where('status', 1)->where('category_id', $food->category_id)->first();
-            if (!empty($category)) {
-                $food->category_name = $category->category_name;
+        if (!empty($foods)) {
+            foreach ($foods as $key => $food) {
+                $category = Category::where('status', 1)->where('category_id', $food->category_id)->first();
+                if (!empty($category)) {
+                    $food->category_name = $category->category_name;
+                }
+                $food->date = date('Y-m-d', strtotime($food->date_of_availability));
             }
-            $food->date = date('Y-m-d', strtotime($food->date_of_availability));
         }
         return view('frontend.food.food-list', ['foods' => $foods]);
     }
