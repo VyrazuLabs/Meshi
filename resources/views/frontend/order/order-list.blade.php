@@ -51,7 +51,7 @@
                           @endif
                         </div>
                         <div class="cart-content">
-                          <div class="cart-content-details">
+                          <div class="cart-content-details cart-content-details-border">
                             <h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
                             <h5 class="t-orange"><strong>{{ trans('app.Order Number') }}</strong> - {{$order->order_number}}</h5>
                             <h5><span><strong class="t-black">{{ trans('app.Date of Delivery') }}: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">{{ trans('app.Shipping Address') }}: </strong>  {{$order->address}}</span></h5>
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="cart-content">
-                          <div class="cart-content-details">
+                          <div class="cart-content-details cart-content-details-border">
                             <h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
                             <h5 class="t-orange"><strong>{{ trans('app.Order Number') }}</strong> - {{$order->order_number}}</h5>
                             <h5><span><strong class="t-black">{{ trans('app.Date of Delivery') }}: </strong> {{date('Y-m-d', strtotime($order->date))}}</span><span class="customer-delivertime"><strong class="t-black">{{ trans('app.Shipping Address') }}: </strong>  {{$order->address}}</span></h5>

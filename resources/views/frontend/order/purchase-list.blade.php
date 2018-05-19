@@ -41,7 +41,11 @@
 									</div>
 
 									<div class="cart-content">
+										@if($order->creator_review || $order->closed_order == 1)
+										<div class="cart-content-details cart-content-details-border">
+										@else
 										<div class="cart-content-details">
+										@endif
 											<h3 class="t-black cart-item-title">{{$order->item_name}}</h3>
 											<h4 class="t-orange">{{ trans('app.Price') }} ¥{{$order->total_price}}</h4>
 											<div class="d-inline-block">

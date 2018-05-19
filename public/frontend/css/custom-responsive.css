@@ -66,10 +66,12 @@
 		margin-top: 7px;    
 	}	
 	.cart-content-details{	    
+		width: 100%;
+	}
+	.cart-content-details-border{
 		border-bottom: 1px solid #ccc;	    
 		margin-bottom: 22px;	    
 		padding-bottom: 20px;	
-		width: 100%;
 	}
 	.order-list-detail-price{
 		text-align: left;
