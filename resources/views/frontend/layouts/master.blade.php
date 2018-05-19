@@ -46,6 +46,8 @@
     <script src="{{ url('frontend/js/bootstrap.min.js') }}"></script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38"></script> -->
     @php
+      $rating_validation_error = TranslatedResources::translatedData()['rating_validation_error'];
+
       $langName =[];
       if(Session::has('lang_name')) {
         $langName = Session::get('lang_name');
@@ -147,6 +149,8 @@
         $('#communicationRatingId').val(communicationRating);
       }
 
+      var ratingErrorMsg = '{{$rating_validation_error}}';
+
       $('.store-reviews').click(function() {
         var form_data = new FormData($("#eaterReviewForm")[0]);
         $.ajax({
@@ -162,7 +166,7 @@
               if(obj.error.quality_ratings || obj.error.delivery_ratings || obj.error.communication_ratings ){
                 new PNotify({
                   title: 'Error',
-                  text: 'Ratings fields are required',
+                  text: ratingErrorMsg,
                   type: 'error',
                   buttons: {
                     sticker: false
@@ -206,7 +210,7 @@
               if(obj.error.communication_ratings){
                 new PNotify({
                   title: 'Error',
-                  text: 'Rating field is required',
+                  text: ratingErrorMsg,
                   type: 'error',
                   buttons: {
                     sticker: false

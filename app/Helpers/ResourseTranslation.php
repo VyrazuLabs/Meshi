@@ -32,6 +32,8 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['phone_validation_error'] = 'Please enter a valid phone number';
             $data['successful_registration'] = 'User registered successfully';
             $data['sent_feedback'] = 'Sent Successfully';
+            $data['rating_validation_error'] = 'Rating field is required';
+
         } else {
             $data['crop_button'] = '画像を切り取る';
             $data['invalid_qty_msg'] = '注文数が無効です';
@@ -48,6 +50,7 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['phone_validation_error'] = '有効な電話番号を入力して下さい';
             $data['successful_registration'] = 'ユーザーが登録されました';
             $data['sent_feedback'] = '正常に送信されました';
+            $data['rating_validation_error'] = '評価フィールドは必須です';
 
         }
         return $data;
