@@ -196,18 +196,18 @@
 					<!-- description -->
 					<div class="col-md-8">
 						<div class="col-lg-12 col-12 description description-main-div">
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="">
 									<a href="{{route('profile_details',['user_id' => $food_details->offered_by])}}">
 										@if(!empty($food_details->image))
-											<img src="{{url('/uploads/profile/picture/'.$food_details->image)}}" class="img-circle">
+											<img src="{{url('/uploads/profile/picture/'.$food_details->image)}}" class="img-circle food-details-description-image">
 										@else
-											<img src="{{ url('frontend/images/description.png') }}" class="img-circle">
+											<img src="{{ url('frontend/images/description.png') }}" class="img-circle food-details-description-image">
 										@endif
 									</a>
 								</div>
 							</div>
-							<div class="col-md-9">
+							<div class="col-md-10">
 								<div class="">
 									<h4>{{ trans('app.FoodDescription') }}</h4>
 									<p>@php echo nl2br($food_details->food_description); @endphp</p>
