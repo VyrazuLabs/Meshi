@@ -35,3 +35,11 @@
 .user-editcoverimg{
 	width: 100%;
 }
+.create-user-crop-btn{
+	margin-top: 18px;
+}
+.create-user-close-crop{
+	float: right;
+    font-size: 20px;
+    cursor: pointer;
+}

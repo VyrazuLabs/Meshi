@@ -714,6 +714,7 @@
 	      	$('#cropImage').html('');
 	      	// $('.defaultImage').hide();
 	      	$('#uploadButton').show();
+	      	$('#user_register_btn').attr('disabled', false);
 
 	      	//$('#cropImage').html('');
 	      	// $('.postion-abs').show();

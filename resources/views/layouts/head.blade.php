@@ -14,7 +14,6 @@
   <!-- Morris chart -->
   <link rel="stylesheet" href="{{ url('admin_panel/morris.js/morris.css') }}">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="{{ url('admin_panel/jvectormap/jquery-jvectormap.css') }}">
   <!-- Date Picker -->
   <link rel="stylesheet" href="{{ url('admin_panel/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <!-- Daterange picker -->
