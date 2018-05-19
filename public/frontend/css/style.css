@@ -228,6 +228,9 @@ iframe{
 .category-box{
   margin-top: 21px;
 }
+.sign-in li:last-child{
+  padding-left: 0;
+}
 .language-box {    
   display: inline;    
   margin-right: 10px;
@@ -236,7 +239,8 @@ iframe{
   background-image: url(../images/down_arrow.png);   
   background-size: 11px;    
   background-repeat: no-repeat;    
-  background-position: right center;    
+  background-position: right center;  
+  padding-left: 10px;  
   padding-right: 15px;
  }
  .profile-images {    
