@@ -68,7 +68,7 @@
 							</div>
 							<p class="t-orange empty-cart-text">{{ trans('app.Oops your food list is empty') }}</p>
 							<div class="col-lg-12 col-xs-12 p-0 text-center cart-order-btn-div">
-								<a href="{{ url('/')}}" class="btn back-orange cart-order-btn">{{ trans('app.Continue Shopping') }}</a>
+								<a href="{{ url('/food/create')}}" class="btn back-orange cart-order-btn">{{ trans('app.Continue Shopping') }}</a>
 							</div>
 						</div>
 					</div>
