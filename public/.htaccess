@@ -1,7 +1,3 @@
-AuthUserFile /var/www/html/vyrazu/ssh/sharemeshi/.htpasswd
-AuthType Basic
-AuthName "Super Secret Site"
-Require valid-user
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
