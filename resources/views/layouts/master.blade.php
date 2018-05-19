@@ -60,8 +60,8 @@
     <!-- Sparkline -->
     <script src="{{ url('admin_panel/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- jvectormap -->
-    <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-    <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <!-- <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script> -->
+    <!-- <script src="{{ url('admin_panel/jvectormap/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script> -->
     <!-- jQuery Knob Chart -->
     <script src="{{ url('admin_panel/jquery-knob/dist/jquery.knob.min.js') }}"></script>
     <!-- daterangepicker -->
@@ -83,7 +83,7 @@
     <!-- AdminLTE App -->
     <script src="{{ url('/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ url('/js/dashboard.js') }}"></script>
+    <!-- <script src="{{ url('/js/dashboard.js') }}"></script> -->
     <!-- datatable -->
     <script src="{{ url('admin_panel/datatable/js/datatables.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->

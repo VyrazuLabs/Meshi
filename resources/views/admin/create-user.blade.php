@@ -412,7 +412,7 @@
 		            	<div class="form-group form-custom-group d-inline-block user-editcoverimg profile-edit-field item form-group position-relatv">
 		            @endif
 				            <label> Image<span>*</span></label>
-                  			<span id="closeCrop" title="Cancel" onclick="cancel_crop()">&times;</span>
+                  			<span id="closeCrop" class="create-user-close-crop" title="Cancel" onclick="cancel_crop()">&times;</span>
 	                       	<div class="" id="defaultUploadImage" style="">
 	                        	<div class="col-md-12 p-0">
 	                          		<input type="file" id="uploadFile" name="" class="custom-file-input position-absolute custm-input" onchange="readURL(this);">
@@ -424,7 +424,7 @@
 		                    	</span>
 		                  	@endif
                    			<div class="" id="alreadyExistImage">
-                      			<div class="col-md-12 preview-step1">
+                      			<div class="col-md-12 p-0 preview-step1">
                         			<div class="img-preview">
                       					@if($form_type == 'edit' && !empty($user->image))
 		                                	<img src="{{ url('/uploads/profile/picture/'.$user->image) }}" id="profile-img" style="height: 100px;float: right;"/>
@@ -432,10 +432,10 @@
                         			</div>
                       			</div>
                    			</div>
-	                       	<div class="testclass" id="cropWrapper">
-	                        	<div class="col-md-12">
+	                       	<div class="testclass img-responsive" id="cropWrapper">
+	                        	<div class="col-md-12 p-0">
 	                          		<div id="cropImage" style="">
-	                            		<img src="" alt="" style="" class="">
+	                            		<img src="" alt="" style="" class="img-responsive">
 	                          		</div>
 	                        	</div>
 	                       	</div>
@@ -445,7 +445,7 @@
 
 	            <!-- /.box-body -->
                 <div class="box-footer text-center">
-                	<button type="submit" class="btn btn-success btn-booking">Submit</button>
+                	<button type="submit" id="create_user_submit" class="btn btn-success btn-block btn-booking">Submit</button>
                 </div>
             {!! Form::close() !!}
       	</div>
@@ -523,7 +523,7 @@
           var reader = new FileReader();
 
           reader.onload = function (e) {
-          	$('.testclass').prev().append('<div class="col-md-12 crop-btn-box"><button id="imgCrop" type="button" class="btn mrgnTop10" onclick="img_crop()">Crop</button></div>');
+          	$('.testclass').append('<div class="col-md-12 p-0 crop-btn-box"><button id="imgCrop" type="button" class="btn btn-success btn-block mrgnTop10 create-user-crop-btn" onclick="img_crop()">Crop</button></div>');
               var _html = '<img id="crop-wrapper" src="'+e.target.result+'" alt="" style="width:428px;">';
               $('#cropImage').html(_html);
 
@@ -567,6 +567,7 @@
     $('#uploadFile').on('click', function() {
     	$('#closeCrop').show();
     	$('.preview-step1').hide();
+    	$('#create_user_submit').attr('disabled', true);
     });
 
     //click on close button
@@ -629,6 +630,7 @@
       $('#uploadButton').hide();
       $('.preview-step1').show();
       $('#imgCrop').remove();
+      $('#create_user_submit').attr('disabled', false);
       //save the values in a field
       $('#'+field_name).val(_canvas.toDataURL("image/jpeg", 0.8))
     }
@@ -649,8 +651,8 @@
       $('#cropImage').html('');
       // $('.defaultImage').hide();
       $('#uploadButton').show();
-      console.log('this is a text');
-
+      // console.log('this is a text');
+      $('#create_user_submit').attr('disabled', false);
       //$('#cropImage').html('');
       // $('.postion-abs').show();
       // $('.organization-logo').show();
