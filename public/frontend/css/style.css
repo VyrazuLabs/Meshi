@@ -868,3 +868,8 @@ so   it doesn’t make the test unnecessarily selective */
 .order-list-cart-content-btn-div{    
   /*width: 100%;*/
 }
+.food-details-description-image{
+  height: 80px;
+  width: 80px !important;
+  border: 4px solid #f26522;
+}
