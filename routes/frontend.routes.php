@@ -140,7 +140,7 @@ Route::group(['middleware' => ['Language']], function () {
     Route::group(['prefix' => 'order'], function () {
         Route::post('/calculate-pricing', 'User\Cart\CartController@calculatePricing');
 
-        Route::group(['prefix' => 'order', 'middleware' => ['SignInRouteAccessUser']], function () {
+        Route::group(['middleware' => ['SignInRouteAccessUser']], function () {
             Route::group(['namespace' => 'User'], function () {
                 Route::group(['namespace' => 'Cart'], function () {
                     Route::post('/add-to-cart', 'CartController@addToCart')->name('add_to_cart');
