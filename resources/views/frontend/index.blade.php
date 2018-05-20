@@ -73,7 +73,7 @@
                     <div class="row">
                     @foreach($available_foods as $food)
                         <!-- featured -->
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-4 col-lg-3" style="height: 390px;">
                                 <!-- featured -->
                                 <div class="featured profile-featured">
                                     <div class="featured-image">
@@ -159,7 +159,7 @@
                     <div class="row">
                     @foreach($closed_food_items as $food)
                         <!-- featured -->
-                            <div class="col-md-4 col-lg-3" style="display: flex;">
+                            <div class="col-md-4 col-lg-3" style="display: flex; height: 380px;">
                                 <!-- featured -->
                                 <div class="featured">
                                     <div class="featured-image">
@@ -190,12 +190,13 @@
                                         </a>
                                     </div>
 
+
                                     <!-- ad-info -->
                                     <div class="ad-info">
                                         <h3 class="item-price">&yen;{{$food->price}}</h3>
                                         <h4 class="item-title" title="@php echo $food->item_name; @endphp">
-                                            @if(mb_strlen($food->item_name) > 50)
-                                                @php echo mb_substr($food->item_name, 0, 50, "UTF-8") @endphp ...
+                                            @if(mb_strlen($food->item_name) > 20)
+                                                @php echo mb_substr($food->item_name, 0, 20, "UTF-8") @endphp ...
                                             @else
                                                 {{ $food->item_name }}
                                             @endif
