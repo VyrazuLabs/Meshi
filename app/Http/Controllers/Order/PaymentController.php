@@ -216,7 +216,8 @@ class PaymentController extends Controller
                 'creator' => $creator, 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate,
             ], function ($message) use ($email) {
                 $message->to($email)
-                    ->bcc(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'))
+                    ->from(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'), env('MAIL_FROM_NAME', 'シェアメシ'))
+                    ->bcc([env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com')])
                     ->subject('【シェアメシ】新規のご注文のお知らせ');
             });
 
@@ -227,7 +228,8 @@ class PaymentController extends Controller
                 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate,
             ], function ($message) use ($email) {
                 $message->to($email)
-                    ->bcc(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'))
+                    ->from(env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com'), env('MAIL_FROM_NAME', 'シェアメシ'))
+                    ->bcc([env('MAIL_PURCHASED_NOTIFICATION', 'purchased@sharemeshi.com')])
                     ->subject('【シェアメシ】ご購入いただきありがとうございます');
             });
 
