@@ -114,7 +114,13 @@
                                             @endif
                                         </h4>
                                         <div class="item-cat">
-                                            <span>{{$food->category_name}}</span>
+                                            <span title="@php echo $food->category_name; @endphp">
+                                            @if(mb_strlen($food->category_name) > 13)
+                                                @php echo mb_substr($food->category_name, 0, 13, "UTF-8") @endphp ...
+                                            @else
+                                                {{ $food->category_name }}
+                                            @endif
+                                            </span>
                                         </div>
                                     </div><!-- ad-info -->
 
@@ -124,17 +130,16 @@
                                         @php
                                             $current_date = date("Y-m-d");
                                             $tomorrow = date('Y-m-d', strtotime($current_date . ' +1 day'));
-                                            $currentDay = WeekDaysName::days()['currentDay'];
-                                            $tomorrowDay = WeekDaysName::days()['tomorrowDay'];
+                                            $day_name = WeekDaysName::days()[date('D', strtotime($food->date))];
                                         @endphp
                                         @if($food->date == $current_date)
                                             <span class="dated">{{ trans('app.Today') }}
-                                            ({{$current_date}} {{$currentDay}} )</span>
+                                            ({{$current_date}}, {{$day_name}} )</span>
                                         @elseif($food->date == $tomorrow)
                                             <span class="dated">{{ trans('app.Tomorrow') }}
-                                            ({{$tomorrow}} {{$tomorrowDay}})</span>
+                                            ({{$tomorrow}}, {{$day_name}})</span>
                                         @else
-                                            <span class="dated">{{$food->date}}</span>
+                                            <span class="dated">{{$food->date}}, {{$day_name}}</span>
                                         @endif
                                         </div>
                                     </div><!-- ad-meta -->
@@ -214,7 +219,13 @@
                                             @endif
                                         </h4>
                                         <div class="item-cat">
-                                            <span>{{$food->category_name}}</span>
+                                            <span title="@php echo $food->category_name; @endphp">
+                                            @if(mb_strlen($food->category_name) > 13)
+                                                @php echo mb_substr($food->category_name, 0, 13, "UTF-8") @endphp ...
+                                            @else
+                                                {{ $food->category_name }}
+                                            @endif
+                                            </span>
                                         </div>
                                     </div><!-- ad-info -->
 

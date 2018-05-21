@@ -28,11 +28,14 @@
 	                  	@endif
 	                </div>
 	                <div class="form-group form-custom-group">
-	                  	<label>Name <span>*</span></label>
-						{!! Form::text('category_name', null, 
+                  		<label>Name <span>*</span>
+                  			<span id="show-count-span" style="display: none;">(<span id="c-count-val">15</span> Chracters Left)</span>
+                  			<span id="show-default-span" style="display: none;">(Total 15 Chracters)</span>
+                  		</label>
+						{!! Form::text('category_name', null,
 						    array(
-						          'class'=>'form-control', 
-						          'placeholder'=>'Enter Category Name')) !!}
+						          'class'=>'form-control c-counter',
+						          'placeholder'=>'Enter Category Name','maxlength'=>'15')) !!}
 						@if ($errors->has('category_name'))
 						  	<span class="help-block">
 						      <strong class="strong">{{ $errors->first('category_name') }}</strong>
@@ -41,8 +44,8 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Description<span>*</span></label>
-	                  	{!! Form::textarea('description', null, 
-	                          array('class'=>'form-control', 
+	                  	{!! Form::textarea('description', null,
+	                          array('class'=>'form-control',
 	                                'placeholder'=>'Category Description','rows'=>'3')) !!}
 	                  	@if ($errors->has('description'))
 	                    	<span class="help-block">
@@ -70,4 +73,19 @@
 @endsection
 
 @section('add-js')
+<script type="text/javascript">
+	$('#show-count-span').hide();
+	$('#show-default-span').show();
+	$('.c-counter').keyup(function() {
+	$('#show-default-span').hide();
+	$('#show-count-span').show();
+	    var max_length = 15;
+	    var input_length_left = max_length - $(this).val().length;
+	    if( input_length_left < 0 ) {
+	      input_length_left = 0;
+	      $("#").text("Characters left: " + (15 - $(this).val().length));
+	    }
+	    $('#c-count-val').html(input_length_left);
+  	});
+</script>
 @endsection

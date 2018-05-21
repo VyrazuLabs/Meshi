@@ -8,7 +8,7 @@ class WeekDaysNameTranslation implements WeekDaysNameContract
 {
     public static function days()
     {
-        $daysName = [];
+        $daysArray = [];
         $current_date = date("Y-m-d");
         $tomorrow = date('Y-m-d', strtotime($current_date . ' +1 day'));
         /* getting the days name of today and tomorrow */
@@ -24,9 +24,7 @@ class WeekDaysNameTranslation implements WeekDaysNameContract
         $saturday = trans('app.Sat');
 
         $daysArray = ['Sun' => $sunday, 'Mon' => $monday, 'Tue' => $tuesday, 'Wed' => $wednesday, 'Thu' => $thursday, 'Fri' => $friday, 'Sat' => $saturday];
-        $daysName['currentDay'] = $daysArray[$current_day];
-        $daysName['tomorrowDay'] = $daysArray[$tomorrow_day];
 
-        return $daysName;
+        return $daysArray;
     }
 }

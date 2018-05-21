@@ -26,7 +26,6 @@ class OrderController extends Controller
                     $order->creator_name = $creator->name;
                 }
             }
-
         }
         return view('order.order-list', ['orders' => $orders]);
     }

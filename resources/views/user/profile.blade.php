@@ -160,7 +160,13 @@
 												@endif
 											</h4>
 											<div class="item-cat">
-												<span>{{$food->category_name}}</span>
+												<span title="@php echo $food->category_name; @endphp">
+	                                            @if(mb_strlen($food->category_name) > 12)
+	                                                @php echo mb_substr($food->category_name, 0, 12, "UTF-8") @endphp ...
+	                                            @else
+	                                                {{ $food->category_name }}
+	                                            @endif
+                                            </span>
 											</div>
 										</div><!-- ad-info -->
 
@@ -258,4 +264,5 @@
 @endsection
 
 @section('add-js')
+
 @endsection
