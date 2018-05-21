@@ -56,6 +56,9 @@
 	.order-list-cart-content-btn-div{
 
 	}
+	.food-register-form-group{
+		padding: 0;
+	}
 }
 @media screen and (min-width: 576px) and (max-width: 991px){    
 	.review-group{    	

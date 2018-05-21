@@ -478,6 +478,9 @@ iframe{
 .bootstrap-datetimepicker-widget table td span{
   background-color: transparent;
 }
+.food-register-timeslot-btn{
+  white-space: normal;
+}
 /* start customer order details */
 .customer-delivertime{   
   margin-left: 16px;

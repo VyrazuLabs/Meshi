@@ -83,4 +83,5 @@
 				<!-- nav-right -->
 			</div><!-- container -->
 		</nav><!-- navbar -->
-	</header><!-- header -->
+	</header>
+	<!-- header -->

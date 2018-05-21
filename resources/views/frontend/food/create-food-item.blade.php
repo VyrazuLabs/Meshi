@@ -112,7 +112,7 @@
                 	</div>
 		            <div class="col-sm-12 col-md-12 col-xs-12 p-0 input_fields_wrap">
 		            	<div class="col-lg-12 col-xs-12 d-inline-block form-group p-0">
-	                		<button class="btn ad-mre-btn add_field_button pull-right back-orange">{{ trans('app.Add Time Slot') }}</button>
+	                		<button class="btn ad-mre-btn food-register-timeslot-btn add_field_button pull-right back-orange">{{ trans('app.Add Time Slot') }}</button>
 	                	</div>
 	                	<div class="clearfix"></div>
 	                	@if(!empty($time_of_availability))
@@ -120,11 +120,11 @@
 		                  		<div class="col-lg-12 col-xs-12 p-0 float-left">
 		                  		<i class="fa fa-times float-right time-cross" aria-hidden="true"></i>
 		                    		<div class="start-time-id float-left">
-				                      	<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+				                      	<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 " >
 				                       	 	<label>{{ trans('app.Start Time') }} <span>*</span></label>
 				                        	{!! Form::text('time_of_availability[0][start_time][]', $key, array('class'=>'form-control timepickerid')) !!}
 				                      	</div>
-				                      	<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+				                      	<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 				                        	<div class="ad-mre-btn pull-right"></div>
 				                        	<label>{{ trans('app.End Time') }} <span>*</span></label>
 				                        	{!! Form::text('time_of_availability[0][end_time][]', $slot, array('class'=>'form-control seat timepickerid')) !!}
@@ -135,11 +135,11 @@
 	                	@else
 	                		<div class="col-lg-12 col-xs-12 p-0 float-left">
 		                  		<div class="start-time-id float-left">
-		                  			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+		                  			<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 " >
 		                      			<label>{{ trans('app.Start Time') }} <span>*</span></label>
 		                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
 		                    		</div>
-				                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+				                    <div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 				                      <div class="ad-mre-btn pull-right"></div>
 				                      <label>{{ trans('app.End Time') }} <span>*</span></label>
 				                      {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }}
@@ -194,14 +194,14 @@
 
 	                <div class="col-lg-12 col-xs-12 p-0 float-left">
                   		<div class="start-time-id float-left">
-                  			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+                  			<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 " >
                       			<label>{{ trans('app.Start Publication Date') }}<span>*</span></label>
                       			<!-- <input type="text" class="form-control food-item-date" name=""> -->
                       			{!! Form::text('start_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
                     		</div>
-		                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+		                    <div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0" >
 		                      <div class="ad-mre-btn pull-right"></div>
 		                      <label>{{ trans('app.End Publication Date') }}<span>*</span></label>
 		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
@@ -336,7 +336,7 @@
 	      if(x < max_fields){ //max input box allowed
 	        x++; //text box increment
 
-	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross " onclick="closetimeslot(this)" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 "><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
+	        $(wrapper).append('<div class="col-lg-12 col-xs-12 p-0 float-left"><i class="fa fa-times float-right time-cross " onclick="closetimeslot(this)" aria-hidden="true"></i><div class="start-time-id float-left"><div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 "><input class="form-control blink-cursor timepickerid " name="time_of_availability[0][start_time][]" type="text" value=""></div><div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0"><div class="ad-mre-btn pull-right"></div><input class="form-control timepickerid " name="time_of_availability[0][end_time][]" type="text" value=""></div></div></div>');
 	        $(".time-cross").click(function(){
 	        	$(this).parent().remove();
 	        });
@@ -344,6 +344,7 @@
 	        $('.timepickerid').timepicker({
 		      showMeridian: false,
               minuteStep: 30,
+              disableMousewheel: true
 		      // defaultTime: false
 		    });
 	      }
@@ -381,6 +382,7 @@
   	$('.timepickerid').timepicker({
       showMeridian: false,
       minuteStep: 30,
+      disableMousewheel: true
 	  // defaultTime: false
     });
 

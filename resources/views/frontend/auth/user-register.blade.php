@@ -17,6 +17,7 @@
 				<!-- user-login -->
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card signin-box">
+						
 						@php
 	      					$crop_button = TranslatedResources::translatedData()['crop_button'];
 	    				@endphp
