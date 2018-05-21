@@ -14,7 +14,7 @@
 			<div class="row text-center">
 				<!-- user-login -->
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-					<div class="user-account boxes-card">
+					<div class="user-account register-food-account boxes-card">
 					@if($form_type == 'edit')
 						<h2>{{ trans('app.Edit Food') }}</h2>
 					@else
@@ -75,15 +75,15 @@
 	                </div> -->
 	                <div class="form-group form-custom-group">
 		                <label for="exampleInputFile">{{ trans('app.Upload Food Images') }} <span>*</span></label>
-		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input' ,'id' => 'food_images') ) !!}
+		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input mb-0' ,'id' => 'food_images') ) !!}
 		                  @if( !empty($food_images) )
-		                    <div class="form-group">
-		                      <div class="col-sm-8" style="width: 100%;">
+		                    <div class="form-group d-inline-block">
+		                      <div class="col-sm-8 p-0" style="width: 100%;">
 		                        @foreach( $food_images as $images )
 		                          <li  class="gallery-images" style="float: left; list-style: none; margin: 6px;">
-		                          <a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}">X</a>
-
 		                          <img src="{{ url('/uploads/food/'.$images) }}" style="width: 62px; height: 42px;margin-top: 6px;" />
+		                          <a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+
 		                          </li>
 		                        @endforeach
 		                      </div>

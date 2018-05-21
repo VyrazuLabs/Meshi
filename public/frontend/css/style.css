@@ -1,5 +1,5 @@
 .mb-0{
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 }
 .mt-0{
 	margin-top: 0;
@@ -480,6 +480,9 @@ iframe{
 }
 .food-register-timeslot-btn{
   white-space: normal;
+}
+.register-food-account textarea{
+  margin-bottom: 30px;
 }
 /* start customer order details */
 .customer-delivertime{   
