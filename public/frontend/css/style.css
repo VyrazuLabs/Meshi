@@ -891,3 +891,7 @@ so   it doesn’t make the test unnecessarily selective */
 .sign-in li a{
   padding: 15px 12px;
 }
+.profile-food-names{
+  cursor: pointer;
+  margin-left: 10px;
+}

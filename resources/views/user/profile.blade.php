@@ -225,8 +225,17 @@
 									{{$review->eater_name}}
 								</div>
 							</div>
-							<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
-								<p class="mb-0 text-left t-black">{{ $age }} {{ $gender }}</p>
+							<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0 text-left">
+								<p class="mb-0 text-left t-black d-inline-block">{{ $age }} {{ $gender }}</p>
+								<p class="mb-0 text-left t-black d-inline-block">
+
+								<a href="{{route('food_details',['food_item_id' => $review->food_item_id])}}"" class="t-orange profile-food-names" title="@php echo $review->item_name; @endphp">
+								@if(mb_strlen($review->item_name) > 20)
+                                    @php echo mb_substr($review->item_name, 0, 20, "UTF-8") @endphp ...
+                                @else
+                                    {{ $review->item_name }}
+                                @endif
+                                </a></p>
 							</div>
 							<p class="text-left">
 								{{$review->review_description}}
