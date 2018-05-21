@@ -232,7 +232,7 @@ class OrderController extends Controller
             $eater_info['phone_number'] = $profileDetails->phone_number;
             $eater_info['gender'] = DataTranslation::getTranslated()['genders'][$profileDetails->gender];
             $eater_info['age'] = DataTranslation::getTranslated()['ages'][$profileDetails->age];
-            $eater_info['description'] = $profileDetails->description;
+            $eater_info['description'] = nl2br($profileDetails->description);
             if (!empty($profileDetails->image)) {
                 $eater_info['image'] = $profileDetails->image;
             }
