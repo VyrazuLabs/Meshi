@@ -52,7 +52,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> Status<span>*</span></label>
-	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control']) }}
 	                  @if ($errors->has('status'))
 	                    <span class="help-block">
 	                      <strong class="strong">{{ $errors->first('status') }}</strong>

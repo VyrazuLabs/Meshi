@@ -20,7 +20,7 @@
               	<div class="box-body">
 	                <div class="form-group form-custom-group">
 	                  <label> Category<span>*</span></label>
-	                  {!! Form::select('category_id', $category_id,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Select Category']) !!}
+	                  {!! Form::select('category_id', $category_id,null,['class' => 'form-control', 'placeholder' => 'Select Category']) !!}
 	                  @if ($errors->has('category_id'))
 	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('category_id') }}</strong>
@@ -64,7 +64,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> Offered By<span>*</span></label>
-	                  {!! Form::select('offered_by', $offered_by,null,['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Select User']) !!}
+	                  {!! Form::select('offered_by', $offered_by,null,['class' => 'form-control', 'placeholder' => 'Select User']) !!}
 	                  @if ($errors->has('offered_by'))
 	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('offered_by') }}</strong>
@@ -133,7 +133,7 @@
 	                	@else
 	                		<div class="col-lg-12 col-xs-12 p-0">
 		                  		<div class="start-time-id">
-		                    		<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 create-food-timestart" >
+		                    		<div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 create-food-timestart" >
 		                      			<label>Start Time <span>*</span></label>
 		                      			{{ Form::text('time_of_availability[0][start_time][]', null, ['class' => 'form-control timepickerid']) }}
 
@@ -192,16 +192,16 @@
 						  	</span>
 						@endif
 	                </div>
-	                <div class="col-lg-12 col-xs-12 p-0 float-left">
+	                <div class="col-lg-12 col-xs-12 p-0 d-inline-block">
                   		<div class="start-time-id float-left">
-                  			<div class="form-group form-custom-group  col-sm-6 col-md-6 col-xs-12 pl-0 " >
+                  			<div class="form-group form-custom-group create-food-timestart col-sm-6 col-md-6 col-xs-12 pl-0 " >
                       			<label>Start Publication Date<span>*</span></label>
                       			<!-- <input type="text" class="form-control food-item-date" name=""> -->
                       			{!! Form::text('start_publication_date', null,
 						    array(
 						          'class'=>'form-control food-item-date')) !!}
                     		</div>
-		                    <div class="form-group form-custom-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+		                    <div class="form-group form-custom-group create-food-timestart col-sm-6 col-md-6 col-xs-12 pr-0" >
 		                      <div class="ad-mre-btn pull-right"></div>
 		                      <label>End Publication Date<span>*</span></label>
 		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
@@ -219,7 +219,7 @@
                   	</div>
 	                <div class="form-group form-custom-group">
 	                  <label> Status<span>*</span></label>
-	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control']) }}
 	                  @if ($errors->has('status'))
 	                    <span class="help-block error">
 	                      <strong class="strong">{{ $errors->first('status') }}</strong>
@@ -243,7 +243,8 @@
 	//Date picker
   	$('#datePicker').datepicker({
     	format: 'yyyy-mm-dd',
-    	autoclose: true
+    	autoclose: true,
+    	todayHighlight: true,
   	});
 
 
@@ -288,6 +289,7 @@
 
 	        $('.timepickerid').timepicker({
 		      showMeridian: false,
+		      disableMousewheel: true
 		    });
 	      }
 	    });
@@ -298,7 +300,8 @@
 
 	//Time picker
   	$('.timepickerid').timepicker({
-      showMeridian: false,
+      showMeridian: false, 
+      disableMousewheel: true
     });
     $('.time-cross').click(function(){
     	closetimeslot(this);

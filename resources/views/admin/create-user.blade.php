@@ -84,7 +84,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> User Type<span>*</span></label>
-	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Meshi eater (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control col-md-7 col-xs-12','onchange'=>'types()','id'=>'select-type']) }}
+	                  {{ Form::select('type', ['1' => 'Mesh creator (those who want to offer home cooking)', '2' => 'Meshi eater (who wants to eat home cooking)'], null, ['placeholder' => '-- Choose Type --', 'class' => 'form-control','onchange'=>'types()','id'=>'select-type']) }}
 	                  @if ($errors->has('type'))
 	                    <span class="help-block">
 	                      <strong class="strong t-red">{{ $errors->first('type') }}</strong>
@@ -236,7 +236,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Age<span>*</span></label>
-	                    {{ Form::select('age', ['10' => "10's", '20' => "20's", '30' => "Thirties", '40' => 'Forties', '50' => 'Fifties', '60' => "60's", '70' => "70's", '80' => "Age 80" ], null, ['placeholder' => '-- Please Select Age --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                    {{ Form::select('age', ['10' => "10's", '20' => "20's", '30' => "Thirties", '40' => 'Forties', '50' => 'Fifties', '60' => "60's", '70' => "70's", '80' => "Age 80" ], null, ['placeholder' => '-- Please Select Age --', 'class' => 'form-control']) }}
 						@if ($errors->has('age'))
 							<span class="help-block">
 							  <strong class="strong t-red">{{ $errors->first('age') }}</strong>
@@ -301,7 +301,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  	<label>Sex<span>*</span></label>
-	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                    {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control']) }}
 						@if ($errors->has('gender'))
 							<span class="help-block">
 							  <strong class="strong t-red">{{ $errors->first('gender') }}</strong>
@@ -315,7 +315,7 @@
 	                    	'2' => 'Housewives(byte,part other,currently none)',
 	                    	'3' => 'Employee',
 	                    	'4' => 'None'],
-	                    	null, ['placeholder' => '-- Please Select Profession --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                    	null, ['placeholder' => '-- Please Select Profession --', 'class' => 'form-control']) }}
 						@if ($errors->has('profession'))
 							<span class="help-block">
 							  <strong class="strong t-red">{{ $errors->first('profession') }}</strong>
@@ -379,7 +379,7 @@
 	                </div>
 	                <div class="form-group form-custom-group">
 	                  <label> Status<span>*</span></label>
-	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control col-md-7 col-xs-12']) }}
+	                  {{ Form::select('status', ['0' => 'Inactive', '1' => 'Active'], null, ['placeholder' => '-- Select A Status --', 'class' => 'form-control']) }}
 	                  @if ($errors->has('status'))
 	                    <span class="help-block">
 	                      <strong class="strong t-red">{{ $errors->first('status') }}</strong>
