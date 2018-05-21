@@ -225,4 +225,6 @@ return [
     'crop' => '画像切り取り',
     'Video Link(Embed Code)' => '動画リンク（埋め込みコード）',
     'Cover Image' => 'プロフィール画面カバー画像',
+    'No Available Foods' => 'おっとした食べ物はありません',
+
 ];

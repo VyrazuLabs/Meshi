@@ -59,21 +59,20 @@
                     </div>
                 </div><!-- cta -->
             </div><!-- row -->
-            @if(count($available_foods)>0)
-                <div class="section featureds">
-                    <div class="row">
-                        <!-- featured-top -->
-                        <div class="col-sm-12">
-                            <div class="featured-top">
-                                <h4>{{ trans('app.Available List') }}</h4>
-                            </div>
-                        </div><!-- featured-top -->
-                    </div>
-
-                    <div class="row">
-                    @foreach($available_foods as $food)
-                        <!-- featured -->
-                            <div class="col-md-4 col-lg-3" style="height: 390px;">
+            <div class="section featureds">
+                <div class="row">
+                    <!-- featured-top -->
+                    <div class="col-sm-12">
+                        <div class="featured-top">
+                            <h4>{{ trans('app.Available List') }}</h4>
+                        </div>
+                    </div><!-- featured-top -->
+                </div>
+                <div class="row">
+                    @if(count($available_foods)>0)
+                        @foreach($available_foods as $food)
+                            <!-- featured -->
+                            <div class="col-md-4 col-lg-3">
                                 <!-- featured -->
                                 <div class="featured profile-featured">
                                     <div class="featured-image">
@@ -142,9 +141,22 @@
                                 </div><!-- featured -->
                             </div><!-- featured -->
                         @endforeach
-                    </div><!-- row -->
-                </div><!-- featureds -->
-            @endif
+                    @else
+                        <div class="col-lg-12 col-xs-12 text-center p-0">
+                            <div class="section">
+                                <div class="col-md-6 float-none d-inline-block">
+                                    <div class="empty-cart-img">
+                                        <img src="{{url('/frontend/images/empty-food-list.jpg')}}" class="img-responsive m-auto">
+                                    </div>
+                                    <p class="t-orange empty-cart-text">{{ trans('app.No Available Foods') }}</p>
+                                    <div class="col-lg-12 col-xs-12 p-0 text-center cart-order-btn-div">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div><!-- row -->
+            </div><!-- featureds -->
             @if(count($closed_food_items)>0)
                 <div class="section featureds">
                     <div class="row">
