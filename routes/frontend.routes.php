@@ -31,8 +31,8 @@ Route::group(['middleware' => ['Language']], function () {
         Route::get('/sign-in', array('uses' => 'SigninController@signIn', 'middleware' => 'SignInRouteAccess'))->name('sign_in');
         Route::post('/authentication', array('uses' => 'SigninController@authentication'))->name('authentication');
         Route::get('sign-out', ['uses' => 'SigninController@signOut'])->name('user_sign_out');
-        Route::get('/forget-password', ['uses' => 'SigninController@forgetPassword'])->name('user_forget_password');
-        Route::post('/forget-password', ['uses' => 'SigninController@sendMail'])->name('user_send_mail');
+        Route::get('/forgot-password', ['uses' => 'SigninController@forgetPassword'])->name('user_forget_password');
+        Route::post('/forgot-password', ['uses' => 'SigninController@sendMail'])->name('user_send_mail');
         Route::get('/password/changing/{id}/{email}', 'SigninController@changeForgetPassword');
         Route::post('/password/changing', 'SigninController@updateForgetPassword');
     });

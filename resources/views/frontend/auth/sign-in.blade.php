@@ -13,12 +13,12 @@
 	<section id="" class="clearfix user-page sign-back">
 		<div class="container">
 			<div class="row text-center">
-				<!-- user-login -->			
+				<!-- user-login -->
 				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<div class="user-account boxes-card signin-box">
 						<h2>{{ trans('app.User') }} {{ trans('app.Login') }}</h2>
 						<!-- form -->
-						
+
 						@if(Session::has('login_status'))
             				<p class="alert alert-danger load-limit">{{ Session::get('login_status') }}</p>
         				@endif
@@ -51,26 +51,26 @@
                                     </label>
                                 </div>
 								<div class="pull-right forgot-password">
-									<a href="#">{{ trans('app.Forgot Your Password') }}?</a>
+									<a href="{{route('user_forget_password')}}">{{ trans('app.Forgot Your Password') }}?</a>
 								</div>
 							</div><!-- forgot-password -->
 							<button type="submit" href="#" class="btn signin-btn">{{ trans('app.Login') }}</button>
                     	</form>
-                    	{{ trans('app.Do not have an account') }}? 
+                    	{{ trans('app.Do not have an account') }}?
                     	<a href="{{ url('/user/register') }}">{{ trans('app.Sign Up here') }}</a>
 					</div>
 					<!-- <a href="#" class="btn-primary">Create a New Account</a> -->
-				</div><!-- user-login -->			
-			</div><!-- row -->	
+				</div><!-- user-login -->
+			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- signin-page -->
  {!! Session::forget('login_status'); !!}
  {!! Session::forget('inactive_status'); !!}
- 
 
-	
+
+
 
 @endsection
 
-@section('add-js')	
+@section('add-js')
 @endsection

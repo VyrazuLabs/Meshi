@@ -235,5 +235,14 @@ return [
     'Video Link(Embed Code)' => 'Video Link(Embed Code)',
     'Cover Image' => 'Cover Image',
     'No Available Foods' => 'Oops no available foods',
-    'nickname\'s' => ':nickname\'s'
+    'nickname\'s' => ':nickname\'s',
+    'Forgot Password' => 'Forgot Password',
+    'email placeholder' => 'Enter Email',
+    'email template text' => "Not to worry. Let's get you a new password",
+    'RESET PASSWORD' => 'RESET PASSWORD',
+    'Change Password' => 'Change Password',
+    'New Password' => 'New Password',
+    'password placeholder' => 'Enter Password',
+    'confirm password placeholder' => 'Retype Password',
+
 ];

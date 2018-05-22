@@ -8,61 +8,50 @@
 @endsection
 
 @section('content')
+@php
+	$passwordPlaceholder = trans('app.password placeholder');
+	$retypePasswordPlaceholder = trans('app.confirm password placeholder');
+@endphp
 
-<!-- signin-page -->
-	<section id="" class="clearfix user-page">
-		<div class="container">
-			<div class="row text-center">
-				<!-- user-login -->			
-				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-					<div class="user-account boxes-card">
-						<h2>Change Password</h2>
-						<!-- form -->
-						
-						{!! Form::open(['url' => '/password/changing/', 'method' => 'post', 'files'=>'true']) !!}
-			                {{ Form::hidden('email_id',Crypt::encrypt($decripted_email),[]) }}
-
-			              <div class="box-body">
-							<div class="form-group form-custom-group">
-			                  	{{ Form::label('password','New Password') }}
-								{{ Form::password('password',['id'=>'fblink','class'=>'form-control profileinput createeventinput','placeholder'=>'Enter new password']) }}
-
+<section id="" class="clearfix user-page">
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<div class="user-account boxes-card">
+					<h2>{{ trans('app.Change Password') }}</h2>
+					{!! Form::open(['url' => '/password/changing/', 'method' => 'post', 'files'=>'true']) !!}
+		                {{ Form::hidden('email_id',Crypt::encrypt($decripted_email),[]) }}
+			            <div class="box-body">
+							<div class="form-custom-group form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+								<label>{{ trans('app.New Password') }}</label>
+								{{ Form::password('password',['class'=>'form-control createeventinput','placeholder'=>$passwordPlaceholder]) }}
 				                @if ($errors->has('password'))
-				                                    <span class="help-block">
-				                                        <span class="signup-error">{{ $errors->first('password') }}</span>
-				                                    </span>
-				                                @endif
+                                    <span class="help-block">
+                                        <span class="signup-error">{{ $errors->first('password') }}</span>
+                                    </span>
+                                @endif
 			                </div>
-			                <div class="form-group form-custom-group">
-			                  	{{ Form::label('confirm_password','Confirm Password') }}
-			                  	
-								{{ Form::password('confirm_password',['id'=>'fblink','class'=>'form-control profileinput createeventinput','placeholder'=>'Confirm your password']) }}
-				                @if ($errors->has('confirm_password'))
-				                                    <span class="help-block">
-				                                        <span class="signup-error">{{ $errors->first('confirm_password') }}</span>
-				                                    </span>
-				                                @endif
+			                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }} form-custom-group">
+								<label>{{ trans('app.Password Confirmation') }}</label>
+								{{ Form::password('password_confirmation',['class'=>'form-control createeventinput','placeholder'=>$retypePasswordPlaceholder]) }}
+				                @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <span class="signup-error">{{ $errors->first('password_confirmation') }}</span>
+                                    </span>
+                                @endif
 			                </div>
 		                </div>
-			              
-			              	<div class="box-footer text-center">
-			                  {{ Form::submit('Change Password',['class'=>'btn btn-booking']) }}
-			                </div>
-			            {!! Form::close() !!}
-	                <!-- /.box-body -->
-	            </div>
-
-
-
-					</div>
-					<!-- <a href="#" class="btn-primary">Create a New Account</a> -->
-				</div><!-- user-login -->			
-			</div><!-- row -->	
-		</div><!-- container -->
-	</section><!-- signin-page -->
-	
+		              	<div class="box-footer text-center">
+		                	<button class="btn btn-booking">{{ trans('app.Submit') }}</button>
+		                </div>
+		            {!! Form::close() !!}
+            	</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 @endsection
 
-@section('add-js')	
+@section('add-js')
 @endsection

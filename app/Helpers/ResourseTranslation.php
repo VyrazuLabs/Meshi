@@ -33,6 +33,11 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['successful_registration'] = 'User registered successfully';
             $data['sent_feedback'] = 'Sent Successfully';
             $data['rating_validation_error'] = 'Rating field is required';
+            $data['reset_password_subject'] = 'Sharemeshi password reset link';
+            $data['mail_sent_msg'] = 'Mail Sent';
+            $data['invalid_email_error_msg'] = 'Invalid Email';
+            $data['password_updation_success'] = 'Password has been changed';
+            $data['password_validation_msg'] = 'Please enter registered email';
 
         } else {
             $data['crop_button'] = '画像を切り取る';
@@ -51,6 +56,11 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['successful_registration'] = 'ユーザーが登録されました';
             $data['sent_feedback'] = '正常に送信されました';
             $data['rating_validation_error'] = '評価フィールドは必須です';
+            $data['reset_password_subject'] = 'パスワードリセットリンク';
+            $data['mail_sent_msg'] = 'メールが送信されました';
+            $data['invalid_email_error_msg'] = '無効なメール';
+            $data['password_updation_success'] = 'パスワードが変更されました';
+            $data['password_validation_msg'] = '登録したメールアドレスを入力してください';
 
         }
         return $data;

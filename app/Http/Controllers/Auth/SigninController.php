@@ -10,6 +10,7 @@ use Crypt;
 use Illuminate\Http\Request;
 use Mail;
 use Session;
+use TranslatedResources;
 use Validator;
 
 class SigninController extends Controller
@@ -90,36 +91,41 @@ class SigninController extends Controller
     public function sendMail(Request $request)
     {
         $input = $request->input();
+        $resetPasswordValidator = $this->resetPasswordValidator($input);
 
-        //CHECKING EMAIL IS EMPTY OR NOT
-        if ($input['email'] == '') {
-            Session::flash('error', "Please enter your mail id");
-            return redirect()->back();
-        }
-
-        //CHECKING EMAIL EXIST OR NOT
-        $data = User::where('email', $input['email'])->first();
-
-        if (!empty($data)) {
-            $email = $input['email'];
-            $name = $data['name'];
-            $uniqueid = uniqid();
-
-            ForgetPasswordToken::create([
-                'email' => $email,
-                'token' => $uniqueid,
-            ]);
-
-            //SEND MAIL
-            Mail::send('frontend.email.forget_password_email', ['name' => $name, 'name' => 'Sharemeshi', 'email' => $email, 'uniqueid' => $uniqueid], function ($message) use ($email, $name) {
-                $message->from('contact@sharemeshi.com', $name = null)->to($email, $name)->subject('Your password reset link');
-            });
-            Session::flash('success', "Mail has been sent");
-            return redirect()->back();
+        if ($resetPasswordValidator->fails()) {
+            Session::flash('error', TranslatedResources::translatedData()['password_validation_msg']);
+            return redirect()->back()->withInput()->withErrors($resetPasswordValidator);
         } else {
-            Session::flash('error', "The mail id is not valid");
-            return redirect()->back();
+            //CHECK THIS EMAIL EXIST IN DB OR NOT
+            $user = User::where('email', $input['email'])->first();
+            if (!empty($user)) {
+                $email = $input['email'];
+                $name = $user['name'];
+                $uniqueid = uniqid();
+                ForgetPasswordToken::create([
+                    'email' => $email,
+                    'token' => $uniqueid,
+                ]);
+
+                //SEND RESET PASSWORD MAIL
+                Mail::send('frontend.email.forget_password_email', ['name' => $name, 'email' => $email, 'uniqueid' => $uniqueid], function ($message) use ($email, $name) {
+                    $message->to($email, $name)->subject(TranslatedResources::translatedData()['reset_password_subject']);
+                });
+                Session::flash('success', TranslatedResources::translatedData()['mail_sent_msg']);
+            } else {
+                Session::flash('error', TranslatedResources::translatedData()['invalid_email_error_msg']);
+            }
         }
+        return redirect('/');
+    }
+
+    /* validator for reset password */
+    protected function resetPasswordValidator($request)
+    {
+        return Validator::make($request, [
+            'email' => 'required|email|max:255',
+        ]);
     }
 
     //RETURN VIEW OF PASSWORD CHANGE PAGE
@@ -141,19 +147,22 @@ class SigninController extends Controller
     public function updateForgetPassword(Request $request)
     {
         $input = $request->input();
-
         $validation = $this->forgetPasswordValidator($input);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
-        $data = User::where('email', Crypt::decrypt($input['email_id']))->first();
-        $data->update(['password' => bcrypt($input['password'])]);
-
-        $forget_password_token = ForgetPasswordToken::where('email', $data['email'])->first();
-        $forget_password_token->delete();
-
-        Session::flash('success', 'Password has been changed');
-        return redirect('/');
+        $user = User::where('email', Crypt::decrypt($input['email_id']))->first();
+        if (!empty($user)) {
+            $user->update(['password' => bcrypt($input['password'])]);
+            $forget_password_token = ForgetPasswordToken::where('email', $user['email'])->first();
+            if (!empty($forget_password_token)) {
+                $forget_password_token->delete();
+            }
+            Session::flash('success', TranslatedResources::translatedData()['password_updation_success']);
+            return redirect('/sign-in');
+        } else {
+            return back();
+        }
     }
 
     //PASSWORD CHANGE VALIDATION
@@ -161,7 +170,7 @@ class SigninController extends Controller
     {
         return Validator::make($data, [
             'password' => 'required|string|min:6',
-            'confirm_password' => 'min:6|same:password',
+            'password_confirmation' => 'min:6|same:password',
         ]);
     }
 }

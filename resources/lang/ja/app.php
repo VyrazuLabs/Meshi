@@ -226,6 +226,14 @@ return [
     'Video Link(Embed Code)' => '動画リンク（埋め込みコード）',
     'Cover Image' => 'プロフィール画面カバー画像',
     'No Available Foods' => 'おっとした食べ物はありません',
-    'nickname\'s' => ':nicknameさんの'
+    'nickname\'s' => ':nicknameさんの',
+    'Forgot Password' => 'パスワードをお忘れですか',
+    'email placeholder' => 'メールアドレスを入力して',
+    'email template text' => "心配無用。新しいパスワードを手に入れましょう",
+    'RESET PASSWORD' => 'パスワードを再設定する',
+    'Change Password' => 'パスワードを変更する',
+    'New Password' => '新しいパスワード',
+    'password placeholder' => 'パスワードを入力する',
+    'confirm password placeholder' => 'パスワードを再入力してください',
 
 ];
