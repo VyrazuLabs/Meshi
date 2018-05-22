@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-	{{ __('app.nickname\'s', ['nickname' => $user->nick_name]) }}@lang('app.Profile') | @lang('app.sharemeshi') }}
+	{{ __('app.nickname\'s', ['nickname' => $user->nick_name]) }}@lang('app.Profile') | @lang('app.sharemeshi')
 @endsection
 
 @section('add-meta')
