@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-  {{ trans('app.sharemeshi') }}
+	{{ __('app.nickname\'s', ['nickname' => $user->nick_name]) }}@lang('app.Profile') | @lang('app.sharemeshi') }}
 @endsection
 
 @section('add-meta')
@@ -12,7 +12,7 @@
 <section id="" class="clearfix category-page">
 	<div class="container">
 		<div class="breadcrumb-section">
-			<h2 class="title t-orange d-inline-block">{{ trans('app.Profile')}}</h2>
+			<h2 class="title t-orange d-inline-block">@lang('app.Profile')</h2>
 			@if(Auth::user())
 				@if($user->user_id == Auth::User()->user_id)
 					<a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}"><button class="btn back-orange t-white edit-profile-btn float-right"><i class="fa fa-edit"></i> {{ trans('app.EDIT PROFILE') }}</button></a>

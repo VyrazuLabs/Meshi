@@ -235,4 +235,5 @@ return [
     'Video Link(Embed Code)' => 'Video Link(Embed Code)',
     'Cover Image' => 'Cover Image',
     'No Available Foods' => 'Oops no available foods',
+    'nickname\'s' => ':nickname\'s'
 ];
