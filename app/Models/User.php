@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -18,13 +17,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-                            'name',
-                            'email',
-                            'password',
-                            'user_id',
-                            'type', // 1 = CREATOR, 2 = EATER
-                            'nick_name',
-                            'status'
+        'name',
+        'email',
+        'password',
+        'user_id',
+        'type', // 1 = CREATOR, 2 = EATER
+        'nick_name',
+        'status',
     ];
 
     /**
@@ -37,5 +36,10 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
-    
+
+    public function profileDetails()
+    {
+        return $this->hasOne('App\Models\ProfileInformation', 'user_id', 'user_id');
+    }
+
 }

@@ -63,14 +63,20 @@
 							<li class="dropdown"><i class="fa fa-user"></i>{{Auth::User()->nick_name}}
 							</li>
 							<!--  -->
+							@php
+				                $picture = url('/frontend/images/default-user.png');
+				                if(!empty(Auth::user()->profileDetails)) {
+				                  $picture = '/uploads/profile/picture/'.Auth::user()->profileDetails->image;
+				                }
+				            @endphp
 			            	<li>
 			            		<div class="dropdown">
 			            			<a href="#" id="dropdownMenu1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-power-off" aria-hidden="true"></i></a>
 
 								  <ul class="dropdown-menu dropdown-menu-right p-0 logout-border-menu" aria-labelledby="dropdownMenu1">
 								    <li class="d-block logout-list">
-								    	<a href="#"><img src="{{ url('/frontend/images/Dp.png') }}" class="img-responsive logout-image"></a>
-								    	<p class="text-center logout-text-name">Creatojnknlkjn</p>
+								    	<a href="#"><img src="{{ url($picture) }}" class="img-responsive logout-image"></a>
+								    	<p class="text-center logout-text-name">{{Auth::User()->nick_name}}</p>
 								    </li>
 								    <li class="d-block">
 								    	<a href="{{route('user_sign_out')}}" class="m-0s btn-block back-orange logout-button">Logout</a>
