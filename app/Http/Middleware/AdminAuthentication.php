@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Auth;
+use Closure;
 
-class UserAuthentication
+class AdminAuthentication
 {
     /**
      * Handle an incoming request.
@@ -16,13 +16,12 @@ class UserAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::User()->type == 0) {
+        if (Auth::User()->type == 0) {
             return $next($request);
-        }
-        else {
+        } else {
             return redirect('/');
 
         }
-        
+
     }
 }

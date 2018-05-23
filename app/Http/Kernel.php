@@ -41,9 +41,13 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
-        'UserAuth' => [ 
-             \App\Http\Middleware\ProfileSectionAccess::class,
+        'UserAuth' => [
+            \App\Http\Middleware\ProfileSectionAccess::class,
         ],
+        'AdminAuth' => [
+            \App\Http\Middleware\AdminAuthentication::class,
+        ],
+
     ];
 
     /**
