@@ -235,5 +235,6 @@ return [
     'New Password' => '新しいパスワード',
     'password placeholder' => 'パスワードを入力する',
     'confirm password placeholder' => 'パスワードを再入力してください',
+    'Logout' => 'ログアウト',
 
 ];

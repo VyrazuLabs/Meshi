@@ -244,5 +244,6 @@ return [
     'New Password' => 'New Password',
     'password placeholder' => 'Enter Password',
     'confirm password placeholder' => 'Retype Password',
+    'Logout' => 'Logout',
 
 ];

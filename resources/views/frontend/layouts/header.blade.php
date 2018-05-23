@@ -79,7 +79,7 @@
 								    	<p class="text-center logout-text-name">{{Auth::User()->nick_name}}</p>
 								    </li>
 								    <li class="d-block">
-								    	<a href="{{route('user_sign_out')}}" class="m-0s btn-block back-orange logout-button">Logout</a>
+								    	<a href="{{route('user_sign_out')}}" class="m-0s btn-block back-orange logout-button">{{ trans('app.Logout') }}</a>
 								    </li>
 								  </ul>
 								</div>
