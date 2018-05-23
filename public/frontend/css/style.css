@@ -40,11 +40,14 @@
 .d-inline-block{
   display: inline-block;
 }
+.d-block{
+  display: block !important;
+}
 .text-left{
 	text-align: left;
 }
 .back-orange{
-  background-color: #f26522;
+  background-color: #f26522 !important;
 }
 .feature-over-person{
     /*position: absolute;
@@ -895,3 +898,36 @@ so   it doesn’t make the test unnecessarily selective */
   cursor: pointer;
   margin-left: 10px;
 }
+/* logout design */
+.logout-button{  
+  border-radius: 0 !important;  
+  color: #fff !important;  
+  font-weight: 500 !important;  
+  text-align: center !important;  
+  padding: 7px 12px !important;  
+  color: #fff !important;
+}
+.logout-button:hover,
+.logout-button:focus{
+  color: #fff;
+}
+.logout-border-menu{
+  border: 1px solid #f26522;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.logout-image{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #f26522;
+  margin: auto;
+}
+.logout-list a{
+  padding: 0 !important;
+}
+.logout-text-name{
+    font-weight: 500;
+    margin-bottom: 19px;
+    color: #0a0a0a;
+  }

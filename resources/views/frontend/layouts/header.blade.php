@@ -60,8 +60,24 @@
 					<!-- sign-in -->
 					<ul class="sign-in">
 						@if(Auth::User())
-							<li><i class="fa fa-user"></i>{{Auth::User()->nick_name}}</li>
-			            	<li><a href="{{route('user_sign_out')}}" class=""><i class="fa fa-sign-out"></i></a></li>
+							<li class="dropdown"><i class="fa fa-user"></i>{{Auth::User()->nick_name}}
+							</li>
+							<!--  -->
+			            	<li>
+			            		<div class="dropdown">
+			            			<a href="#" id="dropdownMenu1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+
+								  <ul class="dropdown-menu dropdown-menu-right p-0 logout-border-menu" aria-labelledby="dropdownMenu1">
+								    <li class="d-block logout-list">
+								    	<a href="#"><img src="{{ url('/frontend/images/Dp.png') }}" class="img-responsive logout-image"></a>
+								    	<p class="text-center logout-text-name">Creatojnknlkjn</p>
+								    </li>
+								    <li class="d-block">
+								    	<a href="{{route('user_sign_out')}}" class="m-0s btn-block back-orange logout-button">Logout</a>
+								    </li>
+								  </ul>
+								</div>
+							</li>
 						@else
 							<li><a href="{{ url('/sign-in') }}"> {{ trans('app.Sign In') }} </a></li>
 							<li><a href="{{ url('/user/register') }}"> {{ trans('app.Sign Up here') }} </a></li>

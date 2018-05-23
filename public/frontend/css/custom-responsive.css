@@ -120,3 +120,8 @@
         display:block !important;
     }
 }
+@media (min-width: 1200px) {
+	.logout-border-menu{
+		margin-top: 16px;
+	}
+}
