@@ -8,7 +8,7 @@
         <img src="{{ url('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Admin</p>
+        <p>{{Auth::User()->name}}</p>
         <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
       </div>
     </div>
@@ -16,21 +16,24 @@
     <ul class="sidebar-menu" data-widget="tree">
 
       <li><a href="{{ route('admin_dashboard') }}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+      <li><a href="{{route('edit_admin')}}"><i class="fa fa-edit"></i><span>Edit Profile</span></a></li>
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-user"></i>
-          <span>User</span>
+          <i class="fa fa-user-plus"></i>
+          <span>User Registration</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('create_user') }}"><i class="fa fa-plus-square-o"></i><span>Create User</span></a></li>
+          <li><a href="{{ route('create_user') }}"><i class="fa fa-users"></i><span>Create Eater/Creator</span></a></li>
+          <li><a href="{{ route('create_admin') }}"><i class="fa fa-user-plus"></i><span>Create Admin</span></a></li>
           <li><a href="{{ route('list_user')}}"><i class="fa fa-list"></i><span>User List</span></a></li>
+          <li><a href="{{ route('list_admin')}}"><i class="fa fa-list"></i><span>Admin List</span></a></li>
         </ul>
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-hand-o-right"></i>
           <span>Category</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -41,7 +44,7 @@
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-cutlery"></i>
           <span>Food Item</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -63,7 +66,7 @@
       </li> -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-comment-o"></i>
           <span>Feedback</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>

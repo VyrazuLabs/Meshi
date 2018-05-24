@@ -236,5 +236,6 @@ return [
     'password placeholder' => 'パスワードを入力する',
     'confirm password placeholder' => 'パスワードを再入力してください',
     'Logout' => 'ログアウト',
+    'can not buy' => "管理者は食べ物を購入できません",
 
 ];

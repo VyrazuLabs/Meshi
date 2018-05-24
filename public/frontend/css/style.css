@@ -931,3 +931,6 @@ so   it doesn’t make the test unnecessarily selective */
     margin-bottom: 19px;
     color: #0a0a0a;
   }
+  .detail-admin-label{
+    color: #272727;
+  }

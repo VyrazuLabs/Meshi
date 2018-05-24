@@ -245,5 +245,6 @@ return [
     'password placeholder' => 'Enter Password',
     'confirm password placeholder' => 'Retype Password',
     'Logout' => 'Logout',
+    'can not buy' => "Admin can't buy food",
 
 ];

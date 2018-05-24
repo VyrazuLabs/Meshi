@@ -38,6 +38,7 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['invalid_email_error_msg'] = 'Invalid Email';
             $data['password_updation_success'] = 'Password has been changed';
             $data['password_validation_msg'] = 'Please enter registered email';
+            $data['inactive_error_msg'] = 'Can not make inactive current user';
 
         } else {
             $data['crop_button'] = '画像を切り取る';
@@ -61,6 +62,7 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['invalid_email_error_msg'] = '無効なメール';
             $data['password_updation_success'] = 'パスワードが変更されました';
             $data['password_validation_msg'] = '登録したメールアドレスを入力してください';
+            $data['inactive_error_msg'] = '現在のユーザーを非アクティブにすることはできません';
 
         }
         return $data;

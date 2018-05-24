@@ -27,7 +27,7 @@
 							@elseif(Auth::user() && Auth::user()->type == 2)
 								<li><a href="{{route('edit_profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.EDIT PROFILE') }}</a></li>
 							@endif
-							@if(Auth::user())
+							@if(Auth::User() && Auth::User()->type != 0)
 								<li><a href="{{route('purchased_list')}}">{{ trans('app.Purchased List') }}</a></li>
 							@endif
 

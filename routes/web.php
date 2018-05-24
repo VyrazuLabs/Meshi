@@ -39,12 +39,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::group(['namespace' => 'Admin'], function () {
 
             Route::get('/dashboard', 'DashboardController@dashboard')->name('admin_dashboard');
+            Route::get('/edit-profile', 'AdminProfileController@edit')->name('edit_admin');
+            Route::post('/update-profile', 'AdminProfileController@update')->name('update_admin');
+            Route::get('/create', 'AdminRegistrationController@create')->name('create_admin');
+            Route::post('/save-admin', 'AdminRegistrationController@save')->name('save_admin');
+            Route::get('/list', 'AdminRegistrationController@lists')->name('list_admin');
+            Route::get('/edit/{user_id}', 'AdminRegistrationController@edit')->name('edit_admin_user');
+
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/create', 'UserRegistrationController@create')->name('create_user');
                 Route::post('/save', 'UserRegistrationController@save')->name('save_user');
                 Route::get('/list', 'UserRegistrationController@lists')->name('list_user');
                 Route::get('/edit/{user_id}', 'UserRegistrationController@edit')->name('edit_user');
                 Route::get('/delete/{user_id}', 'UserRegistrationController@delete')->name('delete_user');
+
             });
             Route::group(['prefix' => 'category'], function () {
                 Route::get('/create', 'CategoryController@create')->name('create_category');

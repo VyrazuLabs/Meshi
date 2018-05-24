@@ -152,29 +152,37 @@
 														</select>
 												</div>
 												@endif
+
+												@if(Auth::User() && Auth::User()->type == 0)
+													<div class="col-md-12 p-0">
+														<label class="detail-admin-label">{{ trans('app.can not buy')}}</label>
+														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Buy Now') }}</button>
+													</div>
+												@else
 												<div class="col-md-12 p-0">
-												@if($food_details->quantity > 0)
-													@if($food_details->closed_order == 0)
-														@if(Auth::User())
-															@php
-															$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
-															$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
-															$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
-															@endphp
-															@if((Auth::User()->user_id) != $food_details->offered_by )
-																<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+													@if($food_details->quantity > 0)
+														@if($food_details->closed_order == 0)
+															@if(Auth::User())
+																@php
+																$deliveryDate = new DateTime($food_details->date_of_availability, new DateTimeZone('Asia/Tokyo'));
+																$today = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
+																$isShow = $deliveryDate->getTimestamp() > $today->getTimestamp();
+																@endphp
+																@if((Auth::User()->user_id) != $food_details->offered_by )
+																	<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
+																@endif
+															@else
+																<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
 															@endif
 														@else
-															<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
+															<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
 														@endif
 													@else
-														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
+														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Out Of Stock') }}</button>
 													@endif
-												@else
-													<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Out Of Stock') }}</button>
-												@endif
 
 												</div>
+												@endif
 											</div>
 											<div class="col-md-12 p-0">
 												<p>※前後5分程度の余裕を見てお待ちください</p>
