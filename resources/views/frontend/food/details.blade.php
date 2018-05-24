@@ -155,8 +155,7 @@
 
 												@if(Auth::User() && Auth::User()->type == 0)
 													<div class="col-md-12 p-0">
-														<label class="detail-admin-label">{{ trans('app.can not buy')}}</label>
-														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Buy Now') }}</button>
+														<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.can not buy')}}</button>
 													</div>
 												@else
 												<div class="col-md-12 p-0">

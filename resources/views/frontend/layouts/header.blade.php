@@ -60,7 +60,7 @@
 					<!-- sign-in -->
 					<ul class="sign-in">
 						@if(Auth::User())
-							<li class="dropdown"><i class="fa fa-user"></i>{{Auth::User()->nick_name}}
+							<li class="dropdown">
 							</li>
 							<!--  -->
 							@php
@@ -71,7 +71,7 @@
 				            @endphp
 			            	<li>
 			            		<div class="dropdown">
-			            			<a href="#" id="dropdownMenu1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+			            			<a href="#" id="dropdownMenu1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-user"></i>{{Auth::User()->nick_name}}<i class="fa fa-power-off logout-power-icon" aria-hidden="true"></i></a>
 
 								  <ul class="dropdown-menu dropdown-menu-right p-0 logout-border-menu" aria-labelledby="dropdownMenu1">
 								    <li class="d-block logout-list">
