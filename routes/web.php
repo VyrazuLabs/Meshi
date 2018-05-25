@@ -35,7 +35,7 @@ Route::get('/register', function () {
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
-    Route::group(['middleware' => ['UserAuth', 'AdminAuth']], function () {
+    Route::group(['middleware' => 'UserAuth'], function () {
         Route::group(['namespace' => 'Admin'], function () {
 
             Route::get('/dashboard', 'DashboardController@dashboard')->name('admin_dashboard');

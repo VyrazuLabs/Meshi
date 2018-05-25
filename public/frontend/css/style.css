@@ -927,10 +927,46 @@ so   it doesn’t make the test unnecessarily selective */
   padding: 0 !important;
 }
 .logout-text-name{
-    font-weight: 500;
-    margin-bottom: 19px;
-    color: #0a0a0a;
-  }
-  .logout-power-icon{
-    margin-left: 4px;
-  }
+  font-weight: 500;
+  margin-bottom: 19px;
+  color: #0a0a0a;
+}
+.logout-power-icon{
+  margin-left: 4px;
+}
+  /* multiple cropper */
+#galleryImages, #cropper{
+  width: 100%;
+  float: left;
+}
+canvas{
+    max-width: 100%;
+    float: left;
+    height: 100px;
+}
+.crop-button{
+  background-color: #f26522;
+  color: #fff;
+}
+.singleImageCanvasContainer{
+  max-width: 300px;
+  display: inline-block;
+  position: relative;
+  margin: 4px 0px 4px 7px;
+}
+.singleImageCanvasCloseBtn{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #f26522;
+  color: #fff;
+  border: 1px solid #f26522;
+  line-height: 1px;
+}
+.singleImageCanvasCloseBtn i{
+  font-size: 13px;
+}
+.cropper-image-box{
+  width: 0;
+  height: 0;
+}
