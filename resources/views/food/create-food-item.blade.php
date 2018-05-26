@@ -5,9 +5,14 @@
 @endsection
 
 @section('add-meta')
+	<!-- cropper css -->
+	<link href="{{ url('frontend/css/cropper/cropper.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
+	@php
+		$crop_button = TranslatedResources::translatedData()['crop_button'];
+	@endphp
     <div class="col-md-8">
       	<div class="box box-custom-main">
         	<!-- form start -->
@@ -71,7 +76,7 @@
 	                    </span>
 	                  @endif
 	                </div>
-	                <div class="form-group form-custom-group">
+	              <!--   <div class="form-group form-custom-group">
 		                <label for="exampleInputFile">Upload Food Images <span>*</span></label>
 		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input' ,'id' => 'food_images') ) !!}
 		                  @if( !empty($food_images) )
@@ -90,6 +95,46 @@
 		                  @if ($errors->has('food_images'))
 		                  <span class="help-block error">
 		                     <strong class="strong">{{ $errors->first('food_images') }}</strong>
+		                  </span>
+		                  @endif
+		            </div> -->
+		            <div class="form-group form-custom-group">
+		                <label for="exampleInputFile">Upload Food Images <span>*</span></label>
+		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input mb-0 custom-food-image-register' ,'id' => 'food_images','accept' => '.jpg,.jpeg,.png', 'onchange' => 'imagesPreview(this)') ) !!}
+		                <div class="form-group d-inline-block gallery-images" id="galleryImages">
+		                </div>
+		                <div id="cropImages" class="col-lg-12 col-xs-12 p-0 float-left"></div>
+		                <!-- crop image div generated here -->
+		                <div id="cropper">
+						  	<canvas id="cropperImg" class="cropper-image-box" width="0" height="0"></canvas>
+						</div>
+		                <!-- <div class="user-crop-image" id="cropWrapper">
+                        	<div class="col-md-12 p-0">
+                          		<div id="cropImage" style="">
+                            		<img src="" alt="" style="" class="">
+                          		</div>
+                        	</div>
+                        	<div class="crooper-images-crop-btn-block"></div>
+                       	</div> -->
+                       	{!! Form::hidden('food_item_images', null, [ 'id' => 'food_image_data' ])!!}
+		                <!-- code for showing uploded images starts here-->
+		                  @if( !empty($food_images) )
+		                    <div class="form-group d-inline-block">
+		                      <div class="col-sm-8 p-0" style="width: 100%;">
+		                        @foreach( $food_images as $images )
+		                          	<li  class="gallery-images" style="float: left; list-style: none; margin: 6px;">
+		                          		<img src="{{ url('/uploads/food/'.$images) }}" style="width: 62px; height: 42px;margin-top: 6px;" />
+		                          		<a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+									</li>
+		                        @endforeach
+		                      </div>
+		                    </div>
+		                  @endif
+		                <!-- code for showing uploded images ends here-->
+
+		                  @if ($errors->has('food_images'))
+		                  <span class="help-block">
+		                     <strong class="strong t-red">{{ $errors->first('food_images') }}</strong>
 		                  </span>
 		                  @endif
 		            </div>
@@ -238,7 +283,12 @@
 @endsection
 
 @section('add-js')
+<!-- cropper js -->
+<script src="{{ url('frontend/js/cropper/cropper.min.js') }}"></script>
 <script type="text/javascript">
+
+	// crop button
+	var translatedData = '{{$crop_button}}';
 
 	//Date picker
   	$('#datePicker').datepicker({
@@ -300,7 +350,7 @@
 
 	//Time picker
   	$('.timepickerid').timepicker({
-      showMeridian: false, 
+      showMeridian: false,
       disableMousewheel: true
     });
     $('.time-cross').click(function(){
@@ -317,5 +367,134 @@
 	        locale: 'ja'
 	    });
 	});
+
+	// multiple food images upload
+	// Multiple images preview in browser
+	var c;
+	function imagesPreview(input) {
+		var j= 0;
+	  	var cropper;
+	  	var _html = "";
+	  	document.getElementById('galleryImages').innerHTML = "";
+	  	var img = [];
+	  	if(document.getElementById('cropperImg').cropper){
+	    	document.getElementById('cropperImg').cropper.destroy();
+	    	document.getElementById('cropImageBtn').remove();
+	  	}
+	  	if (input.files) {
+	    	var index = 0;
+	    	for (singleFile of input.files) {
+	      		var reader = new FileReader();
+	      		reader.onload = function(event) {
+	        		var blobUrl = event.target.result;
+	        		img.push(new Image());
+	        		img[j].onload = function(e) {
+		        		// Canvas Container
+			          	var singleCanvasImageContainer = document.createElement("div");
+			          	singleCanvasImageContainer.id = 'singleImageCanvasContainer'+index;
+			          	singleCanvasImageContainer.className = 'singleImageCanvasContainer';
+		        		// Canvas Close Btn
+			          	var singleCanvasImageCloseBtn = document.createElement("button");
+			          	var singleCanvasImageCloseBtnText = document.createElement("i");
+			          	singleCanvasImageCloseBtnText.className = "fa fa-times";
+			          	singleCanvasImageCloseBtn.id = 'singleImageCanvasCloseBtn'+index;
+			          	singleCanvasImageCloseBtn.className = 'singleImageCanvasCloseBtn';
+			          	singleCanvasImageCloseBtn.onclick = function() { removeSingleCanvas(this) };
+			          	singleCanvasImageCloseBtn.appendChild(singleCanvasImageCloseBtnText);
+			          	singleCanvasImageContainer.appendChild(singleCanvasImageCloseBtn)
+		        		// Image Canvas
+			        	var canvas = document.createElement("canvas");
+			        	canvas.id = 'imageCanvas'+index;
+			        	canvas.className = 'imageCanvas singleImageCanvas';
+			        	canvas.width = e.currentTarget.width;
+			        	canvas.height = e.currentTarget.height;
+			        	canvas.onclick = function() { cropInitOnClick(canvas.id); };
+			        	singleCanvasImageContainer.appendChild(canvas)
+	          			// Canvas Context
+			        	var ctx = canvas.getContext("2d");
+			        	ctx.drawImage(e.currentTarget,0,0);
+			        	document.getElementById('galleryImages').appendChild(singleCanvasImageContainer);
+			        	urlConversion();
+			        	cropInit('imageCanvas0');
+			        	index++;
+		        	};
+	        		img[j].src = blobUrl;
+	        		j++;
+	      		}
+	      		reader.readAsDataURL(singleFile);
+	    	}
+	  	}
+	  	addCropButton();
+	}
+	function cropInit(selector) {
+		c=document.getElementById(selector);
+		var allCloseButtons = document.querySelectorAll('.singleImageCanvasCloseBtn');
+		for (let element of allCloseButtons) {
+			element.style.display = 'block';
+		}
+		c.previousSibling.style.display = 'none';
+		// c.id = croppedImg;
+		var ctx=c.getContext("2d");
+		var imgData=ctx.getImageData(0, 0, c.width, c.height);
+		var image = document.getElementById('cropperImg');
+		image.width = c.width;
+		image.height = c.height;
+		var ctx = image.getContext("2d");
+		ctx.putImageData(imgData,0,0);
+		cropper = new Cropper(image, {
+			aspectRatio: 1 / 1,
+		});
+	}
+	function cropInitOnClick(selector) {
+		if(document.getElementById('cropperImg').cropper){
+		    document.getElementById('cropperImg').cropper.destroy();
+	    	document.getElementById('cropImageBtn').remove();
+		    cropInit(selector);
+	    	addCropButton();
+		} else {
+		    cropInit(selector);
+	    	addCropButton();
+		}
+	}
+	function image_crop() {
+      	var cropcanvas = document.getElementById("cropperImg").cropper.getCroppedCanvas({width: 250, height: 250});
+		// document.getElementById('cropImages').appendChild(cropcanvas);
+		var ctx=cropcanvas.getContext("2d");
+		var imgData=ctx.getImageData(0, 0, cropcanvas.width, cropcanvas.height);
+		// var image = document.getElementById(c);
+		c.width = cropcanvas.width;
+		c.height = cropcanvas.height;
+		var ctx = c.getContext("2d");
+		ctx.putImageData(imgData,0,0);
+		document.getElementById('cropperImg').cropper.destroy();
+		document.getElementById('cropImageBtn').remove();
+		urlConversion();
+		document.getElementById('cropperImg').width = 0;
+		document.getElementById('cropperImg').height = 0;
+    }
+	function removeSingleCanvas(selector) {
+	  	selector.parentNode.remove();
+	  	urlConversion();
+	}
+	function addCropButton() {
+		// add crop button
+	   	var cropBtn = document.createElement("button");
+	   	cropBtn.setAttribute('type', 'button');
+	   	cropBtn.id = 'cropImageBtn';
+	   	cropBtn.className = "btn btn-block crop-button";
+	    var cropBtntext = document.createTextNode(translatedData);
+	    cropBtn.appendChild(cropBtntext);
+	    document.getElementById("cropper").appendChild(cropBtn);
+	    cropBtn.onclick = function() { image_crop(cropBtn.id); };
+	}
+	function urlConversion() {
+	  	var allImageCanvas = document.querySelectorAll('.singleImageCanvas');
+	  	var convertedUrl = "";
+	  	for (let element of allImageCanvas) {
+	    	convertedUrl += element.toDataURL("image/jpeg");
+	  		convertedUrl += "img_url";
+	  	}
+	  	document.getElementById('food_image_data').value = convertedUrl;
+	}
 </script>
 @endsection

@@ -92,45 +92,78 @@ class FoodItemController extends Controller
 
                     ]);
 
-                    if ($request->hasFile('food_images')) {
-                        $files = $request->file('food_images');
-                        $input_data = $request->all();
+                    // if ($request->hasFile('food_images')) {
+                    //     $files = $request->file('food_images');
+                    //     $input_data = $request->all();
 
-                        $foodImageValidator = Validator::make(
-                            $input_data, [
-                                'food_images.*' => 'required|mimes:jpg,jpeg,png',
-                            ], [
-                                'food_images.*.required' => 'Please upload an image',
-                                'food_images.*.mimes' => 'Only jpeg,png images are allowed',
-                            ]
-                        );
+                    //     $foodImageValidator = Validator::make(
+                    //         $input_data, [
+                    //             'food_images.*' => 'required|mimes:jpg,jpeg,png',
+                    //         ], [
+                    //             'food_images.*.required' => 'Please upload an image',
+                    //             'food_images.*.mimes' => 'Only jpeg,png images are allowed',
+                    //         ]
+                    //     );
 
-                        if ($foodImageValidator->fails()) {
-                            $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
-                            Session::flash('error', $image_validation_error);
-                            return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-                        } else {
-                            foreach ($files as $file) {
-                                $filename = $file->getClientOriginalName();
-                                $extension = $file->getClientOriginalExtension();
-                                $picture = "food_" . uniqid() . "." . $extension;
-                                $destinationPath = public_path() . '/uploads/food/';
-                                $file->move($destinationPath, $picture);
+                    //     if ($foodImageValidator->fails()) {
+                    //         $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                    //         Session::flash('error', $image_validation_error);
+                    //         return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
+                    //     } else {
+                    //         foreach ($files as $file) {
+                    //             $filename = $file->getClientOriginalName();
+                    //             $extension = $file->getClientOriginalExtension();
+                    //             $picture = "food_" . uniqid() . "." . $extension;
+                    //             $destinationPath = public_path() . '/uploads/food/';
+                    //             $file->move($destinationPath, $picture);
 
-                                //STORE NEW IMAGES IN THE ARRAY VARAIBLE
-                                $new_images[] = $picture;
+                    //             //STORE NEW IMAGES IN THE ARRAY VARAIBLE
+                    //             $new_images[] = $picture;
 
-                                // UNSERIALIZE EXISTING IMAGES
-                                $old_images = unserialize($food_item->food_images);
-                                if (!empty($old_images)) {
-                                    //MERGE NEW IMAGES AND EXISTING IMAGES
-                                    $total_images = array_merge($new_images, $old_images);
-                                } else {
-                                    $total_images = $new_images;
+                    //             // UNSERIALIZE EXISTING IMAGES
+                    //             $old_images = unserialize($food_item->food_images);
+                    //             if (!empty($old_images)) {
+                    //                 //MERGE NEW IMAGES AND EXISTING IMAGES
+                    //                 $total_images = array_merge($new_images, $old_images);
+                    //             } else {
+                    //                 $total_images = $new_images;
+                    //             }
+                    //         }
+                    //         $food_item->update(['food_images' => serialize($total_images)]);
+                    //     }
+                    // }
+                    if (isset($input['food_item_images']) && !empty($input['food_item_images'])) {
+                        //get the base64 value in a variable
+                        $data = $input['food_item_images'];
+                        // print_r($data);die;
+                        $imgArray = explode('img_url', $data);
+                        if (!empty($imgArray)) {
+                            foreach ($imgArray as $key => $data) {
+                                if (!empty($data)) {
+                                    list($t, $data) = explode(';', $data);
+                                    list(, $data) = explode(',', $data);
+                                    $_img = base64_decode($data);
+                                    // print_r($data);
+                                    $food_item_images = 'food_' . uniqid() . ".jpeg";
+                                    file_put_contents(public_path() . '/uploads/food/' . $food_item_images, $_img);
+                                    //STORE NEW IMAGES IN THE ARRAY VARAIBLE
+                                    $new_images[] = $food_item_images;
+
+                                    // UNSERIALIZE EXISTING IMAGES
+                                    $old_images = unserialize($food_item->food_images);
+                                    if (!empty($old_images)) {
+                                        //MERGE NEW IMAGES AND EXISTING IMAGES
+                                        $total_images = array_merge($new_images, $old_images);
+                                    } else {
+                                        $total_images = $new_images;
+                                    }
                                 }
+
                             }
                             $food_item->update(['food_images' => serialize($total_images)]);
+
                         }
+
                     }
                     $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
                     Session::flash('success', $updation_success_msg);
@@ -171,35 +204,57 @@ class FoodItemController extends Controller
                     $profile->update(['total_dishes' => $totalDishes]);
                 }
 
-                //multiple Image Upload
-                if ($request->hasFile('food_images')) {
-                    $files = $request->file('food_images');
-                    $input_data = $request->all();
+                // //multiple Image Upload
+                // if ($request->hasFile('food_images')) {
+                //     $files = $request->file('food_images');
+                //     $input_data = $request->all();
 
-                    $foodImageValidator = Validator::make(
-                        $input_data, [
-                            'food_images.*' => 'required|mimes:jpg,jpeg,png',
-                        ], [
-                            'food_images.*.required' => 'Please upload an image',
-                            'food_images.*.mimes' => 'Only jpeg,png,jpg images are allowed',
-                        ]
-                    );
+                //     $foodImageValidator = Validator::make(
+                //         $input_data, [
+                //             'food_images.*' => 'required|mimes:jpg,jpeg,png',
+                //         ], [
+                //             'food_images.*.required' => 'Please upload an image',
+                //             'food_images.*.mimes' => 'Only jpeg,png,jpg images are allowed',
+                //         ]
+                //     );
 
-                    if ($foodImageValidator->fails()) {
-                        $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
-                        Session::flash('error', $image_validation_error);
-                        return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-                    } else {
-                        foreach ($files as $file) {
-                            $filename = $file->getClientOriginalName();
-                            $extension = $file->getClientOriginalExtension();
-                            $picture = "food_" . uniqid() . "." . $extension;
-                            $destinationPath = public_path() . '/uploads/food/';
-                            $file->move($destinationPath, $picture);
-                            $food_images[] = $picture;
+                //     if ($foodImageValidator->fails()) {
+                //         $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
+                //         Session::flash('error', $image_validation_error);
+                //         return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
+                //     } else {
+                //         foreach ($files as $file) {
+                //             $filename = $file->getClientOriginalName();
+                //             $extension = $file->getClientOriginalExtension();
+                //             $picture = "food_" . uniqid() . "." . $extension;
+                //             $destinationPath = public_path() . '/uploads/food/';
+                //             $file->move($destinationPath, $picture);
+                //             $food_images[] = $picture;
+                //         }
+                //         $food->update(['food_images' => serialize($food_images)]);
+                //     }
+                // }
+                if (isset($input['food_item_images']) && !empty($input['food_item_images'])) {
+                    //get the base64 value in a variable
+                    $data = $input['food_item_images'];
+                    // print_r($data);die;
+                    $imgArray = explode('img_url', $data);
+                    if (!empty($imgArray)) {
+                        foreach ($imgArray as $key => $data) {
+                            if (!empty($data)) {
+                                list($t, $data) = explode(';', $data);
+                                list(, $data) = explode(',', $data);
+                                $_img = base64_decode($data);
+                                // print_r($data);
+                                $food_item_images = 'food_' . uniqid() . ".jpeg";
+                                file_put_contents(public_path() . '/uploads/food/' . $food_item_images, $_img);
+                                //STORE NEW IMAGES IN THE ARRAY VARAIBLE
+                                $new_images[] = $food_item_images;
+                            }
                         }
-                        $food->update(['food_images' => serialize($food_images)]);
+                        $food->update(['food_images' => serialize($new_images)]);
                     }
+
                 }
                 $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
                 Session::flash('success', $creation_success_msg);

@@ -251,9 +251,9 @@ class FoodController extends Controller
                     //     $food_item->update(['food_images' => serialize($total_images)]);
                     // }
                     // }
-                    if (isset($input['profile_image']) && !empty($input['profile_image'])) {
+                    if (isset($input['food_item_images']) && !empty($input['food_item_images'])) {
                         //get the base64 value in a variable
-                        $data = $input['profile_image'];
+                        $data = $input['food_item_images'];
                         // print_r($data);die;
                         $imgArray = explode('img_url', $data);
                         if (!empty($imgArray)) {
@@ -263,10 +263,10 @@ class FoodController extends Controller
                                     list(, $data) = explode(',', $data);
                                     $_img = base64_decode($data);
                                     // print_r($data);
-                                    $profile_image = 'food_' . uniqid() . ".jpeg";
-                                    file_put_contents(public_path() . '/uploads/food/' . $profile_image, $_img);
+                                    $food_item_images = 'food_' . uniqid() . ".jpeg";
+                                    file_put_contents(public_path() . '/uploads/food/' . $food_item_images, $_img);
                                     //STORE NEW IMAGES IN THE ARRAY VARAIBLE
-                                    $new_images[] = $profile_image;
+                                    $new_images[] = $food_item_images;
 
                                     // UNSERIALIZE EXISTING IMAGES
                                     $old_images = unserialize($food_item->food_images);
@@ -353,9 +353,9 @@ class FoodController extends Controller
                 //     }
                 // }
 
-                if (isset($input['profile_image']) && !empty($input['profile_image'])) {
+                if (isset($input['food_item_images']) && !empty($input['food_item_images'])) {
                     //get the base64 value in a variable
-                    $data = $input['profile_image'];
+                    $data = $input['food_item_images'];
                     // print_r($data);die;
                     $imgArray = explode('img_url', $data);
                     if (!empty($imgArray)) {
@@ -365,10 +365,10 @@ class FoodController extends Controller
                                 list(, $data) = explode(',', $data);
                                 $_img = base64_decode($data);
                                 // print_r($data);
-                                $profile_image = 'food_' . uniqid() . ".jpeg";
-                                file_put_contents(public_path() . '/uploads/food/' . $profile_image, $_img);
+                                $food_item_images = 'food_' . uniqid() . ".jpeg";
+                                file_put_contents(public_path() . '/uploads/food/' . $food_item_images, $_img);
                                 //STORE NEW IMAGES IN THE ARRAY VARAIBLE
-                                $new_images[] = $profile_image;
+                                $new_images[] = $food_item_images;
                             }
                         }
                         $food->update(['food_images' => serialize($new_images)]);

@@ -939,14 +939,15 @@ so   it doesn’t make the test unnecessarily selective */
   width: 100%;
   float: left;
 }
-canvas{
+.singleImageCanvas{
     max-width: 100%;
     float: left;
-    height: 100px;
+    max-height: 100px;
 }
 .crop-button{
   background-color: #f26522;
   color: #fff;
+  margin-bottom: 30px;
 }
 .singleImageCanvasContainer{
   max-width: 300px;
@@ -967,6 +968,6 @@ canvas{
   font-size: 13px;
 }
 .cropper-image-box{
-  width: 0;
-  height: 0;
+ /* width: 0;
+  height: 0;*/
 }
