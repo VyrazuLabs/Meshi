@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        '\App\Console\Commands\SendEmailNotifications',
+        // '\App\Console\Commands\SendEmailNotifications',
+        // '\App\Console\Commands\ReviewNotification',
     ];
 
     /**
@@ -28,6 +29,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('EmailNotification:sendMail')
             ->daily();
+        $schedule->command('ReviewNotification:sendReviewReminder')
+            ->hourly();
     }
 
     /**

@@ -23,6 +23,11 @@ class Order extends Model
         'time',
         'total_price',
         'status',
+        'email_notification',
+        'reviewed_by_eater',
+        'reviewed_by_creator',
+        'eater_review_notification',
+        'creator_review_notification',
     );
 
     protected $dates = ['deleted_at'];

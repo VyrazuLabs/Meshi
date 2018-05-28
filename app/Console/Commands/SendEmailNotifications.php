@@ -40,27 +40,37 @@ class SendEmailNotifications extends Command
         if (!empty($order)) {
             foreach ($order as $key => $value) {
                 $fooditem = FoodItem::where('food_item_id', $value->food_item_id)->first();
+                $order_details = [];
                 if (!empty($fooditem)) {
-                    $value->item_name = $fooditem->item_name;
-                    $value->food_item_id = $fooditem->food_item_id;
+                    $order_details['item_name'] = $fooditem->item_name;
+                    $order_details['order_number'] = $value->order_number;
+                    $order_details['date_of_delivery'] = $value->date_of_delivery;
+                    $order_details['time'] = $value->time;
+                    $order_details['food_item_id'] = $fooditem->food_item_id;
                     /* send mail to eater */
                     $eater = User::where('user_id', $value->ordered_by)->first();
                     if (!empty($eater)) {
                         $eaterEmail = $eater->email;
-                        $value->eater_nick_name = $eater->nick_name;
-                        Mail::send('frontend.email.eater-delivery-reminder-mail', ['order_details' => $value], function ($message) use ($eaterEmail) {
-                            $message->to($eaterEmail)->subject('シェアメシ');
-                        });
+                        $order_details['eater_nick_name'] = $eater->nick_name;
+                        if ($value->email_notification == 0) {
+                            Mail::send('frontend.email.eater-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($eaterEmail) {
+                                $message->to($eaterEmail)->subject('シェアメシ');
+                            });
+
+                        }
                     }
                     /* send mail to creator */
                     $creator = User::where('user_id', $fooditem->offered_by)->first();
                     if (!empty($creator)) {
                         $creatorEmail = $creator->email;
-                        $value->creator_nick_name = $eater->nick_name;
-                        Mail::send('frontend.email.creator-delivery-reminder-mail', ['order_details' => $value], function ($message) use ($creatorEmail) {
-                            $message->to($creatorEmail)->subject('シェアメシ');
-                        });
+                        $order_details['creator_nick_name'] = $eater->nick_name;
+                        if ($value->email_notification == 0) {
+                            Mail::send('frontend.email.creator-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($creatorEmail) {
+                                $message->to($creatorEmail)->subject('シェアメシ');
+                            });
+                        }
                     }
+                    $value->update(['email_notification' => 1]);
                 }
             }
         }

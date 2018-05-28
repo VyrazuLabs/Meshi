@@ -183,6 +183,11 @@ class PaymentController extends Controller
                     'time' => $cart->time,
                     'quantity' => $cart->quantity,
                     'status' => 1, //paid
+                    'email_notification' => 0,
+                    'reviewed_by_eater' => 0,
+                    'reviewed_by_creator' => 0,
+                    'eater_review_notification' => 0,
+                    'creator_review_notification' => 0,
                 ]);
 
                 $available_stock = $food->quantity - $cart->quantity;

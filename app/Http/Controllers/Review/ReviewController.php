@@ -47,6 +47,8 @@ class ReviewController extends Controller
                     'communication_ratings' => $input['communication_ratings'],
                     'review_description' => $input['review_description']]);
 
+                $order->update(['reviewed_by_eater' => 1]);
+
                 $reviews = [
                     "success" => 1,
                     "error" => 0,
@@ -105,6 +107,9 @@ class ReviewController extends Controller
                     'order_id' => $input['order_id'],
                     'communication_ratings' => $input['communication_ratings'],
                     'communication_description' => $input['communication_description']]);
+
+                $order->update(['reviewed_by_creator' => 1]);
+
                 $reviews = [
                     "success" => 1,
                     "error" => 0,
