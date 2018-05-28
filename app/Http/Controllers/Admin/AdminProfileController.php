@@ -15,7 +15,7 @@ class AdminProfileController extends Controller
     public function edit()
     {
         $user = User::where('user_id', Auth::User()->user_id)->first();
-        return view('admin.edit-admin-profile', ['user' => $user, 'form_types' => 'dgdgdfg']);
+        return view('admin.edit-admin-profile', ['user' => $user]);
     }
 
     public function update(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Review;
 
 use App\Http\Controllers\Controller;
+use App\Models\Food\FoodItem;
 use App\Models\Order\Order;
 use App\Models\ProfileInformation;
 use App\Models\Review\CreatorReview;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Mail;
 use Validator;
 
 class ReviewController extends Controller
@@ -34,8 +36,8 @@ class ReviewController extends Controller
             ];
         } else {
             if (!empty($order)) {
-                /* store reviews in DB */
-                EaterReview::create([
+                /* store reviews by eater in DB */
+                $eater_review = EaterReview::create([
                     'review_id' => uniqid(),
                     'reviewed_by' => Auth::User()->user_id,
                     'food_item_id' => $order->food_item_id,
@@ -49,6 +51,23 @@ class ReviewController extends Controller
                     "success" => 1,
                     "error" => 0,
                 ];
+
+                $fooditem = FoodItem::where('food_item_id', $order->food_item_id)->first();
+                if (!empty($fooditem)) {
+                    /* get eater's details */
+                    $eater_review->eater_nick_name = Auth::User()->nick_name;
+                    $eater_review->item_name = $fooditem->item_name;
+                    /* send email notification to the creator when eater writes review */
+                    /* get creator's details */
+                    $creator = User::where('user_id', $fooditem->offered_by)->first();
+                    if (!empty($creator)) {
+                        $creatorEmail = $creator->email;
+                        $eater_review->creator_nick_name = $creator->nick_name;
+                        Mail::send('frontend.email.creator-review-notification', ['eater_review' => $eater_review], function ($message) use ($creatorEmail) {
+                            $message->to($creatorEmail)->subject('シェアメシ');
+                        });
+                    }
+                }
             } else {
                 $reviews = [
                     "success" => 0,
@@ -78,8 +97,8 @@ class ReviewController extends Controller
             ];
         } else {
             if (!empty($order)) {
-                /* store reviews in DB */
-                CreatorReview::create([
+                /* store reviews by creator in DB */
+                $creator_review = CreatorReview::create([
                     'review_id' => uniqid(),
                     'reviewed_by' => Auth::User()->user_id,
                     'food_item_id' => $order->food_item_id,
@@ -90,6 +109,25 @@ class ReviewController extends Controller
                     "success" => 1,
                     "error" => 0,
                 ];
+                /* send email notification to the eater when creator writes review */
+                $fooditem = FoodItem::where('food_item_id', $order->food_item_id)->first();
+                if (!empty($fooditem)) {
+                    $creator_review->order_number = $order->order_number;
+
+                    /* get creator's details */
+                    $creator_review->creator_nick_name = Auth::User()->nick_name;
+                    $creator_review->item_name = $fooditem->item_name;
+                    /* send email notification to the creator when eater writes review */
+                    /* get eater's details */
+                    $eater = User::where('user_id', $order->ordered_by)->first();
+                    if (!empty($eater)) {
+                        $eaterEmail = $eater->email;
+                        $creator_review->eater_nick_name = $eater->nick_name;
+                        Mail::send('frontend.email.eater-review-notification', ['creator_review' => $creator_review], function ($message) use ($eaterEmail) {
+                            $message->to($eaterEmail)->subject('シェアメシ');
+                        });
+                    }
+                }
             } else {
                 $reviews = [
                     "success" => 0,
