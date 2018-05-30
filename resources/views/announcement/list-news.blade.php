@@ -24,7 +24,13 @@
 		            <tbody>
 			            @foreach($news as $value)
 			              	<tr>
-				                <td>{{$value->title}}</td>
+				                <td>
+
+                                    {{$value->title}}
+                                    @if($value->highlight == 1)
+                                        <img src="{{url('frontend/images/new.gif')}}">
+                                    @endif
+                                    </td>
 				                <td>
 					                @if(mb_strlen($value->title) >= 40)
 										@php echo mb_substr($value->contents, 0, 40, "UTF-8") @endphp ...
