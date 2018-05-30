@@ -36,44 +36,45 @@ class ReviewNotification extends Command
         $jst_current_date = date("Y-m-d");
 
         $orders = Order::whereDate('date_of_delivery', $jst_current_date)->get();
-        foreach ($orders as $key => $order) {
-            $delivery_time = strtotime(date($order->time));
-            $time_limit = date("H:i", strtotime('+3 hours', $delivery_time));
-            $jst_current_date_time = strtotime(date("H:i"));
+        if (count($orders) > 0) {
+            foreach ($orders as $key => $order) {
+                $delivery_time = strtotime(date($order->time));
+                $time_limit = date("H:i", strtotime('+3 hours', $delivery_time));
+                $jst_current_date_time = strtotime(date("H:i"));
 
-            $order_details = [];
-            $order_details['order_number'] = $order->order_number;
-            /* get eater details */
-            $eater = User::where('user_id', $order->ordered_by)->first();
-            if (!empty($eater)) {
-                $eater_email = $eater->email;
-                $order_details['eater_nickname'] = $eater->nick_name;
-            }
-
-            /* get creator details */
-            $fooditem = FoodItem::where('food_item_id', $order->food_item_id)->first();
-            if (!empty($fooditem)) {
-                $creator = User::where('user_id', $fooditem->offered_by)->first();
-                if (!empty($creator)) {
-                    $creator_email = $creator->email;
-                    $order_details['creator_nickname'] = $creator->nick_name;
+                $order_details = [];
+                $order_details['order_number'] = $order->order_number;
+                /* get eater details */
+                $eater = User::where('user_id', $order->ordered_by)->first();
+                if (!empty($eater)) {
+                    $eater_email = $eater->email;
+                    $order_details['eater_nickname'] = $eater->nick_name;
                 }
-            }
 
-            if ($jst_current_date_time > $time_limit) {
-                if ($order->reviewed_by_eater == 0 && $order->eater_review_notification == 0) {
-                    Mail::send('frontend.email.eater-review-reminder-mail', ['order' => $order_details], function ($message) use ($eater_email) {
-                        $message->to($eater_email)->subject('シェアメシ');
-                    });
-                    $order->update(['eater_review_notification' => 1]);
-
+                /* get creator details */
+                $fooditem = FoodItem::where('food_item_id', $order->food_item_id)->first();
+                if (!empty($fooditem)) {
+                    $creator = User::where('user_id', $fooditem->offered_by)->first();
+                    if (!empty($creator)) {
+                        $creator_email = $creator->email;
+                        $order_details['creator_nickname'] = $creator->nick_name;
+                    }
                 }
-                if ($order->reviewed_by_creator == 0 && $order->creator_review_notification == 0) {
-                    Mail::send('frontend.email.creator-review-reminder-mail', ['order' => $order_details], function ($message) use ($creator_email) {
-                        $message->to($creator_email)->subject('シェアメシ');
-                    });
 
-                    $order->update(['creator_review_notification' => 1]);
+                if ($jst_current_date_time > $time_limit) {
+                    if ($order->reviewed_by_eater == 0 && $order->eater_review_notification == 0) {
+                        Mail::send('frontend.email.eater-review-reminder-mail', ['order' => $order_details], function ($message) use ($eater_email) {
+                            $message->to($eater_email)->subject('シェアメシ');
+                        });
+                        $order->update(['eater_review_notification' => 1]);
+                    }
+                    if ($order->reviewed_by_creator == 0 && $order->creator_review_notification == 0) {
+                        Mail::send('frontend.email.creator-review-reminder-mail', ['order' => $order_details], function ($message) use ($creator_email) {
+                            $message->to($creator_email)->subject('シェアメシ');
+                        });
+
+                        $order->update(['creator_review_notification' => 1]);
+                    }
                 }
             }
         }

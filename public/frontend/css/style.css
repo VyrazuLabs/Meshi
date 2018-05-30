@@ -939,15 +939,26 @@ so   it doesn’t make the test unnecessarily selective */
   width: 100%;
   float: left;
 }
+canvas{
+  max-width: 100%;
+  display: inline-block;
+}
+#cropperImg{
+  /*max-width: 0;
+  max-height: 0;*/
+}
+#cropImageBtn{
+  display: none;
+  margin-bottom: 30px;
+}
 .singleImageCanvas{
-    max-width: 100%;
-    float: left;
-    max-height: 100px;
+  max-width: 100%;
+  float: left;
+  max-height: 100px;
 }
 .crop-button{
   background-color: #f26522;
   color: #fff;
-  margin-bottom: 30px;
 }
 .singleImageCanvasContainer{
   max-width: 300px;
@@ -968,6 +979,17 @@ so   it doesn’t make the test unnecessarily selective */
   font-size: 13px;
 }
 .cropper-image-box{
- /* width: 0;
-  height: 0;*/
+  /*max-width: 0;
+  max-height: 0;*/
+  max-height: 300px;
+}
+.news-list ul li{
+  padding: 5px 0;
+}
+.news-list{
+  padding: 22px 0;
+}
+.news-date{
+  margin-right: 15px;
+  color: #a0a0a0;
 }

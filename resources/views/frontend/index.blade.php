@@ -15,7 +15,6 @@
         <!-- </div> -->
         <div class="container">
             <div class="">
-
                 <p style="font-size: 24px; text-align: center;margin-top: 30px;">シェアメシは、空いた時間を使ってお料理を提供したい方と、栄養価の高い家庭料理を求めている方を<br/>マッチングする、新しいフードシェアリングサービスです。</p>
 
                 <!-- cta -->
@@ -59,6 +58,38 @@
                     </div>
                 </div><!-- cta -->
             </div><!-- row -->
+            <div class="section featureds">
+                    <div class="row">
+                        <!-- featured-top -->
+                        <div class="col-sm-12">
+                            <div class="featured-top mb-0">
+                                <h4>{{ trans('app.News List') }}</h4>
+                            </div>
+                        </div><!-- featured-top -->
+                    </div>
+
+                    <div class="news-list">
+                        <ul>
+                            @foreach($news as $value)
+                                <li>
+                                    <span class="news-date">{{ trans('app.Date') }} : {{date('Y-m-d', strtotime($value->created_at))}}</span>
+                                    <span>
+                                        <a href="{{route('news_details',['news_id' => $value->news_id])}}" class="t-black">
+                                        @if(mb_strlen($value->title) > 130)
+                                            @php echo substr($value->title,0,130); @endphp ...
+                                        @else
+                                            {{$value->title}}
+                                        @endif
+                                        </a>
+                                    </span>
+                                    @if($value->highlight == 1)
+                                        <img src="{{url('frontend/images/new.gif')}}">
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div><!-- row -->
+                </div><!-- featureds -->
             <div class="section featureds">
                 <div class="row">
                     <!-- featured-top -->

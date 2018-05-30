@@ -49,6 +49,7 @@ Route::group(['middleware' => ['Language']], function () {
         Route::get('/shopping-cart', array('uses' => 'FrontendController@cart'))->name('shoppingCart');
         Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
         Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
+        Route::get('/news-details/{news_id}', array('uses' => 'FrontendController@newsDetails'))->name('news_details');
 
         /**
          * ROUTES FOR FOOD ITEM SECTION

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Announcement\News;
 use App\Models\Category\Category;
 use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
@@ -123,10 +124,13 @@ class FrontendController extends Controller
                 }
             }
         }
+
+        $newsList = News::where('status', 1)->orderBy('created_at', 'DESC')->take(3)->get();
+
         // echo "<pre>";
         // print_r($closed_food_items);die;
 
-        return view('frontend.index', ['foodItems' => $foodItems, 'available_foods' => $available_foods, 'closed_food_items' => $closed_food_items]);
+        return view('frontend.index', ['foodItems' => $foodItems, 'available_foods' => $available_foods, 'closed_food_items' => $closed_food_items, 'news' => $newsList]);
     }
 
     public function privacy()
@@ -157,6 +161,12 @@ class FrontendController extends Controller
     public function contactUs()
     {
         return view('frontend.contact-us');
+    }
+
+    public function newsDetails($news_id = null)
+    {
+        $news = News::where('news_id', $news_id)->first();
+        return view('frontend.news-details', ['news' => $news]);
     }
 
 }

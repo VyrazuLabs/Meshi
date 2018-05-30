@@ -79,13 +79,15 @@
 	                </div> -->
 	                <div class="form-group form-custom-group">
 		                <label for="exampleInputFile">{{ trans('app.Upload Food Images') }} <span>*</span></label>
-		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input mb-0 custom-food-image-register' ,'id' => 'food_images','accept' => '.jpg,.jpeg,.png', 'onchange' => 'imagesPreview(this)') ) !!}
+		                {!! Form::file('food_images[]', array('multiple'=>true,'class' => 'custom-file-input mb-0 custom-food-image-register' ,'id' => 'food_images','accept' => '.jpg,.jpeg,.png') ) !!}
+		                {!! Form::hidden('food_item_images', null, [ 'id' => 'food_image_data' ])!!}
 		                <div class="form-group d-inline-block gallery-images" id="galleryImages">
 		                </div>
 		                <div id="cropImages" class="col-lg-12 col-xs-12 p-0 float-left"></div>
 		                <!-- crop image div generated here -->
 		                <div id="cropper">
 						  	<canvas id="cropperImg" class="cropper-image-box" width="0" height="0"></canvas>
+						  	<button type="button" class="btn btn-block back-orange cropImageBtn" id="cropImageBtn">Crop</button>
 						</div>
 		                <!-- <div class="user-crop-image" id="cropWrapper">
                         	<div class="col-md-12 p-0">
@@ -95,7 +97,7 @@
                         	</div>
                         	<div class="crooper-images-crop-btn-block"></div>
                        	</div> -->
-                       	{!! Form::hidden('food_item_images', null, [ 'id' => 'food_image_data' ])!!}
+
 		                <!-- code for showing uploded images starts here-->
 		                  @if( !empty($food_images) )
 		                    <div class="form-group d-inline-block">
@@ -436,28 +438,34 @@
 	// multiple food images upload
 	// Multiple images preview in browser
 	var c;
+	var galleryImagesContainer = document.getElementById('galleryImages');
+	var imageCropFileInput = document.getElementById('food_images');
+	var cropperImageInitCanvas = document.getElementById('cropperImg');
+	var cropImageButton = document.getElementById('cropImageBtn');
 	function imagesPreview(input) {
-		var j= 0;
 		var cropper;
 		var _html = "";
 		document.getElementById('galleryImages').innerHTML = "";
 		var img = [];
-		if(document.getElementById('cropperImg').cropper){
-			document.getElementById('cropperImg').cropper.destroy();
-			document.getElementById('cropImageBtn').remove();
-		}
-	  	if (input.files) {
+		if(cropperImageInitCanvas.cropper){
+	      	cropperImageInitCanvas.cropper.destroy();
+	      	cropImageButton.style.display = 'none';
+	      	cropperImageInitCanvas.width = 0;
+	      	cropperImageInitCanvas.height = 0;
+	    }
+	  	if (input.files.length) {
+	  		var i = 0;
 	    	var index = 0;
 			for (singleFile of input.files) {
 				var reader = new FileReader();
 				reader.onload = function(event) {
 					var blobUrl = event.target.result;
 					img.push(new Image());
-					img[j].onload = function(e) {
+					img[i].onload = function(e) {
 						// Canvas Container
-				      var singleCanvasImageContainer = document.createElement("div");
-				      singleCanvasImageContainer.id = 'singleImageCanvasContainer'+index;
-				      singleCanvasImageContainer.className = 'singleImageCanvasContainer';
+				      	var singleCanvasImageContainer = document.createElement('div');
+		            	singleCanvasImageContainer.id = 'singleImageCanvasContainer'+index;
+		            	singleCanvasImageContainer.className = 'singleImageCanvasContainer';
 						// Canvas Close Btn
 						var singleCanvasImageCloseBtn = document.createElement("button");
 						var singleCanvasImageCloseBtnText = document.createElement("i");
@@ -473,27 +481,38 @@
 					    canvas.className = 'imageCanvas singleImageCanvas';
 					    canvas.width = e.currentTarget.width;
 					    canvas.height = e.currentTarget.height;
-					    canvas.onclick = function() { cropInitOnClick(canvas.id); };
+					    canvas.onclick = function() { cropInit(canvas.id); };
 					    singleCanvasImageContainer.appendChild(canvas)
 							// Canvas Context
 					    var ctx = canvas.getContext("2d");
 					    ctx.drawImage(e.currentTarget,0,0);
-					    // document.getElementById('galleryImages').append(canvas);
-					    document.getElementById('galleryImages').appendChild(singleCanvasImageContainer);
+					    galleryImagesContainer.appendChild(singleCanvasImageContainer);
+			            while (document.querySelectorAll('.singleImageCanvas').length == input.files.length) {
+			              	var allCanvasImages = document.querySelectorAll('.singleImageCanvas')[0].getAttribute('id');
+			              	cropInit(allCanvasImages);
+			              	break;
+			            };
 					    urlConversion();
-					    cropInit('imageCanvas0');
 		   			 	index++;
 					};
-					img[j].src = blobUrl;
-					j++;
+					img[i].src = blobUrl;
+					i++;
 				}
 				reader.readAsDataURL(singleFile);
 			}
 	  	}
-	  	addCropButton();
+	  	// addCropButton();
 	}
+	imageCropFileInput.addEventListener("change", function(event){
+	    imagesPreview(event.target);
+	    // console.log(event.target);
+	});
+	// Initialize Cropper
 	function cropInit(selector) {
 		c=document.getElementById(selector);
+		if(cropperImageInitCanvas.cropper){
+	        cropperImageInitCanvas.cropper.destroy();
+	    }
 		var allCloseButtons = document.querySelectorAll('.singleImageCanvasCloseBtn');
 		for (let element of allCloseButtons) {
 			element.style.display = 'block';
@@ -502,14 +521,14 @@
 		// c.id = croppedImg;
 		var ctx=c.getContext("2d");
 		var imgData=ctx.getImageData(0, 0, c.width, c.height);
-		var image = document.getElementById('cropperImg');
+		var image = cropperImageInitCanvas;
 		image.width = c.width;
 		image.height = c.height;
 		var ctx = image.getContext("2d");
 		ctx.putImageData(imgData,0,0);
 		cropper = new Cropper(image, {
 			aspectRatio: 1 / 1,
-			// crop: function(event) {
+			crop: function(event) {
 			//   // console.log(event.detail.x);
 			//   // console.log(event.detail.y);
 			//   // console.log(event.detail.width);
@@ -517,36 +536,52 @@
 			//   // console.log(event.detail.rotate);
 			//   // console.log(event.detail.scaleX);
 			//   // console.log(event.detail.scaleY);
-			// }
+			cropImageButton.style.display = 'block';
+			}
 		});
 	}
-	function cropInitOnClick(selector) {
-		if(document.getElementById('cropperImg').cropper){
-		    document.getElementById('cropperImg').cropper.destroy();
-	    	document.getElementById('cropImageBtn').remove();
-		    cropInit(selector);
-	    	addCropButton();
-		} else {
-		    cropInit(selector);
-	    	addCropButton();
-		}
-	}
+	// function cropInitOnClick(selector) {
+	// 	if(document.getElementById('cropperImg').cropper){
+	// 	    document.getElementById('cropperImg').cropper.destroy();
+	//     	document.getElementById('cropImageBtn').remove();
+	// 	    cropInit(selector);
+	//     	addCropButton();
+	// 	} else {
+	// 	    cropInit(selector);
+	//     	addCropButton();
+	// 	}
+	// }
+	// Crop Image
 	function image_crop() {
-      	var cropcanvas = document.getElementById("cropperImg").cropper.getCroppedCanvas({width: 250, height: 250});
-		// document.getElementById('cropImages').appendChild(cropcanvas);
-		var ctx=cropcanvas.getContext("2d");
-		  var imgData=ctx.getImageData(0, 0, cropcanvas.width, cropcanvas.height);
-		  // var image = document.getElementById(c);
-		  c.width = cropcanvas.width;
-		  c.height = cropcanvas.height;
-		  var ctx = c.getContext("2d");
-		  ctx.putImageData(imgData,0,0);
-		  document.getElementById('cropperImg').cropper.destroy();
-	      document.getElementById('cropImageBtn').remove();
-	      urlConversion();
-	      document.getElementById('cropperImg').width = 0;
-		  document.getElementById('cropperImg').height = 0;
-    }
+	    if(cropperImageInitCanvas.cropper){
+	      var cropcanvas = cropperImageInitCanvas.cropper.getCroppedCanvas({width: 250, height: 250});
+	      // document.getElementById('cropImages').appendChild(cropcanvas);
+	      var ctx=cropcanvas.getContext('2d');
+	        var imgData=ctx.getImageData(0, 0, cropcanvas.width, cropcanvas.height);
+	        // var image = document.getElementById(c);
+	        c.width = cropcanvas.width;
+	        c.height = cropcanvas.height;
+	        var ctx = c.getContext('2d');
+	        ctx.putImageData(imgData,0,0);
+	        cropperImageInitCanvas.cropper.destroy();
+	        cropperImageInitCanvas.width = 0;
+	        cropperImageInitCanvas.height = 0;
+	        cropImageButton.style.display = 'none';
+	        var allCloseButtons = document.querySelectorAll('.singleImageCanvasCloseBtn');
+	        for (let element of allCloseButtons) {
+	          element.style.display = 'block';
+	        }
+	        urlConversion();
+	        // cropperImageInitCanvas.style.display = 'none';
+	    } else {
+	      alert('Please select any Image you want to crop');
+	    }
+	}
+	cropImageButton.addEventListener("click", function(){
+	    image_crop();
+	 });
+
+
 	function removeSingleCanvas(selector) {
 	  	selector.parentNode.remove();
 	  	urlConversion();
@@ -562,15 +597,15 @@
 	    document.getElementById("cropper").appendChild(cropBtn);
 	    cropBtn.onclick = function() { image_crop(cropBtn.id); };
 	}
-	function urlConversion() {
-	  	var allImageCanvas = document.querySelectorAll('.singleImageCanvas');
-	  	var convertedUrl = "";
-	  	for (let element of allImageCanvas) {
-	    	convertedUrl += element.toDataURL("image/jpeg");
-	  		convertedUrl += "img_url";
-	  	}
-	  	document.getElementById('food_image_data').value = convertedUrl;
-	  			  document.getElementById('cropperImg').height = 0;
-	}
+	// Get Converted Url
+	  function urlConversion() {
+	    var allImageCanvas = document.querySelectorAll('.singleImageCanvas');
+	    var convertedUrl = '';
+	    for (let element of allImageCanvas) {
+	      convertedUrl += element.toDataURL('image/jpeg');
+	      convertedUrl += 'img_url';
+	    }
+	    document.getElementById('food_image_data').value = convertedUrl;
+	 }
 </script>
 @endsection

@@ -74,6 +74,17 @@
           <li><a href="{{ route('list_feedback')}}"><i class="fa fa-list"></i><span>Feedback List</span></a></li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-bullhorn"></i>
+          <span>News</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ route('add_news')}}"><i class="fa fa-plus-square-o"></i><span>Create News</span></a></li>
+          <li><a href="{{ route('list_news')}}"><i class="fa fa-list"></i><span>News List</span></a></li>
+        </ul>
+      </li>
       <li><a href="{{ route('list_order')}}"><i class="fa fa-list"></i><span>Order List</span></a></li>
     </ul>
   </section>

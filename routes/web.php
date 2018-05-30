@@ -84,6 +84,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
             Route::get('/list', 'FeedbackController@lists')->name('list_feedback');
             Route::get('/view/{feedback_id}', 'FeedbackController@view')->name('view_feedback');
         });
+
+        Route::group(['namespace' => 'Announcement', 'prefix' => 'news'], function () {
+            Route::get('/list', 'NewsController@lists')->name('list_news');
+            Route::get('/add', 'NewsController@add')->name('add_news');
+            Route::get('/edit/{news_id}', 'NewsController@edit')->name('edit_news');
+            Route::post('/save', 'NewsController@save')->name('save_news');
+        });
     });
 
 });
