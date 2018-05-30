@@ -58,6 +58,7 @@
                     </div>
                 </div><!-- cta -->
             </div><!-- row -->
+            @if(count($news)>0)
             <div class="section featureds">
                     <div class="row">
                         <!-- featured-top -->
@@ -70,6 +71,7 @@
 
                     <div class="news-list">
                         <ul>
+
                             @foreach($news as $value)
                                 <li>
                                     <span class="news-date">{{ trans('app.Date') }} : {{date('Y-m-d', strtotime($value->created_at))}}</span>
@@ -89,7 +91,9 @@
                             @endforeach
                         </ul>
                     </div><!-- row -->
+
                 </div><!-- featureds -->
+            @endif
             <div class="section featureds">
                 <div class="row">
                     <!-- featured-top -->
