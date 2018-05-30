@@ -22,6 +22,7 @@
 		            </tr>
 		            </thead>
 		            <tbody>
+		            @if(count($news)>0)
 			            @foreach($news as $value)
 			              	<tr>
 				                <td>
@@ -48,6 +49,7 @@
 				                <td><a href="{{route('edit_news',['news_id' => $value['news_id']])}}" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 			              	</tr>
 			            @endforeach
+			        @endif
 		            </tbody>
 	          	</table>
 	        </div>
