@@ -1,6 +1,9 @@
 .error{
 	color: red;
 }
+.back-orange{
+  background-color: #f26522 !important;
+}
 .p-0{
 	padding: 0;
 }
@@ -47,23 +50,33 @@
 	margin: 3px;
 }
   /* multiple cropper */
+ /* multiple cropper */
 #galleryImages, #cropper{
   width: 100%;
   float: left;
 }
+canvas{
+  max-width: 100%;
+  display: inline-block;
+}
+#cropperImg{
+  /*max-width: 0;
+  max-height: 0;*/
+}
+#cropImageBtn{
+  display: none;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  color: #fff;
+}
 .singleImageCanvas{
-    max-width: 100%;
-    float: left;
-    max-height: 100px;
+  max-width: 100%;
+  float: left;
+  max-height: 100px;
 }
 .crop-button{
   background-color: #f26522;
   color: #fff;
-  margin-top: 17px;
-  margin-bottom: 15px;
-}
-.cropper-container {
-	/*width: 100% !important;*/
 }
 .singleImageCanvasContainer{
   max-width: 300px;
@@ -84,6 +97,7 @@
   font-size: 13px;
 }
 .cropper-image-box{
- /* width: 0;
-  height: 0;*/
+  /*max-width: 0;
+  max-height: 0;*/
+  max-height: 300px;
 }
