@@ -78,7 +78,7 @@
 
                             @foreach($news as $value)
                                 <li>
-                                    <span class="news-date">{{ trans('app.Date') }} : {{date('Y-m-d', strtotime($value->date))}}</span>
+                                    <span class="news-date">{{date('Y-m-d', strtotime($value->date))}}</span>
                                     <span>
                                         <a href="{{route('news_details',['news_id' => $value->news_id])}}" class="t-black">
                                         @if(mb_strlen($value->title) > 130)
