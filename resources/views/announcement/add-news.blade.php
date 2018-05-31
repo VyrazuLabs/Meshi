@@ -58,6 +58,16 @@
 	                    </span>
 	                  @endif
 	                </div>
+	                <div class="form-group form-custom-group">
+		                <label>Date of News <span>*</span></label>
+		                {!! Form::text('date', null, [
+		                                    'class' => 'form-control', 'id' => 'datePicker']) !!}
+		                @if ($errors->has('date'))
+		                  <span class="help-block error">
+		                    <strong class="strong">{{ $errors->first('date') }}</strong>
+		                  </span>
+		                @endif
+		            </div>
 	                <!-- /.box-body -->
 	            </div>
                 <div class="box-footer text-center">
@@ -69,4 +79,12 @@
 @endsection
 
 @section('add-js')
+<script type="text/javascript">
+	//Date picker
+  	$('#datePicker').datepicker({
+    	format: 'yyyy-mm-dd',
+    	autoclose: true,
+    	todayHighlight: true,
+  	});
+</script>
 @endsection

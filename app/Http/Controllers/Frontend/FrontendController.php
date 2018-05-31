@@ -125,7 +125,7 @@ class FrontendController extends Controller
             }
         }
 
-        $newsList = News::where('status', 1)->orderBy('created_at', 'DESC')->take(3)->get();
+        $newsList = News::where('status', 1)->orderBy('date', 'DESC')->take(3)->get();
 
         // echo "<pre>";
         // print_r($closed_food_items);die;

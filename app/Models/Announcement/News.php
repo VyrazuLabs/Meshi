@@ -13,5 +13,6 @@ class News extends Model
         'contents',
         'highlight',
         'status',
+        'date',
     );
 }

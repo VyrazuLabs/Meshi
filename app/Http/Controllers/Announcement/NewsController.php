@@ -40,6 +40,12 @@ class NewsController extends Controller
             $input['highlight'] = 0;
         }
 
+        //CONVERTING INPUT DATE INTO y-m-d FORMAT
+        if (isset($input['date'])) {
+            $date = str_replace('/', '-', $input['date']);
+            $dates = date('Y-m-d', strtotime($date));
+        }
+
         /* check validation */
         if ($validator->fails()) {
             Session::flash('error', trans('validation.form_error'));
@@ -51,7 +57,8 @@ class NewsController extends Controller
                 $news->update(['title' => $input['title'],
                     'contents' => $input['contents'],
                     'highlight' => $input['highlight'],
-                    'status' => $input['status']]);
+                    'status' => $input['status'],
+                    'date' => $dates]);
                 Session::flash('success', TranslatedResources::translatedData()['updation_success_msg']);
             } else {
                 /* create news */
@@ -60,6 +67,7 @@ class NewsController extends Controller
                     'contents' => $input['contents'],
                     'highlight' => $input['highlight'],
                     'status' => $input['status'],
+                    'date' => $dates,
                 ]);
                 Session::flash('success', TranslatedResources::translatedData()['creation_success_msg']);
             }
@@ -74,6 +82,7 @@ class NewsController extends Controller
             'title' => 'required',
             'contents' => 'required',
             'status' => 'required',
+            'date' => 'required',
         ]);
     }
 }
