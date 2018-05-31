@@ -59,6 +59,9 @@
 	.food-register-form-group{
 		padding: 0;
 	}
+	.support-main-box{	
+		padding: 30px 15px 30px 15px;	
+	}	
 }
 @media screen and (min-width: 576px) and (max-width: 991px){    
 	.review-group{    	

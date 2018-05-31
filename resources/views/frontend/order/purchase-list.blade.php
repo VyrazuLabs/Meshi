@@ -80,7 +80,7 @@
 												@if($order->review_status == 0 && $order->closed_order == 1)
 													<button type="button" data-toggle="modal" data-target="#reviewmodal" class="btn text-right back-orange customer-review-btn creator-review-btn" data-attr="{{ $order->order_id }}" onclick="reviewFood(this)">{{ trans('app.Make Review') }}</button>
 												@elseif($order->review_status == 1)
-													<button type="button" class="btn text-right back-orange customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
+													<button type="button" class="btn text-right customer-review-btn parchesed-review-btn creator-review-btn">{{ trans('app.Reviewed') }}</button>
 												@endif
 											</div>
 										</div>

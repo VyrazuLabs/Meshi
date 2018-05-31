@@ -169,4 +169,9 @@ class FrontendController extends Controller
         return view('frontend.news-details', ['news' => $news]);
     }
 
+    public function beginnerTutorial()
+    {
+        return view('frontend.beginners-tutorial');
+    }
+
 }

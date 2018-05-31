@@ -12,6 +12,7 @@
                                 <li><a href="{{route('about_us')}}">{{ trans('app.About Us') }}</a></li>
                                 <li><a href="{{route('faq')}}">{{ trans('app.FAQ') }}</a></li>
                                 <li><a href="{{ route('contact_us')}}">{{ trans('app.Contact Us') }}</a></li>
+                                <li><a href="{{ route('beginners_tutorial')}}">{{ trans('app.Beginners Tutorial') }}</a></li>
                             </ul>
                         </div>
                     </div><!-- footer-widget -->
@@ -51,7 +52,7 @@
             </div><!-- container -->
         </section><!-- footer-top -->
 
-        
+
         <div class="footer-bottom clearfix text-center">
             <div class="container">
                 <p>{{ trans('app.Copyright') }} &copy; 2018. <a href="https://sharemeshi.com/">{{ trans('app.sharemeshi') }}</a></p>

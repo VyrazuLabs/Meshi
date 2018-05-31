@@ -50,6 +50,7 @@ Route::group(['middleware' => ['Language']], function () {
         Route::get('/about-us', array('uses' => 'FrontendController@aboutUs'))->name('about_us');
         Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
         Route::get('/news-details/{news_id}', array('uses' => 'FrontendController@newsDetails'))->name('news_details');
+        Route::get('/beginner-tutorial', array('uses' => 'FrontendController@beginnerTutorial'))->name('beginners_tutorial');
 
         /**
          * ROUTES FOR FOOD ITEM SECTION
