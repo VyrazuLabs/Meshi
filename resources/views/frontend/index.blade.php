@@ -16,6 +16,10 @@
         <div class="container">
             <div class="">
                 <p style="font-size: 24px; text-align: center;margin-top: 30px;">シェアメシは、空いた時間を使ってお料理を提供したい方と、栄養価の高い家庭料理を求めている方を<br/>マッチングする、新しいフードシェアリングサービスです。</p>
+                <!-- beginner button -->
+                <div class="col-lg-12 col-xs-12 text-center beginner-btn-box">
+                    <a href="{{ route('beginners_tutorial')}}" class="btn btn-lg back-orange beginner-guide-btn">Beginner Guide</a>
+                </div>
 
                 <!-- cta -->
                 <div class="section cta text-center">

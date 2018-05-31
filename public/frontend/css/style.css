@@ -1027,3 +1027,15 @@ canvas{
   font-weight: 600;
 }
 /* end beginners page */
+/* start beginner button */
+.beginner-btn-box{
+  padding: 23px 0;
+}
+.beginner-guide-btn{
+  color: #fff;
+}
+.beginner-guide-btn:hover,
+.beginner-guide-btn:focus{
+  color: #fff;
+}
+/* end beginner button */
