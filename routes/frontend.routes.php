@@ -64,6 +64,7 @@ Route::group(['middleware' => ['Language']], function () {
                     Route::get('/edit/{food_item_id}', 'FoodController@editFood')->name('edit_food');
                     Route::get('/lists', 'FoodController@lists')->name('food_list');
                     Route::post('/save', 'FoodController@save')->name('save_food_item_user');
+                    Route::get('/delete/{food_image}/{food_item_id}', 'FoodController@deleteFoodImage')->name('delete_food_images');
                 });
             });
 

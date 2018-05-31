@@ -105,7 +105,7 @@
 		                        @foreach( $food_images as $images )
 		                          	<li  class="gallery-images" style="float: left; list-style: none; margin: 6px;">
 		                          		<img src="{{ url('/uploads/food/'.$images) }}" style="width: 62px; height: 42px;margin-top: 6px;" />
-		                          		<a href="{{route('delete_food_image',[$images,$food_items->food_item_id])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+		                          		<a href="{{route('delete_food_images',[$images,$food_items->food_item_id])}}"><i class="fa fa-times" aria-hidden="true"></i></a>
 									</li>
 		                        @endforeach
 		                      </div>

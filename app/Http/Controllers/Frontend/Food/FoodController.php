@@ -516,4 +516,36 @@ class FoodController extends Controller
 
         return view('frontend.food.create-food-item', ['form_type' => 'edit', 'food_items' => $food_items, 'category_id' => $category_id, 'offered_by' => $offered_by, 'food_images' => $food_images, 'time_of_availability' => $time_of_availability, 'deliverable_area' => $deliverable_area]);
     }
+
+    /* DELETE FOOD IMAGES */
+    public function deleteFoodImage($food_image = null, $food_item_id = null)
+    {
+        $food_item = FoodItem::where('food_item_id', $food_item_id)->first();
+        $imgArray = [];
+        if (!empty($food_item)) {
+            if (!empty($food_item->food_images)) {
+                $images = unserialize($food_item->food_images);
+                foreach ($images as $key => $delete_image) {
+                    if ($delete_image == $food_image) {
+
+                        //DELETE SELECTED IMAGE FROM DATABASE
+                        unset($images[$key]);
+
+                        //DELETE THE SAME IMAGE FROM FOLDER
+                        if (file_exists(public_path() . '/uploads/food/' . $delete_image)) {
+                            unlink(public_path() . '/uploads/food/' . $delete_image);
+                        }
+                    } else {
+                        $imgArray[] = $delete_image;
+                    }
+                }
+            }
+
+            //AFTER DELETION UPDATE REMAINING IMAGES
+            $new_food_images = $food_item->update(['food_images' => serialize($imgArray)]);
+            $deletion_success_msg = TranslatedResources::translatedData()['deletion_success_msg'];
+            Session::flash('success', $deletion_success_msg);
+        }
+        return redirect()->back();
+    }
 }
