@@ -271,7 +271,9 @@ return [
     'eater receive food title step 3' => 'Receive the food.',
     'eater receive food description step 3' => 'Food creator will deliver the food to your house at the time. Please enjoy the food and communication with food creator.',
     'eater make review title step 4' => 'Make Review',
-    'eater make review title step 4' => 'Please write review for food creator.',
+    'eater make review description step 4' => 'Please write review for food creator.',
     'Beginner Guide' => 'Beginner Guide',
+    'For Creator' => 'For Creator',
+    'For Eater' => 'For Eater',
 
 ];

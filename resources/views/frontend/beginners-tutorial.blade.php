@@ -22,10 +22,10 @@
 			</div>
 			<div class="col-lg-12 col-xs-12 p-0 text-center">
 				<ul class="nav nav-pills d-inline-block beginner-nav-pill">
-			    	<li class="active"><a data-toggle="pill" href="#beginner_creator_box">For Creator</a></li>
-			    	<li><a data-toggle="pill" href="#beginner_eater_box">For Eater</a></li>
+			    	<li class="active"><a data-toggle="pill" href="#beginner_creator_box">{{ trans('app.For Creator')}}</a></li>
+			    	<li><a data-toggle="pill" href="#beginner_eater_box">{{ trans('app.For Eater')}}</a></li>
 			  	</ul>
-	  
+
 			  	<div class="tab-content">
 				    <div id="beginner_creator_box" class="tab-pane fade in active text-left">
 				      	<!-- for food creator -->
@@ -129,7 +129,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 4') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.eater make review title step 4') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.eater make review title step 4') }}</p>
+									<p class="t-black beginner-step-description">{{ trans('app.eater make review description step 4') }}</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/eater-step4.png') }}" class="img-responsive beginner-right-img">

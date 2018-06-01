@@ -263,7 +263,9 @@ return [
     'eater receive food title step 3' => '食べ物を受け取る。',
     'eater receive food description step 3' => 'その時に食糧を作って食べ物をあなたの家に届けます。食べ物の作成者とのコミュニケーションを楽しんでください。',
     'eater make review title step 4' => 'レビューをする',
-    'eater make review title step 4' => '食品作家のためのレビューを書いてください。',
+    'eater make review description step 4' => '食品作家のためのレビューを書いてください。',
     'Beginner Guide' => '初心者ガイド',
+    'For Creator' => 'クリエイター向け',
+    'For Eater' => 'イーター',
 
 ];
