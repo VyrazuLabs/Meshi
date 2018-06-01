@@ -100,6 +100,6 @@ class SendEmailNotifications extends Command
     public function handle()
     {
         /* RUN THE TASK DAILY */
-        $schedule->command('EmailNotification:sendMail')->everyMinute();
+        $schedule->command('EmailNotification:sendMail')->daily();
     }
 }

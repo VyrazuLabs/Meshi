@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('EmailNotification:sendMail')
-            ->everyMinute();
+            ->daily();
         $schedule->command('ReviewNotification:sendReviewReminder')
             ->hourly();
     }
