@@ -234,8 +234,8 @@
         var pathname = window.location;
         var homeUrl = '{{ url("/") }}/';
         if(pathname != homeUrl) {
-          $(".nav").find(".active").removeClass("active");
-          $('.nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+          $(".header-nav").find(".active").removeClass("active");
+          $('.header-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
         }
       });
 

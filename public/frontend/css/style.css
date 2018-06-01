@@ -1060,6 +1060,25 @@ canvas{
   font-size: 23px;
 }
 .news-details-description-text{
-    line-height: 35px;
-    font-size: 21px;
+  line-height: 35px;
+  font-size: 21px;
+}
+.beginners-food-creator-title{
+  font-size: 22px;
+  font-weight: 100;
+}
+.beginner-nav-pill.nav-pills>li.active>a, 
+.beginner-nav-pill.nav-pills>li.active>a:focus, 
+.beginner-nav-pill.nav-pills>li.active>a:hover{
+  background-color: #f26522;
+  color: #fff;
+}
+.nav.beginner-nav-pill li{
+  margin: 0 6px;
+}
+.nav.beginner-nav-pill li a{
+  border: 1px solid #f26522;
+  color: #f26522;
+  text-transform: none;
+  min-width: 120px;
 }

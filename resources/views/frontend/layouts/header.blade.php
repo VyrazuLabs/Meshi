@@ -16,7 +16,7 @@
 				<!-- /navbar-header -->
 				<div class="navbar-left">
 					<div class="collapse navbar-collapse pr-0" id="navbar-collapse">
-						<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav header-nav">
 							<li class="active"><a href="{{ url('/')}}">{{ trans('app.HOME')}}</a></li>
 							@if(Auth::user() && Auth::user()->type == 1)
 								<li><a href="{{route('profile_details',['user_id' => Auth::User()->user_id])}}">{{ trans('app.PROFILE') }}</a></li>
