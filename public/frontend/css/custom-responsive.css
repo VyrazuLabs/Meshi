@@ -19,6 +19,9 @@
 	.order-list-detail-price{		
 		text-align: center;	
 	}
+	.news-list-box{
+		padding: 70px 12px;
+	}
 }
 @media (min-width: 768px){	
 	.modal-dialog {	    

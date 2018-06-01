@@ -21,29 +21,29 @@
 				</ol><!-- breadcrumb -->
 				<h2 class="title d-inline-block t-orange">{{ trans('app.News') }}</h2>
 			</div>
-			<div class="section about boxes-card">
-				<div class="about-info">
-					<div class="row">
+			<div class="col-lg-12 col-xs-12 p-0 text-center">
+				<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 p-0 d-inline-block float-none section about boxes-card">
+					<div class="about-info news-list-box">
 						<!-- about-text -->
 						<div class="col-md-12 col-xs-12 text-center">
-							<div class="col-md-8 float-none d-inline-block">
+							<!-- <div class="col-md-8 float-none d-inline-block"> -->
 								<div class="about-text">
 									<!-- title-paragraph -->
-									<div class="description-paragraph">
-										<h3 class="about-us-text"><b>{{$news->title}}</b></h3>
+									<div class="description-paragraph news-list-title">
+										<h3 class="about-us-text news-details-text">{{$news->title}}</h3>
 									</div>
 									<!-- title-paragraph -->
 
 									<!-- content-paragraph -->
 									<div class="description-paragraph">
-										<p class="about-us-text">@php echo nl2br($news->contents); @endphp</p>
+										<p class="about-us-text news-details-description-text">@php echo nl2br($news->contents); @endphp</p>
 									</div>
 									<!-- content-paragraph -->
 								</div>
-							</div>
+							<!-- </div> -->
 						</div><!-- about-text -->
-					</div>
-				</div><!-- about-info -->
+					</div><!-- about-info -->
+				</div>
 			</div>
 		</div>
 	</div>

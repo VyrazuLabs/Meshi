@@ -1039,3 +1039,27 @@ canvas{
   color: #fff;
 }
 /* end beginner button */
+/* news details start */
+.news-list-box{
+  margin-bottom: 0;
+  padding: 70px 86px;
+  float: left;
+}
+.news-list-title::after{
+  content: '';
+  border: none;
+  margin: 30px auto;
+  display: block;
+  height: 8px;
+  width: 105px;
+  background: #f26522;
+}
+.news-details-text{
+  color: #000;
+  line-height: 32px;
+  font-size: 23px;
+}
+.news-details-description-text{
+    line-height: 35px;
+    font-size: 21px;
+}
