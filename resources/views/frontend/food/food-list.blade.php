@@ -40,8 +40,10 @@
 										@php
                                             $current_date = date("Y-m-d");
                                         @endphp
-                                        @if($food->date >= $current_date)
-											<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">{{ trans('app.Remove') }}</a>
+                                        @if($food->order_status == 0)
+	                                        @if($food->date >= $current_date)
+												<a href="#" type="button" class="btn text-right food-creator-list-btn" id="remove-food-item" data-attr="{{ $food->food_item_id }}" onclick="deleteFood(this)">{{ trans('app.Remove') }}</a>
+											@endif
 										@endif
 											<a href="{{route('edit_food',['food_item_id' => $food->food_item_id])}}" type="button" class="btn text-right food-creator-list-btn food-creator-list-edit back-orange">{{ trans('app.Edit') }}</a>
 										</div>

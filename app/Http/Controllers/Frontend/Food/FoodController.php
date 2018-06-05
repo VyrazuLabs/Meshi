@@ -446,6 +446,12 @@ class FoodController extends Controller
 
         if (!empty($foods)) {
             foreach ($foods as $key => $food) {
+                $order = Order::where('food_item_id', $food->food_item_id)->first();
+                if (!empty($order)) {
+                    $food->order_status = 1;
+                } else {
+                    $food->order_status = 0;
+                }
                 $category = Category::where('status', 1)->where('category_id', $food->category_id)->first();
                 if (!empty($category)) {
                     $food->category_name = $category->category_name;
