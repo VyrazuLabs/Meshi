@@ -12,6 +12,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Mail;
 use Session;
 use TranslatedResources;
 use Validator;
@@ -277,12 +278,9 @@ class FoodController extends Controller
                                         $total_images = $new_images;
                                     }
                                 }
-
                             }
                             $food_item->update(['food_images' => serialize($total_images)]);
-
                         }
-
                     }
                     $updation_success_msg = TranslatedResources::translatedData()['updation_success_msg'];
                     Session::flash('success', $updation_success_msg);
@@ -310,7 +308,6 @@ class FoodController extends Controller
                     'end_publication_date' => $end_date,
                     'end_publication_time' => $end_time,
                     'quantity' => $input['quantity'],
-
                 ]);
 
                 $profile = ProfileInformation::where('user_id', Auth::user()->user_id)->first();
@@ -323,40 +320,10 @@ class FoodController extends Controller
                     $profile->update(['total_dishes' => $totalDishes]);
                 }
 
-                // /* Upload food images */
-                // if ($request->hasFile('food_images')) {
-                //     $files = $request->file('food_images');
-                //     $input_data = $request->all();
-
-                //     $foodImageValidator = Validator::make(
-                //         $input_data, [
-                //             'food_images.*' => 'required|mimes:jpg,jpeg,png',
-                //         ], [
-                //             'food_images.*.required' => 'Please upload an image',
-                //             'food_images.*.mimes' => 'Only jpeg,png,jpg images are allowed',
-                //         ]
-                //     );
-                //     if ($foodImageValidator->fails()) {
-                //         $image_validation_error = TranslatedResources::translatedData()['image_validation_error'];
-                //         Session::flash('error', $image_validation_error);
-                //         return Redirect()->back()->withErrors($foodImageValidator)->withInput($input);
-                //     } else {
-                //         foreach ($files as $file) {
-                //             $filename = $file->getClientOriginalName();
-                //             $extension = $file->getClientOriginalExtension();
-                //             $picture = "food_" . uniqid() . "." . $extension;
-                //             $destinationPath = public_path() . '/uploads/food/';
-                //             $file->move($destinationPath, $picture);
-                //             $food_images[] = $picture;
-                //         }
-                //         $food->update(['food_images' => serialize($food_images)]);
-                //     }
-                // }
-
+                /* Upload food images */
                 if (isset($input['food_item_images']) && !empty($input['food_item_images'])) {
                     //get the base64 value in a variable
                     $data = $input['food_item_images'];
-                    // print_r($data);die;
                     $imgArray = explode('img_url', $data);
                     if (!empty($imgArray)) {
                         foreach ($imgArray as $key => $data) {
@@ -364,7 +331,6 @@ class FoodController extends Controller
                                 list($t, $data) = explode(';', $data);
                                 list(, $data) = explode(',', $data);
                                 $_img = base64_decode($data);
-                                // print_r($data);
                                 $food_item_images = 'food_' . uniqid() . ".jpeg";
                                 file_put_contents(public_path() . '/uploads/food/' . $food_item_images, $_img);
                                 //STORE NEW IMAGES IN THE ARRAY VARAIBLE
@@ -373,8 +339,24 @@ class FoodController extends Controller
                         }
                         $food->update(['food_images' => serialize($new_images)]);
                     }
-
                 }
+
+                /* SEND EMAIL TO ADMIN WHEN NEW FOOD CREATED BY FOOD CREATOR */
+                $adminEmail = 'admin@sharemeshi.com';
+                // $adminEmail = 'ankita@vyrazu.com'; //for testing purpose
+                $foodDetails = $food;
+                $userDetails = user::where('user_id', $food->offered_by)->first();
+                if (!empty($userDetails)) {
+                    $foodDetails['creatorName'] = $userDetails->name;
+                    $foodDetails['creatorNickName'] = $userDetails->nick_name;
+                }
+                if (empty($input['deliverable_area'])) {
+                    $foodDetails['deliverable_area'] = $profile->deliverable_area;
+                }
+
+                Mail::send('frontend.email.food-creation-email', ['foodDetails' => $foodDetails], function ($message) use ($adminEmail) {
+                    $message->to($adminEmail)->subject('シェアメシ');
+                });
 
                 $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];
                 Session::flash('success', $creation_success_msg);
