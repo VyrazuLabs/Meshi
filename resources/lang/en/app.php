@@ -257,19 +257,24 @@ return [
     'Step 4' => 'Step 4',
     'For Food Eater' => 'For Food Eater',
     "creator available time title step1" => "You can use this time whenever you're free(available time)",
-    "creator available time description step1" => 'Please confirm your available date & time to deliver food.Even if you make your food too much you can deeliver it to food eater.',
+    "creator available time description step1" => 'Please confirm your available date & time to deliver food.
+Even if you make your food too much you can deliver it to food eater.',
     "creator upload food title step 2" => "Upload your food",
-    "creator upload food description step 2" => "Please upload the food you always make too muchYou can upload the food you always make or you're good at",
+    "creator upload food description step 2" => "Please upload the food you always make too much.
+    You can upload the food you always make or you're good at.",
     "creator deliver food title step 3" => 'Deliver the food to eater.',
-    "creator deliver food description step 3" => 'When you got the order,please deliver the food to food eater.',
+    "creator deliver food description step 3" => 'When you got the order, please deliver the food to food eater.',
     "creator write review title step 4" => 'Write Review',
     "creator write review description step 4" => 'Please write review with many appreciate.',
     "eater select food title step1" => 'Select the food you want to eat',
     "eater select food description step1" => 'Please Select the food you want to eat.',
     'eater specify time title step 2' => 'Specify time and number of food',
-    'eater specify time description step 2' => 'Please select the time and number.Food creator will deliver your house. If you want to deliver your another place, you can contact us to tell us.',
+    'eater specify time description step 2' => 'Please select the time and number.
+    Food creator will deliver at your house.
+    If you want to deliver your another place, you can contact us or tell us.',
     'eater receive food title step 3' => 'Receive the food.',
-    'eater receive food description step 3' => 'Food creator will deliver the food to your house at the time. Please enjoy the food and communication with food creator.',
+    'eater receive food description step 3' => 'Food creator will deliver the food to your house at the time.
+    Please enjoy the food and communication with food creator.',
     'eater make review title step 4' => 'Make Review',
     'eater make review description step 4' => 'Please write review for food creator.',
     'Beginner Guide' => 'Beginner Guide',

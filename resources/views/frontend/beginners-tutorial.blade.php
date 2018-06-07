@@ -35,7 +35,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 1') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.creator available time title step1') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.creator available time description step1') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br(trans('app.creator available time description step1')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/creator-step1.png') }}" class="img-responsive beginner-right-img">
@@ -48,7 +48,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 2') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.creator upload food title step 2') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.creator upload food description step 2') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br( trans('app.creator upload food description step 2')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/creator-step2.png') }}" class="img-responsive beginner-right-img">
@@ -61,7 +61,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 3') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.creator deliver food title step 3') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.creator deliver food description step 3') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br( trans('app.creator deliver food description step 3')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/creator-step3.png') }}" class="img-responsive beginner-right-img">
@@ -74,7 +74,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 4') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.creator write review title step 4') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.creator write review description step 4') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br(trans('app.creator write review description step 4')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/creator-step4.png') }}" class="img-responsive beginner-right-img">
@@ -90,7 +90,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 1') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.eater select food title step1') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.eater select food description step1') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br (trans('app.eater select food description step1')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/eater-step1.png') }}" class="img-responsive beginner-right-img">
@@ -103,7 +103,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 2') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.eater specify time title step 2') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.eater specify time description step 2') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br  (trans('app.eater specify time description step 2')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/eater-step2.png') }}" class="img-responsive beginner-right-img">
@@ -116,7 +116,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 3') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.eater receive food title step 3') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.eater receive food description step 3') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br (trans('app.eater receive food description step 3')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/eater-step3.png') }}" class="img-responsive beginner-right-img">
@@ -129,7 +129,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 p-0">
 									<p class="t-orange beginner-step-title">{{ trans('app.Step 4') }}</p>
 									<p class="t-orange beginner-step-sub-text">{{ trans('app.eater make review title step 4') }}</p>
-									<p class="t-black beginner-step-description">{{ trans('app.eater make review description step 4') }}</p>
+									<p class="t-black beginner-step-description">@php echo nl2br (trans('app.eater make review description step 4')) @endphp</p>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-0">
 									<img src="{{ url('frontend/images/eater-step4.png') }}" class="img-responsive beginner-right-img">
