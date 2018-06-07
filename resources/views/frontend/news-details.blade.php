@@ -35,7 +35,7 @@
 									<!-- title-paragraph -->
 
 									<!-- content-paragraph -->
-									<div class="description-paragraph">
+									<div class="description-paragraph text-left">
 										<p class="about-us-text news-details-description-text">@php echo nl2br($news->contents); @endphp</p>
 									</div>
 									<!-- content-paragraph -->
