@@ -379,7 +379,6 @@ class FoodController extends Controller
             'start_publication_date' => 'required',
             'end_publication_date' => 'required',
             'quantity' => 'required',
-
         ]);
     }
 
