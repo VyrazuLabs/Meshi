@@ -225,7 +225,7 @@ return [
     'crop' => '画像切り取り',
     'Video Link(Embed Code)' => '動画リンク（埋め込みコード）',
     'Cover Image' => 'プロフィール画面カバー画像',
-    'No Available Foods' => 'おっとした食べ物はありません',
+    'No Available Foods' => '現在お料理はありません',
     'nickname\'s' => ':nicknameさんの',
     'Forgot Password' => 'パスワードをお忘れですか',
     'email placeholder' => 'メールアドレスを入力して',
