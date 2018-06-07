@@ -1033,6 +1033,8 @@ canvas{
 }
 .beginner-guide-btn{
   color: #fff;
+  min-width: 120px;
+  padding: 15px 10px;
 }
 .beginner-guide-btn:hover,
 .beginner-guide-btn:focus{
