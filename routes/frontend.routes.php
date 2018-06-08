@@ -51,6 +51,7 @@ Route::group(['middleware' => ['Language']], function () {
         Route::get('/contact-us', array('uses' => 'FrontendController@contactUs'))->name('contact_us');
         Route::get('/news-details/{news_id}', array('uses' => 'FrontendController@newsDetails'))->name('news_details');
         Route::get('/beginner-tutorial', array('uses' => 'FrontendController@beginnerTutorial'))->name('beginners_tutorial');
+        Route::post('/set-session', array('uses' => 'FrontendController@setSession'));
 
         /**
          * ROUTES FOR FOOD ITEM SECTION
@@ -58,7 +59,7 @@ Route::group(['middleware' => ['Language']], function () {
         Route::group(['prefix' => 'food'], function () {
             Route::group(['namespace' => 'Food'], function () {
                 Route::get('/details/{food_item_id}', 'FoodController@details')->name('food_details');
-                Route::group(['middleware' => 'SignInRouteAccessUser'], function () {
+                Route::group(['middleware' => ['SignInRouteAccessUser', 'CreatorRouteAccess']], function () {
                     Route::get('/create', 'FoodController@create')->name('food_create');
                     Route::post('/delete', 'FoodController@delete')->name('delete_food');
                     Route::get('/edit/{food_item_id}', 'FoodController@editFood')->name('edit_food');
@@ -108,11 +109,10 @@ Route::group(['middleware' => ['Language']], function () {
              * ROUTES FOR ORDER SECTION
              */
             Route::group(['namespace' => 'Order'], function () {
-                Route::get('/order-details', 'OrderController@orderDetails')->name('order_details');
+                Route::get('/order-details', array('uses' => 'OrderController@orderDetails', 'middleware' => 'CreatorRouteAccess'))->name('order_details');
                 Route::get('/purchased-list', 'OrderController@purchasedList')->name('purchased_list');
-                Route::get('/order-list', 'OrderController@orderedList')->name('order_list');
+                Route::get('/order-list', array('uses' => 'OrderController@orderedList', 'middleware' => 'CreatorRouteAccess'))->name('order_list');
                 Route::post('/show-eater-information', 'OrderController@viewEaterInformation');
-
             });
 
             /**

@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Food\FoodItem;
 use App\Models\ForgetPasswordToken;
+use App\Models\Order\Cart;
 use App\Models\User;
 use Auth;
 use Crypt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Mail;
 use Session;
 use TranslatedResources;
+use URL;
 use Validator;
 
 class SigninController extends Controller
@@ -18,6 +22,12 @@ class SigninController extends Controller
     /* view of creator/eater login form */
     public function signIn()
     {
+        /* check for private url session variables */
+        if (Session::has('private_url')) {
+            Session::forget('private_url');
+            /* set the previous url in session */
+            Session::put('url.intended', URL::previous());
+        }
         return view('frontend.auth.sign-in');
     }
 
@@ -45,11 +55,47 @@ class SigninController extends Controller
                     if (Auth::User()->type == 1 || Auth::User()->type == 2) {
                         $user = User::where('user_id', Auth::User()->user_id)->first();
                         $user->update(['remember_token' => $remember_me]);
-                        if (Auth::User()->type == 1) {
-                            return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
-                        }
-                        if (Auth::User()->type == 2) {
-                            return redirect('/');
+                        /* redirect to the previous url after login if user try to access private URLs */
+                        if (Session::has('url.intended')) {
+                            $intendedUrl = Session::get('url.intended');
+                            Session::forget('url.intended');
+                            return Redirect::to($intendedUrl);
+                        } elseif (Session::has('buy_food')) {
+                            $order_details = Session::get('buy_food');
+                            Session::forget('buy_food');
+
+                            //decrypt price and food_item_id here
+                            $price = Crypt::decrypt($order_details['amount']);
+                            $food_item_id = Crypt::decrypt($order_details['food_item_id']);
+                            $food_details_url = route('food_details', ['food_item_id' => $food_item_id]);
+
+                            $foodItem = FoodItem::where('food_item_id', $food_item_id)->first();
+                            if ($foodItem->offered_by != Auth::User()->user_id) {
+                                $foodStock = $foodItem->quantity;
+                                /* add item in cart */
+                                if ($order_details['quantity'] <= $foodStock) {
+                                    $cart = Cart::create(['food_item_id' => $food_item_id,
+                                        'cart_id' => uniqid(),
+                                        'price' => $price,
+                                        'time' => $order_details['slot'],
+                                        'quantity' => $order_details['quantity'],
+                                        'booked_by' => Auth::User()->user_id,
+                                    ]);
+                                    Session::forget('redirect_order_details');
+                                    return redirect(url('/order/payment/make-paypal-payment', array($cart->cart_id)));
+                                } else {
+                                    return Redirect::to($food_details_url);
+                                }
+                            } else {
+                                return Redirect::to($food_details_url);
+                            }
+                        } else {
+                            if (Auth::User()->type == 1) {
+                                return redirect()->route('profile_details', ['user_id' => Auth::user()->user_id]);
+                            }
+                            if (Auth::User()->type == 2) {
+                                return redirect('/');
+                            }
                         }
                     } else {
                         Auth::logout();
@@ -173,4 +219,5 @@ class SigninController extends Controller
             'password_confirmation' => 'min:6|same:password',
         ]);
     }
+
 }

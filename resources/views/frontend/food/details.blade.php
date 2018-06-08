@@ -171,7 +171,7 @@
 																	<button id="buy_now_btn" disabled="disabled" class="btn btn-red detail-buy-btn makeOrder" type="button">{{ trans('app.Buy Now') }}</button>
 																@endif
 															@else
-																<a disabled="disabled" class="btn btn-red detail-buy-btn" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
+																<a disabled="disabled" class="btn btn-red detail-buy-btn buy-after-login" id="buy_now_btn_bfr_login" >{{ trans('app.Buy Now') }}</a>
 															@endif
 														@else
 															<button class="btn detail-buy-btn details-sold-out-btn" type="button">{{ trans('app.Sold Out') }}</button>
@@ -353,20 +353,37 @@
 		    }
 		});
 	}
+
 	function checkForValue(param) {
 		var value = $(param).val();
 		if(value != '') {
 			$('#buy_now_btn').prop('disabled', false);
 			$('#buy_now_btn_bfr_login').attr('disabled', false);
-			$('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
+			// $('#buy_now_btn_bfr_login').attr('href',"{{route('sign_in')}}");
 		}
 		else {
 			$('#buy_now_btn').prop('disabled', true);
 			$('#buy_now_btn_bfr_login').attr('disabled', true);
-			$('#buy_now_btn_bfr_login').attr('href', '#');
+			// $('#buy_now_btn_bfr_login').attr('href', '#');
 		}
-}
+	}
 
+	$('.buy-after-login').on('click',function(){
+		var form_data = new FormData($("#buy_now_form")[0]);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            type: 'POST',
+            data: form_data,
+            url: "{{ url('set-session') }}",
+		    contentType: false,
+		    processData: false,
+            success: function(result) {
+	          	if(result) {
+	            	window.location = "{{route('sign_in')}}";
+	            }
+	        }
+        });
+    });
 
 
 </script>

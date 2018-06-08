@@ -8,6 +8,9 @@ use App\Models\Category\Category;
 use App\Models\Food\FoodItem;
 use App\Models\ProfileInformation;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Session;
 
 class FrontendController extends Controller
 {
@@ -172,6 +175,20 @@ class FrontendController extends Controller
     public function beginnerTutorial()
     {
         return view('frontend.beginners-tutorial');
+    }
+
+    public function setSession(Request $request)
+    {
+        $input = Input::all();
+        $order_details = [];
+        $order_details = $input;
+
+        /* set session variable when clicked on private URLs */
+        Session::put('buy_food', $order_details);
+        Session::put('redirect_order_details', 'redirect_order_details');
+
+        echo json_encode($order_details);
+
     }
 
 }

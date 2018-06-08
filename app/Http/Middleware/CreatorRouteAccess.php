@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Auth;
 use Closure;
-use Session;
 
-class SignInRouteAccessUser
+class CreatorRouteAccess
 {
     /**
      * Handle an incoming request.
@@ -17,12 +16,11 @@ class SignInRouteAccessUser
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            /* set session variable when clicked on private URLs */
-            Session::put('private_url', 'private_url');
-            return redirect('/sign-in');
+        if (Auth::User()->type == 1) {
+            return $next($request);
+        } else {
+            return redirect('/');
+            // return response('Unauthorized.', 401);
         }
-
-        return $next($request);
     }
 }

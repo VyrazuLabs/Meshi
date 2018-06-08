@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'SignInRouteAccess' => \App\Http\Middleware\SignInRouteAccess::class,
         'SignInRouteAccessUser' => \App\Http\Middleware\SignInRouteAccessUser::class,
         'Language' => \App\Http\Middleware\Language::class,
+        'CreatorRouteAccess' => \App\Http\Middleware\CreatorRouteAccess::class,
     ];
 }
