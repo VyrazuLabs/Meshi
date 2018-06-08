@@ -87,7 +87,7 @@
 		                <!-- crop image div generated here -->
 		                <div id="cropper">
 						  	<canvas id="cropperImg" class="cropper-image-box" width="0" height="0"></canvas>
-						  	<button type="button" class="btn btn-block back-orange cropImageBtn" id="cropImageBtn">Crop</button>
+						  	<button type="button" class="btn btn-block back-orange cropImageBtn" id="cropImageBtn">{{ trans('app.crop') }}</button>
 						</div>
 		                <!-- <div class="user-crop-image" id="cropWrapper">
                         	<div class="col-md-12 p-0">
@@ -134,8 +134,35 @@
                   		{!! Form::text('deliverable_area', $deliverable_area,
                           array('class'=>'form-control')) !!}
                 	</div>
+
+					<div class="col-lg-12 col-xs-12 p-0 float-left">
+						<div class="start-time-id float-left">
+							<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 " >
+								<label>{{ trans('app.Start Publication Date') }}<span>*</span></label>
+								<!-- <input type="text" class="form-control food-item-date" name=""> -->
+								{!! Form::text('start_publication_date', null,
+                          array(
+                                'class'=>'form-control food-item-date')) !!}
+							</div>
+							<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0" >
+								<div class="ad-mre-btn pull-right"></div>
+								<label>{{ trans('app.End Publication Date') }}<span>*</span></label>
+							<!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
+								<!-- <input type="text" class="form-control food-item-date"> -->
+								{!! Form::text('end_publication_date', null,
+                              array(
+                                    'class'=>'form-control food-item-date')) !!}
+							</div>
+							@if ($errors->has('time_of_availability'))
+								<span class="help-block">
+	                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
+	                          </span>
+							@endif
+						</div>
+					</div>
+
 		            <div class="col-sm-12 col-md-12 col-xs-12 p-0 input_fields_wrap">
-		            	<div class="col-lg-12 col-xs-12 d-inline-block form-group p-0">
+						<div class="col-lg-12 col-xs-12 d-inline-block form-group p-0">
 	                		<button class="btn ad-mre-btn food-register-timeslot-btn add_field_button pull-right back-orange">{{ trans('app.Add Time Slot') }}</button>
 	                	</div>
 	                	<div class="clearfix"></div>
@@ -216,31 +243,7 @@
 						@endif
 	                </div>
 
-	                <div class="col-lg-12 col-xs-12 p-0 float-left">
-                  		<div class="start-time-id float-left">
-                  			<div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pl-0 " >
-                      			<label>{{ trans('app.Start Publication Date') }}<span>*</span></label>
-                      			<!-- <input type="text" class="form-control food-item-date" name=""> -->
-                      			{!! Form::text('start_publication_date', null,
-						    array(
-						          'class'=>'form-control food-item-date')) !!}
-                    		</div>
-		                    <div class="form-group form-custom-group food-register-form-group col-sm-6 col-md-6 col-xs-12 pr-0" >
-		                      <div class="ad-mre-btn pull-right"></div>
-		                      <label>{{ trans('app.End Publication Date') }}<span>*</span></label>
-		                      <!-- {{ Form::text('time_of_availability[0][end_time][]', null, ['class' => 'form-control seat timepickerid','id' =>'seat_id' ]) }} -->
-		                      <!-- <input type="text" class="form-control food-item-date"> -->
-		                      {!! Form::text('end_publication_date', null,
-						    array(
-						          'class'=>'form-control food-item-date')) !!}
-		                    </div>
-		                    @if ($errors->has('time_of_availability'))
-	                          <span class="help-block">
-	                            <strong class="strong t-red">{{ $errors->first('time_of_availability') }}</strong>
-	                          </span>
-	                        @endif
-                  		</div>
-                  	</div>
+
 
 
 
