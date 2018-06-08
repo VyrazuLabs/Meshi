@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //'\App\Console\Commands\SendEmailNotifications',
-        //'\App\Console\Commands\ReviewNotification',
+        '\App\Console\Commands\SendEmailNotifications',
+        '\App\Console\Commands\ReviewNotification',
     ];
 
     /**

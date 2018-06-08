@@ -342,7 +342,7 @@ class FoodController extends Controller
                 }
 
                 /* SEND EMAIL TO ADMIN WHEN NEW FOOD CREATED BY FOOD CREATOR */
-                $adminEmail = 'admin@sharemeshi.com';
+                $adminEmail = env('MAIL_ADMIN_NOTIFICATION', 'admin@sharemeshi.com');
                 // $adminEmail = 'ankita@vyrazu.com'; //for testing purpose
                 $foodDetails = $food;
                 $userDetails = user::where('user_id', $food->offered_by)->first();
@@ -354,8 +354,8 @@ class FoodController extends Controller
                     $foodDetails['deliverable_area'] = $profile->deliverable_area;
                 }
 
-                Mail::send('frontend.email.food-creation-email', ['foodDetails' => $foodDetails], function ($message) use ($adminEmail) {
-                    $message->to($adminEmail)->subject('シェアメシ');
+                Mail::send('frontend.email.food-creation-email', ['foodDetails' => $foodDetails], function ($message) use ($adminEmail, $foodDetails) {
+                    $message->to($adminEmail)->subject("{$foodDetails->creatorName}さんの新しいお料理がアップされました。({$foodDetails->date_of_availability}提供予定)");
                 });
 
                 $creation_success_msg = TranslatedResources::translatedData()['creation_success_msg'];

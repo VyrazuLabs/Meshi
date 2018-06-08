@@ -57,7 +57,7 @@ class ResourseTranslation implements ResourseTranslationContract
             $data['successful_registration'] = 'ユーザーが登録されました';
             $data['sent_feedback'] = '正常に送信されました';
             $data['rating_validation_error'] = '評価フィールドは必須です';
-            $data['reset_password_subject'] = 'パスワードリセットリンク';
+            $data['reset_password_subject'] = 'パスワードリセット用URL';
             $data['mail_sent_msg'] = 'メールが送信されました';
             $data['invalid_email_error_msg'] = '無効なメール';
             $data['password_updation_success'] = 'パスワードが変更されました';

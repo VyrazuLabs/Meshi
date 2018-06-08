@@ -1033,7 +1033,7 @@ canvas{
 }
 .beginner-guide-btn{
   color: #fff;
-  min-width: 120px;
+  min-width: 500px;
   padding: 15px 10px;
 }
 .beginner-guide-btn:hover,
@@ -1063,7 +1063,8 @@ canvas{
 }
 .news-details-description-text{
   line-height: 35px;
-  font-size: 21px;
+  font-size: 17px;
+  margin-top: 50px;
 }
 .beginners-food-creator-title{
   font-size: 22px;

@@ -277,7 +277,6 @@ Even if you make your food too much you can deliver it to food eater.',
     Please enjoy the food and communication with food creator.',
     'eater make review title step 4' => 'Make Review',
     'eater make review description step 4' => 'Please write review for food creator.',
-    'Beginner Guide' => 'Beginner Guide',
     'For Creator' => 'For Creator',
     'For Eater' => 'For Eater',
 

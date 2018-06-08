@@ -10,3 +10,9 @@
 		</span>
 	</body>
 </html>
+<p>
+	--<br/>
+	シェアメシ<br/>
+	人と人を食でつなぐ、全く新しいシェアリングエコノミーサービス<br/>
+	https://sharemeshi.com<br/>
+</p>

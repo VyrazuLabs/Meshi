@@ -34,6 +34,7 @@
 							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
 
 
+							<li><a href="{{ url('/beginner-tutorial') }}">{{ trans('app.Beginners Tutorial') }}</a> </li>
 							<li><a href="{{ url('/about-us') }}">{{ trans('app.About Us') }}</a> </li>
 							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
