@@ -16,18 +16,6 @@ use Illuminate\Support\Facades\Input;
 
 class OrderController extends Controller
 {
-
-    // public function makeOrder($cart_id = null) {
-    //     $cart = Cart::where('cart_id',$cart_id)->first();
-    //     return view('order.make-order',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
-    // }
-
-    // public function makeOrderWithPaypal($cart_id = null) {
-    //     echo "hello";die;
-    //     $cart = Cart::where('cart_id',$cart_id)->first();
-    //     return view('order.make-order-with-paypal',['food_item_id'=>$cart->food_item_id,'amount'=>$cart->price]);
-    // }
-
     public function orderDetails()
     {
         return view('order.order-details');
@@ -111,7 +99,7 @@ class OrderController extends Controller
         $upcomingOrders = Order::where('order.status', 1)
             ->join('food_item', 'order.food_item_id', '=', 'food_item.food_item_id')
             ->where('food_item.offered_by', Auth::User()->user_id)
-            ->where('order.date_of_delivery', '>=', $jst_current_date)
+            ->where('order.delivery_date_time', '>', $jst_current_date_time)
             ->orderBy('order.date_of_delivery', 'DESC')
             ->paginate(20, ['*'], 'upcoming_orders');
 
@@ -163,7 +151,8 @@ class OrderController extends Controller
         $previousOrders = Order::where('order.status', 1)
             ->join('food_item', 'order.food_item_id', '=', 'food_item.food_item_id')
             ->where('food_item.offered_by', Auth::User()->user_id)
-            ->where('order.date_of_delivery', '<', $jst_current_date)
+            ->where('order.delivery_date_time', '<', $jst_current_date_time)
+
             ->orderBy('order.date_of_delivery', 'DESC')
             ->paginate(20, ['*'], 'previous_orders');
 

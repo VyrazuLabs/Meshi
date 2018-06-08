@@ -173,6 +173,7 @@ class PaymentController extends Controller
 
                 //CREATE RANDOM NUMBER
                 $random_num = strtoupper(uniqid(mt_rand(1, 999)));
+                $timestamp_datetime = $food->date_of_availability . ' ' . $cart->time;
                 $order = Order::create([
                     'food_item_id' => $foodItemId,
                     'order_id' => uniqid(),
@@ -188,6 +189,7 @@ class PaymentController extends Controller
                     'reviewed_by_creator' => 0,
                     'eater_review_notification' => 0,
                     'creator_review_notification' => 0,
+                    'delivery_date_time' => (strtotime(date($timestamp_datetime))),
                 ]);
 
                 $available_stock = $food->quantity - $cart->quantity;

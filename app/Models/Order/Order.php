@@ -28,6 +28,7 @@ class Order extends Model
         'reviewed_by_creator',
         'eater_review_notification',
         'creator_review_notification',
+        'delivery_date_time',
     );
 
     protected $dates = ['deleted_at'];
