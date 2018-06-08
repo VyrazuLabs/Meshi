@@ -10,9 +10,9 @@
                             <h3>{{ trans('app.Quik Links') }}</h3>
                             <ul>
                                 <li><a href="{{route('about_us')}}">{{ trans('app.About Us') }}</a></li>
+                                <li><a href="{{ route('beginners_tutorial')}}">{{ trans('app.Beginners Tutorial') }}</a></li>
                                 <li><a href="{{route('faq')}}">{{ trans('app.FAQ') }}</a></li>
                                 <li><a href="{{ route('contact_us')}}">{{ trans('app.Contact Us') }}</a></li>
-                                <li><a href="{{ route('beginners_tutorial')}}">{{ trans('app.Beginner Guide') }}</a></li>
                             </ul>
                         </div>
                     </div><!-- footer-widget -->

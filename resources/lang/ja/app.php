@@ -263,7 +263,6 @@ return [
     'eater receive food description step 3' => '指定いただいた時間と場所に、メシクリエーターさんがお料理をおすそ分けされます。事前にメシクリエーターさんのプロフィールをご確認頂きながら、ご近所付き合いもお楽しみ下さい！',
     'eater make review title step 4' => 'レビューを書く',
     'eater make review description step 4' => 'お礼の気持ちを込めてメシクリエーターさんへレビューを書きましょう。他のメシイーターさんがメシクリエーターさんを選ぶ時の参考になりますので、ぜひおすすめポイントをご紹介ください！',
-    'Beginner Guide' => '初めての方へ',
     'For Creator' => 'メシクリエイターの方',
     'For Eater' => 'メシイーターの方',
 
