@@ -1063,7 +1063,8 @@ canvas{
 }
 .news-details-description-text{
   line-height: 35px;
-  font-size: 21px;
+  font-size: 17px;
+  margin-top: 50px;
 }
 .beginners-food-creator-title{
   font-size: 22px;
