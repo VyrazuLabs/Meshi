@@ -34,8 +34,10 @@
 							<!-- <li><a href="{{ url('food/categories') }}">{{ trans('app.CATEGORY') }}</a></li> -->
 
 
-							<li><a href="{{ url('/beginner-tutorial') }}">{{ trans('app.Beginners Tutorial') }}</a> </li>
-							<li><a href="{{ url('/about-us') }}">{{ trans('app.About Us') }}</a> </li>
+							@if(!Auth::User())
+								<li><a href="{{ url('/beginner-tutorial') }}">{{ trans('app.Beginners Tutorial') }}</a></li>
+								<li><a href="{{ url('/about-us') }}">{{ trans('app.About Us') }}</a></li>
+							@endif
 							<li><a href="{{ url('/faq') }}">{{ trans('app.FAQ') }}</a></li>
 						</ul>
 					</div>
@@ -63,7 +65,6 @@
 						@if(Auth::User())
 							<li class="dropdown">
 							</li>
-							<!--  -->
 							@php
 				                $picture = url('/frontend/images/default-user.png');
 				                if(!empty(Auth::user()->profileDetails)) {
