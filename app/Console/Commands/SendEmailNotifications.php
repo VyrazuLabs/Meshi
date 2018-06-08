@@ -64,7 +64,7 @@ class SendEmailNotifications extends Command
                         $order_details['eater_nick_name'] = $eater->nick_name;
                         if ($value->email_notification == 0) {
                             Mail::send('frontend.email.eater-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($eaterEmail) {
-                                $message->to($eaterEmail)->subject('シェアメシ');
+                                $message->to($eaterEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
                             });
                         }
                     }
@@ -81,7 +81,7 @@ class SendEmailNotifications extends Command
                         $order_details['creator_nick_name'] = $creator->nick_name;
                         if ($value->email_notification == 0) {
                             Mail::send('frontend.email.creator-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($creatorEmail) {
-                                $message->to($creatorEmail)->subject('シェアメシ');
+                                $message->to($creatorEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
                             });
                         }
                     }
