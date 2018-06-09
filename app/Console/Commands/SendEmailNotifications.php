@@ -33,62 +33,6 @@ class SendEmailNotifications extends Command
     public function __construct()
     {
         parent::__construct();
-        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
-        $jst_current_date = date("Y-m-d");
-        $tomorrow = date('Y-m-d', strtotime($jst_current_date . ' +1 day'));
-        $order = Order::whereDate('date_of_delivery', $tomorrow)->where('email_notification', 0)->get();
-
-        if (!empty($order)) {
-            foreach ($order as $key => $value) {
-                $fooditem = FoodItem::where('food_item_id', $value->food_item_id)->first();
-                $order_details = [];
-                if (!empty($fooditem)) {
-                    $order_details['item_name'] = $fooditem->item_name;
-                    $order_details['order_number'] = $value->order_number;
-                    $order_details['date_of_delivery'] = $value->date_of_delivery;
-                    $order_details['time'] = $value->time;
-                    $order_details['food_item_id'] = $fooditem->food_item_id;
-                    $order_details['quantity'] = $value->quantity;
-                    $order_details['price'] = $value->total_price;
-
-                    /* send mail to eater */
-                    $eater = User::where('user_id', $value->ordered_by)->first();
-                    if (!empty($eater)) {
-                        $profileDetails = ProfileInformation::where('user_id', $value->ordered_by)->first();
-                        if (!empty($profileDetails)) {
-                            $order_details['address'] = $profileDetails->address;
-                            $order_details['phone_number'] = $profileDetails->phone_number;
-                            $order_details['description'] = $profileDetails->description;
-                        }
-                        $eaterEmail = $eater->email;
-                        $order_details['eater_nick_name'] = $eater->nick_name;
-                        if ($value->email_notification == 0) {
-                            Mail::send('frontend.email.eater-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($eaterEmail) {
-                                $message->to($eaterEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
-                            });
-                        }
-                    }
-                    /* send mail to creator */
-                    $creator = User::where('user_id', $fooditem->offered_by)->first();
-                    if (!empty($creator)) {
-                        $profileDetails = ProfileInformation::where('user_id', $fooditem->offered_by)->first();
-                        if (!empty($profileDetails)) {
-                            $order_details['address'] = $profileDetails->address;
-                            $order_details['phone_number'] = $profileDetails->phone_number;
-                            $order_details['description'] = $profileDetails->description;
-                        }
-                        $creatorEmail = $creator->email;
-                        $order_details['creator_nick_name'] = $creator->nick_name;
-                        if ($value->email_notification == 0) {
-                            Mail::send('frontend.email.creator-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($creatorEmail) {
-                                $message->to($creatorEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
-                            });
-                        }
-                    }
-                    $value->update(['email_notification' => 1]);
-                }
-            }
-        }
 
     }
 
@@ -100,6 +44,67 @@ class SendEmailNotifications extends Command
     public function handle()
     {
         /* RUN THE TASK DAILY */
-        $schedule->command('EmailNotification:sendMail')->daily();
+        // $schedule->command('EmailNotification:sendMail')->daily();
+
+        $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
+        $jst_current_date = date("Y-m-d");
+        $tomorrow = date('Y-m-d', strtotime($jst_current_date . ' +1 day'));
+        $jst_current_time = strtotime(date("H:i"));
+
+        $order = Order::whereDate('date_of_delivery', $tomorrow)->where('email_notification', 0)->get();
+        if (!empty($order)) {
+            foreach ($order as $key => $value) {
+                $food_delivery_time = strtotime(date($value->time));
+                if ($food_delivery_time == $jst_current_time) {
+                    $fooditem = FoodItem::where('food_item_id', $value->food_item_id)->first();
+                    $order_details = [];
+                    if (!empty($fooditem)) {
+                        $order_details['item_name'] = $fooditem->item_name;
+                        $order_details['order_number'] = $value->order_number;
+                        $order_details['date_of_delivery'] = $value->date_of_delivery;
+                        $order_details['time'] = $value->time;
+                        $order_details['food_item_id'] = $fooditem->food_item_id;
+                        $order_details['quantity'] = $value->quantity;
+                        $order_details['price'] = $value->total_price;
+
+                        /* send mail to eater */
+                        $eater = User::where('user_id', $value->ordered_by)->first();
+                        if (!empty($eater)) {
+                            $profileDetails = ProfileInformation::where('user_id', $value->ordered_by)->first();
+                            if (!empty($profileDetails)) {
+                                $order_details['address'] = $profileDetails->address;
+                                $order_details['phone_number'] = $profileDetails->phone_number;
+                                $order_details['description'] = $profileDetails->description;
+                            }
+                            $eaterEmail = $eater->email;
+                            $order_details['eater_nick_name'] = $eater->nick_name;
+                            if ($value->email_notification == 0) {
+                                Mail::send('frontend.email.eater-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($eaterEmail) {
+                                    $message->to($eaterEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
+                                });
+                            }
+                        }
+                        /* send mail to creator */
+                        $creator = User::where('user_id', $fooditem->offered_by)->first();
+                        if (!empty($creator)) {
+                            $profileDetails = ProfileInformation::where('user_id', $fooditem->offered_by)->first();
+                            if (!empty($profileDetails)) {
+                                $order_details['address'] = $profileDetails->address;
+                                $order_details['phone_number'] = $profileDetails->phone_number;
+                                $order_details['description'] = $profileDetails->description;
+                            }
+                            $creatorEmail = $creator->email;
+                            $order_details['creator_nick_name'] = $creator->nick_name;
+                            if ($value->email_notification == 0) {
+                                Mail::send('frontend.email.creator-delivery-reminder-mail', ['order_details' => $order_details], function ($message) use ($creatorEmail) {
+                                    $message->to($creatorEmail)->subject('[シェアメシ]明日はお料理のお届け日です');
+                                });
+                            }
+                        }
+                        $value->update(['email_notification' => 1]);
+                    }
+                }
+            }
+        }
     }
 }
