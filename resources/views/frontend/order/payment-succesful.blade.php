@@ -9,7 +9,10 @@
 <br/>
 <p>
     {{ $food->item_name }} (クリエータ: {{ $creator->nick_name }}さん)<br/>
-    (https://sharemeshi.com/food/details/{{ $food->food_item_id }})
+    (https://sharemeshi.com/food/details/{{ $food->food_item_id }})<br/>
+    お料理詳細: {{ $food->food_description }}<br/>
+    クリエーターさん自己紹介: {{ $creatorProfile->description }}<br/>
+    クリエーターさん電話番号: {{ $creatorProfile->phone_number }}<br/>
 </p>
 <p>
     お届け予定: {{ $food->date_of_availability }} {{ $order->time }}

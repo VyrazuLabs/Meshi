@@ -5,9 +5,11 @@
 <p>お届け希望日: {{ $food->date_of_availability }} {{ $order->time }}</p>
 <br/>
 <p>
-    メシイーター名：{{ $buyer->nick_name }} ({{ $buyer->name }} 様)<br/>
+    メシイーターさん：{{ $buyer->nick_name }} ({{ $buyer->name }} 様)<br/>
     住所: {{ $buyerProfile->prefectures }}{{ $buyerProfile->municipality }}{{ $buyerProfile->address }}<br/>
-    ご連絡先: {{ $buyerProfile->phone_number }}</p>
+    ご連絡先: {{ $buyerProfile->phone_number }}<br/>
+    自己紹介: {{ $buyerProfile->description }}<br/>
+</p>
 <br/>
 <p>
     お時間に遅れそうな場合や、道が不明な場合は直接ご連絡いただければと思います。<br/>

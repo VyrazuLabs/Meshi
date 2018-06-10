@@ -215,6 +215,7 @@ class PaymentController extends Controller
             $price = $order->total_price;
             $bookingDate = $order->date_of_order;
             $creator = User::where('user_id', $food->offered_by)->first();
+            $creatorProfile = ProfileInformation::where('user_id', $food->offered_by)->first();
 
             // $email = 'purchased@sharemeshi.com'; //this email is for purchase section
             $email = $creator->email; //this email is for testing purpose
@@ -231,7 +232,7 @@ class PaymentController extends Controller
             $email = $buyer->email; //this email is for purchase section
             //$email = 'contact@sharemeshi.com'; //this email is for testing purpose
             Mail::send('frontend.order.payment-succesful', [
-                'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'creator' => $creator,
+                'orderNumber' => $orderNumber, 'order' => $order, 'buyer' => $buyer, 'creator' => $creator, 'creatorProfile' => $creatorProfile,
                 'food' => $food, 'price' => $price, 'bookingDate' => $bookingDate,
             ], function ($message) use ($email) {
                 $message->to($email)
