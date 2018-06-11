@@ -32,6 +32,19 @@ class ReviewNotification extends Command
     public function __construct()
     {
         parent::__construct();
+
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        /* RUN THE TASK DAILY */
+        // $schedule->command('ReviewNotification:sendReviewReminder')->hourly();
+
         $jst_time_zone = date_default_timezone_set('Asia/Tokyo');
         $jst_current_date = date("Y-m-d");
 
@@ -43,6 +56,8 @@ class ReviewNotification extends Command
                 $jst_current_date_time = strtotime(date("H:i"));
 
                 $order_details = [];
+                $creator_email = '';
+                $eater_email = '';
                 $order_details['order_number'] = $order->order_number;
                 /* get eater details */
                 $eater = User::where('user_id', $order->ordered_by)->first();
@@ -61,7 +76,7 @@ class ReviewNotification extends Command
                     }
                 }
 
-                if ($jst_current_date_time > $time_limit) {
+                if ($jst_current_date_time > $time_limit && !empty($eater_email) && !empty($creator_email) && !empty($order_details)) {
                     if ($order->reviewed_by_eater == 0 && $order->eater_review_notification == 0) {
                         Mail::send('frontend.email.eater-review-reminder-mail', ['order' => $order_details], function ($message) use ($eater_email) {
                             $message->to($eater_email)->subject('シェアメシ');
@@ -78,16 +93,5 @@ class ReviewNotification extends Command
                 }
             }
         }
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        /* RUN THE TASK DAILY */
-        $schedule->command('ReviewNotification:sendReviewReminder')->hourly();
     }
 }
