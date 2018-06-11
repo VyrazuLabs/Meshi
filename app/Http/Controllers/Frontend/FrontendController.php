@@ -90,7 +90,10 @@ class FrontendController extends Controller
                 // $food->dateBegin = $dateBegin;
                 // $food->dateEnd = $dateEnd;
                 $user = User::where('user_id', $food->offered_by)->first();
-                if (!$user) continue;
+                if (!$user) {
+                    continue;
+                }
+
                 if ($user->status == 1) {
                     $food->user_status = 1;
                 } else {
