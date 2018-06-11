@@ -359,6 +359,8 @@
 				                </div>
 				                <div class="form-group form-custom-group">
 				                  <label>{{ trans('app.Subsequent address') }}<span>*</span></label>
+									<br/>
+									<span>※ お届けをスムーズにするため、マンション名まで記載頂くようお願いいたします。</span>
 				                  	{!! Form::textarea('address', null,
 				                          array('class'=>'form-control',
 				                          		'id' => 'addressbox',
