@@ -64,6 +64,9 @@ class FrontendController extends Controller
                     $images = $food->food_images;
                     $food->foodImages = unserialize($images);
                 }
+                if (!empty($profile->area)) {
+                    $food->area = $profile->area;
+                }
                 /* make an array of 8 available foods that satisfies the publication period */
                 if ($jst_current_date_time > $dateBegin && $jst_current_date_time < $dateEnd) {
                     if ($i <= 8) {
