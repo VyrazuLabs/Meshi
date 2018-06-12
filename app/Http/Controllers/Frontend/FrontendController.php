@@ -172,7 +172,11 @@ class FrontendController extends Controller
     public function newsDetails($news_id = null)
     {
         $news = News::where('news_id', $news_id)->first();
-        return view('frontend.news-details', ['news' => $news]);
+        if (!empty($news)) {
+            return view('frontend.news-details', ['news' => $news]);
+        } else {
+            return back();
+        }
     }
 
     public function beginnerTutorial()

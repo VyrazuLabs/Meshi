@@ -472,33 +472,37 @@ class FoodController extends Controller
         $profile = ProfileInformation::where('user_id', Auth::User()->user_id)->first();
 
         $food_items = FoodItem::where('food_item_id', $food_item_id)->first();
-        if (!empty($food_items->deliverable_area)) {
-            $deliverable_area = $food_items->deliverable_area;
+        if (!empty($food_items)) {
+            if (!empty($food_items->deliverable_area)) {
+                $deliverable_area = $food_items->deliverable_area;
+            } else {
+                $deliverable_area = $profile->deliverable_area;
+            }
+
+            //CONVERTING DATE FORMAT
+            if (!empty($food_items->date_of_availability)) {
+                $food_items->date_of_availability = date('Y-m-d', strtotime($food_items->date_of_availability));
+            }
+
+            if (!empty($food_items->food_images)) {
+                //getting the food images
+                $images = $food_items->food_images;
+                $food_images = unserialize($images);
+            }
+
+            //UNSERIALIZE TIME SLOT HERE
+            if (!empty($food_items->time_of_availability)) {
+                $time_of_availability = unserialize($food_items->time_of_availability);
+                $time_of_availability = array_filter($time_of_availability);
+            }
+
+            /* concatenate publication date and time*/
+            if (!empty($food_items->start_publication_date) && !empty($food_items->end_publication_date)) {
+                $food_items->start_publication_date = $food_items->start_publication_date . " " . $food_items->start_publication_time;
+                $food_items->end_publication_date = $food_items->end_publication_date . " " . $food_items->end_publication_time;
+            }
         } else {
-            $deliverable_area = $profile->deliverable_area;
-        }
-
-        //CONVERTING DATE FORMAT
-        if (!empty($food_items->date_of_availability)) {
-            $food_items->date_of_availability = date('Y-m-d', strtotime($food_items->date_of_availability));
-        }
-
-        if (!empty($food_items->food_images)) {
-            //getting the food images
-            $images = $food_items->food_images;
-            $food_images = unserialize($images);
-        }
-
-        //UNSERIALIZE TIME SLOT HERE
-        if (!empty($food_items->time_of_availability)) {
-            $time_of_availability = unserialize($food_items->time_of_availability);
-            $time_of_availability = array_filter($time_of_availability);
-        }
-
-        /* concatenate publication date and time*/
-        if (!empty($food_items->start_publication_date) && !empty($food_items->end_publication_date)) {
-            $food_items->start_publication_date = $food_items->start_publication_date . " " . $food_items->start_publication_time;
-            $food_items->end_publication_date = $food_items->end_publication_date . " " . $food_items->end_publication_time;
+            return back();
         }
 
         return view('frontend.food.create-food-item', ['form_type' => 'edit', 'food_items' => $food_items, 'category_id' => $category_id, 'offered_by' => $offered_by, 'food_images' => $food_images, 'time_of_availability' => $time_of_availability, 'deliverable_area' => $deliverable_area]);
