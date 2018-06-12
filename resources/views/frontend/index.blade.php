@@ -160,6 +160,7 @@
                                                 {{ $food->category_name }}
                                             @endif
                                             </span>
+                                            <span class="home-category-area">{{$food->area}}</span>
                                         </div>
                                     </div><!-- ad-info -->
 

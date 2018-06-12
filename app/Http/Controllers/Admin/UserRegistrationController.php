@@ -26,8 +26,6 @@ class UserRegistrationController extends Controller
     public function save(Request $request)
     {
         $input = $request->input();
-        // echo "<pre>";
-        // print_r($input);die;
         $file = $request->file();
         $validator = $this->validator($input);
         $userUpdateValidator = $this->userUpdateValidator($input);
@@ -35,30 +33,38 @@ class UserRegistrationController extends Controller
         $coverImageValidator = $this->coverImageValidator($file);
         $document = '';
 
+        /********* Create lat long from given address ********/
+        $address = stripslashes($input['address']); //Address
+        // GET JSON RESULTS FROM THIS REQUEST
+        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=AIzaSyBlnFMM7LYrLdByQPJopWVNXq0mJRtqb38');
+        $latitude = '';
+        $longitude = '';
+        $city_name = '';
+        $geo = json_decode($geo, true); // Convert the JSON to an array
+        if ($geo['status'] == 'OK') {
+            $addressArray = $geo['results'][0]['address_components'];
+            foreach ($addressArray as $key => $value) {
+                $addressTypeArray = $value['types'];
+                if (in_array("locality", $addressTypeArray)) {
+                    $city_name = $value['short_name'];
+                }
+            }
+
+            // GET LAT & LONG
+            $latitude = $geo['results'][0]['geometry']['location']['lat'];
+            $longitude = $geo['results'][0]['geometry']['location']['lng'];
+        }
+
         /* update user */
         if (isset($input['user_id'])) {
             /* check validation for user updation */
             if ($userUpdateValidator->fails()) {
-                // print_r($userUpdateValidator->errors());die;
                 Session::flash('error', trans('validation.form_error'));
                 return redirect()->back()->withErrors($userUpdateValidator)->withInput();
             } else {
                 /* get user and their profile details */
                 $user = User::where('user_id', $input['user_id'])->first();
                 $profile = ProfileInformation::where('user_id', $input['user_id'])->first();
-
-                /********* Create lat long from given address ********/
-                $address = stripslashes($input['address']); //Address
-                // GET JSON RESULTS FROM THIS REQUEST
-                $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address));
-                $latitude = '';
-                $longitude = '';
-                $geo = json_decode($geo, true); // Convert the JSON to an array
-                if ($geo['status'] == 'OK') {
-                    // GET LAT & LONG
-                    $latitude = $geo['results'][0]['geometry']['location']['lat'];
-                    $longitude = $geo['results'][0]['geometry']['location']['lng'];
-                }
 
                 /******** update reason for registering ********/
                 // $reason = '';
@@ -133,6 +139,9 @@ class UserRegistrationController extends Controller
                     'profile_message' => $profile_message,
                     'video_link' => $video_link,
                     'deliverable_area' => $deliverable_area,
+                    'city' => $city_name,
+                    'area' => $input['area'],
+
                 ]);
 
                 /****************crop image functionality starts****************/
@@ -209,19 +218,19 @@ class UserRegistrationController extends Controller
                 /****************crop image functionality ends****************/
 
                 /* Create lat long from given address */
-                $address = stripslashes($input['address']); //Address
+                // $address = stripslashes($input['address']); //Address
 
-                // GET JSON RESULTS FROM THIS REQUEST
-                $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address));
+                // // GET JSON RESULTS FROM THIS REQUEST
+                // $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address));
 
-                $latitude = '';
-                $longitude = '';
-                $geo = json_decode($geo, true); // Convert the JSON to an array
-                if ($geo['status'] == 'OK') {
-                    // GET LAT & LONG
-                    $latitude = $geo['results'][0]['geometry']['location']['lat'];
-                    $longitude = $geo['results'][0]['geometry']['location']['lng'];
-                }
+                // $latitude = '';
+                // $longitude = '';
+                // $geo = json_decode($geo, true); // Convert the JSON to an array
+                // if ($geo['status'] == 'OK') {
+                //     // GET LAT & LONG
+                //     $latitude = $geo['results'][0]['geometry']['location']['lat'];
+                //     $longitude = $geo['results'][0]['geometry']['location']['lng'];
+                // }
 
                 // $reason = '';
                 // if (!empty($input['reason_for_registration_edit'])) {
@@ -275,6 +284,9 @@ class UserRegistrationController extends Controller
                     'profile_message' => $profile_message,
                     'video_link' => $video_link,
                     'deliverable_area' => $deliverable_area,
+                    'city' => $city_name,
+                    'area' => $input['area'],
+
                 ]);
 
                 if (!empty($file['cover_image'])) {
@@ -312,6 +324,8 @@ class UserRegistrationController extends Controller
             'profession' => 'required',
             // 'reason_for_registration_edit' => 'required',
             'profile_image' => 'required',
+            'area' => 'required',
+
         ]);
     }
 
@@ -331,6 +345,8 @@ class UserRegistrationController extends Controller
             'municipality' => 'required',
             'gender' => 'required',
             'profession' => 'required',
+            'area' => 'required',
+
             // 'reason_for_registration_edit' => 'required',
         ]);
     }
@@ -400,6 +416,7 @@ class UserRegistrationController extends Controller
             $user->profile_message_edit = $profile->profile_message;
             $user->video_link_edit = $profile->video_link;
             $user->deliverable_area_edit = $profile->deliverable_area;
+            $user->area = $profile->area;
         }
 
         return view('admin.create-user', ['user' => $user, 'form_type' => 'edit']);

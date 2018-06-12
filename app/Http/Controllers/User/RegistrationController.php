@@ -247,7 +247,6 @@ class RegistrationController extends Controller
                     foreach ($addressArray as $key => $value) {
                         $addressTypeArray = $value['types'];
                         if (in_array("locality", $addressTypeArray)) {
-                            // echo"<pre>";print_r($value);die;
                             $city_name = $value['short_name'];
                         }
                     }
