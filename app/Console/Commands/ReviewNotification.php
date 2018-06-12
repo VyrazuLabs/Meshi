@@ -79,13 +79,13 @@ class ReviewNotification extends Command
                 if ($jst_current_date_time > $time_limit && !empty($eater_email) && !empty($creator_email) && !empty($order_details)) {
                     if ($order->reviewed_by_eater == 0 && $order->eater_review_notification == 0) {
                         Mail::send('frontend.email.eater-review-reminder-mail', ['order' => $order_details], function ($message) use ($eater_email) {
-                            $message->to($eater_email)->subject('シェアメシ');
+                            $message->to($eater_email)->subject('[シェアメシ]レビューのご登録のお願い');
                         });
                         $order->update(['eater_review_notification' => 1]);
                     }
                     if ($order->reviewed_by_creator == 0 && $order->creator_review_notification == 0) {
                         Mail::send('frontend.email.creator-review-reminder-mail', ['order' => $order_details], function ($message) use ($creator_email) {
-                            $message->to($creator_email)->subject('シェアメシ');
+                            $message->to($creator_email)->subject('[シェアメシ]レビューのご登録のお願い');
                         });
 
                         $order->update(['creator_review_notification' => 1]);
