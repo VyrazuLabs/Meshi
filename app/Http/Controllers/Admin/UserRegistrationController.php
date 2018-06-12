@@ -324,7 +324,6 @@ class UserRegistrationController extends Controller
             'profession' => 'required',
             // 'reason_for_registration_edit' => 'required',
             'profile_image' => 'required',
-            'area' => 'required',
 
         ]);
     }
@@ -345,7 +344,6 @@ class UserRegistrationController extends Controller
             'municipality' => 'required',
             'gender' => 'required',
             'profession' => 'required',
-            'area' => 'required',
 
             // 'reason_for_registration_edit' => 'required',
         ]);
