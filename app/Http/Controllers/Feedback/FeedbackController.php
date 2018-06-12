@@ -33,7 +33,7 @@ class FeedbackController extends Controller
             $email = env('MAIL_ADMIN_NOTIFICATION', 'admin@sharemeshi.com');
             Mail::send('feedback.feedback-mail', ['subject' => $input['subject'], 'messages' => $input['message'], 'name' => $input['name'], 'sender' => $input['email']], function ($message) use ($input, $email) {
                 $message->to($email)
-                    ->subject('FEEDBACK');
+                    ->subject('[シェアメシ]お問い合わせフォームからお問い合わせがありました');
             });
             $sent_feedback = TranslatedResources::translatedData()['sent_feedback'];
             Session::flash('success', $sent_feedback);
