@@ -289,6 +289,17 @@
 						@endif
 	                </div>
 	                <div class="form-group form-custom-group">
+	                  	<label>Area<span>*</span></label>
+	                  	{!! Form::text('area', null,
+	                          array('class'=>'form-control',
+	                                'placeholder'=>'Enter Area')) !!}
+						@if ($errors->has('area'))
+							<span class="help-block">
+							  <strong class="strong t-red">{{ $errors->first('area') }}</strong>
+							</span>
+						@endif
+	                </div>
+	                <div class="form-group form-custom-group">
 	                  <label>Address<span>*</span></label>
 	                  	{!! Form::textarea('address', null,
 	                          array('class'=>'form-control','id' => 'addressbox',

@@ -32,6 +32,7 @@ class ProfileInformation extends Model
         'profile_message',
         'city',
         'deliverable_area',
+        'area',
     );
 
     protected $dates = ['deleted_at'];
