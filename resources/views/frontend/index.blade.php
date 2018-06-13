@@ -160,7 +160,10 @@
                                                 {{ $food->category_name }}
                                             @endif
                                             </span>
-                                            <span class="home-category-area">{{$food->area}}</span>
+                                            @if(!empty($food->area))
+                                                <span class="home-category-area t-orange">{{$food->area}}</span>
+                                            @endif
+
                                         </div>
                                     </div><!-- ad-info -->
 
@@ -266,7 +269,9 @@
                                                 {{ $food->category_name }}
                                             @endif
                                             </span>
-                                            <span class="home-category-area">{{$food->area}}</span>
+                                            @if(!empty($food->area))
+                                                <span class="home-category-area t-orange">{{$food->area}}</span>
+                                            @endif
                                         </div>
                                     </div><!-- ad-info -->
 

@@ -14,7 +14,7 @@
 	color: #000 !important;
 }
 .t-orange{
-  color: #f26522;
+  color: #f26522 !important;
 }
 .t-white{
   color: #fff;
@@ -1086,5 +1086,8 @@ canvas{
   min-width: 120px;
 }
 .home-category-area{
-  margin-left: 13px;
+  margin-left: 7px;
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 3px;
 }
