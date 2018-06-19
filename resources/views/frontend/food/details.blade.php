@@ -100,7 +100,8 @@
 											</span></p>
 											<div class="price-line"></div>
 											<p class="detail-price-list"><strong>{{ trans('app.Total') }}: </strong><span class="float-right"><strong>¥ <span id="new-cost" class="t-black">{{$cost}}</span></strong></span></p>
-											<p>※料金には、地域活性化貢献料、配送料、お料理の料金が含まれます</p>
+											<p>※ご注文1つあたり約1.5人前と、ボリュームたっぷりとなっております</p>
+											<p>※料金には、配送料、地域活性化貢献料、お料理の料金が含まれます</p>
 											<p>※メシクリエーターさんが心を込めて作っています。時間変更・キャンセルはなるべくしないようにお願いいたします。</p>
 										</div>
 										<!-- price -->
