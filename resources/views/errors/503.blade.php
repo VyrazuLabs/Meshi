@@ -42,32 +42,26 @@
     <!-- End Google Tag Manager (noscript) -->
     @endif
     <header></header>
-
-
-
-
-
-<!-- signin-page -->
-	<section id="" class="clearfix user-page maintanence-back">
-		<div class="container">
-			<div class="row text-center">
-				<!-- user-login -->
-				<div class="col-sm-12 col-md-10 float-none d-inline-block">
-					<div class="user-account boxes-card signin-box maintainance-box">
-						<div class="col-md-6 col-sm-12">
-							<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive maintainance-logo">
-							<p class="t-orange text-left mb-0 maintainanc-text">Site is under maintenance.</p>
-							<p class="t-orange text-left mb-0 maintainanc-text">We'll be back soon.</p>
-						</div>
-						<div class="col-md-6 col-sm-12">
-							<div class="maintainance-image-back">
-							<img src="{{ url('frontend/images/maintenance_image.png') }}" class="img-responsive maintainance-image">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<footer></footer>
+  	<section id="" class="clearfix user-page maintanence-back">
+  		<div class="container">
+  			<div class="row text-center">
+  				<!-- user-login -->
+  				<div class="col-sm-12 col-md-10 float-none d-inline-block">
+  					<div class="user-account boxes-card signin-box maintainance-box">
+  						<div class="col-md-6 col-sm-12">
+  							<img src="{{ url('frontend/images/Logo.png') }}" class="img-responsive maintainance-logo">
+  							<p class="t-orange text-left mb-0 maintainanc-text">Site is under maintenance.</p>
+  							<p class="t-orange text-left mb-0 maintainanc-text">We'll be back soon.</p>
+  						</div>
+  						<div class="col-md-6 col-sm-12">
+  							<div class="maintainance-image-back">
+  							<img src="{{ url('frontend/images/maintenance_image.png') }}" class="img-responsive maintainance-image">
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+	  <footer></footer>
 	</body>
 </html>
